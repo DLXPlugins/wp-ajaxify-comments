@@ -1,0 +1,214 @@
+# Copyright (C) 2013 WP Ajaxify Comments
+# This file is distributed under the same license as the WP-Ajaxify-Comments package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Ajaxify-Comments 0.8.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-ajaxify-comments\n"
+"POT-Creation-Date: 2013-02-05 22:06:21+00:00\n"
+"PO-Revision-Date: 2013-02-17 12:46+0200\n"
+"Last-Translator: Siman-Tov yechiel <mastersgate@gmail.com>\n"
+"Language-Team: wpstore.co.il <mastersgate@gmail.com>\n"
+"Language: hebrew\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: wp-ajaxify-comments.php:38
+msgid "General"
+msgstr "הגדרות כלליות"
+
+#: wp-ajaxify-comments.php:43
+msgid "Enable plugin"
+msgstr "הפעל פלאגין"
+
+#: wp-ajaxify-comments.php:48
+msgid "Debug mode"
+msgstr "מצב דבאג"
+
+#: wp-ajaxify-comments.php:53
+msgid "Selectors"
+msgstr "מצביעים"
+
+#: wp-ajaxify-comments.php:58
+msgid "Comment form selector"
+msgstr "מצביע לטופס התגובה"
+
+#: wp-ajaxify-comments.php:63
+msgid "Comments container selector"
+msgstr "מצביע לתוכן התגובה"
+
+#: wp-ajaxify-comments.php:68
+msgid "Respond container selector"
+msgstr "מצביע לתגובה"
+
+#: wp-ajaxify-comments.php:73
+msgid "Error container selector"
+msgstr "מצביע להודעת השגיאה"
+
+#: wp-ajaxify-comments.php:78
+msgid "Popup overlay"
+msgstr "הגדרות החלון הקופץ"
+
+#: wp-ajaxify-comments.php:83
+msgid "Corner radius (px)"
+msgstr "רדיוס הפינות (PX)"
+
+#: wp-ajaxify-comments.php:89
+msgid "Margin top (px)"
+msgstr "שוליים עליונים (px)"
+
+#: wp-ajaxify-comments.php:95
+msgid "Fade in time (ms)"
+msgstr "זמן דהיית ההודעה בכניסה (ms)"
+
+#: wp-ajaxify-comments.php:101
+msgid "Fade out time (ms)"
+msgstr "זמן דהיית ההודעה ביציאה (ms)"
+
+#: wp-ajaxify-comments.php:107
+msgid "Timeout (ms)"
+msgstr "זמן מקסימלי לסיום הפעולה (ms)"
+
+#: wp-ajaxify-comments.php:113
+msgid "Loading background color"
+msgstr "צבע הרקע בטעינת ההודעה"
+
+#: wp-ajaxify-comments.php:118
+msgid "Loading text color"
+msgstr "צבע הטקסט בטעינת ההודעה"
+
+#: wp-ajaxify-comments.php:123
+msgid "Success background color"
+msgstr "צבע הרקע בהודעת הצלחה"
+
+#: wp-ajaxify-comments.php:128
+msgid "Success text color"
+msgstr "צבע הטקסט בהודעת הצלחה"
+
+#: wp-ajaxify-comments.php:133
+msgid "Error background color"
+msgstr "צבע הרקע בהודעת שגיאה"
+
+#: wp-ajaxify-comments.php:138
+msgid "Error text color"
+msgstr "צבע הטקסט בהודעת שגיאה"
+
+#: wp-ajaxify-comments.php:143
+msgid "Opacity (%)"
+msgstr "שקיפות (%)"
+
+#: wp-ajaxify-comments.php:149
+msgid "Text align (left|center|right)"
+msgstr "יישור הטקטס (left|center|right)"
+
+#: wp-ajaxify-comments.php:154
+msgid "Default font size"
+msgstr "גודל הפונט בברירת המחדל"
+
+#: wp-ajaxify-comments.php:155
+msgid "Font size (e.g. \"14px\", \"1.1em\", &hellip;)"
+msgstr "גודל הפונט (לדוגמה \"14px\", \"1.1em\", &hellip;)"
+
+#: wp-ajaxify-comments.php:160
+msgid "Z-Index"
+msgstr "Z-Index"
+
+#: wp-ajaxify-comments.php:166
+msgid "Miscellaneous"
+msgstr "הגדרות שונות"
+
+#: wp-ajaxify-comments.php:171
+msgid "Scroll speed (ms)"
+msgstr "מהירות הגלילה (ms)"
+
+#: wp-ajaxify-comments.php:176
+msgid "Expert settings (JavaScript callbacks)"
+msgstr "הגדרות מתקדמות (קריאה ל - JavaScript)"
+
+#: wp-ajaxify-comments.php:183
+msgid "Parameter: dom (jQuery DOM element)"
+msgstr "פרמטר: dom (אלמנט של jQuery DOM)"
+
+#: wp-ajaxify-comments.php:242
+msgid "Posting your comment. Please wait&hellip;"
+msgstr "שולח את התגובה. נא המתן..."
+
+#: wp-ajaxify-comments.php:243
+msgid "Something went wrong, your comment has not been posted."
+msgstr "אירעה שגיאה במשלוח התגובה !"
+
+#: wp-ajaxify-comments.php:244
+msgid "Your comment has been posted. Thank you!"
+msgstr "תגובתך נשלחה בהצלחה. תודה !"
+
+#: wp-ajaxify-comments.php:245
+msgid "Your comment has been posted and is awaiting moderation. Thank you!"
+msgstr "תגובתך נשלחה בהצלחה וממתינה לאישור מנהלי האתר. תודה !"
+
+#: wp-ajaxify-comments.php:246
+msgid "Reloading page. Please wait&hellip;"
+msgstr "טוען את העמוד מחדש. נא המתן..."
+
+#: wp-ajaxify-comments.php:281
+msgid "%s is not enabled!"
+msgstr "%s כבוי !"
+
+#: wp-ajaxify-comments.php:281 wp-ajaxify-comments.php:284
+msgid "Click here to configure the plugin."
+msgstr "להגדרות הפלאגין לחץ כאן"
+
+#: wp-ajaxify-comments.php:284
+msgid "%s is running in debug mode!"
+msgstr "%s במצב דבאג !"
+
+#: wp-ajaxify-comments.php:365
+msgid "Settings saved successfully."
+msgstr "ההגדרות נשמרו בהצלחה."
+
+#: wp-ajaxify-comments.php:367
+msgid "Settings not saved! Please correct the red marked input fields."
+msgstr "ההגדרות לא נשמרו ! יש לתקן את השדות המסומנים באדום."
+
+#: wp-ajaxify-comments.php:373
+msgid "Plugin Settings: %s"
+msgstr "הגדרות הפלאגין: %s"
+
+#: wp-ajaxify-comments.php:383
+msgid "Plugin Settings"
+msgstr "הגדרות הפלאגין"
+
+#: wp-ajaxify-comments.php:411
+msgid "Leave empty for default value %s"
+msgstr "השאר ריק להגדרת ברירת המחדל - %s"
+
+#: wp-ajaxify-comments.php:424
+msgid "Save Changes"
+msgstr "שמור הגדרות"
+
+#: wp-ajaxify-comments.php:444
+msgid "Contact & Donation"
+msgstr "יצירת קשר & תרומות"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Ajaxify Comments"
+msgstr "WP Ajaxify Comments"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/wp-ajaxify-comments/"
+msgstr "http://wordpress.org/extend/plugins/wp-ajaxify-comments/"
+
+#. Description of the plugin/theme
+msgid ""
+"WP Ajaxify Comments hooks into your current theme and adds AJAX "
+"functionality to the comment form."
+msgstr "הפלאגין מוסיף פונקציית AJAX לטופס התגובות."
+
+#. Author of the plugin/theme
+msgid "Jan Jonas"
+msgstr "ג'ן ג'ונס"
+
+#. Author URI of the plugin/theme
+msgid "http://janjonas.net"
+msgstr "http://janjonas.net"

@@ -1,0 +1,57 @@
+# Copyright (C) 2012 WP Ajaxify Comments
+# This file is distributed under the same license as the WP-Ajaxify-Comments package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Ajaxify-Comments 0.5.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-ajaxify-comments\n"
+"POT-Creation-Date: 2012-06-21 17:32:44+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-07-03 09:55+0700\n"
+"Last-Translator: solitary1510 <solitary1510@gmail.com>\n"
+"Language-Team: solitary1510 <solitary1510@gmail.com>\n"
+"X-Poedit-Language: Vietnamese\n"
+"X-Poedit-Country: VIET NAM\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: wp-ajaxify-comments.php:209
+msgid "Posting your comment. Please wait&hellip;"
+msgstr "Đang gửi phản hồi của bạn. Vui lòng đợi&hellip;"
+
+#: wp-ajaxify-comments.php:210
+msgid "Something went wrong, your comment has not been posted."
+msgstr "Đã có một số lỗi. Phản hồi của bạn chưa được gửi!"
+
+#: wp-ajaxify-comments.php:211
+msgid "Your comment has been posted. Thank you!"
+msgstr "Phản hồi của bạn đã được gửi. Cảm ơn!"
+
+#: wp-ajaxify-comments.php:212
+msgid "Your comment has been posted and is awaiting moderation. Thank you!"
+msgstr "Phản hồi của bạn đã gửi thành công và đang được kiểm duyệt. Xin cảm ơn!"
+
+#: wp-ajaxify-comments.php:213
+msgid "Reloading page. Please wait&hellip;"
+msgstr "Đang tải lại trang. Vui lòng đợi&hellip;"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Ajaxify Comments"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/wp-ajaxify-comments/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "WP Ajaxify Comments hooks into your current theme and adds AJAX functionality to the comment form."
+msgstr "WP Ajaxify Comments là 1 plugin cho phép bạn thêm chức năng AJAX cho phần phản hồi giúp việc gửi phản hồi không cần làm mới trang. Bạn không cần phải chỉnh sửa trong giao diện bất kì điều gì."
+
+#. Author of the plugin/theme
+msgid "Jan Jonas"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://janjonas.net"
+msgstr ""
+

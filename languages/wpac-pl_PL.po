@@ -1,0 +1,54 @@
+# Copyright (C) 2012 WP Ajaxify Comments
+# This file is distributed under the same license as the WP-Ajaxify-Comments package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Ajaxify-Comments 0.5.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-ajaxify-comments\n"
+"POT-Creation-Date: 2012-06-21 17:32:44+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-07-02 09:25+0100\n"
+"Last-Translator: Jacek Tomaszewski <kontakt@jtomaszewski.eu>\n"
+"Language-Team: Jan Jonas <mail@janjnas.net>\n"
+
+#: wp-ajaxify-comments.php:209
+msgid "Posting your comment. Please wait&hellip;"
+msgstr "Komentarz jest właśnie dodawany. Proszę zaczekać&hellip;"
+
+#: wp-ajaxify-comments.php:210
+msgid "Something went wrong, your comment has not been posted."
+msgstr "Nastąpił błąd i twój komentarz nie został opublikowany."
+
+#: wp-ajaxify-comments.php:211
+msgid "Your comment has been posted. Thank you!"
+msgstr "Komentarz został opublikowany. Dziękujemy!"
+
+#: wp-ajaxify-comments.php:212
+msgid "Your comment has been posted and is awaiting moderation. Thank you!"
+msgstr "Twój komentarz został opublikowany i czeka na moderację. Dziękujemy!"
+
+#: wp-ajaxify-comments.php:213
+msgid "Reloading page. Please wait&hellip;"
+msgstr "Odświeżanie strony. Proszę zaczekać&hellip;"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Ajaxify Comments"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/wp-ajaxify-comments/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "WP Ajaxify Comments hooks into your current theme and adds AJAX functionality to the comment form."
+msgstr "WP Ajaxify Comments wszczepuje się do twojego bieżącego szablonu i uzupełnia formularz dodawania komentarzy o funkcjonalność AJAX."
+
+#. Author of the plugin/theme
+msgid "Jan Jonas"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://janjonas.net"
+msgstr ""
+

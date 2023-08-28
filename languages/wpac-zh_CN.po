@@ -1,0 +1,287 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Ajaxify-Comments\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Fri, 18 Jul 2014 03:32:36 +0100\n"
+"PO-Revision-Date: Sun, 20 Jul 2014 14:19:44 +0100\n"
+"Last-Translator: Jincheng Shan\n"
+"Language-Team: Jincheng Shan\n"
+"Language: Chinese\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en_US\n"
+"X-Loco-Target-Locale: zh_CN\n"
+"X-Loco-Project-Id: 2519\n"
+"X-Loco-Api-Version: 1.0.8"
+
+#: wp-ajaxify-comments.php:41 loco:53c887500990d2f85a446b72
+msgid "General"
+msgstr "常规设置"
+
+#: wp-ajaxify-comments.php:186 loco:53c887520990d2f85a446b8e
+msgid "Miscellaneous"
+msgstr "其他设置"
+
+#: wp-ajaxify-comments.php:56 loco:53c887500990d2f85a446b75
+msgid "Selectors"
+msgstr "选择器"
+
+#: wp-ajaxify-comments.php:197 loco:53c887520990d2f85a446b90
+msgid "Texts"
+msgstr "文字设置"
+
+#. Plugin Name of the plugin/theme
+#: loco:53c887540990d2f85a446bac
+msgid "WP Ajaxify Comments"
+msgstr "WP Ajaxify Comments"
+
+#: wp-ajaxify-comments.php:180 loco:53c887520990d2f85a446b8d
+msgid "Z-Index"
+msgstr "z-index 属性"
+
+#: wp-ajaxify-comments.php:405 wp-ajaxify-comments.php:408
+#: loco:53c887530990d2f85a446ba3
+msgid "Click here to configure the plugin."
+msgstr "点此设置插件。"
+
+#: wp-ajaxify-comments.php:61 loco:53c887500990d2f85a446b76
+msgid "Comment form selector"
+msgstr "评论表单选择器"
+
+#: wp-ajaxify-comments.php:71 loco:53c887500990d2f85a446b78
+msgid "Comment paging links selector"
+msgstr "评论翻页链接选择器"
+
+#: wp-ajaxify-comments.php:217 loco:53c887530990d2f85a446b98
+msgid "Comment posted"
+msgstr "评论提交"
+
+#: wp-ajaxify-comments.php:222 loco:53c887530990d2f85a446b9a
+msgid "Comment posted unapproved"
+msgstr "评论审核"
+
+#: wp-ajaxify-comments.php:66 loco:53c887500990d2f85a446b77
+msgid "Comments container selector"
+msgstr "评论容器选择器"
+
+#: wp-ajaxify-comments.php:571 loco:53c887540990d2f85a446bab
+msgid "Contact & Donation"
+msgstr "联系和捐赠"
+
+#: wp-ajaxify-comments.php:91 loco:53c887510990d2f85a446b7c
+msgid "Corner radius (px)"
+msgstr "border-radius 属性（px）"
+
+#: wp-ajaxify-comments.php:51 loco:53c887500990d2f85a446b74
+msgid "Debug mode"
+msgstr "调试模式"
+
+#: wp-ajaxify-comments.php:174 loco:53c887520990d2f85a446b8b
+msgid "Default font size"
+msgstr "默认字体大小"
+
+#: wp-ajaxify-comments.php:46 loco:53c887500990d2f85a446b73
+msgid "Enable plugin"
+msgstr "启用插件"
+
+#: wp-ajaxify-comments.php:153 loco:53c887510990d2f85a446b87
+msgid "Error background color"
+msgstr "错误时背景颜色"
+
+#: wp-ajaxify-comments.php:81 loco:53c887510990d2f85a446b7a
+msgid "Error container selector"
+msgstr "错误提示容器选择器"
+
+#: wp-ajaxify-comments.php:158 loco:53c887520990d2f85a446b88
+msgid "Error text color"
+msgstr "错误时文字颜色"
+
+#: wp-ajaxify-comments.php:232 loco:53c887530990d2f85a446b9d
+msgid "Expert settings"
+msgstr "高级设置"
+
+#: wp-ajaxify-comments.php:115 loco:53c887510990d2f85a446b80
+msgid "Fade in time (ms)"
+msgstr "淡入时间（ms）"
+
+#: wp-ajaxify-comments.php:121 loco:53c887510990d2f85a446b81
+msgid "Fade out time (ms)"
+msgstr "淡出时间（ms）"
+
+#: wp-ajaxify-comments.php:175 loco:53c887520990d2f85a446b8c
+msgid "Font size (e.g. \"14px\", \"1.1em\", &hellip;)"
+msgstr "<p>字体大小（如「14px」、「1.1em」&hellip;）</p>"
+
+#. Author URI of the plugin/theme
+#: loco:53c887540990d2f85a446bb0
+msgid "http://janjonas.net"
+msgstr "http://janjonas.net"
+
+#. Plugin URI of the plugin/theme
+#: loco:53c887540990d2f85a446bad
+msgid "http://wordpress.org/extend/plugins/wp-ajaxify-comments/"
+msgstr "http://wordpress.org/extend/plugins/wp-ajaxify-comments/"
+
+#. Author of the plugin/theme
+#: loco:53c887540990d2f85a446baf
+msgid "Jan Jonas"
+msgstr "Jan Jonas"
+
+#: wp-ajaxify-comments.php:538 loco:53c887540990d2f85a446ba9
+msgid "Leave empty for default value %s"
+msgstr "留空将使用默认值：%s"
+
+#: wp-ajaxify-comments.php:261 loco:53c887530990d2f85a446ba0
+msgid "Load comments async threshold"
+msgstr "异步加载评论"
+
+#: wp-ajaxify-comments.php:263 loco:53c887530990d2f85a446ba1
+msgid ""
+"Load comments asynchronously with secondary AJAX request if more than the "
+"specified number of comments exist. Leave empty to disable this feature."
+msgstr ""
+"当文章评论数超过指定数时，则 Ajax 异步加载评论（设置 0 "
+"将永远异步加载评论）。留空将停用此功能。"
+
+#: wp-ajaxify-comments.php:133 loco:53c887510990d2f85a446b83
+msgid "Loading background color"
+msgstr "加载中背景颜色"
+
+#: wp-ajaxify-comments.php:206 loco:53c887520990d2f85a446b93
+msgid "Loading comments. Please wait&hellip;"
+msgstr "加载评论中，请稍后&hellip;"
+
+#: wp-ajaxify-comments.php:138 loco:53c887510990d2f85a446b84
+msgid "Loading text color"
+msgstr "加载中文字颜色"
+
+#: wp-ajaxify-comments.php:97 loco:53c887510990d2f85a446b7d
+msgid "Margin top (px)"
+msgstr "margin-top 属性（px）"
+
+#: wp-ajaxify-comments.php:163 loco:53c887520990d2f85a446b89
+msgid "Opacity (%)"
+msgstr "opacity 属性（%）"
+
+#: wp-ajaxify-comments.php:109 loco:53c887510990d2f85a446b7f
+msgid "Padding (px)"
+msgstr "padding 属性（px）"
+
+#: wp-ajaxify-comments.php:239 loco:53c887530990d2f85a446b9f
+msgid "Parameter: dom (jQuery DOM element)"
+msgstr "参数：dom（jQuery DOM 元素）"
+
+#: wp-ajaxify-comments.php:510 loco:53c887540990d2f85a446ba8
+msgid "Plugin Settings"
+msgstr "插件设置"
+
+#: wp-ajaxify-comments.php:500 loco:53c887540990d2f85a446ba7
+msgid "Plugin Settings: %s"
+msgstr "插件设置：%s"
+
+#: wp-ajaxify-comments.php:86 loco:53c887510990d2f85a446b7b
+msgid "Popup overlay"
+msgstr "状态提示"
+
+#: wp-ajaxify-comments.php:202 loco:53c887520990d2f85a446b92
+msgid "Post comment"
+msgstr "评论提交"
+
+#: wp-ajaxify-comments.php:201 loco:53c887520990d2f85a446b91
+msgid "Posting your comment. Please wait&hellip;"
+msgstr "提交评论中，请稍候&hellip;"
+
+#: wp-ajaxify-comments.php:207 loco:53c887520990d2f85a446b94
+msgid "Refresh comments"
+msgstr "刷新评论"
+
+#: wp-ajaxify-comments.php:227 loco:53c887530990d2f85a446b9c
+msgid "Reloading page"
+msgstr "重载页面"
+
+#: wp-ajaxify-comments.php:226 loco:53c887530990d2f85a446b9b
+msgid "Reloading page. Please wait&hellip;"
+msgstr "<p>重载页面中，请稍候&hellip;</p>"
+
+#: wp-ajaxify-comments.php:76 loco:53c887510990d2f85a446b79
+msgid "Respond container selector"
+msgstr "评论表单容器选择器"
+
+#: wp-ajaxify-comments.php:551 loco:53c887540990d2f85a446baa
+msgid "Save Changes"
+msgstr "保存更改"
+
+#: wp-ajaxify-comments.php:191 loco:53c887520990d2f85a446b8f
+msgid "Scroll speed (ms)"
+msgstr "滚动速度（ms）"
+
+#: wp-ajaxify-comments.php:494 loco:53c887540990d2f85a446ba6
+msgid "Settings not saved! Please correct the red marked input fields."
+msgstr "设置并未保存！请正确填写红色标记的输入框。"
+
+#: wp-ajaxify-comments.php:492 loco:53c887540990d2f85a446ba5
+msgid "Settings saved successfully."
+msgstr "设置已成功保存。"
+
+#: wp-ajaxify-comments.php:211 loco:53c887520990d2f85a446b95
+msgid "Something went wrong, your comment has not been posted."
+msgstr "发生未知错误，评论提交失败。"
+
+#: wp-ajaxify-comments.php:143 loco:53c887510990d2f85a446b85
+msgid "Success background color"
+msgstr "成功后背景颜色"
+
+#: wp-ajaxify-comments.php:148 loco:53c887510990d2f85a446b86
+msgid "Success text color"
+msgstr "成功后文字颜色"
+
+#: wp-ajaxify-comments.php:169 loco:53c887520990d2f85a446b8a
+msgid "Text align (left|center|right)"
+msgstr "文字对齐方式（left、center、right）"
+
+#: wp-ajaxify-comments.php:127 loco:53c887510990d2f85a446b82
+msgid "Timeout (ms)"
+msgstr "超时时间（ms）"
+
+#: wp-ajaxify-comments.php:212 loco:53c887530990d2f85a446b96
+msgid "Unknown error occured"
+msgstr "未知错误"
+
+#: wp-ajaxify-comments.php:103 loco:53c887510990d2f85a446b7e
+msgid "Width (%)"
+msgstr "width 属性（%）"
+
+#. Description of the plugin/theme
+#: loco:53c887540990d2f85a446bae
+msgid ""
+"WP Ajaxify Comments hooks into your current theme and adds AJAX functionality "
+"to the comment form."
+msgstr ""
+"WP Ajaxify Comments 将嵌入您的当前主题，为评论框增加 Ajax "
+"动态效果。"
+
+#: wp-ajaxify-comments.php:237 wp-ajaxify-comments.php:244
+#: wp-ajaxify-comments.php:250 wp-ajaxify-comments.php:256
+#: loco:53c887530990d2f85a446b9e
+msgid "'%s' callback"
+msgstr "'%s' 回调函数"
+
+#: wp-ajaxify-comments.php:405 loco:53c887530990d2f85a446ba2
+msgid "%s is not enabled!"
+msgstr "%s 插件未启用！"
+
+#: wp-ajaxify-comments.php:408 loco:53c887540990d2f85a446ba4
+msgid "%s is running in debug mode!"
+msgstr "%s 已启用调试模式！"
+
+#: wp-ajaxify-comments.php:221 loco:53c887530990d2f85a446b99
+msgid "Your comment has been posted and is awaiting moderation. Thank you!"
+msgstr "您的评论已提交并需要等待审核，非常感谢！"
+
+#: wp-ajaxify-comments.php:216 loco:53c887530990d2f85a446b97
+msgid "Your comment has been posted. Thank you!"
+msgstr "您的评论已提交，非常感谢！"

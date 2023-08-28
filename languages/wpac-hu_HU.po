@@ -1,0 +1,45 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Ajaxify-Comments v0.6.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-03-25 14:58+0100\n"
+"Last-Translator: svsw <svsw@inet.ua>\n"
+"Language-Team: Bagi Patrik\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"Language: hu_HU\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ wpac
+#: wp-ajaxify-comments.php:230
+msgid "Posting your comment. Please wait&hellip;"
+msgstr "Hozzászólásod küldése. Kérlek várj..."
+
+# @ wpac
+#: wp-ajaxify-comments.php:231
+msgid "Something went wrong, your comment has not been posted."
+msgstr "Hiba történt. A hozzászólásod nem lett elküldve."
+
+# @ wpac
+#: wp-ajaxify-comments.php:232
+msgid "Your comment has been posted. Thank you!"
+msgstr "A hozzászólásod elküldve."
+
+# @ wpac
+#: wp-ajaxify-comments.php:233
+msgid "Your comment has been posted and is awaiting moderation. Thank you!"
+msgstr "A hozzászólásod elküldve és moderációra vár."
+
+# @ wpac
+#: wp-ajaxify-comments.php:234
+msgid "Reloading page. Please wait&hellip;"
+msgstr "Oldal újratöltése folyamatban. Kérlek várj..."

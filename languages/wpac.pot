@@ -1,0 +1,270 @@
+# Copyright (C) 2013 WP Ajaxify Comments
+# This file is distributed under the same license as the WP-Ajaxify-Comments package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Ajaxify-Comments 0.14.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-ajaxify-comments\n"
+"POT-Creation-Date: 2013-06-14 18:54:07+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: wp-ajaxify-comments.php:41
+msgid "General"
+msgstr ""
+
+#: wp-ajaxify-comments.php:46
+msgid "Enable plugin"
+msgstr ""
+
+#: wp-ajaxify-comments.php:51
+msgid "Debug mode"
+msgstr ""
+
+#: wp-ajaxify-comments.php:56
+msgid "Selectors"
+msgstr ""
+
+#: wp-ajaxify-comments.php:61
+msgid "Comment form selector"
+msgstr ""
+
+#: wp-ajaxify-comments.php:66
+msgid "Comments container selector"
+msgstr ""
+
+#: wp-ajaxify-comments.php:71
+msgid "Comment paging links selector"
+msgstr ""
+
+#: wp-ajaxify-comments.php:76
+msgid "Respond container selector"
+msgstr ""
+
+#: wp-ajaxify-comments.php:81
+msgid "Error container selector"
+msgstr ""
+
+#: wp-ajaxify-comments.php:86
+msgid "Popup overlay"
+msgstr ""
+
+#: wp-ajaxify-comments.php:91
+msgid "Corner radius (px)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:97
+msgid "Margin top (px)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:103
+msgid "Width (%)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:109
+msgid "Padding (px)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:115
+msgid "Fade in time (ms)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:121
+msgid "Fade out time (ms)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:127
+msgid "Timeout (ms)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:133
+msgid "Loading background color"
+msgstr ""
+
+#: wp-ajaxify-comments.php:138
+msgid "Loading text color"
+msgstr ""
+
+#: wp-ajaxify-comments.php:143
+msgid "Success background color"
+msgstr ""
+
+#: wp-ajaxify-comments.php:148
+msgid "Success text color"
+msgstr ""
+
+#: wp-ajaxify-comments.php:153
+msgid "Error background color"
+msgstr ""
+
+#: wp-ajaxify-comments.php:158
+msgid "Error text color"
+msgstr ""
+
+#: wp-ajaxify-comments.php:163
+msgid "Opacity (%)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:169
+msgid "Text align (left|center|right)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:174
+msgid "Default font size"
+msgstr ""
+
+#: wp-ajaxify-comments.php:175
+msgid "Font size (e.g. \"14px\", \"1.1em\", &hellip;)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:180
+msgid "Z-Index"
+msgstr ""
+
+#: wp-ajaxify-comments.php:186
+msgid "Miscellaneous"
+msgstr ""
+
+#: wp-ajaxify-comments.php:191
+msgid "Scroll speed (ms)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:197
+msgid "Texts"
+msgstr ""
+
+#: wp-ajaxify-comments.php:201
+msgid "Posting your comment. Please wait&hellip;"
+msgstr ""
+
+#: wp-ajaxify-comments.php:202
+msgid "Post comment"
+msgstr ""
+
+#: wp-ajaxify-comments.php:206
+msgid "Loading comments. Please wait&hellip;"
+msgstr ""
+
+#: wp-ajaxify-comments.php:207
+msgid "Refresh comments"
+msgstr ""
+
+#: wp-ajaxify-comments.php:211
+msgid "Something went wrong, your comment has not been posted."
+msgstr ""
+
+#: wp-ajaxify-comments.php:212
+msgid "Unknown error occured"
+msgstr ""
+
+#: wp-ajaxify-comments.php:216
+msgid "Your comment has been posted. Thank you!"
+msgstr ""
+
+#: wp-ajaxify-comments.php:217
+msgid "Comment posted"
+msgstr ""
+
+#: wp-ajaxify-comments.php:221
+msgid "Your comment has been posted and is awaiting moderation. Thank you!"
+msgstr ""
+
+#: wp-ajaxify-comments.php:222
+msgid "Comment posted unapproved"
+msgstr ""
+
+#: wp-ajaxify-comments.php:226
+msgid "Reloading page. Please wait&hellip;"
+msgstr ""
+
+#: wp-ajaxify-comments.php:227
+msgid "Reloading page"
+msgstr ""
+
+#: wp-ajaxify-comments.php:232
+msgid "Expert settings"
+msgstr ""
+
+#: wp-ajaxify-comments.php:237 wp-ajaxify-comments.php:244
+#: wp-ajaxify-comments.php:250 wp-ajaxify-comments.php:256
+msgid "'%s' callback"
+msgstr ""
+
+#: wp-ajaxify-comments.php:239
+msgid "Parameter: dom (jQuery DOM element)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:261
+msgid "Load comments async threshold"
+msgstr ""
+
+#: wp-ajaxify-comments.php:263
+msgid ""
+"Load comments asynchronously with secondary AJAX request if more than the "
+"specified number of comments exist. Leave empty to disable this feature."
+msgstr ""
+
+#: wp-ajaxify-comments.php:405
+msgid "%s is not enabled!"
+msgstr ""
+
+#: wp-ajaxify-comments.php:405 wp-ajaxify-comments.php:408
+msgid "Click here to configure the plugin."
+msgstr ""
+
+#: wp-ajaxify-comments.php:408
+msgid "%s is running in debug mode!"
+msgstr ""
+
+#: wp-ajaxify-comments.php:492
+msgid "Settings saved successfully."
+msgstr ""
+
+#: wp-ajaxify-comments.php:494
+msgid "Settings not saved! Please correct the red marked input fields."
+msgstr ""
+
+#: wp-ajaxify-comments.php:500
+msgid "Plugin Settings: %s"
+msgstr ""
+
+#: wp-ajaxify-comments.php:510
+msgid "Plugin Settings"
+msgstr ""
+
+#: wp-ajaxify-comments.php:538
+msgid "Leave empty for default value %s"
+msgstr ""
+
+#: wp-ajaxify-comments.php:551
+msgid "Save Changes"
+msgstr ""
+
+#: wp-ajaxify-comments.php:571
+msgid "Contact & Donation"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WP Ajaxify Comments"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/wp-ajaxify-comments/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"WP Ajaxify Comments hooks into your current theme and adds AJAX "
+"functionality to the comment form."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Jan Jonas"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://janjonas.net"
+msgstr ""

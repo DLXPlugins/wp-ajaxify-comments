@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.4.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-ajaxify-comments\n"
+"POT-Creation-Date: 2012-07-15 10:14:56+00:00\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Abdolreza Chavoshi <info@iranakasi.com>\n"
+"Language-Team: iranakasi <iranakasi@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Persian\n"
+"X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: wp-ajaxify-comments.php:209
+msgid "Posting your comment. Please wait&hellip;"
+msgstr "نظر شما ارسال شد. لطفا منتظر بمانید"
+
+#: wp-ajaxify-comments.php:210
+msgid "Something went wrong, your comment has not been posted."
+msgstr "چیزی را فراموش کرده اید. نظر شما ارسال نشد!"
+
+#: wp-ajaxify-comments.php:211
+msgid "Your comment has been posted. Thank you!"
+msgstr "نظر شما با موفقیت ارسال شد. متشکریم!"
+
+#: wp-ajaxify-comments.php:212
+msgid "Your comment has been posted and is awaiting moderation. Thank you!"
+msgstr "نظر شما با موفقیت ارسال شد و پس از تایید نمایش داده می شود. متشکریم!"
+
+#: wp-ajaxify-comments.php:213
+msgid "Reloading page. Please wait&hellip;"
+msgstr "صفحه مجددا بارگذاری می شود . لطفا منتظر بمانید!"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Ajaxify Comments"
+msgstr "WP Ajaxify Comments"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/wp-ajaxify-comments/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "WP Ajaxify Comments hooks into your current theme and adds AJAX functionality to the comment form."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Jan Jonas"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://janjonas.net"
+msgstr ""
+

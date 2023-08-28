@@ -1,0 +1,58 @@
+# Copyright (C) 2012 WP Ajaxify Comments
+# This file is distributed under the same license as the WP-Ajaxify-Comments package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Ajaxify-Comments 0.5.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-ajaxify-comments\n"
+"POT-Creation-Date: 2012-07-15 10:14:56+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-01-22 14:55+0300\n"
+"Last-Translator: Serg\n"
+"Language-Team: Jan Jonas <mail@janjnas.net>\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: wp-ajaxify-comments.php:209
+msgid "Posting your comment. Please wait&hellip;"
+msgstr "Vysielanie váš komentár. Počkajte, prosím, &amp;hellip;"
+
+#: wp-ajaxify-comments.php:210
+msgid "Something went wrong, your comment has not been posted."
+msgstr "Niečo sa pokazilo, váš komentár nebol zaúčtovaný."
+
+#: wp-ajaxify-comments.php:211
+msgid "Your comment has been posted. Thank you!"
+msgstr "Váš komentár bol zaúčtovaný. ďakujem!"
+
+#: wp-ajaxify-comments.php:212
+msgid "Your comment has been posted and is awaiting moderation. Thank you!"
+msgstr "Váš komentár bol vyslaný, a čaká moderovanie. ďakujem!"
+
+#: wp-ajaxify-comments.php:213
+msgid "Reloading page. Please wait&hellip;"
+msgstr "Znova načítať stránku. Počkajte, prosím, &amp;hellip;"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Ajaxify Comments"
+msgstr "WP Ajaxify Comments"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/wp-ajaxify-comments/"
+msgstr "http://WordPress.org/extend/plugins/wp-ajaxify-Comments/"
+
+#. Description of the plugin/theme
+msgid ""
+"WP Ajaxify Comments hooks into your current theme and adds AJAX "
+"functionality to the comment form."
+msgstr ""
+"WP Ajaxify Comments háky do vašej aktuálnu tému a pridáva AJAX funkčnosť "
+"formulára komentár."
+
+#. Author of the plugin/theme
+msgid "Jan Jonas"
+msgstr "Jan Jonas"
+
+#. Author URI of the plugin/theme
+msgid "http://janjonas.net"
+msgstr "http://janjonas.net"

@@ -1,0 +1,56 @@
+# Copyright (C) 2012 WP Ajaxify Comments
+# This file is distributed under the same license as the WP-Ajaxify-Comments package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Ajaxify-Comments 0.5.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-ajaxify-comments\n"
+"POT-Creation-Date: 2012-06-21 17:32:44+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-06-24 16:35+0100\n"
+"Last-Translator: saymonz <my.n@me.is.saymonz.net>\n"
+"Language-Team: saymonz <my.n@me.is.saymonz.net>\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+
+#: wp-ajaxify-comments.php:209
+msgid "Posting your comment. Please wait&hellip;"
+msgstr "Envoi de votre commentaire. Veuillez patienter&hellip;"
+
+#: wp-ajaxify-comments.php:210
+msgid "Something went wrong, your comment has not been posted."
+msgstr "Une erreur s'est produite, votre commentaire n'a pas été envoyé."
+
+#: wp-ajaxify-comments.php:211
+msgid "Your comment has been posted. Thank you!"
+msgstr "Votre commentaire a été envoyé. Merci!"
+
+#: wp-ajaxify-comments.php:212
+msgid "Your comment has been posted and is awaiting moderation. Thank you!"
+msgstr "Votre commentaire a été envoyé et est en attente de modération. Merci!"
+
+#: wp-ajaxify-comments.php:213
+msgid "Reloading page. Please wait&hellip;"
+msgstr "Rechargement de la page. Veuillez patienter&hellip;"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Ajaxify Comments"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/wp-ajaxify-comments/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "WP Ajaxify Comments hooks into your current theme and adds AJAX functionality to the comment form."
+msgstr "WP Ajaxify Comments s'insère dans votre thème actuel et ajoute des fonctionnalités AJAX au formulaire de commentaire."
+
+#. Author of the plugin/theme
+msgid "Jan Jonas"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://janjonas.net"
+msgstr ""
+
