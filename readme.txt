@@ -1,9 +1,9 @@
 ﻿=== WP Ajaxify Comments ===
-Contributors: TBA
+Contributors: ronalfy
 Tags: AJAX, comments, comment, themes, theme
 Requires at least: 3.1.3
-Tested up to: 5.6
-Stable tag: 1.7.4
+Tested up to: 6.3.1
+Stable tag: 1.7.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,10 +11,6 @@ WP Ajaxify Comments hooks into your comment form and adds AJAX functionality - n
 
 
 == Description ==
-
-**Looking for a new plugin maintainer 👀**
-
-Please note that this plugin is no longer maintained or supported and we are looking for a new plugin maintainer (see our announcement <a href="https://wordpress.org/support/topic/looking-for-a-new-plugin-maintainer-%f0%9f%91%80/">here</a>).
 
 **Introduction**
 
@@ -71,6 +67,10 @@ If the plugin does not work out of the box with your theme, custom selectors cou
 
 
 == Changelog ==
+
+= 1.7.5 =
+* Released 2023-08-30
+* Ensuring compatibility with WordPress 6.3.
 
 = 1.7.4 =
 * Fixed HTML5 validation warning for script tag
@@ -568,3 +568,8 @@ Better theme support (for threaded comments) and new features
 
 = 0.0.2 =
 Bug-fix
+
+== Upgrade Notice ==
+
+= 1.7.5 =
+Ajaxify Comments is under new ownership. Making sure plugin works with WP 6.3+.
