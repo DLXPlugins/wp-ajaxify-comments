@@ -1,5 +1,5 @@
 ﻿=== WP Ajaxify Comments ===
-Contributors: weweave
+Contributors: TBA
 Tags: AJAX, comments, comment, themes, theme
 Requires at least: 3.1.3
 Tested up to: 5.6
