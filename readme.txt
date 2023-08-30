@@ -16,7 +16,7 @@ WP Ajaxify Comments hooks into your comment form and adds AJAX functionality - n
 
 When submitting the comment form, WordPress by default reloads the entire page. In the case of an error (e.g. an invalid email address or an empty comment field) the error message is shown on top of a new (blank) screen and the user has to use the browser's back button to correct his inputs before posting the comment again.
 
-The WP Ajaxify Comments WordPress plugin hooks into any WordPress theme and adds AJAX functionality to the comment form: When the user submits his comment, the plugin sends the data to the WordPress backend without reloading the entire page. In the case of an error, the plugin shows an overlay containing the error message so that the user can correct his comment without navigating back. If the comment has been posted successfully, the plugin adds the (new) comment to the list of existing comments without leaving the page and shows an information overlay.
+The <a href="https://dlxplugins.com/plugins/ajaxify-comments">WP Ajaxify Comments WordPress plugin</a> hooks into any WordPress theme and adds AJAX functionality to the comment form: When the user submits his comment, the plugin sends the data to the WordPress backend without reloading the entire page. In the case of an error, the plugin shows an overlay containing the error message so that the user can correct his comment without navigating back. If the comment has been posted successfully, the plugin adds the (new) comment to the list of existing comments without leaving the page and shows an information overlay.
 
 Moreover this plugin includes an option to automatically refresh the comments on the current page while the user stays on your page without requiring a page reload.
 
