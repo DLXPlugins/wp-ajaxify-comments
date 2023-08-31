@@ -25,8 +25,12 @@ class Main {
 		add_filter( 'ajaxify_comments_admin_sub_tabs', array( $this, 'add_main_main_sub_tab' ), 1, 3 );
 		add_filter( 'ajaxify_comments_output_home', array( $this, 'output_main_content' ), 1, 3 );
 		add_action( 'wpac_admin_enqueue_scripts_home', array( $this, 'admin_scripts' ) );
+		add_action( 'wp_ajax_wpac_get_home_options', array( $this, 'ajax_get_options' ) );
 	}
 
+	/**
+	 * Include admin scripts for the home screen.
+	 */
 	public function admin_scripts() {
 		wp_enqueue_script(
 			'wpac-admin-home',
@@ -35,6 +39,30 @@ class Main {
 			Functions::get_plugin_version(),
 			true
 		);
+		wp_localize_script(
+			'wpac-admin-home',
+			'wpacAdminHome',
+			array(
+				'getNonce'    => wp_create_nonce( 'wpac-admin-home-retrieve-options' ),
+				'saveNonce'   => wp_create_nonce( 'wpac-admin-home-save-options' ),
+			)
+		);
+	}
+
+	/**
+	 * Retrieve options via Ajax for the home options.
+	 */
+	public function ajax_get_options() {
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		// Security.
+		if ( ! wp_verify_nonce( $nonce, 'wpac-admin-home-retrieve-options' ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Could not verify nonce.', 'wp-ajaxify-comments' ),
+				)
+			);
+		}
+		wp_send_json_success( array() );
 	}
 
 	/**

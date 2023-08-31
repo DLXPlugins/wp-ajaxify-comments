@@ -40,6 +40,7 @@
 		"hex-to-rgba": "^2.0.1",
 		"lucide-react": "^0.268.0",
 		"mini-css-extract-plugin": "^2.6.1",
+		"node-sass": "^9.0.0",
 		"prettier": "^2.7.1",
 		"prettier-eslint": "^13.0.0",
 		"process": "^0.11.10",
@@ -50,14 +51,11 @@
 		"react-hook-form": "^7.32.2",
 		"react-spinners": "^0.13.6",
 		"resolve-url-loader": "^5.0.0",
+		"sass-loader": "^13.3.2",
 		"use-async-resource": "^2.2.2",
 		"util": "^0.12.4",
 		"webpack": "^5.76.2",
 		"webpack-cli": "^4.10.0",
 		"webpack-remove-empty-scripts": "^0.7.3"
-	},
-	"dependencies": {
-		"node-sass": "^9.0.0",
-		"sass-loader": "^13.3.2"
 	}
 }
