@@ -100,7 +100,6 @@ const Interface = (props) => {
 			selectorPostContainer: data.selectorPostContainer,
 		},
 	});
-	console.log(data);
 	const formValues = useWatch({ control });
 	const { errors, isDirty, dirtyFields, touchedFields } = useFormState({
 		control,
@@ -199,8 +198,6 @@ const Interface = (props) => {
 			</>
 		);
 	};
-
-	console.log(errors.selectorCommentForm);
 
 	return (
 		<>

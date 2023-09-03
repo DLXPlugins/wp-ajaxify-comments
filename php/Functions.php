@@ -133,6 +133,40 @@ class Functions {
 	}
 
 	/**
+	 * Return a default color palette for the theme.
+	 *
+	 * @param array $palette_to_merge {
+	 *    @type string $name Primary color name.
+	 *    @type string $slug Primary color slug.
+	 *    @type string $color Primary color hex or var.
+	 * }
+	 *
+	 * @return array Default color palette.
+	 */
+	public static function get_theme_color_palette( $palette_to_merge = array() ) {
+		$color_palette = array();
+		$settings      = \WP_Theme_JSON_Resolver::get_theme_data()->get_settings();
+		if ( isset( $settings['color']['palette']['theme'] ) ) {
+			$color_palette = $settings['color']['palette']['theme'];
+		}
+
+		// Merge with theme color palette if available.
+		if ( ! empty( $palette_to_merge ) ) {
+			$color_palette = array_merge( $color_palette, $palette_to_merge );
+		}
+		/**
+		 * Filter the color palette.
+		 *
+		 * @param array $color_palette Color palette {
+		 *   @type string $name Primary color name.
+		 *   @type string $slug Primary color slug.
+		 *   @type string $color Primary color hex or var.
+		 * }
+		 */
+		return apply_filters( 'ajaxify/comments/theme_color_palette', $color_palette );
+	}
+
+	/**
 	 * Take a _ separated field and convert to camelcase.
 	 *
 	 * @param string $field Field to convert to camelcase.

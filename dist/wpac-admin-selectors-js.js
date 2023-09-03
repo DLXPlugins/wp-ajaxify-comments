@@ -18871,7 +18871,6 @@ var Interface = function Interface(props) {
     reset = _useForm.reset,
     setError = _useForm.setError,
     clearErrors = _useForm.clearErrors;
-  console.log(data);
   var formValues = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_7__.useWatch)({
     control: control
   });
@@ -18955,7 +18954,6 @@ var Interface = function Interface(props) {
       className: "description"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Ajaxify Comments needs some information about your comment section in order to work properly. Please enter the CSS selectors for the following elements.', 'wp-ajaxify-comments')));
   };
-  console.log(errors.selectorCommentForm);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "ajaxify-admin-panel-area"
   }, getCommentEditingHeader(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {

@@ -45,6 +45,7 @@ class Init {
 
 		// Init tabs.
 		new Tabs\Main();
+		new Tabs\Appearance();
 		new Tabs\Selectors();
 	}
 

@@ -8,6 +8,7 @@ module.exports = ( env ) => {
 				'wpac-admin-css': './src/scss/admin.scss',
 				'wpac-admin-home-js': './src/js/react/views/Home/index.js',
 				'wpac-admin-selectors-js': './src/js/react/views/Selectors/index.js',
+				'wpac-admin-appearance-js': './src/js/react/views/Appearance/index.js',
 
 			},
 			mode: env.mode,

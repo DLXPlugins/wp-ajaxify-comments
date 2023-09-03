@@ -51,6 +51,7 @@
 		"react-hook-form": "^7.32.2",
 		"react-spinners": "^0.13.6",
 		"resolve-url-loader": "^5.0.0",
+		"rgb2hex": "^0.2.5",
 		"sass-loader": "^13.3.2",
 		"use-async-resource": "^2.2.2",
 		"util": "^0.12.4",

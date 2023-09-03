@@ -18845,7 +18845,6 @@ var Interface = function Interface(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     isReset = _useState8[0],
     setIsReset = _useState8[1];
-  console.log(data);
   var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_7__.useForm)({
       defaultValues: {
         enabled: data.enabled,
@@ -18863,7 +18862,6 @@ var Interface = function Interface(props) {
     reset = _useForm.reset,
     setError = _useForm.setError,
     clearErrors = _useForm.clearErrors;
-  console.log(data.scrollSpeed);
   var formValues = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_7__.useWatch)({
     control: control
   });

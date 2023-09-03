@@ -179,6 +179,24 @@ class Options {
 			'selectorPostContainer' => '',
 			'scrollSpeed' => 500,
 			'autoUpdateIdleTime' => 0,
+			'popupBackgroundColorLoading' => '#000000',
+			'popupTextColorLoading' => '#ffffff',
+			'popupBackgroundColorSuccess' => '#008000',
+			'popupTextColorSuccess' => '#FFFFFF',
+			'popupBackgroundColorError' => '#FF0000',
+			'popupTextColorError' => '#FFFFFF',
+			'popupOpacity' => 70,
+			'popupCornerRadius' => 5,
+			'popupMarginTop' => 10,
+			'popupWidth' => 30,
+			'popupPadding' => 5,
+			'popupFadeIn' => 400,
+			'popupFadeOut' => 400,
+			'popupTimeout' => 3000,
+			'popupTextAlign' => 'center', /* can be left|center|right */
+			'popupTextFontSize' => '14px',
+			'popupZindex' => 1000,
+
 		);
 		return $defaults;
 	}

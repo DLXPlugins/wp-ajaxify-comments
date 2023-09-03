@@ -74,7 +74,6 @@ const Interface = (props) => {
 	const [resetting, setResetting] = useState(false);
 	const [isReset, setIsReset] = useState(false);
 
-	console.log( data );
 	const {
 		register,
 		control,
@@ -93,7 +92,6 @@ const Interface = (props) => {
 			autoUpdateIdleTime: data.autoUpdateIdleTime,
 		},
 	});
-	console.log( data.scrollSpeed );
 	const formValues = useWatch({ control });
 	const { errors, isDirty, dirtyFields, touchedFields } = useFormState({
 		control,
