@@ -31,6 +31,59 @@ const cssRegex = /^(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)
 
 const defaultPalette = wpacAdminAppearance.palette;
 
+const showPreview = ( formValues, type ) => {
+	
+	let backgroundColor = "";
+	let textColor = "";
+	let message = "";
+	let top = formValues.popupMarginTop + (jQuery("#wpadminbar").outerHeight() || 0);
+	if (type == "loading") {
+		backgroundColor = formValues.popupBackgroundColorLoading;
+		textColor = formValues.popupTextColorLoading;
+		message = __( 'Loading…', 'wp-ajaxify-comments' );
+	}
+	if (type == "success") {
+		backgroundColor = formValues.popupBackgroundColorSuccess;
+		textColor = formValues.popupTextColorSuccess;
+		message = __( 'Your comment has been posted!', 'wp-ajaxify-comments' );
+	}
+	if (type == "error") {
+		backgroundColor = formValues.popupBackgroundColorError;
+		textColor = formValues.popupTextColorError;
+		message = __( 'There was an error posting your comment.', 'wp-ajaxify-comments' );
+	}
+	jQuery.blockUI({ 
+		message: message, 
+		fadeIn: formValues.popupFadeIn, 
+		fadeOut: formValues.popupFadeOut, 
+		timeout:formValues.popupTimeout,
+		centerY: false,
+		centerX: true,
+		showOverlay: (type == "loading"),
+		css: { 
+			width: formValues.popupWidth + "%",
+			left: ((100-formValues.popupWidth)/2) + "%",
+			top: top + "px",
+			border: "none", 
+			padding: formValues.popupPadding + "px", 
+			backgroundColor: backgroundColor, 
+			"-webkit-border-radius": formValues.popupCornerRadius + "px",
+			"-moz-border-radius": formValues.popupCornerRadius + "px",
+			"border-radius": formValues.popupCornerRadius + "px",
+			opacity: formValues.popupOpacity/100, 
+			color: textColor,
+			textAlign: formValues.popupTextAlign,
+			cursor: (type == "loading") ? "wait" : "default",
+			"font-size": formValues.popupTextFontSize
+		},
+		overlayCSS:  { 
+			backgroundColor: "#000", 
+			opacity: 0
+		},
+		baseZ: formValues.popupZindex
+	}); 
+}
+
 const AppearanceScreen = (props) => {
 	const [defaults, getDefaults] = useAsyncResource(
 		retrieveAppearanceOptions,
@@ -741,6 +794,18 @@ const Interface = (props) => {
 							</tr>
 						</tbody>
 					</table>
+					<div>
+						<a
+							onClick={ (e) => {
+								e.preventDefault();
+								showPreview(formValues, "loading");
+							} }
+							className="ajaxify-admin__preview-button"
+							href="#"
+						>
+							{__('Preview Loading', 'wp-ajaxify-comments')}
+						</a>
+					</div>
 					<div className="ajaxify-admin-buttons">
 						<Button
 							className={classNames(
