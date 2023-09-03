@@ -29,6 +29,17 @@ class Appearance {
 		add_action( 'wp_ajax_wpac_get_appearance_options', array( $this, 'ajax_get_options' ) );
 	}
 
+	/**
+	 * Callback for the theme color palette.
+	 *
+	 * @param array $palette {.
+	 *  @type string $name  Name of the color.
+	 *  @type string $slug  Slug of the color.
+	 *  @type string $color Color hex code.
+	 * }
+	 *
+	 * @return array new color palette.
+	 */
 	public function theme_color_palette( $palette ) {
 		$palette = array(
 			array(
@@ -78,9 +89,9 @@ class Appearance {
 			'wpac-admin-appearance',
 			'wpacAdminAppearance',
 			array(
-				'getNonce'    => wp_create_nonce( 'wpac-admin-appearance-retrieve-options' ),
-				'saveNonce'   => wp_create_nonce( 'wpac-admin-appearance-save-options' ),
-				'palette' => Functions::get_theme_color_palette(),
+				'getNonce'  => wp_create_nonce( 'wpac-admin-appearance-retrieve-options' ),
+				'saveNonce' => wp_create_nonce( 'wpac-admin-appearance-save-options' ),
+				'palette'   => Functions::get_theme_color_palette(),
 			)
 		);
 		remove_filter( 'ajaxify/comments/theme_color_palette', array( $this, 'theme_color_palette' ), 1, 1 );

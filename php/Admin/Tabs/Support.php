@@ -44,8 +44,8 @@ class Support {
 			'wpac-admin-support',
 			'wpacAdminSupport',
 			array(
-				'getNonce'    => wp_create_nonce( 'wpac-admin-support-retrieve-options' ),
-				'saveNonce'   => wp_create_nonce( 'wpac-admin-support-save-options' ),
+				'getNonce'  => wp_create_nonce( 'wpac-admin-support-retrieve-options' ),
+				'saveNonce' => wp_create_nonce( 'wpac-admin-support-save-options' ),
 			)
 		);
 	}

@@ -44,8 +44,8 @@ class Selectors {
 			'wpac-admin-selectors',
 			'wpacAdminSelectors',
 			array(
-				'getNonce'    => wp_create_nonce( 'wpac-admin-selectors-retrieve-options' ),
-				'saveNonce'   => wp_create_nonce( 'wpac-admin-selectors-save-options' ),
+				'getNonce'  => wp_create_nonce( 'wpac-admin-selectors-retrieve-options' ),
+				'saveNonce' => wp_create_nonce( 'wpac-admin-selectors-save-options' ),
 			)
 		);
 	}

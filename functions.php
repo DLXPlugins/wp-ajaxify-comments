@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct acces not allowed!' );
 }
 
+use DLXPlugins\WPAC\Functions as Functions;
+use DLXPlugins\WPAC\Options as Options;
 
 function wpac_get_config() {
 
@@ -412,7 +414,7 @@ function wpac_enqueue_scripts() {
 	// Skip if scripts should not be injected
 	if (!wpac_inject_scripts()) return;
 
-	$version = wpac_get_version();
+	$version = Functions::get_plugin_version();
 	$jsPath = plugins_url('js/', __FILE__);
 	$inFooter = wpac_get_option("placeScriptsInFooter");
 	
@@ -428,14 +430,12 @@ function wpac_enqueue_scripts() {
 }
 
 function wpac_get_version() {
-	if (!function_exists('get_plugins')) require_once(ABSPATH .'wp-admin/includes/plugin.php');
-	$data = get_plugin_data(__FILE__);
-    return $data['Version'];
+	return Functions::get_plugin_version();
 }
 
 function wpac_plugins_loaded() {
 	$dir = dirname(plugin_basename(__FILE__)).DIRECTORY_SEPARATOR.'languages'.DIRECTORY_SEPARATOR;
-	load_plugin_textdomain(WPAC_DOMAIN, false, $dir);
+	load_plugin_textdomain( 'wp-ajaxify-comments', false, $dir);
 }
 add_action('plugins_loaded', 'wpac_plugins_loaded');
 

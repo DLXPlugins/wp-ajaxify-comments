@@ -135,7 +135,7 @@ class Functions {
 	/**
 	 * Return a default color palette for the theme.
 	 *
-	 * @param array $palette_to_merge {
+	 * @param array $palette_to_merge {.
 	 *    @type string $name Primary color name.
 	 *    @type string $slug Primary color slug.
 	 *    @type string $color Primary color hex or var.
@@ -225,7 +225,7 @@ class Functions {
 		return WPAC_VERSION;
 	}
 
-	
+
 	/**
 	 * Returns appropriate html for KSES.
 	 *

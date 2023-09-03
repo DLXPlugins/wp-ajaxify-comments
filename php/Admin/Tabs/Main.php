@@ -6,6 +6,9 @@
  */
 
 namespace DLXPlugins\WPAC\Admin\Tabs;
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'No direct access.' );
+}
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );
@@ -44,8 +47,8 @@ class Main {
 			'wpac-admin-home',
 			'wpacAdminHome',
 			array(
-				'getNonce'    => wp_create_nonce( 'wpac-admin-home-retrieve-options' ),
-				'saveNonce'   => wp_create_nonce( 'wpac-admin-home-save-options' ),
+				'getNonce'  => wp_create_nonce( 'wpac-admin-home-retrieve-options' ),
+				'saveNonce' => wp_create_nonce( 'wpac-admin-home-save-options' ),
 			)
 		);
 	}

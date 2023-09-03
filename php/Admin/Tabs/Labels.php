@@ -44,8 +44,8 @@ class Labels {
 			'wpac-admin-labels',
 			'wpacAdminLabels',
 			array(
-				'getNonce'    => wp_create_nonce( 'wpac-admin-labels-retrieve-options' ),
-				'saveNonce'   => wp_create_nonce( 'wpac-admin-labels-save-options' ),
+				'getNonce'  => wp_create_nonce( 'wpac-admin-labels-retrieve-options' ),
+				'saveNonce' => wp_create_nonce( 'wpac-admin-labels-save-options' ),
 			)
 		);
 	}
