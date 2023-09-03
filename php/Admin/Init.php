@@ -50,6 +50,7 @@ class Init {
 		new Tabs\Callbacks();
 		new Tabs\Labels();
 		new Tabs\Selectors();
+		new Tabs\Support();
 	}
 
 	/**

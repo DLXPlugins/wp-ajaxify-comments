@@ -114,6 +114,9 @@ class Settings {
 			<symbol aria-hidden="true" data-prefix="fas" data-icon="flask" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="flask">
 				<path fill="currentColor" opacity="0.4" d="M309.5 320h-171L64.8 439.8c-.5 .9-.8 1.8-.8 2.8c0 3 2.4 5.4 5.4 5.4H378.6c3 0 5.4-2.4 5.4-5.4c0-1-.3-2-.8-2.8L309.5 320z"/><path fill="currentColor" d="M160 0H288h32c17.7 0 32 14.3 32 32s-14.3 32-32 32V196.8c0 11.8 3.3 23.5 9.5 33.5L437.7 406.2c6.7 10.9 10.3 23.5 10.3 36.4c0 38.3-31.1 69.4-69.4 69.4H69.4C31.1 512 0 480.9 0 442.6c0-12.8 3.6-25.4 10.3-36.4L118.5 230.4c6.2-10.1 9.5-21.7 9.5-33.5V64c-17.7 0-32-14.3-32-32s14.3-32 32-32h32zm32 64V196.8c0 23.7-6.6 46.9-19 67.1L64.8 439.8c-.5 .9-.8 1.8-.8 2.8c0 3 2.4 5.4 5.4 5.4H378.6c3 0 5.4-2.4 5.4-5.4c0-1-.3-2-.8-2.8L275 263.9c-12.4-20.2-19-43.4-19-67.1V64H192z"/>
 			</symbol>
+			<symbol aria-hidden="true" data-prefix="fad" data-icon="hands-helping" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 512" id="hands-helping">
+				<g class="fa-group"><path class="fa-secondary" fill="currentColor" d="M224 248V121.68a31.78 31.78 0 0 1 15-27.1l33.5-20.9A64.48 64.48 0 0 1 306.4 64h102.21L512 4.28A32 32 0 0 1 555.72 16l80 138.6a32 32 0 0 1-11.7 43.7l-80 46.2V216a56 56 0 0 0-56-56H304v88a40 40 0 1 1-80 0z" opacity="0.4"></path><path class="fa-primary" fill="currentColor" d="M4.32 357.38A31.92 31.92 0 0 1 16 313.68l80-46.2v-47.3a63.86 63.86 0 0 1 31.1-54.8l64.89-39V248a72 72 0 1 0 144 0v-56H488a23.94 23.94 0 0 1 24 24v48a23.94 23.94 0 0 1-24 24h-8v64a32 32 0 0 1-32 32h-16a64.06 64.06 0 0 1-64 64H231.41L128 507.68A32 32 0 0 1 84.32 496z"></path></g>
+			</symbol>
 		</svg>
 		<?php do_action( 'comment_edit_pro_add_admin_header_content' ); ?>
 		<?php

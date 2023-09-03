@@ -9,6 +9,8 @@ import BeatLoader from 'react-spinners/BeatLoader';
 import {
 	TextControl,
 	Button,
+	SelectControl,
+	ToggleControl,
 } from '@wordpress/components';
 import { AlertCircle, Loader2, ClipboardCheck } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
@@ -87,9 +89,15 @@ const Interface = (props) => {
 		defaultValues: {
 			commentPagesUrlRegex: data.commentPagesUrlRegex,
 			asyncCommentsThreshold: data.asyncCommentsThreshold,
-			callbackOnAfterPostComment: data.callbackOnAfterPostComment,
-			callbackOnBeforeUpdateComments: data.callbackOnBeforeUpdateComments,
-			callbackOnAfterUpdateComments: data.callbackOnAfterUpdateComments,
+			asyncLoadTrigger: data.asyncLoadTrigger,
+			disableUrlUpdate: data.disableUrlUpdate,
+			disableScrollToAnchor: data.disableScrollToAnchor,
+			useUncompressedScripts: data.useUncompressedScripts,
+			placeScriptsInFooter: data.placeScriptsInFooter,
+			optimizeAjaxResponse: data.optimizeAjaxResponse,
+			baseUrl: data.baseUrl,
+			disableCache: data.disableCache,
+			enableByQuery: data.enableByQuery,
 		},
 	});
 	console.log(data);
@@ -197,430 +205,309 @@ const Interface = (props) => {
 			<div className="ajaxify-admin-panel-area">
 				{getCommentEditingHeader()}
 				<form onSubmit={handleSubmit(onSubmit)}>
-				<table className="form-table form-table-row-sections">
-						<tbody>
-							<tr>
-								<th scope="row">{__('Labels', 'wp-ajaxify-comments')}</th>
-								<td>
-									<div className="ajaxify-admin__control-row">
-										<Controller
-											name="commentPagesUrlRegex"
-											control={control}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-														label={__('Comment Pages URL Regex', 'wp-ajaxify-comments')}
-														type="text"
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.commentPagesUrlRegex?.type,
-															'has-error': 'pattern' === errors.commentPagesUrlRegex?.type,
-															'is-required': true,
-														})}
-														help={__('Regular expression that matches URLs of all pages that support comments; leave empty to use WordPress defaults to automatically detect pages where comments are allowed. Please note: The expression is evaluated against the full page URL including schema, hostname, port number (if none default ports are used), (full) path and query string.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-												</>
+					<div className="ajaxify-admin-panel-content">
+						<div className="ajaxify-admin__control-row">
+							<Controller
+								name="commentPagesUrlRegex"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<>
+										<TextControl
+											label={__('Comment Pages URL Regex', 'wp-ajaxify-comments')}
+											type="text"
+											className={classNames('ajaxify-admin__text-control', {
+												'has-error': 'required' === errors.commentPagesUrlRegex?.type,
+												'has-error': 'pattern' === errors.commentPagesUrlRegex?.type,
+												'is-required': true,
+											})}
+											help={__('Regular expression that matches URLs of all pages that support comments; leave empty to use WordPress defaults to automatically detect pages where comments are allowed. Please note: The expression is evaluated against the full page URL including schema, hostname, port number (if none default ports are used), (full) path and query string.', 'wp-ajaxify-comments')}
+											aria-required="true"
+											value={value}
+											onChange={onChange}
+										/>
+									</>
+								)}
+							/>
+						</div>
+						<div className="ajaxify-admin__control-row">
+							<Controller
+								name="asyncCommentsThreshold"
+								control={control}
+								rules={{ pattern: /^[0-9]+$/ }}
+								render={({ field: { onChange, value } }) => (
+									<>
+										<TextControl
+											label={__('Load Comments Async Threshold', 'wp-ajaxify-comments')}
+											type="number"
+											className={classNames('ajaxify-admin__text-control', {
+												'has-error': 'required' === errors.asyncCommentsThreshold?.type,
+												'has-error': 'pattern' === errors.asyncCommentsThreshold?.type,
+												'is-required': true,
+											})}
+											help={__('Load comments asynchronously with secondary AJAX request if more than the specified number of comments exist (0 for always load comments asynchronously). Leave empty to disable this feature.', 'wp-ajaxify-comments')}
+											aria-required="true"
+											value={value}
+											onChange={onChange}
+										/>
+										{'pattern' === errors.asyncCommentsThreshold?.type && (
+											<Notice
+												message={__(
+													'Please enter a valid number.',
+													'wp-ajaxify-comments'
+												)}
+												status="error"
+												politeness="assertive"
+												inline={false}
+												icon={() => (<AlertCircle />)}
+											/>
+										)}
+									</>
+								)}
+							/>
+						</div>
+						<div className="ajaxify-admin__control-row">
+							<Controller
+								name="asyncLoadTrigger"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<>
+										<SelectControl
+											label={__('Async Comments Load Trigger', 'wp-ajaxify-comments')}
+											value={value}
+											onChange={onChange}
+											options={[
+												{
+													label: __('DomReady', 'wp-ajaxify-comments'),
+													value: 'DomReady',
+												},
+												{
+													label: __('Viewport', 'wp-ajaxify-comments'),
+													value: 'Viewport',
+												},
+												{
+													label: __('None', 'wp-ajaxify-comments'),
+													value: 'None',
+												}
+											]}
+											help={__('Trigger to load comments asynchronously (\'DomReady\': Load comments immediately, \'Viewport\': Load comments when comments container is in viewport, \'None\': Comment loading is triggered manually).', 'wp-ajaxify-comments')}
+										/>
+									</>
+								)}
+							/>
+						</div>
+						<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
+							<Controller
+								name="disableUrlUpdate"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<ToggleControl
+										label={__('Disable URL Updating', 'wp-ajaxify-comments')}
+										checked={value}
+										onChange={(boolValue) => {
+											onChange(boolValue);
+										}}
+										help={__(
+											'URLs update as comments are posted and comments are paginated. Disable this if you want to prevent any URL re-writing.',
+											'wp-ajaxify-comments'
+										)}
+									/>
+								)}
+							/>
+						</div>
+						<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
+							<Controller
+								name="disableScrollToAnchor"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<ToggleControl
+										label={__('Disable Scroll to Anchor', 'wp-ajaxify-comments')}
+										checked={value}
+										onChange={(boolValue) => {
+											onChange(boolValue);
+										}}
+										help={__(
+											'By default, Ajaxify Comments will perform an easing scroll to the anchor in the URL location bar. Disable this if you want to prevent any scrolling.',
+											'wp-ajaxify-comments'
+										)}
+									/>
+								)}
+							/>
+						</div>
+						<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
+							<Controller
+								name="useUncompressedScripts"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<ToggleControl
+										label={__('Use Uncompressed Scripts', 'wp-ajaxify-comments')}
+										checked={value}
+										onChange={(boolValue) => {
+											onChange(boolValue);
+										}}
+										help={__(
+											'By default a compressed (and merged) JavaScript file is used, check to use uncompressed JavaScript files. Please note: If debug mode is enabled, uncompressed JavaScript files are used.',
+											'wp-ajaxify-comments'
+										)}
+									/>
+								)}
+							/>
+						</div>
+						<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
+							<Controller
+								name="alwaysIncludeScripts"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<>
+										<ToggleControl
+											label={__('Always Include Scripts', 'wp-ajaxify-comments')}
+											checked={value}
+											onChange={(boolValue) => {
+												onChange(boolValue);
+											}}
+											help={__(
+												'By default JavaScript files are only included on pages where comments are enabled, check to include JavaScript files on every page. Please note: If debug mode is enabled, JavaScript files are included on every pages.',
+												'wp-ajaxify-comments'
 											)}
 										/>
-									</div>
-									<div className="ajaxify-admin__control-row">
-										<Controller
-											name="asyncCommentsThreshold"
-											control={control}
-											rules={{ pattern: /^[0-9]+$/ }}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-														label={__('Load Comments Async Threshold', 'wp-ajaxify-comments')}
-														type="number"
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.asyncCommentsThreshold?.type,
-															'has-error': 'pattern' === errors.asyncCommentsThreshold?.type,
-															'is-required': true,
-														})}
-														help={__('Load comments asynchronously with secondary AJAX request if more than the specified number of comments exist (0 for always load comments asynchronously). Leave empty to disable this feature.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-													{'pattern' === errors.asyncCommentsThreshold?.type && (
-														<Notice
-															message={__(
-																'Please enter a valid number.',
-																'wp-ajaxify-comments'
-															)}
-															status="error"
-															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
-														/>
+										{
+											data.debug && (
+												<Notice
+													message={__(
+														'Debug mode is enabled. Scripts will be loaded automatically when debug mode is on.',
+														'wp-ajaxify-comments'
 													)}
-												</>
+													status="info"
+													politeness="assertive"
+													inline={false}
+												/>
+											)
+										}
+									</>
+								)}
+							/>
+						</div>
+						<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
+							<Controller
+								name="placeScriptsInFooter"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<>
+										<ToggleControl
+											label={__('Place Scripts in Footer', 'wp-ajaxify-comments')}
+											checked={value}
+											onChange={(boolValue) => {
+												onChange(boolValue);
+											}}
+											help={__(
+												'Load JavaScript files in the footer to improve performance. Please note: If debug mode is enabled, JavaScript files are loaded in the footer.',
+												'wp-ajaxify-comments'
 											)}
 										/>
-									</div>
-									<div className="ajaxify-admin__control-row">
-										<Controller
-											name="textReloadPage"
-											control={control}
-											rules={{ required: true }}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-														label={__('Reload page', 'wp-ajaxify-comments')}
-														type="text"
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textReloadPage?.type,
-															'has-error': 'pattern' === errors.textReloadPage?.type,
-															'is-required': true,
-														})}
-														help={__('The text shown when the page needs to be reloaded.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-													{'required' === errors.textReloadPage?.type && (
-														<Notice
-															message={__(
-																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
-															status="error"
-															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
-														/>
+										{
+											data.debug && (
+												<Notice
+													message={__(
+														'Debug mode is enabled. Scripts will be loaded in the footer when debug mode is on.',
+														'wp-ajaxify-comments'
 													)}
-												</>
+													status="info"
+													politeness="assertive"
+													inline={false}
+												/>
+											)
+										}
+									</>
+								)}
+							/>
+						</div>
+						<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
+							<Controller
+								name="optimizeAjaxResponse"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<>
+										<ToggleControl
+											label={__('Optimize AJAX Response', 'wp-ajaxify-comments')}
+											checked={value}
+											onChange={(boolValue) => {
+												onChange(boolValue);
+											}}
+											help={__(
+												'Check to remove unnecessary HTML content from AJAX responses to save bandwidth.',
+												'wp-ajaxify-comments'
 											)}
 										/>
-									</div>
-									<div className="ajaxify-admin__control-row">
-										<Controller
-											name="textPostComment"
-											control={control}
-											rules={{ required: true }}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-														label={__('Post Comment Notification', 'wp-ajaxify-comments')}
-														type="text"
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textPostComment?.type,
-															'has-error': 'pattern' === errors.textPostComment?.type,
-															'is-required': true,
-														})}
-														help={__('The text shown when a comment is successfully posted.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-													{'required' === errors.textPostComment?.type && (
-														<Notice
-															message={__(
-																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
-															status="error"
-															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
-														/>
-													)}
-												</>
+									</>
+								)}
+							/>
+						</div>
+						<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
+							<Controller
+								name="baseUrl"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<>
+										<TextControl
+
+											label={
+												__('Base URL', 'wp-ajaxify-comments')
+											}
+											type="text"
+											className={classNames('ajaxify-admin__text-control', {
+												'has-error': 'required' === errors.baseUrl?.type,
+												'has-error': 'pattern' === errors.baseUrl?.type,
+												'is-required': true,
+											})}
+											help={__('If you are running your Wordpress site behind a reverse proxy, set the this option to be the FQDN that the site will be accessed on (e.g. http://www.your-site.com).', 'wp-ajaxify-comments')}
+											value={value}
+											onChange={onChange}
+										/>
+									</>
+								)}
+							/>
+						</div>
+						<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
+							<Controller
+								name="disableCache"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<>
+										<ToggleControl
+											label={__('Disable Cache', 'wp-ajaxify-comments')}
+											checked={value}
+											onChange={(boolValue) => {
+												onChange(boolValue);
+											}}
+											help={__(
+												'Check to disable client-side caching when updating comments.',
+												'wp-ajaxify-comments'
 											)}
 										/>
-									</div>
-									<div className="ajaxify-admin__control-row">
-										<Controller
-											name="textRefreshComments"
-											control={control}
-											rules={{ required: true }}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-														label={__('Refresh Comments Status Label', 'wp-ajaxify-comments')}
-														type="text"
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textRefreshComments?.type,
-															'has-error': 'pattern' === errors.textRefreshComments?.type,
-															'is-required': true,
-														})}
-														help={__('The text shown when the comments are refreshing.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-													{'required' === errors.textRefreshComments?.type && (
-														<Notice
-															message={__(
-																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
-															status="error"
-															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
-														/>
-													)}
-												</>
-											)}
+									</>
+								)}
+							/>
+						</div>
+						<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
+							<Controller
+								name="enableByQuery"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<>
+										<ToggleControl
+											label={__('Enable by Query', 'wp-ajaxify-comments')}
+											checked={value}
+											onChange={(boolValue) => {
+												onChange(boolValue);
+											}}
+											help={sprintf(__(
+												'Check to enable the plugin by passing the (secret) query string (WPACEnable=%s)',
+												'wp-ajaxify-comments'), wpacAdminAdvanced.secret)}
 										/>
-									</div>
-									<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
-										<Controller
-											name="textUnknownError"
-											control={control}
-											rules={{ required: true }}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-														label={__('Unknown Error', 'wp-ajaxify-comments')}
-														type="text"
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textUnknownError?.type,
-															'has-error': 'pattern' === errors.textUnknownError?.type,
-															'is-required': true,
-														})}
-														help={__('The text shown when an unknown error occurs.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-													{'required' === errors.textUnknownError?.type && (
-														<Notice
-															message={__(
-																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
-															status="error"
-															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
-														/>
-													)}
-												</>
-											)}
-										/>
-									</div>
-									<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
-										<Controller
-											name="textErrorTypeComment"
-											control={control}
-											rules={{ required: true }}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-														label={
-															__('Error \'Please type a comment\':', 'wp-ajaxify-comments')
-														}
-														type="text"
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorTypeComment?.type,
-															'has-error': 'pattern' === errors.textErrorTypeComment?.type,
-															'is-required': true,
-														})}
-														help={__('The text shown when the user has not typed a comment.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-													{'required' === errors.textErrorTypeComment?.type && (
-														<Notice
-															message={__(
-																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
-															status="error"
-															politeness="assertive"
-															inline={false}
-														/>
-													)}
-												</>
-											)}
-										/>
-									</div>
-									<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
-										<Controller
-											name="textErrorCommentsClosed"
-											control={control}
-											rules={{ required: true }}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-														label={
-															__('Error \'Comments closed\':', 'wp-ajaxify-comments')
-														}
-														type="text"
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorCommentsClosed?.type,
-															'has-error': 'pattern' === errors.textErrorCommentsClosed?.type,
-															'is-required': true,
-														})}
-														help={__('The text shown when comments are closed.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-													{'required' === errors.textErrorCommentsClosed?.type && (
-														<Notice
-															message={__(
-																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
-															status="error"
-															politeness="assertive"
-															inline={false}
-														/>
-													)}
-												</>
-											)}
-										/>
-									</div>
-									<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
-										<Controller
-											name="textErrorMustBeLoggedIn"
-											control={control}
-											rules={{ required: true }}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-														label={
-															__('Error \'Must be logged in\':', 'wp-ajaxify-comments')
-														}
-														type="text"
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorMustBeLoggedIn?.type,
-															'has-error': 'pattern' === errors.textErrorMustBeLoggedIn?.type,
-															'is-required': true,
-														})}
-														help={__('The text shown when the user must be logged in to post a comment.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-													{'required' === errors.textErrorMustBeLoggedIn?.type && (
-														<Notice
-															message={__(
-																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
-															status="error"
-														/>
-													)}
-												</>
-											)}
-										/>
-									</div>
-									<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
-										<Controller
-											name="textErrorFillRequiredFields"
-											control={control}
-											rules={{ required: true }}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-														label={
-															__('Error \'Fill in required fields\':', 'wp-ajaxify-comments')
-														}
-														type="text"
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorFillRequiredFields?.type,
-															'has-error': 'pattern' === errors.textErrorFillRequiredFields?.type,
-															'is-required': true,
-														})}
-														help={__('The text shown when the user has not filled in all required fields.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-													{'required' === errors.textErrorFillRequiredFields?.type && (
-														<Notice
-															message={__(
-																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
-														/>
-													)}
-												</>
-											)}
-										/>
-									</div>
-									<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
-										<Controller
-											name="textErrorInvalidEmailAddress"
-											control={control}
-											rules={{ required: true }}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorInvalidEmailAddress?.type,
-															'has-error': 'pattern' === errors.textErrorInvalidEmailAddress?.type,
-															'is-required': true,
-														})}
-														label={
-															__('Error \'Invalid email address\':', 'wp-ajaxify-comments')
-														}
-														type="text"
-														help={__('The text shown when the user has not entered a valid email address.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-													{'required' === errors.textErrorInvalidEmailAddress?.type && (
-														<Notice
-															message={__(
-																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
-														/>
-													)}
-												</>
-											)}
-										/>
-									</div>
-									<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
-										<Controller
-											name="textErrorPostTooQuickly"
-											control={control}
-											rules={{ required: true }}
-											render={({ field: { onChange, value } }) => (
-												<>
-													<TextControl
-													
-														label={
-															__('Error \'Post too quickly\':', 'wp-ajaxify-comments')
-														}
-														type="text"
-														className={classNames('ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorPostTooQuickly?.type,
-															'has-error': 'pattern' === errors.textErrorPostTooQuickly?.type,
-															'is-required': true,
-														})}
-														help={__('The text shown when the user is posting comments too quickly.', 'wp-ajaxify-comments')}
-														aria-required="true"
-														value={value}
-														onChange={onChange}
-													/>
-													{'required' === errors.textErrorPostTooQuickly?.type && (
-														<Notice
-															message={__(
-																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
-														/>
-													)}
-												</>
-											)}
-										/>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+									</>
+								)}
+							/>
+						</div>
+					</div>
 					<div className="ajaxify-admin-buttons">
 						<Button
 							className={classNames(

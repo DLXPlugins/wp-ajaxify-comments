@@ -12,6 +12,7 @@ module.exports = ( env ) => {
 				'wpac-admin-labels-js': './src/js/react/views/Labels/index.js',
 				'wpac-admin-callbacks-js': './src/js/react/views/Callbacks/index.js',
 				'wpac-admin-advanced-js': './src/js/react/views/Advanced/index.js',
+				'wpac-admin-support-js': './src/js/react/views/Support/index.js',
 
 			},
 			mode: env.mode,

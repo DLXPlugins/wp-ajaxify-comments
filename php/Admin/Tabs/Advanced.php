@@ -46,6 +46,7 @@ class Advanced {
 			array(
 				'getNonce'    => wp_create_nonce( 'wpac-admin-advanced-retrieve-options' ),
 				'saveNonce'   => wp_create_nonce( 'wpac-admin-advanced-save-options' ),
+				'secret' => wpac_get_secret(),
 			)
 		);
 	}

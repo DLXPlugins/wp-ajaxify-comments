@@ -216,6 +216,15 @@ class Options {
 			'callbackOnAfterUpdateComments' => '',
 			'commentPagesUrlRegex' => '',
 			'asyncCommentsThreshold' => '',
+			'asyncLoadTrigger' => 'DomReady', /* can be DomReady, none, Viewport */
+			'disableUrlUpdate' => false,
+			'disableScrollToAnchor' => false,
+			'useUncompressedScripts' => false,
+			'placeScriptsInFooter' => true,
+			'optimizeAjaxResponse' => false,
+			'baseUrl' => '',
+			'disableCache' => false,
+			'enableByQuery' => false,
 
 		);
 		return $defaults;
