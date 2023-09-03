@@ -18742,10 +18742,10 @@ function sendCommand(action, data) {
 
 /***/ }),
 
-/***/ "./src/js/react/views/Home/home.js":
-/*!*****************************************!*\
-  !*** ./src/js/react/views/Home/home.js ***!
-  \*****************************************/
+/***/ "./src/js/react/views/Selectors/selectors.js":
+/*!***************************************************!*\
+  !*** ./src/js/react/views/Selectors/selectors.js ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18763,13 +18763,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
 /* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-spinners/BeatLoader */ "./node_modules/react-spinners/BeatLoader.js");
 /* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/toggle-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/text-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button/index.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/toggle-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/text-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button/index.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/clipboard-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js");
 /* harmony import */ var _components_ErrorBoundary__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ErrorBoundary */ "./src/js/react/components/ErrorBoundary/index.js");
 /* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/js/react/utils/SendCommand.js");
-/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/Notice */ "./src/js/react/components/Notice/index.js");
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/Notice */ "./src/js/react/components/Notice/index.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -18795,18 +18797,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var retrieveHomeOptions = function retrieveHomeOptions() {
-  return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wpac_get_home_options', {
-    nonce: wpacAdminHome.getNonce
+var retrieveSelectorOptions = function retrieveSelectorOptions() {
+  return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wpac_get_selectors_options', {
+    nonce: wpacAdminSelectors.getNonce
   });
 };
-var HomeScreen = function HomeScreen(props) {
-  var _useAsyncResource = (0,use_async_resource__WEBPACK_IMPORTED_MODULE_2__.useAsyncResource)(retrieveHomeOptions, []),
+var cssRegex = /^(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)(?:=[\'"]?(.*?)[\'"]?)?\]|#[a-z0-9_-]+|\.(?:[a-z0-9_-]+))+(?:\s*,\s*(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)(?:=[\'"]?(.*?)[\'"]?)?\]|#[a-z0-9_-]+|\.(?:[a-z0-9_-]+))+)*/i;
+var SelectorsScreen = function SelectorsScreen(props) {
+  var _useAsyncResource = (0,use_async_resource__WEBPACK_IMPORTED_MODULE_2__.useAsyncResource)(retrieveSelectorOptions, []),
     _useAsyncResource2 = _slicedToArray(_useAsyncResource, 2),
     defaults = _useAsyncResource2[0],
     getDefaults = _useAsyncResource2[1];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ErrorBoundary__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Could not load Home options.', 'highlight-and-share'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Could not load Selector options.', 'highlight-and-share'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
       href: "https://dlxplugins.com/support/",
       target: "_blank",
       rel: "noopener noreferrer"
@@ -18845,14 +18848,19 @@ var Interface = function Interface(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     isReset = _useState8[0],
     setIsReset = _useState8[1];
-  console.log(data);
   var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_7__.useForm)({
       defaultValues: {
-        enabled: data.enabled,
-        debug: data.debug,
         menuHelper: data.menuHelper,
-        scrollSpeed: data.scrollSpeed,
-        autoUpdateIdleTime: data.autoUpdateIdleTime
+        selectorCommentForm: data.selectorCommentForm,
+        selectorCommentsContainer: data.selectorCommentsContainer,
+        selectorCommentList: data.selectorCommentList,
+        selectorCommentPagingLinks: data.selectorCommentPagingLinks,
+        selectorCommentLinks: data.selectorCommentLinks,
+        selectorRespondContainer: data.selectorRespondContainer,
+        selectorErrorContainer: data.selectorErrorContainer,
+        selectorSubmitButton: data.selectorSubmitButton,
+        selectorTextarea: data.selectorTextarea,
+        selectorPostContainer: data.selectorPostContainer
       }
     }),
     register = _useForm.register,
@@ -18863,7 +18871,7 @@ var Interface = function Interface(props) {
     reset = _useForm.reset,
     setError = _useForm.setError,
     clearErrors = _useForm.clearErrors;
-  console.log(data.scrollSpeed);
+  console.log(data);
   var formValues = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_7__.useWatch)({
     control: control
   });
@@ -18913,10 +18921,14 @@ var Interface = function Interface(props) {
   };
   var getSaveIcon = function getSaveIcon() {
     if (saving) {
-      return Spinner;
+      return function () {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null);
+      };
     }
     if (isSaved) {
-      return ClipboardCheck;
+      return function () {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], null);
+      };
     }
     return false;
   };
@@ -18927,7 +18939,7 @@ var Interface = function Interface(props) {
     if (isSaved) {
       return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Saved', 'wp-ajaxify-comments');
     }
-    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Save Settings', 'wp-ajaxify-comments');
+    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Save Options', 'wp-ajaxify-comments');
   };
   var getResetText = function getResetText() {
     if (resetting) {
@@ -18936,140 +18948,429 @@ var Interface = function Interface(props) {
     if (isReset) {
       return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Defaults Restored', 'wp-ajaxify-comments');
     }
-    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Reset Settings', 'wp-ajaxify-comments');
+    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Restore Defaults', 'wp-ajaxify-comments');
   };
   var getCommentEditingHeader = function getCommentEditingHeader() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Ajaxify Settings Home', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('JavaScript Selectors', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
       className: "description"
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable or disable Ajaxify comments, or place into debug mode.', 'wp-ajaxify-comments')));
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Ajaxify Comments needs some information about your comment section in order to work properly. Please enter the CSS selectors for the following elements.', 'wp-ajaxify-comments')));
   };
+  console.log(errors.selectorCommentForm);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "ajaxify-admin-panel-area"
   }, getCommentEditingHeader(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
     onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-panel-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
     className: "form-table form-table-row-sections"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Ajaxify Status', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
-    name: "enabled",
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Menu Helper', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+    name: "menuHelper",
     control: control,
     render: function render(_ref) {
       var _ref$field = _ref.field,
         _onChange = _ref$field.onChange,
         value = _ref$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Ajaxify Comments', 'wp-ajaxify-comments'),
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Menu Helper', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
           _onChange(boolValue);
         },
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Configure whether to enable or disable Ajaxify Comments.', 'wp-ajaxify-comments')
-      });
-    }
-  }), getValues('enabled') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
-    name: "debug",
-    control: control,
-    render: function render(_ref2) {
-      var _ref2$field = _ref2.field,
-        _onChange2 = _ref2$field.onChange,
-        value = _ref2$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Debug Mode', 'wp-ajaxify-comments'),
-        checked: value,
-        onChange: function onChange(boolValue) {
-          _onChange2(boolValue);
-        },
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Debug mode will show you the Ajaxify Comments debug log in the browser console.', 'wp-ajaxify-comments')
-      });
-    }
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
-    scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Menu Helper', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
-    name: "menuHelper",
-    control: control,
-    render: function render(_ref3) {
-      var _ref3$field = _ref3.field,
-        _onChange3 = _ref3$field.onChange,
-        value = _ref3$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Menu Helper', 'wp-ajaxify-comments'),
-        checked: value,
-        onChange: function onChange(boolValue) {
-          _onChange3(boolValue);
-        },
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Turn on some menu shortcuts when viewing a post with comments. You can force Ajaxify comments to load, and check the page for selectors.', 'wp-ajaxify-comments')
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable menu helper to enable a helper in the admin menu in order to evaluate a comments page for the selectors needed.', 'wp-ajaxify-comments')
       });
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Miscellaneous', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
-    name: "scrollSpeed",
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment Section Selectors', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-admin__control-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+    name: "selectorCommentsContainer",
     control: control,
     rules: {
       required: true,
-      pattern: '\d+'
+      pattern: cssRegex
+    },
+    render: function render(_ref2) {
+      var _errors$selectorComme, _errors$selectorComme2, _classNames, _errors$selectorComme3, _errors$selectorComme4;
+      var _ref2$field = _ref2.field,
+        onChange = _ref2$field.onChange,
+        value = _ref2$field.value;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comments Container', 'wp-ajaxify-comments'),
+        type: "text",
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames = {
+          'has-error': 'required' === ((_errors$selectorComme = errors.selectorCommentsContainer) === null || _errors$selectorComme === void 0 ? void 0 : _errors$selectorComme.type)
+        }, _defineProperty(_classNames, "has-error", 'pattern' === ((_errors$selectorComme2 = errors.selectorCommentsContainer) === null || _errors$selectorComme2 === void 0 ? void 0 : _errors$selectorComme2.type)), _defineProperty(_classNames, 'is-required', true), _classNames)),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The CSS selector for Comments container.', 'wp-ajaxify-comments'),
+        "aria-required": "true",
+        value: value,
+        onChange: onChange
+      }), 'pattern' === ((_errors$selectorComme3 = errors.selectorCommentsContainer) === null || _errors$selectorComme3 === void 0 ? void 0 : _errors$selectorComme3.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Please use valid comma-separated CSS selectors.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }), 'required' === ((_errors$selectorComme4 = errors.selectorCommentsContainer) === null || _errors$selectorComme4 === void 0 ? void 0 : _errors$selectorComme4.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }));
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-admin__control-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+    name: "selectorCommentList",
+    control: control,
+    rules: {
+      required: true,
+      pattern: cssRegex
+    },
+    render: function render(_ref3) {
+      var _errors$selectorComme5, _errors$selectorComme6, _classNames2, _errors$selectorComme7, _errors$selectorComme8;
+      var _ref3$field = _ref3.field,
+        onChange = _ref3$field.onChange,
+        value = _ref3$field.value;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comments List', 'wp-ajaxify-comments'),
+        type: "text",
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames2 = {
+          'has-error': 'required' === ((_errors$selectorComme5 = errors.selectorCommentList) === null || _errors$selectorComme5 === void 0 ? void 0 : _errors$selectorComme5.type)
+        }, _defineProperty(_classNames2, "has-error", 'pattern' === ((_errors$selectorComme6 = errors.selectorCommentList) === null || _errors$selectorComme6 === void 0 ? void 0 : _errors$selectorComme6.type)), _defineProperty(_classNames2, 'is-required', true), _classNames2)),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The CSS selector for the comments list wrapper.', 'wp-ajaxify-comments'),
+        "aria-required": "true",
+        value: value,
+        onChange: onChange
+      }), 'pattern' === ((_errors$selectorComme7 = errors.selectorCommentList) === null || _errors$selectorComme7 === void 0 ? void 0 : _errors$selectorComme7.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Please use valid comma-separated CSS selectors.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }), 'required' === ((_errors$selectorComme8 = errors.selectorCommentList) === null || _errors$selectorComme8 === void 0 ? void 0 : _errors$selectorComme8.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }));
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-admin__control-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+    name: "selectorCommentForm",
+    control: control,
+    rules: {
+      required: true,
+      pattern: cssRegex
     },
     render: function render(_ref4) {
-      var _errors$scrollSpeed;
+      var _errors$selectorComme9, _errors$selectorComme10, _classNames3, _errors$selectorComme11, _errors$selectorComme12;
       var _ref4$field = _ref4.field,
         onChange = _ref4$field.onChange,
         value = _ref4$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Scroll speed (ms)', 'wp-ajaxify-comments'),
-        type: "number",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', {
-          'has-error': 'required' === ((_errors$scrollSpeed = errors.scrollSpeed) === null || _errors$scrollSpeed === void 0 ? void 0 : _errors$scrollSpeed.type),
-          'is-required': true
-        }),
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The scroll speed is the time it takes to scroll to the comment after successful submission.', 'wp-ajaxify-comments'),
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment Form', 'wp-ajaxify-comments'),
+        type: "text",
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames3 = {
+          'has-error': 'required' === ((_errors$selectorComme9 = errors.selectorCommentForm) === null || _errors$selectorComme9 === void 0 ? void 0 : _errors$selectorComme9.type)
+        }, _defineProperty(_classNames3, "has-error", 'pattern' === ((_errors$selectorComme10 = errors.selectorCommentForm) === null || _errors$selectorComme10 === void 0 ? void 0 : _errors$selectorComme10.type)), _defineProperty(_classNames3, 'is-required', true), _classNames3)),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The CSS selector for the comment form. Can be comma separated.', 'wp-ajaxify-comments'),
         "aria-required": "true",
         value: value,
         onChange: onChange
-      });
+      }), 'pattern' === ((_errors$selectorComme11 = errors.selectorCommentForm) === null || _errors$selectorComme11 === void 0 ? void 0 : _errors$selectorComme11.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Please use valid comma-separated CSS selectors.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }), 'required' === ((_errors$selectorComme12 = errors.selectorCommentForm) === null || _errors$selectorComme12 === void 0 ? void 0 : _errors$selectorComme12.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }));
     }
-  }), errors.scrollSpeed && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The value for the scroll speed is invalid.', 'wp-ajaxify-comments'),
-    status: "error",
-    politeness: "assertive",
-    inline: false,
-    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], null)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
-    name: "autoUpdateIdleTime",
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-admin__control-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+    name: "selectorRespondContainer",
     control: control,
     rules: {
       required: true,
-      pattern: '\d+'
+      pattern: cssRegex
     },
     render: function render(_ref5) {
-      var _errors$autoUpdateIdl;
+      var _errors$selectorRespo, _errors$selectorRespo2, _classNames4, _errors$selectorRespo3, _errors$selectorRespo4;
       var _ref5$field = _ref5.field,
         onChange = _ref5$field.onChange,
         value = _ref5$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Auto update idle time (ms)', 'wp-ajaxify-comments'),
-        type: "number",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', {
-          'has-error': 'required' === ((_errors$autoUpdateIdl = errors.autoUpdateIdleTime) === null || _errors$autoUpdateIdl === void 0 ? void 0 : _errors$autoUpdateIdl.type),
-          'is-required': true
-        }),
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Leave empty or set to 0 to disable the auto update feature.', 'wp-ajaxify-comments'),
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Respond Textarea Selector', 'wp-ajaxify-comments'),
+        type: "text",
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames4 = {
+          'has-error': 'required' === ((_errors$selectorRespo = errors.selectorRespondContainer) === null || _errors$selectorRespo === void 0 ? void 0 : _errors$selectorRespo.type)
+        }, _defineProperty(_classNames4, "has-error", 'pattern' === ((_errors$selectorRespo2 = errors.selectorRespondContainer) === null || _errors$selectorRespo2 === void 0 ? void 0 : _errors$selectorRespo2.type)), _defineProperty(_classNames4, 'is-required', true), _classNames4)),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The CSS selector for the Respond textarea.', 'wp-ajaxify-comments'),
         "aria-required": "true",
         value: value,
         onChange: onChange
-      });
+      }), 'pattern' === ((_errors$selectorRespo3 = errors.selectorRespondContainer) === null || _errors$selectorRespo3 === void 0 ? void 0 : _errors$selectorRespo3.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Please use valid comma-separated CSS selectors.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }), 'required' === ((_errors$selectorRespo4 = errors.selectorRespondContainer) === null || _errors$selectorRespo4 === void 0 ? void 0 : _errors$selectorRespo4.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }));
     }
-  }), errors.autoUpdateIdleTime && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The value for the idle time is invalid.', 'wp-ajaxify-comments'),
-    status: "error",
-    politeness: "assertive",
-    inline: false,
-    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], null)
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-admin__control-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+    name: "selectorTextarea",
+    control: control,
+    rules: {
+      required: true,
+      pattern: cssRegex
+    },
+    render: function render(_ref6) {
+      var _errors$selectorTexta, _errors$selectorTexta2, _classNames5, _errors$selectorTexta3, _errors$selectorTexta4;
+      var _ref6$field = _ref6.field,
+        onChange = _ref6$field.onChange,
+        value = _ref6$field.value;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment Textarea Selector', 'wp-ajaxify-comments'),
+        type: "text",
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames5 = {
+          'has-error': 'required' === ((_errors$selectorTexta = errors.selectorTextarea) === null || _errors$selectorTexta === void 0 ? void 0 : _errors$selectorTexta.type)
+        }, _defineProperty(_classNames5, "has-error", 'pattern' === ((_errors$selectorTexta2 = errors.selectorTextarea) === null || _errors$selectorTexta2 === void 0 ? void 0 : _errors$selectorTexta2.type)), _defineProperty(_classNames5, 'is-required', true), _classNames5)),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The CSS selector for the main comment textarea.', 'wp-ajaxify-comments'),
+        "aria-required": "true",
+        value: value,
+        onChange: onChange
+      }), 'pattern' === ((_errors$selectorTexta3 = errors.selectorTextarea) === null || _errors$selectorTexta3 === void 0 ? void 0 : _errors$selectorTexta3.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Please use valid comma-separated CSS selectors.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }), 'required' === ((_errors$selectorTexta4 = errors.selectorTextarea) === null || _errors$selectorTexta4 === void 0 ? void 0 : _errors$selectorTexta4.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }));
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-admin__control-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+    name: "selectorSubmitButton",
+    control: control,
+    rules: {
+      required: true,
+      pattern: cssRegex
+    },
+    render: function render(_ref7) {
+      var _errors$selectorSubmi, _errors$selectorSubmi2, _classNames6, _errors$selectorSubmi3, _errors$selectorSubmi4;
+      var _ref7$field = _ref7.field,
+        onChange = _ref7$field.onChange,
+        value = _ref7$field.value;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment Submit Button Selector', 'wp-ajaxify-comments'),
+        type: "text",
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames6 = {
+          'has-error': 'required' === ((_errors$selectorSubmi = errors.selectorSubmitButton) === null || _errors$selectorSubmi === void 0 ? void 0 : _errors$selectorSubmi.type)
+        }, _defineProperty(_classNames6, "has-error", 'pattern' === ((_errors$selectorSubmi2 = errors.selectorSubmitButton) === null || _errors$selectorSubmi2 === void 0 ? void 0 : _errors$selectorSubmi2.type)), _defineProperty(_classNames6, 'is-required', true), _classNames6)),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The CSS selector for the comment submit button.', 'wp-ajaxify-comments'),
+        "aria-required": "true",
+        value: value,
+        onChange: onChange
+      }), 'pattern' === ((_errors$selectorSubmi3 = errors.selectorSubmitButton) === null || _errors$selectorSubmi3 === void 0 ? void 0 : _errors$selectorSubmi3.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Please use valid comma-separated CSS selectors.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }), 'required' === ((_errors$selectorSubmi4 = errors.selectorSubmitButton) === null || _errors$selectorSubmi4 === void 0 ? void 0 : _errors$selectorSubmi4.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }));
+    }
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "row"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Advanced Selectors', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-admin__control-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+    name: "selectorCommentPagingLinks",
+    control: control,
+    rules: {
+      required: true
+    },
+    render: function render(_ref8) {
+      var _errors$selectorComme13, _errors$selectorComme14, _classNames7, _errors$selectorComme15;
+      var _ref8$field = _ref8.field,
+        onChange = _ref8$field.onChange,
+        value = _ref8$field.value;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Paging Links Selector', 'wp-ajaxify-comments'),
+        type: "text",
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames7 = {
+          'has-error': 'required' === ((_errors$selectorComme13 = errors.selectorCommentPagingLinks) === null || _errors$selectorComme13 === void 0 ? void 0 : _errors$selectorComme13.type)
+        }, _defineProperty(_classNames7, "has-error", 'pattern' === ((_errors$selectorComme14 = errors.selectorCommentPagingLinks) === null || _errors$selectorComme14 === void 0 ? void 0 : _errors$selectorComme14.type)), _defineProperty(_classNames7, 'is-required', true), _classNames7)),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment paging links selector for Ajax pagination.', 'wp-ajaxify-comments'),
+        "aria-required": "true",
+        value: value,
+        onChange: onChange
+      }), 'required' === ((_errors$selectorComme15 = errors.selectorCommentPagingLinks) === null || _errors$selectorComme15 === void 0 ? void 0 : _errors$selectorComme15.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }));
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-admin__control-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+    name: "selectorCommentLinks",
+    control: control,
+    rules: {
+      required: true
+    },
+    render: function render(_ref9) {
+      var _errors$selectorComme16, _errors$selectorComme17, _classNames8, _errors$selectorComme18;
+      var _ref9$field = _ref9.field,
+        onChange = _ref9$field.onChange,
+        value = _ref9$field.value;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment Links Selector', 'wp-ajaxify-comments'),
+        type: "text",
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames8 = {
+          'has-error': 'required' === ((_errors$selectorComme16 = errors.selectorCommentLinks) === null || _errors$selectorComme16 === void 0 ? void 0 : _errors$selectorComme16.type)
+        }, _defineProperty(_classNames8, "has-error", 'pattern' === ((_errors$selectorComme17 = errors.selectorCommentLinks) === null || _errors$selectorComme17 === void 0 ? void 0 : _errors$selectorComme17.type)), _defineProperty(_classNames8, 'is-required', true), _classNames8)),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Selector for the comment links.', 'wp-ajaxify-comments'),
+        "aria-required": "true",
+        value: value,
+        onChange: onChange
+      }), 'required' === ((_errors$selectorComme18 = errors.selectorCommentLinks) === null || _errors$selectorComme18 === void 0 ? void 0 : _errors$selectorComme18.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }));
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-admin__control-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+    name: "selectorErrorContainer",
+    control: control,
+    rules: {
+      required: true
+    },
+    render: function render(_ref10) {
+      var _errors$selectorError, _errors$selectorError2, _classNames9, _errors$selectorError3;
+      var _ref10$field = _ref10.field,
+        onChange = _ref10$field.onChange,
+        value = _ref10$field.value;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Error Container Selector', 'wp-ajaxify-comments'),
+        type: "text",
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames9 = {
+          'has-error': 'required' === ((_errors$selectorError = errors.selectorErrorContainer) === null || _errors$selectorError === void 0 ? void 0 : _errors$selectorError.type)
+        }, _defineProperty(_classNames9, "has-error", 'pattern' === ((_errors$selectorError2 = errors.selectorErrorContainer) === null || _errors$selectorError2 === void 0 ? void 0 : _errors$selectorError2.type)), _defineProperty(_classNames9, 'is-required', true), _classNames9)),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is where any error messages will be shown.', 'wp-ajaxify-comments'),
+        "aria-required": "true",
+        value: value,
+        onChange: onChange
+      }), 'required' === ((_errors$selectorError3 = errors.selectorErrorContainer) === null || _errors$selectorError3 === void 0 ? void 0 : _errors$selectorError3.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }));
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-admin__control-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+    name: "selectorPostContainer",
+    control: control,
+    rules: {
+      required: true
+    },
+    render: function render(_ref11) {
+      var _errors$selectorPostC, _errors$selectorPostC2, _classNames10, _errors$selectorPostC3;
+      var _ref11$field = _ref11.field,
+        onChange = _ref11$field.onChange,
+        value = _ref11$field.value;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Post Container Selector', 'wp-ajaxify-comments'),
+        type: "text",
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames10 = {
+          'has-error': 'required' === ((_errors$selectorPostC = errors.selectorPostContainer) === null || _errors$selectorPostC === void 0 ? void 0 : _errors$selectorPostC.type)
+        }, _defineProperty(_classNames10, "has-error", 'pattern' === ((_errors$selectorPostC2 = errors.selectorPostContainer) === null || _errors$selectorPostC2 === void 0 ? void 0 : _errors$selectorPostC2.type)), _defineProperty(_classNames10, 'is-required', true), _classNames10)),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Selector that matches post containers to enable support for multiple comment forms per page; leave empty to disable multiple comment form per page support. Please note: Each post container needs to have the ID attribute defined. If this option is set, all other selectors cannot select the elements by ID, but have to select the elements inside the post container for example by element and/or class.', 'wp-ajaxify-comments'),
+        "aria-required": "true",
+        value: value,
+        onChange: onChange
+      }), 'required' === ((_errors$selectorPostC3 = errors.selectorPostContainer) === null || _errors$selectorPostC3 === void 0 ? void 0 : _errors$selectorPostC3.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+        }
+      }));
+    }
   })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "ajaxify-admin-buttons"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_14__["default"], {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify__btn ajaxify__btn-primary ajaxify__btn--icon-right', {
       'has-error': hasErrors()
     }, {
@@ -19085,7 +19386,7 @@ var Interface = function Interface(props) {
     iconSize: "18",
     iconPosition: "right",
     disabled: saving
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_14__["default"], {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify__btn ajaxify__btn-danger ajaxify__btn--icon-right', {
       'has-icon': resetting
     }, {
@@ -19103,21 +19404,21 @@ var Interface = function Interface(props) {
       setResetting(true);
       handleReset(e);
     }
-  })), hasErrors() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  })), hasErrors() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('There are form validation errors. Please correct them above.', 'wp-ajaxify-comments'),
     status: "error",
     politeness: "polite"
-  }), isSaved && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), isSaved && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Your settings have been saved.', 'wp-ajaxify-comments'),
     status: "success",
     politeness: "assertive"
-  }), isReset && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), isReset && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_12__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Your settings have been reset.', 'wp-ajaxify-comments'),
     status: "success",
     politeness: "assertive"
   }))));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HomeScreen);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SelectorsScreen);
 
 /***/ }),
 
@@ -20398,6 +20699,81 @@ const AlertCircle = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["defaul
 
 
 //# sourceMappingURL=alert-circle.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/clipboard-check.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/clipboard-check.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ClipboardCheck)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * lucide-react v0.268.0 - ISC
+ */
+
+
+
+const ClipboardCheck = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("ClipboardCheck", [
+  [
+    "rect",
+    {
+      width: "8",
+      height: "4",
+      x: "8",
+      y: "2",
+      rx: "1",
+      ry: "1",
+      key: "tgr4d6"
+    }
+  ],
+  [
+    "path",
+    {
+      d: "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2",
+      key: "116196"
+    }
+  ],
+  ["path", { d: "m9 14 2 2 4-4", key: "df797q" }]
+]);
+
+
+//# sourceMappingURL=clipboard-check.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/loader-2.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/loader-2.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Loader2)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * lucide-react v0.268.0 - ISC
+ */
+
+
+
+const Loader2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Loader2", [
+  ["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]
+]);
+
+
+//# sourceMappingURL=loader-2.js.map
 
 
 /***/ }),
@@ -79554,22 +79930,22 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!******************************************!*\
-  !*** ./src/js/react/views/Home/index.js ***!
-  \******************************************/
+/*!***********************************************!*\
+  !*** ./src/js/react/views/Selectors/index.js ***!
+  \***********************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home */ "./src/js/react/views/Home/home.js");
+/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./selectors */ "./src/js/react/views/Selectors/selectors.js");
 
 
 
-var container = document.getElementById('wpac-tab-home');
+var container = document.getElementById('wpac-tab-selectors');
 var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(container);
-root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().StrictMode), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_home__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().StrictMode), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_selectors__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=wpac-admin-home-js.js.map
+//# sourceMappingURL=wpac-admin-selectors-js.js.map

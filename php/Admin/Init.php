@@ -2,7 +2,7 @@
 /**
  * Register the admin menu and settings.
  *
- * @package CommentEditPro
+ * @package WPAC
  */
 
 namespace DLXPlugins\WPAC\Admin;
@@ -45,6 +45,7 @@ class Init {
 
 		// Init tabs.
 		new Tabs\Main();
+		new Tabs\Selectors();
 	}
 
 	/**

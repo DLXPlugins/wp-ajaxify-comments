@@ -19,19 +19,19 @@ const Notice = ( props ) => {
 		return <Icon width={ 16 } height={ 16 } fill="#6c757d" />;
 	};
 
-	const containerClasses = classNames( className, 'sce-admin__notice', {
-		'sce-admin__notice--has-icon': hasIcon(),
-		[ `sce-admin__notice-type--${ status }` ]: true,
-		[ `sce-admin__notice-appearance--inline` ]: inline,
-		[ `sce-admin__notice-appearance--block` ]: ! inline,
+	const containerClasses = classNames( className, 'ajaxify-admin__notice', {
+		'ajaxify-admin__notice--has-icon': hasIcon(),
+		[ `ajaxify-admin__notice-type--${ status }` ]: true,
+		[ `ajaxify-admin__notice-appearance--inline` ]: inline,
+		[ `ajaxify-admin__notice-appearance--block` ]: ! inline,
 	} );
 	return (
 		<div className={ containerClasses }>
 			<WPNotice isDismissible={ false } spokenMessage={ message } actions={ [] } { ...props }>
 				{ hasIcon() &&
-					<div className="sce-admin__notice-icon">{ getIcon( icon ) }</div>
+					<div className="ajaxify-admin__notice-icon">{ getIcon( icon ) }</div>
 				}
-				<div className="sce-admin__notice-message"><>{ message } { children } </></div>
+				<div className="ajaxify-admin__notice-message"><>{ message } { children } </></div>
 			</WPNotice>
 		</div>
 	);

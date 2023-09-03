@@ -1,8 +1,8 @@
 <?php
 /**
- * Output main SCE tab.
+ * Output main WPAC tab.
  *
- * @package CommentEditPro
+ * @package WPAC
  */
 
 namespace DLXPlugins\WPAC\Admin\Tabs;
@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use DLXPlugins\WPAC\Functions as Functions;
+use DLXPlugins\WPAC\Options as Options;
 
 /**
  * Output the main tab and content.
@@ -62,7 +63,10 @@ class Main {
 				)
 			);
 		}
-		wp_send_json_success( array() );
+
+		$options = Options::get_options();
+		$options = Functions::sanitize_array_recursive( $options );
+		wp_send_json_success( $options );
 	}
 
 	/**

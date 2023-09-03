@@ -3457,6 +3457,10 @@ div.components-toolbar > div + div.has-left-divider::before {
 /* Responsive styles - In hindsight, should've used mobile-first */
 /* Mixin from: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/ */
 /* It's only used here, so no external file for mixin? */
+@keyframes ajaxify-rotate {
+  100% {
+    transform: rotate(360deg); } }
+
 #wpcontent {
   padding-left: 0 !important;
   padding-right: 0 !important;
@@ -3494,20 +3498,24 @@ div.components-toolbar > div + div.has-left-divider::before {
         text-decoration: none;
         font-size: 1.2em;
         padding: 15px 25px;
-        background: #474747;
-        color: #fff;
+        background: #FFFFFF;
+        color: #040A18;
         border-radius: 5px;
         text-align: center;
-        transition: background-color 0.5s ease; }
+        transition: background-color 0.5s ease;
+        border: 1px solid #040A18; }
         #wpcontent #ajaxify-admin-header .ajaxify-admin-header-links a:hover {
-          background: #000;
+          background: #040A18;
+          color: #FFFFFF;
+          border: 1px solid rgba(255, 255, 255, 0.75);
           text-decoration: none; }
   #wpcontent header {
-    background: #FFF;
+    background: #873F49;
     padding: 1.1rem;
     overflow: hidden;
     margin: 0 !important;
-    border-bottom: 2px solid #474747; }
+    border-bottom: 2px solid #040A18;
+    color: #FFFFFF; }
   #wpcontent .nav-tab-wrapper .ajaxify-icon-tab {
     color: #bd9aca; }
   #wpcontent .nav-tab-wrapper .nav-tab-active .ajaxify-icon-tab {
@@ -3575,28 +3583,28 @@ div.components-toolbar > div + div.has-left-divider::before {
     .ajaxify-settings-tabs nav.ajaxify-admin-options a:hover {
       border-top: 0; }
       .ajaxify-settings-tabs nav.ajaxify-admin-options a:hover:before {
-        background: #8019c4; }
+        background: #873F49; }
     .ajaxify-settings-tabs nav.ajaxify-admin-options a:hover {
       transition: all 0.4s ease-in-out;
-      color: #393838; }
+      color: #873F49; }
       .ajaxify-settings-tabs nav.ajaxify-admin-options a:hover:before, .ajaxify-settings-tabs nav.ajaxify-admin-options a:hover:after {
-        background: #8019c4; }
+        background: #873F49; }
       .ajaxify-settings-tabs nav.ajaxify-admin-options a:hover svg use {
         transition: all 0.4s ease-in-out;
-        fill: #a774c9;
-        color: #a774c9; }
+        fill: #873F49;
+        color: #873F49; }
     .ajaxify-settings-tabs nav.ajaxify-admin-options a.nav-tab-active {
       background: #ffffff;
       color: #393838;
       box-shadow: 0 1px 4px #121961; }
       .ajaxify-settings-tabs nav.ajaxify-admin-options a.nav-tab-active:before {
-        background: #393838; }
+        background: #873F49; }
       .ajaxify-settings-tabs nav.ajaxify-admin-options a.nav-tab-active:hover:before, .ajaxify-settings-tabs nav.ajaxify-admin-options a.nav-tab-active:hover:after {
-        background: #8019c4; }
+        background: #873F49; }
       .ajaxify-settings-tabs nav.ajaxify-admin-options a.nav-tab-active svg use {
         transition: all 0.4s ease-in-out;
-        fill: #a774c9;
-        color: #a774c9; }
+        fill: #873F49;
+        color: #873F49; }
     .ajaxify-settings-tabs nav.ajaxify-admin-options a svg {
       vertical-align: middle;
       line-height: normal;
@@ -3605,8 +3613,8 @@ div.components-toolbar > div + div.has-left-divider::before {
       font-size: 24px; }
       .ajaxify-settings-tabs nav.ajaxify-admin-options a svg path {
         transition: all 0.4s ease-in-out;
-        fill: #242748;
-        color: #242748; }
+        fill: #873F49;
+        color: #873F49; }
     .ajaxify-settings-tabs nav.ajaxify-admin-options a span {
       display: none; }
       @media (min-width: 48em) {
@@ -3617,7 +3625,7 @@ div.components-toolbar > div + div.has-left-divider::before {
           grid-column-start: 2;
           grid-column-end: 4; }
           .ajaxify-settings-tabs nav.ajaxify-admin-options a span:hover {
-            color: #9949cf; } }
+            color: #873F49; } }
   .ajaxify-settings-tabs nav.ajaxify-sub-links {
     margin-bottom: 1.3em;
     font-size: 13px; }
@@ -3636,7 +3644,7 @@ div.components-toolbar > div + div.has-left-divider::before {
       text-decoration: none;
       margin: 0;
       background: transparent;
-      color: #393838; }
+      color: #040A18; }
       @media (min-width: 30em) {
         .ajaxify-settings-tabs nav.ajaxify-admin-options a {
           grid-template-columns: 26px 1fr; } }
@@ -3660,8 +3668,347 @@ div.components-toolbar > div + div.has-left-divider::before {
     .ajaxify-settings-tabs .ajaxify-admin-tab-content ~ span {
       display: inline-block;
       order: 2;
-      background: #8019c4;
+      background: #393838;
       border-radius: 5px; }
+
+/* Text Input Box */
+.ajaxify-admin__text-control label {
+  font-size: 0.8125rem;
+  font-weight: 500; }
+
+.ajaxify-admin__text-control input[type='text'],
+.ajaxify-admin__text-control input[type='password'] {
+  max-width: 100%;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.2875rem 0.5rem;
+  min-height: 30px;
+  margin: 0;
+  outline-style: none;
+  box-sizing: border-box; }
+
+.ajaxify-admin-panel-area {
+  position: relative;
+  background-color: #FFF;
+  border: 1px solid #ddd;
+  box-shadow: 1px 1px 7px 2px rgba(221, 221, 221, 0.6);
+  padding: 20px;
+  margin-bottom: 2.2em; }
+  .ajaxify-admin-panel-area h2 {
+    font-size: 24px;
+    line-height: 1.3;
+    margin-top: 0;
+    color: #873F49; }
+  .ajaxify-admin-panel-area:last-child {
+    margin-bottom: 0; }
+  .ajaxify-admin-panel-area .components-form-toggle.is-checked .components-form-toggle__track {
+    background-color: #44873F; }
+
+.ajaxify-panel-row {
+  margin-bottom: 15px; }
+  .ajaxify-panel-row:last-of-type {
+    margin-bottom: 0; }
+
+/* Form tables */
+.form-table th {
+  padding-top: 15px; }
+
+.ajaxify-panel-row p.components-base-control__help,
+.ajaxify-panel-row p.components-form-token-field__help {
+  font-size: 13px;
+  font-style: italic; }
+
+.ajaxify-panel-row .components-select-control label,
+.ajaxify-panel-row .components-radio-control label {
+  font-weight: 700 !important;
+  /* override core styles */
+  font-size: 0.8125rem !important; }
+
+.ajaxify-panel-row .components-select-control {
+  margin-bottom: 25px !important;
+  /* override core styles */ }
+
+.ajaxify-panel-row .components-base-control,
+.ajaxify-panel-row .components-form-token-field,
+.ajaxify-panel-row .ajaxify-admin__button-group--align {
+  margin-bottom: 25px; }
+  .ajaxify-panel-row .components-base-control.has-error,
+  .ajaxify-panel-row .components-form-token-field.has-error,
+  .ajaxify-panel-row .ajaxify-admin__button-group--align.has-error {
+    margin-bottom: 5px; }
+  .ajaxify-panel-row .components-base-control:last-child,
+  .ajaxify-panel-row .components-form-token-field:last-child,
+  .ajaxify-panel-row .ajaxify-admin__button-group--align:last-child {
+    margin-bottom: 0; }
+  .ajaxify-panel-row .components-base-control label,
+  .ajaxify-panel-row .components-form-token-field label,
+  .ajaxify-panel-row .ajaxify-admin__button-group--align label {
+    font-weight: 700; }
+  .ajaxify-panel-row .components-base-control input[type='text'],
+  .ajaxify-panel-row .components-base-control input[type='number'],
+  .ajaxify-panel-row .components-form-token-field input[type='text'],
+  .ajaxify-panel-row .components-form-token-field input[type='number'],
+  .ajaxify-panel-row .ajaxify-admin__button-group--align input[type='text'],
+  .ajaxify-panel-row .ajaxify-admin__button-group--align input[type='number'] {
+    position: relative;
+    display: block;
+    min-width: 200px;
+    max-width: 80%;
+    width: 100%;
+    font-size: 13px; }
+  .ajaxify-panel-row .components-base-control .components-radio-control__option,
+  .ajaxify-panel-row .components-form-token-field .components-radio-control__option,
+  .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; }
+    .ajaxify-panel-row .components-base-control .components-radio-control__option:last-child,
+    .ajaxify-panel-row .components-form-token-field .components-radio-control__option:last-child,
+    .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option:last-child {
+      margin-bottom: 0; }
+    .ajaxify-panel-row .components-base-control .components-radio-control__option input[type='radio'],
+    .ajaxify-panel-row .components-form-token-field .components-radio-control__option input[type='radio'],
+    .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option input[type='radio'] {
+      position: relative;
+      margin: 0;
+      margin-right: 5px;
+      height: 20px;
+      width: 20px; }
+      .ajaxify-panel-row .components-base-control .components-radio-control__option input[type='radio']:checked,
+      .ajaxify-panel-row .components-form-token-field .components-radio-control__option input[type='radio']:checked,
+      .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option input[type='radio']:checked {
+        background: #9949cf;
+        border-color: #9949cf;
+        color: #fff; }
+        .ajaxify-panel-row .components-base-control .components-radio-control__option input[type='radio']:checked:before,
+        .ajaxify-panel-row .components-form-token-field .components-radio-control__option input[type='radio']:checked:before,
+        .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option input[type='radio']:checked:before {
+          position: absolute;
+          background-color: #fff;
+          border: 4px solid #fff;
+          box-sizing: inherit;
+          height: 8px;
+          margin: 0;
+          transform: translate(5px, 5px);
+          width: 8px;
+          left: 0;
+          top: 0; }
+    .ajaxify-panel-row .components-base-control .components-radio-control__option label,
+    .ajaxify-panel-row .components-form-token-field .components-radio-control__option label,
+    .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option label {
+      font-weight: 400;
+      vertical-align: middle; }
+
+.ajaxify-panel-row label.components-base-control__label {
+  position: relative; }
+
+.ajaxify-panel-row .is-required label:after {
+  position: absolute;
+  display: inline-block;
+  vertical-align: middle;
+  content: '*';
+  top: -3px;
+  right: -12px;
+  color: #b53b07;
+  font-size: 1.4em;
+  line-height: 1.3; }
+
+/* Admin Buttons */
+.ajaxify-admin-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .ajaxify-admin-buttons.ajaxify-admin-buttons-flex-right {
+    justify-content: flex-end; }
+  .ajaxify-admin-buttons svg.lucide path {
+    fill: none !important; }
+  .ajaxify-admin-buttons button {
+    background: #fff;
+    color: #017e01;
+    border-style: solid;
+    border-color: #017e01;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.4s ease-in-out;
+    border-width: 1px; }
+    .ajaxify-admin-buttons button:hover {
+      border-radius: 5px;
+      background: #e9ece6;
+      color: #005200;
+      border-color: #006400; }
+    .ajaxify-admin-buttons button.has-error {
+      border: 1px solid #bc2b2c; }
+      .ajaxify-admin-buttons button.has-error:hover {
+        cursor: not-allowed; }
+    .ajaxify-admin-buttons button.ajaxify__btn-white {
+      background: #fff;
+      color: #333;
+      border-color: #111; }
+      .ajaxify-admin-buttons button.ajaxify__btn-white:hover {
+        background: #e6e6e6;
+        color: #111;
+        border-color: #000; }
+    .ajaxify-admin-buttons button.ajaxify__btn-secondary {
+      background: #333;
+      color: #ffffff;
+      border-color: #111; }
+      .ajaxify-admin-buttons button.ajaxify__btn-secondary:hover {
+        background: #4d4d4d;
+        color: #ffffff;
+        border-color: #2b2b2b; }
+    .ajaxify-admin-buttons button.ajaxify__btn-link {
+      all: unset;
+      cursor: pointer;
+      color: #9949cf;
+      font-weight: 600;
+      text-decoration: underline; }
+    .ajaxify-admin-buttons button.ajaxify__btn-danger {
+      background: #fff;
+      color: #822700;
+      border-color: #822700; }
+      .ajaxify-admin-buttons button.ajaxify__btn-danger:hover {
+        background: #ece6e6;
+        color: #822700;
+        border-color: #822700; }
+    .ajaxify-admin-buttons button.sce__btn-action {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      color: #9949cf;
+      border-color: #9949cf;
+      font-weight: 600; }
+      .ajaxify-admin-buttons button.sce__btn-action:hover {
+        background: #f8f7fe;
+        color: #8019c4;
+        border-color: #6f6f6f; }
+        .ajaxify-admin-buttons button.sce__btn-action:hover svg path {
+          fill: #8019c4; }
+      .ajaxify-admin-buttons button.sce__btn-action svg {
+        display: inline-block;
+        margin-right: 8px; }
+        .ajaxify-admin-buttons button.sce__btn-action svg path {
+          fill: #9949cf; }
+    .ajaxify-admin-buttons button.ajaxify__btn--icon-right.is-saving {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .ajaxify-admin-buttons button.ajaxify__btn--icon-right.is-saving svg {
+        width: 24px;
+        height: 24px;
+        margin-left: 8px;
+        animation: ajaxify-rotate 1s linear infinite; }
+        .ajaxify-admin-buttons button.ajaxify__btn--icon-right.is-saving svg path {
+          fill: currentColor; }
+    .ajaxify-admin-buttons button.ajaxify__btn--icon-right.is-saved {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .ajaxify-admin-buttons button.ajaxify__btn--icon-right.is-saved svg {
+        width: 24px;
+        height: 24px;
+        margin-left: 14px; }
+        .ajaxify-admin-buttons button.ajaxify__btn--icon-right.is-saved svg path {
+          fill: #017e01; }
+    .ajaxify-admin-buttons button.ajaxify__btn--icon-right.is-resetting {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      .ajaxify-admin-buttons button.ajaxify__btn--icon-right.is-resetting svg {
+        width: 24px;
+        height: 24px;
+        animation: ajaxify-rotate 1s linear infinite; }
+        .ajaxify-admin-buttons button.ajaxify__btn--icon-right.is-resetting svg path {
+          fill: #822700; }
+
+:root {
+  --ajaxify-admin--color-notice--info: #e3f3f7;
+  --ajaxify-admin--color-notice--info-alt: #3a8dc4;
+  --ajaxify-admin--color-notice--success: #eaf5ea;
+  --ajaxify-admin--color-notice--success-alt: #49a939;
+  --ajaxify-admin--color-notice--warning: #fef6e1;
+  --ajaxify-admin--color-notice--warning-alt: #e8a931;
+  --ajaxify-admin--color-notice--error: #f5e5e4;
+  --ajaxify-admin--color-notice--error-alt: #bc2b2c; }
+
+/* Error Notices */
+.ajaxify-admin__notice {
+  margin: 10px 0; }
+  .ajaxify-admin__notice.ajaxify-admin__notice--has-icon .components-notice__content {
+    display: grid;
+    grid-template-columns: 32px 1fr 1px;
+    align-items: center; }
+  .ajaxify-admin__notice.ajaxify-admin__notice--has-icon.ajaxify-admin__notice-appearance--inline .components-notice__content {
+    display: flex; }
+    .ajaxify-admin__notice.ajaxify-admin__notice--has-icon.ajaxify-admin__notice-appearance--inline .components-notice__content .ajaxify-admin__notice-icon {
+      margin-right: 8px; }
+  .ajaxify-admin__notice .ajaxify-admin__notice-message {
+    color: #393838;
+    font-size: 1.1em;
+    line-height: 1.2;
+    font-weight: 500; }
+  .ajaxify-admin__notice.ajaxify-admin__notice-appearance--block .components-notice {
+    border-left: 4px solid transparent;
+    padding: 15px 20px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    margin-left: 0;
+    margin-right: 0; }
+  .ajaxify-admin__notice.ajaxify-admin__notice-appearance--inline .components-notice {
+    padding-left: 0;
+    margin-left: 0;
+    margin-right: 0; }
+  .ajaxify-admin__notice svg {
+    display: flex;
+    align-items: center;
+    width: 20px;
+    height: 20px; }
+  .ajaxify-admin__notice.ajaxify-admin__notice-type--error:not(.ajaxify-admin__notice-appearance--inline) {
+    background-color: var(--ajaxify-admin--color-notice--error); }
+    .ajaxify-admin__notice.ajaxify-admin__notice-type--error:not(.ajaxify-admin__notice-appearance--inline) .components-notice {
+      border-left-color: var(--ajaxify-admin--color-notice--error-alt); }
+    .ajaxify-admin__notice.ajaxify-admin__notice-type--error:not(.ajaxify-admin__notice-appearance--inline) svg {
+      color: var(--ajaxify-admin--color-notice--error-alt); }
+    .ajaxify-admin__notice.ajaxify-admin__notice-type--error:not(.ajaxify-admin__notice-appearance--inline) svg path {
+      fill: var(--ajaxify-admin--color-notice--error-alt); }
+  .ajaxify-admin__notice.ajaxify-admin__notice-type--error.ajaxify-admin__notice-appearance--inline .ajaxify-admin__notice-message {
+    color: var(--ajaxify-admin--color-notice--error-alt); }
+  .ajaxify-admin__notice.ajaxify-admin__notice-type--error.ajaxify-admin__notice-appearance--inline .ajaxify-admin__notice-message {
+    font-size: 0.9em; }
+  .ajaxify-admin__notice.ajaxify-admin__notice-type--error.ajaxify-admin__notice-appearance--inline svg {
+    width: 16px;
+    height: 16px; }
+    .ajaxify-admin__notice.ajaxify-admin__notice-type--error.ajaxify-admin__notice-appearance--inline svg path {
+      fill: var(--ajaxify-admin--color-notice--error-alt); }
+  .ajaxify-admin__notice.ajaxify-admin__notice-type--success {
+    background-color: var(--ajaxify-admin--color-notice--success); }
+    .ajaxify-admin__notice.ajaxify-admin__notice-type--success .components-notice {
+      border-left-color: var(--ajaxify-admin--color-notice--success-alt); }
+    .ajaxify-admin__notice.ajaxify-admin__notice-type--success svg path {
+      fill: var(--ajaxify-admin--color-notice--success-alt); }
+  .ajaxify-admin__notice.ajaxify-admin__notice-type--info {
+    background-color: var(--ajaxify-admin--color-notice--info); }
+    .ajaxify-admin__notice.ajaxify-admin__notice-type--info .components-notice {
+      border-left-color: var(--ajaxify-admin--color-notice--info-alt); }
+    .ajaxify-admin__notice.ajaxify-admin__notice-type--info svg path {
+      fill: var(--ajaxify-admin--color-notice--info-alt); }
+  .ajaxify-admin__notice.ajaxify-admin__notice-type--warning {
+    background-color: var(--ajaxify-admin--color-notice--warning); }
+    .ajaxify-admin__notice.ajaxify-admin__notice-type--warning .components-notice {
+      border-left-color: var(--ajaxify-admin--color-notice--warning-alt); }
+    .ajaxify-admin__notice.ajaxify-admin__notice-type--warning svg path {
+      fill: var(--ajaxify-admin--color-notice--warning-alt); }
+
+.has-error input.components-text-control__input {
+  border: 1px solid var(--ajaxify-admin--color-notice--error-alt);
+  background-color: var(--ajaxify-admin--color-notice--error); }
+
+.ajaxify-admin__control-row {
+  margin-bottom: 15px; }
 
 
 /*# sourceMappingURL=wpac-admin-css.css.map*/
