@@ -9,6 +9,9 @@ module.exports = ( env ) => {
 				'wpac-admin-home-js': './src/js/react/views/Home/index.js',
 				'wpac-admin-selectors-js': './src/js/react/views/Selectors/index.js',
 				'wpac-admin-appearance-js': './src/js/react/views/Appearance/index.js',
+				'wpac-admin-labels-js': './src/js/react/views/Labels/index.js',
+				'wpac-admin-callbacks-js': './src/js/react/views/Callbacks/index.js',
+				'wpac-admin-advanced-js': './src/js/react/views/Advanced/index.js',
 
 			},
 			mode: env.mode,

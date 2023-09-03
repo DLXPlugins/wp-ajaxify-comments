@@ -196,6 +196,26 @@ class Options {
 			'popupTextAlign' => 'center', /* can be left|center|right */
 			'popupTextFontSize' => '14px',
 			'popupZindex' => 1000,
+			'textPosted' => __('Your comment has been posted. Thank you!', 'wp-ajaxify-comments'),
+			'textPostedUnapproved' => __('Your comment has been posted and is awaiting moderation. Thank you!', 'wp-ajaxify-comments'),
+			'textReloadPage' => __('Reloading page. Please wait.', 'wp-ajaxify-comments'),
+			'textPostComment' => __('Posting your comment. Please wait.', 'wp-ajaxify-comments'),
+			'textRefreshComments' => __('Loading comments. Please wait.', 'wp-ajaxify-comments'),
+			'textUnknownError' => __('Something went wrong, your comment has not been posted.', 'wp-ajaxify-comments'),
+			'textErrorTypeComment' => __( 'Please type your comment text.', 'wp-ajaxify-comments' ),
+			'textErrorCommentsClosed' => __( 'Sorry, comments are closed for this item.', 'wp-ajaxify-comments' ),
+			'textErrorMustBeLoggedIn' => __( 'Sorry, you must be logged in to post a comment.', 'wp-ajaxify-comments' ),
+			'textErrorFillRequiredFields' => __( 'Please fill the required fields (name, email).', 'wp-ajaxify-comments' ),
+			'textErrorInvalidEmailAddress' => __( 'Please enter a valid email address.', 'wp-ajaxify-comments' ),
+			'textErrorPostTooQuickly' => __( 'You are posting comments too quickly. Please wait a minute and resubmit your comment.', 'wp-ajaxify-comments' ),
+			'textErrorDuplicateComment' => __( 'Duplicate comment detected. It looks like you have already submitted this comment.', 'wp-ajaxify-comments' ),
+			'callbackOnBeforeSelectElements' => '',
+			'callbackOnBeforeSubmitComment' => '',
+			'callbackOnAfterPostComment' => '',
+			'callbackOnBeforeUpdateComments' => '',
+			'callbackOnAfterUpdateComments' => '',
+			'commentPagesUrlRegex' => '',
+			'asyncCommentsThreshold' => '',
 
 		);
 		return $defaults;

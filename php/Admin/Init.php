@@ -46,6 +46,9 @@ class Init {
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\Appearance();
+		new Tabs\Advanced();
+		new Tabs\Callbacks();
+		new Tabs\Labels();
 		new Tabs\Selectors();
 	}
 

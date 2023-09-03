@@ -3526,7 +3526,7 @@ div.components-toolbar > div + div.has-left-divider::before {
   #wpcontent .nav-tab-wrapper .ajaxify-icon-tab {
     color: #bd9aca; }
   #wpcontent .nav-tab-wrapper .nav-tab-active .ajaxify-icon-tab {
-    color: #9c68b0; }
+    color: #873F49; }
   #wpcontent .ajaxify-panel-row h2 {
     font-size: 24px;
     color: #9c68b0;
@@ -3603,7 +3603,7 @@ div.components-toolbar > div + div.has-left-divider::before {
     .ajaxify-settings-tabs nav.ajaxify-admin-options a.nav-tab-active {
       background: #ffffff;
       color: #393838;
-      box-shadow: 0 1px 4px #121961; }
+      box-shadow: 0 1px 4px #040a18; }
       .ajaxify-settings-tabs nav.ajaxify-admin-options a.nav-tab-active:before {
         background: #873F49; }
       .ajaxify-settings-tabs nav.ajaxify-admin-options a.nav-tab-active:hover:before, .ajaxify-settings-tabs nav.ajaxify-admin-options a.nav-tab-active:hover:after {
@@ -3675,10 +3675,20 @@ div.components-toolbar > div + div.has-left-divider::before {
     .ajaxify-settings-tabs .ajaxify-admin-tab-content ~ span {
       display: inline-block;
       order: 2;
-      background: #393838;
+      background: #873F49;
       border-radius: 5px; }
 
 /* Text Input Box */
+.ajaxify-admin__textarea-control textarea {
+  white-space: pre-wrap;
+  width: 100%;
+  min-height: 175px;
+  font-size: 14px; }
+
+.ajaxify-admin__js-label label {
+  text-transform: initial;
+  font-size: 15px; }
+
 .ajaxify-admin__text-control label {
   font-size: 0.8125rem;
   font-weight: 500; }
