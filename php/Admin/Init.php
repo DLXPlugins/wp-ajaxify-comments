@@ -137,11 +137,15 @@ class Init {
 	 * @return array Array of settings
 	 */
 	public function plugin_settings_link( $settings ) {
-		$admin_anchor = sprintf( '<a href="%s">%s</a>', esc_url( $this->get_url() ), esc_html__( 'Settings', 'wp-ajaxify-comments' ) );
+		$setting_links = array(
+			'settings' => sprintf( '<a href="%s">%s</a>', esc_url( $this->get_url() ), esc_html__( 'Settings', 'wp-ajaxify-comments' ) ),
+			'docs' => sprintf( '<a href="%s">%s</a>', esc_url( $this->get_url() ), esc_html__( 'Docs', 'wp-ajaxify-comments' ) ),
+			'site'     => sprintf( '<a href="%s" style="color: #f60098;">%s</a>', esc_url( 'https://dlxplugins.com/plugins/ajaxify-comments/' ), esc_html__( 'Visit Site', 'wp-ajaxify-comments' ) ),
+		);
 		if ( ! is_array( $settings ) ) {
-			return array( $admin_anchor );
+			return $setting_links;
 		} else {
-			return array_merge( array( $admin_anchor ), $settings );
+			return array_merge( $setting_links, $settings );
 		}
 	}
 

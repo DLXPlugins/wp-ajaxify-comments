@@ -125,7 +125,6 @@ class Settings {
 	 * Output the top-level admin tabs.
 	 */
 	public static function get_settings_tabs() {
-		
 
 		$settings_url_base = Functions::get_settings_url( 'home' );
 

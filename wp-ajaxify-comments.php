@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: WP Ajaxify Comments
+Plugin Name: Ajaxify Comments
 Plugin URI: https://dlxplugins.com/plugins/ajaxify-comments/
-Description: WP Ajaxify Comments hooks into your current theme and adds AJAX functionality to the comment form.
+Description: Ajaxify Comments hooks into your current theme and adds AJAX functionality to the comment form.
 Author: DLX Plugins
 Author URI: https://dlxplugins.com
 Version: 1.7.5
