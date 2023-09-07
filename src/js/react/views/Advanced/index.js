@@ -7,5 +7,5 @@ const root = createRoot( container );
 root.render(
 	<React.StrictMode>
 		<Advanced />
-	</React.StrictMode>
+	</React.StrictMode>,
 );
