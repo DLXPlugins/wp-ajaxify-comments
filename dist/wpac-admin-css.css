@@ -3457,6 +3457,10 @@ div.components-toolbar > div + div.has-left-divider::before {
 /* Responsive styles - In hindsight, should've used mobile-first */
 /* Mixin from: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/ */
 /* It's only used here, so no external file for mixin? */
+/* enable smooth scroll */
+html {
+  scroll-behavior: smooth; }
+
 :root {
   --ajaxify-admin--color-main: #873F49; }
 
@@ -4078,6 +4082,10 @@ h3.ajaxify-admin-content-subheading {
       border-left-color: var(--ajaxify-admin--color-notice--warning-alt); }
     .ajaxify-admin__notice.ajaxify-admin__notice-type--warning svg path {
       fill: var(--ajaxify-admin--color-notice--warning-alt); }
+
+.ajaxify-admin__notice-action.components-button.components-notice__action {
+  margin-left: 0;
+  margin-top: 15px; }
 
 .has-error input.components-text-control__input {
   border: 1px solid var(--ajaxify-admin--color-notice--error-alt);

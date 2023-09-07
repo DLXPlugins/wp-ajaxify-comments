@@ -5,6 +5,7 @@ module.exports = {
 	},
 	globals: {
 		wpacAdminAdvanced: 'readonly',
+		wpacAdminCallbacks: 'readonly',
 	},
 	extends: [
 		'eslint:recommended',

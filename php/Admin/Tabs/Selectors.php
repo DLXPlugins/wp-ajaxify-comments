@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Output Selectors WPAC tab.
  *
@@ -11,13 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );
 }
 
-use DLXPlugins\WPAC\Functions as Functions;
-use DLXPlugins\WPAC\Options as Options;
+use DLXPlugins\WPAC\Functions;
+use DLXPlugins\WPAC\Options;
 
 /**
  * Output the selectors tab and content.
  */
 class Selectors {
+
 	/**
 	 * Constructor.
 	 */
@@ -44,8 +46,9 @@ class Selectors {
 			'wpac-admin-selectors',
 			'wpacAdminSelectors',
 			array(
-				'getNonce'  => wp_create_nonce( 'wpac-admin-selectors-retrieve-options' ),
-				'saveNonce' => wp_create_nonce( 'wpac-admin-selectors-save-options' ),
+				'getNonce'   => wp_create_nonce( 'wpac-admin-selectors-retrieve-options' ),
+				'saveNonce'  => wp_create_nonce( 'wpac-admin-selectors-save-options' ),
+				'resetNonce' => wp_create_nonce( 'wpac-admin-selectors-reset-options' ),
 			)
 		);
 	}
@@ -113,7 +116,7 @@ class Selectors {
 		if ( 'selectors' === $tab ) {
 			if ( empty( $sub_tab ) || 'selectors' === $sub_tab ) {
 				?>
-					<div id="wpac-tab-selectors"></div>
+				<div id="wpac-tab-selectors"></div>
 				<?php
 			}
 		}

@@ -43,6 +43,12 @@ class Init {
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
+		// Ajax option for saving options.
+		add_action( 'wp_ajax_wpac_save_options', array( $this, 'ajax_save_options' ) );
+
+		// Ajax option for resetting options.
+		add_action( 'wp_ajax_wpac_reset_options', array( $this, 'ajax_reset_options' ) );
+
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\Appearance();
@@ -51,6 +57,10 @@ class Init {
 		new Tabs\Labels();
 		new Tabs\Selectors();
 		new Tabs\Support();
+	}
+
+	public function ajax_save_options() {
+		wp_send_json_success( array( 'message' => 'Options saved.' ) );
 	}
 
 	/**

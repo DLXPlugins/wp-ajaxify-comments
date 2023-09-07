@@ -14,8 +14,7 @@ import { AlertCircle, Loader2, ClipboardCheck } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
-import ColorPickerControl from '../../components/ColorPicker';
-import AlignmentGroup from '../../components/alignment';
+import SaveResetButtons, { onSave, onReset } from '../../components/SaveResetButtons';
 
 const retrieveCallbackOptions = () => {
 	return SendCommand('wpac_get_callbacks_options', {
@@ -90,9 +89,10 @@ const Interface = (props) => {
 			callbackOnAfterPostComment: data.callbackOnAfterPostComment,
 			callbackOnBeforeUpdateComments: data.callbackOnBeforeUpdateComments,
 			callbackOnAfterUpdateComments: data.callbackOnAfterUpdateComments,
+			getNonce: wpacAdminCallbacks.saveNonce,
+			resetNonce: wpacAdminCallbacks.resetNonce,
 		},
 	});
-	console.log(data);
 	const formValues = useWatch({ control });
 	const { errors, isDirty, dirtyFields, touchedFields } = useFormState({
 		control,
@@ -103,77 +103,7 @@ const Interface = (props) => {
 	};
 
 	const onSubmit = (formData) => {
-		setSaving(true);
-		SendCommand('sce_save_comment_editing_options', {
-			nonce: sceCommentEditing.save_nonce,
-			...formData,
-		})
-			.then((ajaxResponse) => {
-				const ajaxSuccess = ajaxResponse.data.success;
-				if (ajaxSuccess) {
-					setIsSaved(true);
-					setTimeout(() => {
-						setIsSaved(false);
-					}, 3000);
-				} else {
-				}
-			})
-			.catch((ajaxResponse) => { })
-			.then((ajaxResponse) => {
-				setSaving(false);
-			});
-	};
-
-	const handleReset = () => {
-		setResetting(true);
-		SendCommand('sce_reset_comment_editing_options', {
-			nonce: sceCommentEditing.reset_nonce,
-		})
-			.then((ajaxResponse) => {
-				const ajaxData = ajaxResponse.data.data;
-				const ajaxSuccess = ajaxResponse.data.success;
-				if (ajaxSuccess) {
-					setIsReset(true);
-					reset(ajaxData);
-					setTimeout(() => {
-						setIsReset(false);
-					}, 3000);
-				}
-			})
-			.catch((ajaxResponse) => { })
-			.then((ajaxResponse) => {
-				setResetting(false);
-			});
-	};
-
-	const getSaveIcon = () => {
-		if (saving) {
-			return () => (<Loader2 />);
-		}
-		if (isSaved) {
-			return () => (<ClipboardCheck />);
-		}
-		return false;
-	};
-
-	const getSaveText = () => {
-		if (saving) {
-			return __('Saving…', 'wp-ajaxify-comments');
-		}
-		if (isSaved) {
-			return __('Saved', 'wp-ajaxify-comments');
-		}
-		return __('Save Options', 'wp-ajaxify-comments');
-	};
-
-	const getResetText = () => {
-		if (resetting) {
-			return __('Restoring Defaults…', 'wp-ajaxify-comments');
-		}
-		if (isReset) {
-			return __('Defaults Restored', 'wp-ajaxify-comments');
-		}
-		return __('Restore Defaults', 'wp-ajaxify-comments');
+		onSave( formData, setError );
 	};
 
 	const getCommentEditingHeader = () => {
@@ -314,64 +244,14 @@ const Interface = (props) => {
 							/>
 						</div>
 					</div>
-					<div className="ajaxify-admin-buttons">
-						<Button
-							className={classNames(
-								'ajaxify__btn ajaxify__btn-primary ajaxify__btn--icon-right',
-								{ 'has-error': hasErrors() },
-								{ 'has-icon': saving || isSaved },
-								{ 'is-saving': saving && !isSaved },
-								{ 'is-saved': isSaved }
-							)}
-							type="submit"
-							text={getSaveText()}
-							icon={getSaveIcon()}
-							iconSize="18"
-							iconPosition="right"
-							disabled={saving}
-						/>
-						<Button
-							className={classNames(
-								'ajaxify__btn ajaxify__btn-danger ajaxify__btn--icon-right',
-								{ 'has-icon': resetting },
-								{ 'is-resetting': { resetting } }
-							)}
-							type="button"
-							text={getResetText()}
-							icon={resetting ? Spinner : false}
-							iconSize="18"
-							iconPosition="right"
-							disabled={saving || resetting}
-							onClick={(e) => {
-								setResetting(true);
-								handleReset(e);
-							}}
-						/>
-					</div>
-					{hasErrors() && (
-						<Notice
-							message={__(
-								'There are form validation errors. Please correct them above.',
-								'wp-ajaxify-comments'
-							)}
-							status="error"
-							politeness="polite"
-						/>
-					)}
-					{isSaved && (
-						<Notice
-							message={__('Your settings have been saved.', 'wp-ajaxify-comments')}
-							status="success"
-							politeness="assertive"
-						/>
-					)}
-					{isReset && (
-						<Notice
-							message={__('Your settings have been reset.', 'wp-ajaxify-comments')}
-							status="success"
-							politeness="assertive"
-						/>
-					)}
+					<SaveResetButtons
+						formValues={ formValues }
+						setError={ setError }
+						reset={ reset }
+						errors={ errors }
+						isDirty={ isDirty }
+						dirtyFields={ dirtyFields }
+					/>
 				</form>
 			</div>
 

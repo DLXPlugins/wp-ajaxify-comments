@@ -16297,7 +16297,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 function isDev() {
-  return typeof process !== 'undefined' && process.env && "development" !== 'production';
+  return typeof SCRIPT_DEBUG !== 'undefined' && SCRIPT_DEBUG === true;
 }
 
 /**
@@ -18610,12 +18610,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_a11y__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/a11y */ "./node_modules/@wordpress/a11y/build-module/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/notice/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/notice/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -18627,6 +18628,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 
 
+
 var Notice = function Notice(props) {
   var _classNames;
   var message = props.message,
@@ -18635,7 +18637,9 @@ var Notice = function Notice(props) {
     icon = props.icon,
     className = props.className,
     inline = props.inline,
-    children = props.children;
+    children = props.children,
+    _props$hasToTop = props.hasToTop,
+    hasToTop = _props$hasToTop === void 0 ? false : _props$hasToTop;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     (0,_wordpress_a11y__WEBPACK_IMPORTED_MODULE_1__.speak)(message, politeness);
   }, [message, status, politeness]);
@@ -18649,15 +18653,21 @@ var Notice = function Notice(props) {
       fill: "#6c757d"
     });
   };
-  var containerClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, 'ajaxify-admin__notice', (_classNames = {
+  var containerClasses = classnames__WEBPACK_IMPORTED_MODULE_3___default()(className, 'ajaxify-admin__notice', (_classNames = {
     'ajaxify-admin__notice--has-icon': hasIcon()
   }, _defineProperty(_classNames, "ajaxify-admin__notice-type--".concat(status), true), _defineProperty(_classNames, "ajaxify-admin__notice-appearance--inline", inline), _defineProperty(_classNames, "ajaxify-admin__notice-appearance--block", !inline), _classNames));
+  var actions = [{
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Back to Top', 'wp-ajaxify-comments'),
+    url: '#ajaxify-admin-header',
+    variant: 'link',
+    className: 'ajaxify-admin__notice-action ajaxify-admin__notice-action--to-top'
+  }];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: containerClasses
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
     isDismissible: false,
     spokenMessage: message,
-    actions: []
+    actions: hasToTop ? actions : []
   }, props), hasIcon() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "ajaxify-admin__notice-icon"
   }, getIcon(icon)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -18670,15 +18680,17 @@ Notice.defaultProps = {
   politeness: 'polite',
   icon: null,
   className: '',
-  inline: false
+  inline: false,
+  hasToTop: false
 };
 Notice.propTypes = {
-  message: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string).isRequired,
-  status: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOf(['info', 'warning', 'success', 'error']),
-  politeness: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOf(['assertive', 'polite']),
-  icon: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func),
-  className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string),
-  inline: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool)
+  message: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string).isRequired,
+  status: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOf(['info', 'warning', 'success', 'error']),
+  politeness: prop_types__WEBPACK_IMPORTED_MODULE_5___default().oneOf(['assertive', 'polite']),
+  icon: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().func),
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().string),
+  inline: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool),
+  hasToTop: (prop_types__WEBPACK_IMPORTED_MODULE_5___default().bool)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Notice);
 
@@ -18755,21 +18767,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var use_async_resource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! use-async-resource */ "./node_modules/use-async-resource/lib/index.js");
 /* harmony import */ var use_async_resource__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(use_async_resource__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
-/* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-spinners/BeatLoader */ "./node_modules/react-spinners/BeatLoader.js");
-/* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/toggle-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/text-control/index.js");
+/* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-spinners/BeatLoader */ "./node_modules/react-spinners/BeatLoader.js");
+/* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/toggle-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/text-control/index.js");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button/index.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js");
-/* harmony import */ var _components_ErrorBoundary__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ErrorBoundary */ "./src/js/react/components/ErrorBoundary/index.js");
-/* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/js/react/utils/SendCommand.js");
-/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/Notice */ "./src/js/react/components/Notice/index.js");
+/* harmony import */ var _components_ErrorBoundary__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/ErrorBoundary */ "./src/js/react/components/ErrorBoundary/index.js");
+/* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/js/react/utils/SendCommand.js");
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Notice */ "./src/js/react/components/Notice/index.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -18796,7 +18808,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var retrieveHomeOptions = function retrieveHomeOptions() {
-  return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wpac_get_home_options', {
+  return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wpac_get_home_options', {
     nonce: wpacAdminHome.getNonce
   });
 };
@@ -18805,14 +18817,14 @@ var HomeScreen = function HomeScreen(props) {
     _useAsyncResource2 = _slicedToArray(_useAsyncResource, 2),
     defaults = _useAsyncResource2[0],
     getDefaults = _useAsyncResource2[1];
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ErrorBoundary__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ErrorBoundary__WEBPACK_IMPORTED_MODULE_4__["default"], {
     fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Could not load Home options.', 'highlight-and-share'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
       href: "https://dlxplugins.com/support/",
       target: "_blank",
       rel: "noopener noreferrer"
     }, "DLX Plugins Support"))
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
-    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Options', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_6___default()), {
+    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Options', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_7___default()), {
       color: '#873F49',
       loading: true,
       cssOverride: true,
@@ -18845,7 +18857,7 @@ var Interface = function Interface(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     isReset = _useState8[0],
     setIsReset = _useState8[1];
-  var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_7__.useForm)({
+  var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_8__.useForm)({
       defaultValues: {
         enabled: data.enabled,
         debug: data.debug,
@@ -18862,10 +18874,10 @@ var Interface = function Interface(props) {
     reset = _useForm.reset,
     setError = _useForm.setError,
     clearErrors = _useForm.clearErrors;
-  var formValues = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_7__.useWatch)({
+  var formValues = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_8__.useWatch)({
     control: control
   });
-  var _useFormState = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_7__.useFormState)({
+  var _useFormState = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_8__.useFormState)({
       control: control
     }),
     errors = _useFormState.errors,
@@ -18877,7 +18889,7 @@ var Interface = function Interface(props) {
   };
   var onSubmit = function onSubmit(formData) {
     setSaving(true);
-    (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('sce_save_comment_editing_options', _objectSpread({
+    (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('sce_save_comment_editing_options', _objectSpread({
       nonce: sceCommentEditing.save_nonce
     }, formData)).then(function (ajaxResponse) {
       var ajaxSuccess = ajaxResponse.data.success;
@@ -18893,7 +18905,7 @@ var Interface = function Interface(props) {
   };
   var handleReset = function handleReset() {
     setResetting(true);
-    (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('sce_reset_comment_editing_options', {
+    (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('sce_reset_comment_editing_options', {
       nonce: sceCommentEditing.reset_nonce
     }).then(function (ajaxResponse) {
       var ajaxData = ajaxResponse.data.data;
@@ -18951,14 +18963,14 @@ var Interface = function Interface(props) {
     className: "form-table form-table-row-sections"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Ajaxify Status', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Ajaxify Status', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
     name: "enabled",
     control: control,
     render: function render(_ref) {
       var _ref$field = _ref.field,
         _onChange = _ref$field.onChange,
         value = _ref$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Ajaxify Comments', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
@@ -18967,14 +18979,14 @@ var Interface = function Interface(props) {
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Configure whether to enable or disable Ajaxify Comments.', 'wp-ajaxify-comments')
       });
     }
-  }), getValues('enabled') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+  }), getValues('enabled') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
     name: "debug",
     control: control,
     render: function render(_ref2) {
       var _ref2$field = _ref2.field,
         _onChange2 = _ref2$field.onChange,
         value = _ref2$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Debug Mode', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
@@ -18985,14 +18997,14 @@ var Interface = function Interface(props) {
     }
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Menu Helper', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Menu Helper', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
     name: "menuHelper",
     control: control,
     render: function render(_ref3) {
       var _ref3$field = _ref3.field,
         _onChange3 = _ref3$field.onChange,
         value = _ref3$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Menu Helper', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
@@ -19003,7 +19015,7 @@ var Interface = function Interface(props) {
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Miscellaneous', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Miscellaneous', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
     name: "scrollSpeed",
     control: control,
     rules: {
@@ -19015,7 +19027,7 @@ var Interface = function Interface(props) {
       var _ref4$field = _ref4.field,
         onChange = _ref4$field.onChange,
         value = _ref4$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Scroll speed (ms)', 'wp-ajaxify-comments'),
         type: "number",
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', {
@@ -19028,13 +19040,13 @@ var Interface = function Interface(props) {
         onChange: onChange
       });
     }
-  }), errors.scrollSpeed && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), errors.scrollSpeed && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The value for the scroll speed is invalid.', 'wp-ajaxify-comments'),
     status: "error",
     politeness: "assertive",
     inline: false,
     icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], null)
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
     name: "autoUpdateIdleTime",
     control: control,
     rules: {
@@ -19046,7 +19058,7 @@ var Interface = function Interface(props) {
       var _ref5$field = _ref5.field,
         onChange = _ref5$field.onChange,
         value = _ref5$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Auto update idle time (ms)', 'wp-ajaxify-comments'),
         type: "number",
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', {
@@ -19059,7 +19071,7 @@ var Interface = function Interface(props) {
         onChange: onChange
       });
     }
-  }), errors.autoUpdateIdleTime && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), errors.autoUpdateIdleTime && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The value for the idle time is invalid.', 'wp-ajaxify-comments'),
     status: "error",
     politeness: "assertive",
@@ -19101,15 +19113,15 @@ var Interface = function Interface(props) {
       setResetting(true);
       handleReset(e);
     }
-  })), hasErrors() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  })), hasErrors() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('There are form validation errors. Please correct them above.', 'wp-ajaxify-comments'),
     status: "error",
     politeness: "polite"
-  }), isSaved && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), isSaved && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Your settings have been saved.', 'wp-ajaxify-comments'),
     status: "success",
     politeness: "assertive"
-  }), isReset && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), isReset && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Your settings have been reset.', 'wp-ajaxify-comments'),
     status: "success",
     politeness: "assertive"

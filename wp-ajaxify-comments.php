@@ -46,3 +46,69 @@ function plugins_loaded() {
 	}
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\plugins_loaded' );
+
+/* Setup plugin activation and redirection */
+register_activation_hook( __FILE__, __NAMESPACE__ . '\on_plugin_activation' );
+add_action( 'admin_init', __NAMESPACE__ . '\activate_redirect' );
+
+/**
+ * Determine if a user can be redirected or not.
+ *
+ * @return true if the user can be redirected. false if not.
+ */
+function can_redirect_on_activation() {
+	// Allow third-parties to prevent activation redirect.
+	$can_redirect = apply_filters( 'dlxplugins/ajaxify/comments/activation/redirect', true );
+	if ( false === $can_redirect ) {
+		return false;
+	}
+
+	// If plugin is activated in network admin options, skip redirect.
+	if ( is_network_admin() ) {
+		return false;
+	}
+
+	// Skip redirect if WP_DEBUG is enabled.
+	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+		return false;
+	}
+
+	// Check for dev mode.
+	if ( function_exists( 'wp_get_development_mode' ) ) {
+		if ( ! empty( wp_get_development_mode() ) ) {
+			return false;
+		}
+	}
+
+	// Determine if multi-activation is enabled.
+	$maybe_multi = filter_input( INPUT_GET, 'activate-multi', FILTER_VALIDATE_BOOLEAN );
+	if ( $maybe_multi ) {
+		return false;
+	}
+
+	// All is well. Can redirect.
+	return true;
+}
+
+/**
+ * Callback when the plugin is activated.
+ */
+function on_plugin_activation() {
+	if ( can_redirect_on_activation() ) {
+		// Add option for whether to redirect.
+		add_option( 'wpac_do_activation_redirect', sanitize_text_field( __FILE__ ) );
+	}
+}
+
+/**
+ * Redirect in the admin upon plugin activation.
+ */
+function activate_redirect() {
+	if ( can_redirect_on_activation() && is_admin() ) {
+		if ( __FILE__ === get_option( 'wpac_do_activation_redirect' ) ) {
+			delete_option( 'wpac_do_activation_redirect' );
+			wp_safe_redirect( esc_url_raw( add_query_arg( array( 'first_time_install' => true ), Functions::get_settings_url() ) ) );
+			exit;
+		}
+	}
+}

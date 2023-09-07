@@ -2,11 +2,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types'; // ES6
 import { speak } from '@wordpress/a11y';
+import { __ } from '@wordpress/i18n';
 import { Notice as WPNotice } from '@wordpress/components';
 import classNames from 'classnames';
 
 const Notice = ( props ) => {
-	const { message, status, politeness, icon, className, inline, children } = props;
+	const { message, status, politeness, icon, className, inline, children, hasToTop = false } = props;
 
 	useEffect( () => {
 		speak( message, politeness );
@@ -25,9 +26,17 @@ const Notice = ( props ) => {
 		[ `ajaxify-admin__notice-appearance--inline` ]: inline,
 		[ `ajaxify-admin__notice-appearance--block` ]: ! inline,
 	} );
+
+	const actions = [
+		{
+			label: __( 'Back to Top', 'wp-ajaxify-comments' ),
+			url: '#ajaxify-admin-header',
+			variant: 'link',
+			className: 'ajaxify-admin__notice-action ajaxify-admin__notice-action--to-top',
+		} ];
 	return (
 		<div className={ containerClasses }>
-			<WPNotice isDismissible={ false } spokenMessage={ message } actions={ [] } { ...props }>
+			<WPNotice isDismissible={ false } spokenMessage={ message } actions={ hasToTop ? actions : [] } { ...props }>
 				{ hasIcon() &&
 					<div className="ajaxify-admin__notice-icon">{ getIcon( icon ) }</div>
 				}
@@ -44,6 +53,7 @@ Notice.defaultProps = {
 	icon: null,
 	className: '',
 	inline: false,
+	hasToTop: false,
 };
 
 Notice.propTypes = {
@@ -53,6 +63,7 @@ Notice.propTypes = {
 	icon: PropTypes.func,
 	className: PropTypes.string,
 	inline: PropTypes.bool,
+	hasToTop: PropTypes.bool,
 };
 
 export default Notice;

@@ -7,6 +7,11 @@ $white: #FFFFFF;
 $marsala: #873F49;
 $dark_blue: #0B1C47;
 
+/* enable smooth scroll */
+html {
+	scroll-behavior: smooth;
+}
+
 :root {
 	--ajaxify-admin--color-main: #873F49;
 }
@@ -878,7 +883,10 @@ h3.ajaxify-admin-content-subheading {
 		}
 	}
 }
-
+.ajaxify-admin__notice-action.components-button.components-notice__action {
+	margin-left: 0;
+	margin-top: 15px;
+}
 .has-error {
 	input.components-text-control__input {
 		border: 1px solid var(--ajaxify-admin--color-notice--error-alt);

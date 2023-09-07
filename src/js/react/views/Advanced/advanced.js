@@ -16,7 +16,7 @@ import { AlertCircle, Loader2, ClipboardCheck } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
-import ColorPickerControl from '../../components/ColorPicker';
+import SaveResetButtons from '../../components/SaveResetButtons';
 
 const retrieveAdvancedOptions = () => {
 	return SendCommand( 'wpac_get_advanced_options', {
@@ -525,6 +525,7 @@ const Interface = ( props ) => {
 												onChange( boolValue );
 											} }
 											help={ sprintf(
+												/* Translators: %s is the secret query string */
 												__(
 													'Check to enable the plugin by passing the (secret) query string (WPACEnable=%s)',
 													'wp-ajaxify-comments',

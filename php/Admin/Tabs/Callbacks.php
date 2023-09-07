@@ -46,6 +46,7 @@ class Callbacks {
 			array(
 				'getNonce'  => wp_create_nonce( 'wpac-admin-callbacks-retrieve-options' ),
 				'saveNonce' => wp_create_nonce( 'wpac-admin-callbacks-save-options' ),
+				'resetNonce' => wp_create_nonce( 'wpac-admin-callbacks-reset-options' ),
 			)
 		);
 	}
