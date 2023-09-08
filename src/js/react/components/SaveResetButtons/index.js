@@ -38,7 +38,7 @@ const SaveResetButtons = ( props ) => {
 		setSavePromise( saveOptionsPromise );
 		setSaving( true );
 		const response = await saveOptionsPromise;
-		return response;
+		setSaving( false );
 	};
 
 	const hasErrors = () => {
@@ -116,19 +116,10 @@ const SaveResetButtons = ( props ) => {
 				/>
 			</div>
 			<div className="ajaxify-admin-notices-bottom">
-				{ saving && (
-					<Notice
-						message={ __( 'Your settings are being saved.', 'wp-ajaxify-comments' ) }
-						status="success"
-						politeness="assertive"
-					/>
-				) }
-				{ saving && (
-					<SnackPop
-						ajaxOptions={ savePromise }
-						loadingMessage={ __( 'Saving Options…', 'wp-ajaxify-comments' ) }
-					/>
-				) }
+				<SnackPop
+					ajaxOptions={ savePromise }
+					loadingMessage={ __( 'Saving Options…', 'wp-ajaxify-comments' ) }
+				/>
 				{ hasErrors() && (
 					<Notice
 						message={ __(
@@ -137,21 +128,6 @@ const SaveResetButtons = ( props ) => {
 						) }
 						status="error"
 						politeness="polite"
-					/>
-				) }
-				{ isSaved && (
-					<Notice
-						message={ __( 'Your settings have been saved.', 'wp-ajaxify-comments' ) }
-						status="success"
-						politeness="assertive"
-						hasToTop={ true }
-					/>
-				) }
-				{ isReset && (
-					<Notice
-						message={ __( 'Your settings have been reset.', 'wp-ajaxify-comments' ) }
-						status="success"
-						politeness="assertive"
 					/>
 				) }
 			</div>

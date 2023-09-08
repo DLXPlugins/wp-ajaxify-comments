@@ -15,7 +15,8 @@ import Notice from '../Notice';
  */
 const SnackPop = ( props ) => {
 	const { ajaxOptions, loadingMessage } = props;
-	const [ notificationOptions, setNotificationOptions ] = useState( {
+
+	const snackbarDefaults = {
 		type: 'info',
 		message: '',
 		title: '',
@@ -24,7 +25,9 @@ const SnackPop = ( props ) => {
 		isSuccess: false,
 		loadingMessage,
 		politeness: 'polite', /* can also be assertive */
-	} );
+	};
+
+	const [ notificationOptions, setNotificationOptions ] = useState( snackbarDefaults );
 	const [ isBusy, setIsBusy ] = useState( false );
 	const [ isModalVisible, setIsModalVisible ] = useState( false );
 	const [ isSnackbarVisible, setIsSnackbarVisible ] = useState( false );
@@ -80,10 +83,12 @@ const SnackPop = ( props ) => {
 				}
 				if ( 'critical' === type ) {
 					setIsSnackbarVisible( false );
+					setNotificationOptions( snackbarDefaults );
 					setIsModalVisible( true );
 				} else {
 					setTimeout( () => {
 						setIsSnackbarVisible( false );
+						setNotificationOptions( snackbarDefaults );
 					}, 10000 );
 				}
 			} ).catch( ( error ) => {
@@ -129,17 +134,31 @@ const SnackPop = ( props ) => {
 		}
 	};
 
+	const getSnackbarActions = () => {
+		const actions = [];
+		if ( notificationOptions.type === 'success' ) {
+			actions.push( {
+				label: __( 'Back to Top', 'wp-ajaxify-comments' ),
+				url: '#ajaxify-admin-header',
+				variant: 'link',
+				className: 'ajaxify-admin__notice-action ajaxify-admin__notice-action--to-top',
+			} );
+		}
+		return actions;
+	};
+
 	const getSnackBar = () => {
 		return (
 			<WPSnackBar
 				className={
 					classnames(
-						`uau-snackbar uau-snackbar-${ notificationOptions.type }`,
+						`ajaxify-snackbar ajaxify-snackbar-${ notificationOptions.type }`,
 						{
-							'uau-snackbar-loading': isBusy,
+							'ajaxify-snackbar-loading': isBusy,
 						}
 					)
 				}
+				actions={ getSnackbarActions() }
 				icon={ getIcon() }
 				onDismiss={ () => setIsSnackbarVisible( false ) }
 				explicitDismiss={ notificationOptions.isDismissable }
@@ -155,13 +174,13 @@ const SnackPop = ( props ) => {
 				<Modal
 					className={
 						classnames(
-							`uau-modal uau-modal-${ notificationOptions.type }`,
+							`ajaxify-modal ajaxify-modal-${ notificationOptions.type }`,
 							{
-								'uau-modal-loading': isBusy,
+								'ajaxify-modal-loading': isBusy,
 							}
 						)
 					}
-					bodyOpenClassName={ 'uau-modal-body-open' }
+					bodyOpenClassName={ 'ajaxify-modal-body-open' }
 					title={ notificationOptions.title }
 					onRequestClose={ () => {
 						setIsModalVisible( false );
@@ -177,7 +196,7 @@ const SnackPop = ( props ) => {
 						icon={ getIcon }
 						inline={ false }
 					/>
-					<div className="uau-modal-button-group">
+					<div className="ajaxify-modal-button-group">
 						<Button
 							className="button button-error"
 							variant="secondary"

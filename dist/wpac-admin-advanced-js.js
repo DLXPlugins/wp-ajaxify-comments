@@ -21506,7 +21506,7 @@ var SaveResetButtons = function SaveResetButtons(props) {
             return saveOptionsPromise;
           case 5:
             response = _context.sent;
-            return _context.abrupt("return", response);
+            setSaving(false);
           case 7:
           case "end":
             return _context.stop();
@@ -21593,26 +21593,13 @@ var SaveResetButtons = function SaveResetButtons(props) {
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "ajaxify-admin-notices-bottom"
-  }, saving && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Your settings are being saved.', 'wp-ajaxify-comments'),
-    status: "success",
-    politeness: "assertive"
-  }), saving && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_5__["default"], {
     ajaxOptions: savePromise,
     loadingMessage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving Options…', 'wp-ajaxify-comments')
   }), hasErrors() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_3__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('There are form validation errors. Please correct them above.', 'wp-ajaxify-comments'),
     status: "error",
     politeness: "polite"
-  }), isSaved && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Your settings have been saved.', 'wp-ajaxify-comments'),
-    status: "success",
-    politeness: "assertive",
-    hasToTop: true
-  }), isReset && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Your settings have been reset.', 'wp-ajaxify-comments'),
-    status: "success",
-    politeness: "assertive"
   })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SaveResetButtons);
@@ -21670,16 +21657,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SnackPop = function SnackPop(props) {
   var ajaxOptions = props.ajaxOptions,
     loadingMessage = props.loadingMessage;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-      type: 'info',
-      message: '',
-      title: '',
-      isDismissable: false,
-      isPersistent: false,
-      isSuccess: false,
-      loadingMessage: loadingMessage,
-      politeness: 'polite' /* can also be assertive */
-    }),
+  var snackbarDefaults = {
+    type: 'info',
+    message: '',
+    title: '',
+    isDismissable: false,
+    isPersistent: false,
+    isSuccess: false,
+    loadingMessage: loadingMessage,
+    politeness: 'polite' /* can also be assertive */
+  };
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(snackbarDefaults),
     _useState2 = _slicedToArray(_useState, 2),
     notificationOptions = _useState2[0],
     setNotificationOptions = _useState2[1];
@@ -21761,10 +21750,12 @@ var SnackPop = function SnackPop(props) {
         }
         if ('critical' === type) {
           setIsSnackbarVisible(false);
+          setNotificationOptions(snackbarDefaults);
           setIsModalVisible(true);
         } else {
           setTimeout(function () {
             setIsSnackbarVisible(false);
+            setNotificationOptions(snackbarDefaults);
           }, 10000);
         }
       })["catch"](function (error) {
@@ -21807,11 +21798,24 @@ var SnackPop = function SnackPop(props) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null);
     }
   };
+  var getSnackbarActions = function getSnackbarActions() {
+    var actions = [];
+    if (notificationOptions.type === 'success') {
+      actions.push({
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Back to Top', 'wp-ajaxify-comments'),
+        url: '#ajaxify-admin-header',
+        variant: 'link',
+        className: 'ajaxify-admin__notice-action ajaxify-admin__notice-action--to-top'
+      });
+    }
+    return actions;
+  };
   var getSnackBar = function getSnackBar() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("uau-snackbar uau-snackbar-".concat(notificationOptions.type), {
-        'uau-snackbar-loading': isBusy
+      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("ajaxify-snackbar ajaxify-snackbar-".concat(notificationOptions.type), {
+        'ajaxify-snackbar-loading': isBusy
       }),
+      actions: getSnackbarActions(),
       icon: getIcon(),
       onDismiss: function onDismiss() {
         return setIsSnackbarVisible(false);
@@ -21822,10 +21826,10 @@ var SnackPop = function SnackPop(props) {
   var getModal = function getModal() {
     if ('critical' === notificationOptions.type) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("uau-modal uau-modal-".concat(notificationOptions.type), {
-          'uau-modal-loading': isBusy
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("ajaxify-modal ajaxify-modal-".concat(notificationOptions.type), {
+          'ajaxify-modal-loading': isBusy
         }),
-        bodyOpenClassName: 'uau-modal-body-open',
+        bodyOpenClassName: 'ajaxify-modal-body-open',
         title: notificationOptions.title,
         onRequestClose: function onRequestClose() {
           setIsModalVisible(false);
@@ -21840,7 +21844,7 @@ var SnackPop = function SnackPop(props) {
         icon: getIcon,
         inline: false
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "uau-modal-button-group"
+        className: "ajaxify-modal-button-group"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
         className: "button button-error",
         variant: "secondary",

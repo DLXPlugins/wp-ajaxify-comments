@@ -60,7 +60,7 @@ class Init {
 	}
 
 	public function ajax_save_options() {
-		wp_send_json_success( array( 'message' => 'Options saved.' ) );
+		wp_send_json_success( array( 'message' => 'Options saved.', 'type' => 'success', 'dismissable' => true ) );
 	}
 
 	/**

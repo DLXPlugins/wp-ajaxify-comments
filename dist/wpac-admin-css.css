@@ -4199,5 +4199,41 @@ h3.ajaxify-admin-content-subheading {
     width: 100%;
     margin-top: 5px; }
 
+/**
+ * Snackbar styles.
+ */
+.ajaxify-snackbar.components-snackbar {
+  position: fixed;
+  top: 32px;
+  right: 0;
+  z-index: 100;
+  background: #0D3172;
+  color: #FFF; }
+  .ajaxify-snackbar.components-snackbar .components-snackbar__content {
+    display: flex;
+    align-items: center; }
+  .ajaxify-snackbar.components-snackbar .components-snackbar__icon {
+    position: absolute;
+    top: 24px;
+    left: 28px;
+    left: 14px;
+    top: auto;
+    bottom: auto;
+    line-height: 0; }
+  .ajaxify-snackbar.components-snackbar.ajaxify-snackbar-loading svg {
+    animation: ajaxify-rotate;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; }
+  .ajaxify-snackbar.components-snackbar.ajaxify-snackbar-success {
+    background: #14720D;
+    color: #FFF; }
+  .ajaxify-snackbar.components-snackbar.ajaxify-snackbar-error, .ajaxify-snackbar.components-snackbar.ajaxify-snackbar-critical {
+    background: #820000;
+    color: #FFF; }
+  .ajaxify-snackbar.components-snackbar.ajaxify-snackbar-warning {
+    background: #FFC107;
+    color: #000; }
+
 
 /*# sourceMappingURL=wpac-admin-css.css.map*/
