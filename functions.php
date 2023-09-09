@@ -590,6 +590,9 @@ function wpac_initialize() {
 			case is_int( $option_value ):
 				$option_value = (int) $option_value;
 				break;
+			case is_numeric( $option_value ):
+				$option_value = (float) $option_value;
+				break;
 			default:
 				$option_value = '"' . wpac_js_escape( $option_value ) . '"';
 		}

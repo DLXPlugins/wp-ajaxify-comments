@@ -164,6 +164,13 @@ WPAC._ReplaceComments = function(data, commentUrl, useFallbackUrl, formData, for
 		WPAC._LoadFallbackUrl(fallbackUrl);
 		return false;
 	}
+	// If length is greater than one, there may be greedy selectors.
+	if (oldCommentsContainer.length > 1) {
+		WPAC._Debug("error", "Comment form on requested page found multiple times (selector: '%s')", oldCommentsContainer);
+		oldCommentsContainer = oldCommentsContainer.filter(function() {
+			return jQuery(this).children().length > 0 && !jQuery(this).is(":header");
+		});
+	}
 	
 	var extractedBody = WPAC._ExtractBody(data);
 	if (extractedBody === false) {
@@ -180,6 +187,17 @@ WPAC._ReplaceComments = function(data, commentUrl, useFallbackUrl, formData, for
 		WPAC._LoadFallbackUrl(fallbackUrl);
 		return false;
 	}
+	if (newCommentsContainer.length > 1) {
+		WPAC._Debug("error", "Comment form on requested page found multiple times (selector: '%s')", newCommentsContainer);
+		console.log( newCommentsContainer );
+
+		// Find the first comment container that has children and is not a heading.
+		newCommentsContainer = newCommentsContainer.filter(function() {
+			return jQuery(this).children().length > 0 && !jQuery(this).is(":header");
+		});
+	}
+
+	
 
 	beforeUpdateComments(extractedBody, commentUrl);
 

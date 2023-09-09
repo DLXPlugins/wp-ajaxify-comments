@@ -22012,20 +22012,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
 /* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-spinners/BeatLoader */ "./node_modules/react-spinners/BeatLoader.js");
 /* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/text-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/select-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/toggle-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button/index.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/clipboard-check.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/text-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/select-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/toggle-control/index.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js");
 /* harmony import */ var _components_ErrorBoundary__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/ErrorBoundary */ "./src/js/react/components/ErrorBoundary/index.js");
 /* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/js/react/utils/SendCommand.js");
 /* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Notice */ "./src/js/react/components/Notice/index.js");
 /* harmony import */ var _components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/SaveResetButtons */ "./src/js/react/components/SaveResetButtons/index.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
@@ -22111,7 +22106,10 @@ var Interface = function Interface(props) {
         optimizeAjaxResponse: data.optimizeAjaxResponse,
         baseUrl: data.baseUrl,
         disableCache: data.disableCache,
-        enableByQuery: data.enableByQuery
+        enableByQuery: data.enableByQuery,
+        saveNonce: wpacAdminAdvanced.saveNonce,
+        resetNonce: wpacAdminAdvanced.resetNonce,
+        caller: 'advanced'
       }
     }),
     register = _useForm.register,
@@ -22121,7 +22119,8 @@ var Interface = function Interface(props) {
     getValues = _useForm.getValues,
     reset = _useForm.reset,
     setError = _useForm.setError,
-    clearErrors = _useForm.clearErrors;
+    clearErrors = _useForm.clearErrors,
+    trigger = _useForm.trigger;
   var formValues = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_9__.useWatch)({
     control: control
   });
@@ -22135,71 +22134,7 @@ var Interface = function Interface(props) {
   var hasErrors = function hasErrors() {
     return Object.keys(errors).length > 0;
   };
-  var onSubmit = function onSubmit(formData) {
-    setSaving(true);
-    (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('sce_save_comment_editing_options', _objectSpread({
-      nonce: sceCommentEditing.save_nonce
-    }, formData)).then(function (ajaxResponse) {
-      var ajaxSuccess = ajaxResponse.data.success;
-      if (ajaxSuccess) {
-        setIsSaved(true);
-        setTimeout(function () {
-          setIsSaved(false);
-        }, 3000);
-      } else {}
-    })["catch"](function (ajaxResponse) {}).then(function (ajaxResponse) {
-      setSaving(false);
-    });
-  };
-  var handleReset = function handleReset() {
-    setResetting(true);
-    (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('sce_reset_comment_editing_options', {
-      nonce: sceCommentEditing.reset_nonce
-    }).then(function (ajaxResponse) {
-      var ajaxData = ajaxResponse.data.data;
-      var ajaxSuccess = ajaxResponse.data.success;
-      if (ajaxSuccess) {
-        setIsReset(true);
-        reset(ajaxData);
-        setTimeout(function () {
-          setIsReset(false);
-        }, 3000);
-      }
-    })["catch"](function (ajaxResponse) {}).then(function (ajaxResponse) {
-      setResetting(false);
-    });
-  };
-  var getSaveIcon = function getSaveIcon() {
-    if (saving) {
-      return function () {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], null);
-      };
-    }
-    if (isSaved) {
-      return function () {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], null);
-      };
-    }
-    return false;
-  };
-  var getSaveText = function getSaveText() {
-    if (saving) {
-      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Saving…', 'wp-ajaxify-comments');
-    }
-    if (isSaved) {
-      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Saved', 'wp-ajaxify-comments');
-    }
-    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Save Options', 'wp-ajaxify-comments');
-  };
-  var getResetText = function getResetText() {
-    if (resetting) {
-      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Restoring Defaults…', 'wp-ajaxify-comments');
-    }
-    if (isReset) {
-      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Defaults Restored', 'wp-ajaxify-comments');
-    }
-    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Restore Defaults', 'wp-ajaxify-comments');
-  };
+  var onSubmit = function onSubmit(formData) {};
   var getCommentEditingHeader = function getCommentEditingHeader() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Advanced', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
       className: "description"
@@ -22221,7 +22156,7 @@ var Interface = function Interface(props) {
       var _ref$field = _ref.field,
         onChange = _ref$field.onChange,
         value = _ref$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment Pages URL Regex', 'wp-ajaxify-comments'),
         type: "text",
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames = {
@@ -22246,7 +22181,7 @@ var Interface = function Interface(props) {
       var _ref2$field = _ref2.field,
         onChange = _ref2$field.onChange,
         value = _ref2$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Load Comments Async Threshold', 'wp-ajaxify-comments'),
         type: "number",
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames2 = {
@@ -22262,7 +22197,7 @@ var Interface = function Interface(props) {
         politeness: "assertive",
         inline: false,
         icon: function icon() {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], null);
         }
       }));
     }
@@ -22275,7 +22210,7 @@ var Interface = function Interface(props) {
       var _ref3$field = _ref3.field,
         onChange = _ref3$field.onChange,
         value = _ref3$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Async Comments Load Trigger', 'wp-ajaxify-comments'),
         value: value,
         onChange: onChange,
@@ -22301,7 +22236,7 @@ var Interface = function Interface(props) {
       var _ref4$field = _ref4.field,
         _onChange = _ref4$field.onChange,
         value = _ref4$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disable URL Updating', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
@@ -22319,7 +22254,7 @@ var Interface = function Interface(props) {
       var _ref5$field = _ref5.field,
         _onChange2 = _ref5$field.onChange,
         value = _ref5$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disable Scroll to Anchor', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
@@ -22337,7 +22272,7 @@ var Interface = function Interface(props) {
       var _ref6$field = _ref6.field,
         _onChange3 = _ref6$field.onChange,
         value = _ref6$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Use Uncompressed Scripts', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
@@ -22355,7 +22290,7 @@ var Interface = function Interface(props) {
       var _ref7$field = _ref7.field,
         _onChange4 = _ref7$field.onChange,
         value = _ref7$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Always Include Scripts', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
@@ -22378,7 +22313,7 @@ var Interface = function Interface(props) {
       var _ref8$field = _ref8.field,
         _onChange5 = _ref8$field.onChange,
         value = _ref8$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Place Scripts in Footer', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
@@ -22401,7 +22336,7 @@ var Interface = function Interface(props) {
       var _ref9$field = _ref9.field,
         _onChange6 = _ref9$field.onChange,
         value = _ref9$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Optimize AJAX Response', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
@@ -22420,7 +22355,7 @@ var Interface = function Interface(props) {
       var _ref10$field = _ref10.field,
         onChange = _ref10$field.onChange,
         value = _ref10$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Base URL', 'wp-ajaxify-comments'),
         type: "text",
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames3 = {
@@ -22440,7 +22375,7 @@ var Interface = function Interface(props) {
       var _ref11$field = _ref11.field,
         _onChange7 = _ref11$field.onChange,
         value = _ref11$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Disable Cache', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
@@ -22458,7 +22393,7 @@ var Interface = function Interface(props) {
       var _ref12$field = _ref12.field,
         _onChange8 = _ref12$field.onChange,
         value = _ref12$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable by Query', 'wp-ajaxify-comments'),
         checked: value,
         onChange: function onChange(boolValue) {
@@ -22468,54 +22403,14 @@ var Interface = function Interface(props) {
         (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Check to enable the plugin by passing the (secret) query string (WPACEnable=%s)', 'wp-ajaxify-comments'), wpacAdminAdvanced.secret)
       }));
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-admin-buttons"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_16__["default"], {
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify__btn ajaxify__btn-primary ajaxify__btn--icon-right', {
-      'has-error': hasErrors()
-    }, {
-      'has-icon': saving || isSaved
-    }, {
-      'is-saving': saving && !isSaved
-    }, {
-      'is-saved': isSaved
-    }),
-    type: "submit",
-    text: getSaveText(),
-    icon: getSaveIcon(),
-    iconSize: "18",
-    iconPosition: "right",
-    disabled: saving
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_16__["default"], {
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify__btn ajaxify__btn-danger ajaxify__btn--icon-right', {
-      'has-icon': resetting
-    }, {
-      'is-resetting': {
-        resetting: resetting
-      }
-    }),
-    type: "button",
-    text: getResetText(),
-    icon: resetting ? Spinner : false,
-    iconSize: "18",
-    iconPosition: "right",
-    disabled: saving || resetting,
-    onClick: function onClick(e) {
-      setResetting(true);
-      handleReset(e);
-    }
-  })), hasErrors() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('There are form validation errors. Please correct them above.', 'wp-ajaxify-comments'),
-    status: "error",
-    politeness: "polite"
-  }), isSaved && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Your settings have been saved.', 'wp-ajaxify-comments'),
-    status: "success",
-    politeness: "assertive"
-  }), isReset && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Your settings have been reset.', 'wp-ajaxify-comments'),
-    status: "success",
-    politeness: "assertive"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    formValues: formValues,
+    setError: setError,
+    reset: reset,
+    errors: errors,
+    isDirty: isDirty,
+    dirtyFields: dirtyFields,
+    trigger: trigger
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AdvancedScreen);

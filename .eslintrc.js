@@ -8,6 +8,8 @@ module.exports = {
 		wpacAdminCallbacks: 'readonly',
 		wpacAdminHome: 'readonly',
 		wpacAdminAppearance: 'readonly',
+		wpacAdminLabels: 'readonly',
+		wpacAdminSelectors: 'readonly',
 	},
 	extends: [
 		'eslint:recommended',

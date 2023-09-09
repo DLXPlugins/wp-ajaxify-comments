@@ -11,8 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );
 }
 
-use DLXPlugins\WPAC\Functions as Functions;
-use DLXPlugins\WPAC\Options as Options;
+use DLXPlugins\WPAC\Functions;
+use DLXPlugins\WPAC\Options;
 
 /**
  * Output the labels tab and content.
@@ -44,8 +44,9 @@ class Labels {
 			'wpac-admin-labels',
 			'wpacAdminLabels',
 			array(
-				'getNonce'  => wp_create_nonce( 'wpac-admin-labels-retrieve-options' ),
-				'saveNonce' => wp_create_nonce( 'wpac-admin-labels-save-options' ),
+				'getNonce'   => wp_create_nonce( 'wpac-admin-labels-retrieve-options' ),
+				'saveNonce'  => wp_create_nonce( 'wpac-admin-labels-save-options' ),
+				'resetNonce' => wp_create_nonce( 'wpac-admin-labels-reset-options' ),
 			)
 		);
 	}
