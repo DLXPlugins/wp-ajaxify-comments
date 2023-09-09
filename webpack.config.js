@@ -13,6 +13,12 @@ module.exports = ( env ) => {
 				'wpac-admin-callbacks-js': './src/js/react/views/Callbacks/index.js',
 				'wpac-admin-advanced-js': './src/js/react/views/Advanced/index.js',
 				'wpac-admin-support-js': './src/js/react/views/Support/index.js',
+				'wpac-frontend-js': './src/js/frontend/index.js',
+				'wpac-frontend-idle-timer': './src/js/frontend/idle-timer.js',
+				'wpac-frontend-jquery-blockUI': './src/js/frontend/jquery.blockUI.js',
+				'wpac-frontend-jquery-waypoints': './src/js/frontend/jquery.waypoints.js',
+				'wpac-frontend-jsuri': './src/js/frontend/jsuri.js',
+				'wpac-frontend-wp-ajaxify-comments': './src/js/frontend/wp-ajaxify-comments.js',
 
 			},
 			mode: env.mode,

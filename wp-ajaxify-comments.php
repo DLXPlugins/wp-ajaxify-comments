@@ -44,6 +44,20 @@ function plugins_loaded() {
 		$admin = new Admin\Init();
 		$admin->init();
 	}
+
+	$options = Options::get_options();
+
+	if ( ! is_admin() && ! wpac_is_login_page() ) {
+		if ( (bool) $options['enable'] || ( $options['enableByQuery'] && $_REQUEST['WPACEnable'] === wpac_get_secret() ) ) {
+			add_filter( 'comments_array', 'wpac_comments_query_filter' );
+			add_action( 'wp_enqueue_scripts', 'wpac_initialize', 9 );
+			add_action( 'wp_enqueue_scripts', 'wpac_enqueue_scripts' );
+			add_filter( 'gettext', 'wpac_filter_gettext', 20, 3 );
+			add_filter( 'wp_die_handler', 'wpac_wp_die_handler' );
+			add_filter( 'option_page_comments', 'wpac_option_page_comments' );
+			add_filter( 'option_comments_per_page', 'wpac_option_comments_per_page' );
+		}
+	}
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\plugins_loaded' );
 

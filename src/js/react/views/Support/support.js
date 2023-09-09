@@ -16,8 +16,6 @@ import { Bookmark, Mail, Users2, GraduationCap, PlugZap, HeartHandshake } from '
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
-import ColorPickerControl from '../../components/ColorPicker';
-import AlignmentGroup from '../../components/alignment';
 
 const SupportScreen = (props) => {
 

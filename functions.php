@@ -429,17 +429,59 @@ function wpac_enqueue_scripts() {
 	}
 
 	$version  = Functions::get_plugin_version();
-	$jsPath   = plugins_url( 'js/', __FILE__ );
-	$inFooter = wpac_get_option( 'placeScriptsInFooter' );
+	$options = Options::get_options();
+	$in_footer = (bool) $options['placeScriptsInFooter'];
 
-	if ( wpac_get_option( 'debug' ) || wpac_get_option( 'useUncompressedScripts' ) ) {
-		wp_enqueue_script( 'jsuri', $jsPath . 'jsuri.js', array(), $version, $inFooter );
-		wp_enqueue_script( 'jQueryBlockUi', $jsPath . 'jquery.blockUI.js', array( 'jquery' ), $version, $inFooter );
-		wp_enqueue_script( 'jQueryIdleTimer', $jsPath . 'idle-timer.js', array( 'jquery' ), $version, $inFooter );
-		wp_enqueue_script( 'waypoints', $jsPath . 'jquery.waypoints.js', array( 'jquery' ), $version, $inFooter );
-		wp_enqueue_script( 'wpAjaxifyComments', $jsPath . 'wp-ajaxify-comments.js', array( 'jquery', 'jQueryBlockUi', 'jsuri', 'jQueryIdleTimer', 'waypoints' ), $version, $inFooter );
+	if ( (bool) $options['debug'] || (bool) $options['useUncompressedScripts'] ) {
+		wp_enqueue_script(
+			'jsuri',
+			Functions::get_plugin_url( 'dist/wpac-frontend-jsuri.js' ),
+			array(),
+			$version,
+			$in_footer
+		);
+		wp_enqueue_script(
+			'jQueryBlockUi',
+			Functions::get_plugin_url( 'dist/wpac-frontend-jquery-blockUI.js' ),
+			array( 'jquery' ),
+			$version,
+			$in_footer
+		);
+		wp_enqueue_script(
+			'jQueryIdleTimer',
+			Functions::get_plugin_url( 'dist/wpac-frontend-idle-timer.js' ),
+			array( 'jquery' ),
+			$version,
+			$in_footer
+		);
+		wp_enqueue_script(
+			'waypoints',
+			Functions::get_plugin_url( 'dist/wpac-frontend-jquery-waypoints.js' ),
+			array( 'jquery' ),
+			$version,
+			$in_footer
+		);
+		wp_enqueue_script(
+			'wpAjaxifyComments',
+			Functions::get_plugin_url( 'dist/wpac-frontend-wp-ajaxify-comments.js' ),
+			array(
+				'jquery',
+				'jQueryBlockUi',
+				'jsuri',
+				'jQueryIdleTimer',
+				'waypoints',
+			),
+			$version,
+			$in_footer
+		);
 	} else {
-		wp_enqueue_script( 'wpAjaxifyComments', $jsPath . 'wp-ajaxify-comments.min.js', array( 'jquery' ), $version, $inFooter );
+		wp_enqueue_script(
+			'wpAjaxifyComments',
+			Functions::get_plugin_url( 'dist/wpac-frontend-js.js' ),
+			array( 'jquery' ),
+			$version,
+			$in_footer
+		);
 	}
 }
 
@@ -568,9 +610,9 @@ function wpac_initialize() {
 		return;
 	}
 
-	echo '<script' . ( wpac_theme_has_html5_support() ? '' : ' type="text/javascript"' ) . '>/* <![CDATA[ */';
+	echo '<script' . ( wpac_theme_has_html5_support() ? '' : ' type="text/javascript"' ) . '>';
 
-	echo 'if(!window["WPAC"])var WPAC={};';
+	echo 'var WPAC={}; window.WPAC = WPAC; WPAC = WPAC;';
 
 	// Options
 	echo 'WPAC._Options={';
@@ -610,7 +652,7 @@ function wpac_initialize() {
 	echo '"afterPostComment":function(commentUrl,unapproved){' . sanitize_text_field( wpac_get_option( 'callbackOnAfterPostComment' ) . '}' );
 	echo '};';
 
-	echo '/* ]]> */</script>';
+	echo '</script>';
 }
 
 function wpac_is_login_page() {
@@ -940,16 +982,4 @@ function wpac_option_comments_per_page( $comments_per_page ) {
 		0 : $comments_per_page;
 }
 
-if ( ! is_admin() && ! wpac_is_login_page() ) {
-	if ( wpac_get_option( 'enable' ) || ( wpac_get_option( 'enableByQuery' ) && $_REQUEST['WPACEnable'] === wpac_get_secret() ) ) {
-		add_filter( 'comments_array', 'wpac_comments_query_filter' );
-		add_action( 'wp_head', 'wpac_initialize' );
-		add_action( 'wp_enqueue_scripts', 'wpac_enqueue_scripts' );
-		add_filter( 'gettext', 'wpac_filter_gettext', 20, 3 );
-		add_filter( 'wp_die_handler', 'wpac_wp_die_handler' );
-		add_filter( 'option_page_comments', 'wpac_option_page_comments' );
-		add_filter( 'option_comments_per_page', 'wpac_option_comments_per_page' );
-	}
-} else {
-	add_action( 'admin_menu', 'wpac_admin_menu' );
-}
+
