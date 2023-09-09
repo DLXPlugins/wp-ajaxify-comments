@@ -25,6 +25,7 @@ const SaveResetButtons = ( props ) => {
 		errors,
 		isDirty,
 		dirtyFields,
+		trigger,
 	} = props;
 
 	const [ saving, setSaving ] = useState( false );
@@ -32,13 +33,35 @@ const SaveResetButtons = ( props ) => {
 	const [ isSaved, setIsSaved ] = useState( false );
 	const [ isReset, setIsReset ] = useState( false );
 	const [ savePromise, setSavePromise ] = useState( null );
+	const [ resetPromise, setResetPromise ] = useState( null );
 
+	/**
+	 * Save the options by setting promise as state.
+	 */
 	const saveOptions = async () => {
-		const saveOptionsPromise = SendCommand( 'wpac_save_options', formValues );
+		const saveOptionsPromise = SendCommand( 'wpac_save_options', { formData: formValues } );
 		setSavePromise( saveOptionsPromise );
 		setSaving( true );
-		const response = await saveOptionsPromise;
+		await saveOptionsPromise;
 		setSaving( false );
+	};
+
+	/**
+	 * Reset the options by setting promise as state.
+	 */
+	const resetOptions = async () => {
+		const resetOptionsPromise = SendCommand( 'wpac_reset_options', { formData: formValues } );
+		setResetPromise( resetOptionsPromise );
+		setResetting( true );
+		const resetResponse = await resetOptionsPromise;
+		reset(
+			resetResponse.data.data.formData,
+			{
+				keepErrors: false,
+				keepDirty: false,
+			},
+		);
+		setResetting( false );
 	};
 
 	const hasErrors = () => {
@@ -92,9 +115,12 @@ const SaveResetButtons = ( props ) => {
 					iconSize="18"
 					iconPosition="right"
 					disabled={ saving }
-					onClick={ ( e ) => {
+					onClick={ async ( e ) => {
 						e.preventDefault();
-						saveOptions();
+						const validationResult = await trigger();
+						if ( validationResult ) {
+							saveOptions();
+						}
 					} }
 				/>
 				<Button
@@ -110,8 +136,8 @@ const SaveResetButtons = ( props ) => {
 					iconPosition="right"
 					disabled={ saving || resetting }
 					onClick={ ( e ) => {
-						setResetting( true );
-						onReset( e );
+						e.preventDefault();
+						resetOptions();
 					} }
 				/>
 			</div>
@@ -119,6 +145,10 @@ const SaveResetButtons = ( props ) => {
 				<SnackPop
 					ajaxOptions={ savePromise }
 					loadingMessage={ __( 'Saving Options…', 'wp-ajaxify-comments' ) }
+				/>
+				<SnackPop
+					ajaxOptions={ resetPromise }
+					loadingMessage={ __( 'Resetting to defaults…', 'wp-ajaxify-comments' ) }
 				/>
 				{ hasErrors() && (
 					<Notice

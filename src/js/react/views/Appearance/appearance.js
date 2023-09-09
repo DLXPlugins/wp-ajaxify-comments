@@ -19,12 +19,13 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import ColorPickerControl from '../../components/ColorPicker';
-import AlignmentGroup from '../../components/alignment';
+import AlignmentGroup from '../../components/Alignment';
+import SaveResetButtons from '../../components/SaveResetButtons';
 
 const retrieveAppearanceOptions = () => {
-	return SendCommand('wpac_get_appearance_options', {
+	return SendCommand( 'wpac_get_appearance_options', {
 		nonce: wpacAdminAppearance.getNonce,
-	});
+	} );
 };
 
 const cssRegex = /^(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)(?:=[\'"]?(.*?)[\'"]?)?\]|#[a-z0-9_-]+|\.(?:[a-z0-9_-]+))+(?:\s*,\s*(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)(?:=[\'"]?(.*?)[\'"]?)?\]|#[a-z0-9_-]+|\.(?:[a-z0-9_-]+))+)*/i;
@@ -32,68 +33,67 @@ const cssRegex = /^(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)
 const defaultPalette = wpacAdminAppearance.palette;
 
 const showPreview = ( formValues, type ) => {
-	
-	let backgroundColor = "";
-	let textColor = "";
-	let message = "";
-	let top = formValues.popupMarginTop + (jQuery("#wpadminbar").outerHeight() || 0);
-	if (type == "loading") {
+	let backgroundColor = '';
+	let textColor = '';
+	let message = '';
+	const top = formValues.popupMarginTop + ( jQuery( '#wpadminbar' ).outerHeight() || 0 );
+	if ( type == 'loading' ) {
 		backgroundColor = formValues.popupBackgroundColorLoading;
 		textColor = formValues.popupTextColorLoading;
 		message = __( 'Loading…', 'wp-ajaxify-comments' );
 	}
-	if (type == "success") {
+	if ( type == 'success' ) {
 		backgroundColor = formValues.popupBackgroundColorSuccess;
 		textColor = formValues.popupTextColorSuccess;
 		message = __( 'Your comment has been posted!', 'wp-ajaxify-comments' );
 	}
-	if (type == "error") {
+	if ( type == 'error' ) {
 		backgroundColor = formValues.popupBackgroundColorError;
 		textColor = formValues.popupTextColorError;
 		message = __( 'There was an error posting your comment.', 'wp-ajaxify-comments' );
 	}
-	jQuery.blockUI({ 
-		message: message, 
-		fadeIn: formValues.popupFadeIn, 
-		fadeOut: formValues.popupFadeOut, 
-		timeout:formValues.popupTimeout,
+	jQuery.blockUI( {
+		message,
+		fadeIn: formValues.popupFadeIn,
+		fadeOut: formValues.popupFadeOut,
+		timeout: formValues.popupTimeout,
 		centerY: false,
 		centerX: true,
-		showOverlay: (type == "loading"),
-		css: { 
-			width: formValues.popupWidth + "%",
-			left: ((100-formValues.popupWidth)/2) + "%",
-			top: top + "px",
-			border: "none", 
-			padding: formValues.popupPadding + "px", 
-			backgroundColor: backgroundColor, 
-			"-webkit-border-radius": formValues.popupCornerRadius + "px",
-			"-moz-border-radius": formValues.popupCornerRadius + "px",
-			"border-radius": formValues.popupCornerRadius + "px",
-			opacity: formValues.popupOpacity/100, 
+		showOverlay: ( type == 'loading' ),
+		css: {
+			width: formValues.popupWidth + '%',
+			left: ( ( 100 - formValues.popupWidth ) / 2 ) + '%',
+			top: top + 'px',
+			border: 'none',
+			padding: formValues.popupPadding + 'px',
+			backgroundColor,
+			'-webkit-border-radius': formValues.popupCornerRadius + 'px',
+			'-moz-border-radius': formValues.popupCornerRadius + 'px',
+			'border-radius': formValues.popupCornerRadius + 'px',
+			opacity: formValues.popupOpacity / 100,
 			color: textColor,
 			textAlign: formValues.popupTextAlign,
-			cursor: (type == "loading") ? "wait" : "default",
-			"font-size": formValues.popupTextFontSize
+			cursor: ( type == 'loading' ) ? 'wait' : 'default',
+			'font-size': formValues.popupTextFontSize,
 		},
-		overlayCSS:  { 
-			backgroundColor: "#000", 
-			opacity: 0
+		overlayCSS: {
+			backgroundColor: '#000',
+			opacity: 0,
 		},
-		baseZ: formValues.popupZindex
-	}); 
-}
+		baseZ: formValues.popupZindex,
+	} );
+};
 
-const AppearanceScreen = (props) => {
-	const [defaults, getDefaults] = useAsyncResource(
+const AppearanceScreen = ( props ) => {
+	const [ defaults, getDefaults ] = useAsyncResource(
 		retrieveAppearanceOptions,
-		[]
+		[],
 	);
 	return (
 		<ErrorBoundary
 			fallback={
 				<p>
-					{__('Could not load appearance options.', 'highlight-and-share')}
+					{ __( 'Could not load appearance options.', 'highlight-and-share' ) }
 					<br />
 					<a
 						href="https://dlxplugins.com/support/"
@@ -108,31 +108,39 @@ const AppearanceScreen = (props) => {
 			<Suspense
 				fallback={
 					<>
-						<h2>{__('Loading Options', 'wp-ajaxify-comments')}</h2>
+						<h2>{ __( 'Loading Options', 'wp-ajaxify-comments' ) }</h2>
 						<BeatLoader
-							color={'#873F49'}
-							loading={true}
-							cssOverride={true}
-							size={25}
-							speedMultiplier={0.65}
+							color={ '#873F49' }
+							loading={ true }
+							cssOverride={ true }
+							size={ 25 }
+							speedMultiplier={ 0.65 }
 						/>
 					</>
 				}
 			>
-				<Interface defaults={defaults} {...props} />
+				<Interface defaults={ defaults } { ...props } />
 			</Suspense>
 		</ErrorBoundary>
 	);
 };
 
-const Interface = (props) => {
+const Interface = ( props ) => {
 	const { defaults } = props;
 	const response = defaults();
 	const { data, success } = response.data;
-	const [saving, setSaving] = useState(false);
-	const [isSaved, setIsSaved] = useState(false);
-	const [resetting, setResetting] = useState(false);
-	const [isReset, setIsReset] = useState(false);
+	const [ saving, setSaving ] = useState( false );
+	const [ isSaved, setIsSaved ] = useState( false );
+	const [ resetting, setResetting ] = useState( false );
+	const [ isReset, setIsReset ] = useState( false );
+
+	const getAdminBarHeight = () => {
+		const adminBar = document.getElementById( 'wpadminbar' );
+		if ( null !== adminBar ) {
+			return adminBar.offsetHeight;
+		}
+		return 0;
+	};
 
 	const {
 		register,
@@ -143,7 +151,8 @@ const Interface = (props) => {
 		reset,
 		setError,
 		clearErrors,
-	} = useForm({
+		trigger,
+	} = useForm( {
 		defaultValues: {
 			popupBackgroundColorLoading: data.popupBackgroundColorLoading,
 			popupTextColorLoading: data.popupTextColorLoading,
@@ -162,102 +171,34 @@ const Interface = (props) => {
 			popupTextAlign: data.popupTextAlign,
 			popupTextFontSize: data.popupTextFontSize,
 			popupZindex: data.popupZindex,
+			saveNonce: wpacAdminAppearance.saveNonce,
+			resetNonce: wpacAdminAppearance.resetNonce,
+			caller: 'appearance',
 		},
-	});
-	const formValues = useWatch({ control });
-	const { errors, isDirty, dirtyFields, touchedFields } = useFormState({
+	} );
+	const formValues = useWatch( { control } );
+	const { errors, isDirty, dirtyFields, touchedFields } = useFormState( {
 		control,
-	});
+	} );
 
 	const hasErrors = () => {
-		return Object.keys(errors).length > 0;
+		return Object.keys( errors ).length > 0;
 	};
 
-	const onSubmit = (formData) => {
-		setSaving(true);
-		SendCommand('sce_save_comment_editing_options', {
-			nonce: sceCommentEditing.save_nonce,
-			...formData,
-		})
-			.then((ajaxResponse) => {
-				const ajaxSuccess = ajaxResponse.data.success;
-				if (ajaxSuccess) {
-					setIsSaved(true);
-					setTimeout(() => {
-						setIsSaved(false);
-					}, 3000);
-				} else {
-				}
-			})
-			.catch((ajaxResponse) => { })
-			.then((ajaxResponse) => {
-				setSaving(false);
-			});
-	};
-
-	const handleReset = () => {
-		setResetting(true);
-		SendCommand('sce_reset_comment_editing_options', {
-			nonce: sceCommentEditing.reset_nonce,
-		})
-			.then((ajaxResponse) => {
-				const ajaxData = ajaxResponse.data.data;
-				const ajaxSuccess = ajaxResponse.data.success;
-				if (ajaxSuccess) {
-					setIsReset(true);
-					reset(ajaxData);
-					setTimeout(() => {
-						setIsReset(false);
-					}, 3000);
-				}
-			})
-			.catch((ajaxResponse) => { })
-			.then((ajaxResponse) => {
-				setResetting(false);
-			});
-	};
-
-	const getSaveIcon = () => {
-		if (saving) {
-			return () => (<Loader2 />);
-		}
-		if (isSaved) {
-			return () => (<ClipboardCheck />);
-		}
-		return false;
-	};
-
-	const getSaveText = () => {
-		if (saving) {
-			return __('Saving…', 'wp-ajaxify-comments');
-		}
-		if (isSaved) {
-			return __('Saved', 'wp-ajaxify-comments');
-		}
-		return __('Save Options', 'wp-ajaxify-comments');
-	};
-
-	const getResetText = () => {
-		if (resetting) {
-			return __('Restoring Defaults…', 'wp-ajaxify-comments');
-		}
-		if (isReset) {
-			return __('Defaults Restored', 'wp-ajaxify-comments');
-		}
-		return __('Restore Defaults', 'wp-ajaxify-comments');
+	const onSubmit = ( formData ) => {
 	};
 
 	const getCommentEditingHeader = () => {
 		return (
 			<>
 				<h2>
-					{__('Appearance Settings', 'wp-ajaxify-comments')}
+					{ __( 'Appearance Settings', 'wp-ajaxify-comments' ) }
 				</h2>
 				<p className="description">
-					{__(
+					{ __(
 						'Adjust the appearance of Ajaxify comments and see a preview of how it will look on the frontend.',
-						'wp-ajaxify-comments'
-					)}
+						'wp-ajaxify-comments',
+					) }
 				</p>
 			</>
 		);
@@ -266,604 +207,577 @@ const Interface = (props) => {
 	return (
 		<>
 			<div className="ajaxify-admin-panel-area">
-				{getCommentEditingHeader()}
-				<form onSubmit={handleSubmit(onSubmit)}>
+				{ getCommentEditingHeader() }
+				<form onSubmit={ handleSubmit( onSubmit ) }>
+					<div className="ajaxify-admin-appearance-preview-row" style={ { position: 'sticky', top: ( getAdminBarHeight() + 5 ) + 'px' } }>
+						<div className="ajaxify-admin-appearance-preview-row__buttons">
+							<Button
+								onClick={ ( e ) => {
+									e.preventDefault();
+									showPreview( formValues, 'loading' );
+								} }
+								className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
+								variant="secondary"
+							>
+								{ __( 'Preview Loading', 'wp-ajaxify-comments' ) }
+							</Button>
+							<Button
+								onClick={ ( e ) => {
+									e.preventDefault();
+									showPreview( formValues, 'success' );
+								} }
+								className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
+								variant="secondary"
+							>
+								{ __( 'Preview Success', 'wp-ajaxify-comments' ) }
+							</Button>
+							<Button
+								onClick={ ( e ) => {
+									e.preventDefault();
+									showPreview( formValues, 'error' );
+								} }
+								className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
+								variant="secondary"
+							>
+								{ __( 'Preview Error', 'wp-ajaxify-comments' ) }
+							</Button>
+						</div>
+					</div>
 					<table className="form-table form-table-row-sections">
 						<tbody>
 							<tr>
-								<th scope="row">{__('Overlay Colors', 'wp-ajaxify-comments')}</th>
+								<th scope="row">{ __( 'Overlay Colors', 'wp-ajaxify-comments' ) }</th>
 								<td>
 									<div className="ajaxify-admin__control-row">
 										<p className="description">
-											{__(
-												'Adjust the colors of the popup and launch a preview below.', 'wp-ajaxify-comments'
-											)}
+											{ __(
+												'Adjust the colors of the popup and launch a preview below.', 'wp-ajaxify-comments',
+											) }
 										</p>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupBackgroundColorLoading"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<ColorPickerControl
-														value={value}
-														key={'popup-background-color-loading'}
-														onChange={(slug, newValue) => {
-															onChange(newValue);
-														}}
-														label={__('Loading Background Color', 'wp-ajaxify-comments')}
-														defaultColors={defaultPalette}
-														defaultColor={'#000000'}
-														slug={'popup-background-color-loading'}
+														value={ value }
+														key={ 'popup-background-color-loading' }
+														onChange={ ( slug, newValue ) => {
+															onChange( newValue );
+														} }
+														label={ __( 'Loading Background Color', 'wp-ajaxify-comments' ) }
+														defaultColors={ defaultPalette }
+														defaultColor={ '#000000' }
+														slug={ 'popup-background-color-loading' }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupTextColorLoading"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<ColorPickerControl
-														value={value}
-														key={'popup-text-color-loading'}
-														onChange={(slug, newValue) => {
-															onChange(newValue);
-														}}
-														label={__('Loading Text Color', 'wp-ajaxify-comments')}
-														defaultColors={defaultPalette}
-														defaultColor={'#FFFFFF'}
-														slug={'popup-text-color-loading'}
+														value={ value }
+														key={ 'popup-text-color-loading' }
+														onChange={ ( slug, newValue ) => {
+															onChange( newValue );
+														} }
+														label={ __( 'Loading Text Color', 'wp-ajaxify-comments' ) }
+														defaultColors={ defaultPalette }
+														defaultColor={ '#FFFFFF' }
+														slug={ 'popup-text-color-loading' }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupBackgroundColorSuccess"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<ColorPickerControl
-														value={value}
-														key={'popup-background-color-success-loading'}
-														onChange={(slug, newValue) => {
-															onChange(newValue);
-														}}
-														label={__('Success Loading Background Color', 'wp-ajaxify-comments')}
-														defaultColors={defaultPalette}
-														defaultColor={'#008000'}
-														slug={'popup-background-color-success-loading'}
+														value={ value }
+														key={ 'popup-background-color-success-loading' }
+														onChange={ ( slug, newValue ) => {
+															onChange( newValue );
+														} }
+														label={ __( 'Success Loading Background Color', 'wp-ajaxify-comments' ) }
+														defaultColors={ defaultPalette }
+														defaultColor={ '#008000' }
+														slug={ 'popup-background-color-success-loading' }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupTextColorSuccess"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<ColorPickerControl
-														value={value}
-														key={'popup-text-color-success-loading'}
-														onChange={(slug, newValue) => {
-															onChange(newValue);
-														}}
-														label={__('Success Loading Text Color', 'wp-ajaxify-comments')}
-														defaultColors={defaultPalette}
-														defaultColor={'#000000'}
-														slug={'popup-text-color-success-loading'}
+														value={ value }
+														key={ 'popup-text-color-success-loading' }
+														onChange={ ( slug, newValue ) => {
+															onChange( newValue );
+														} }
+														label={ __( 'Success Loading Text Color', 'wp-ajaxify-comments' ) }
+														defaultColors={ defaultPalette }
+														defaultColor={ '#000000' }
+														slug={ 'popup-text-color-success-loading' }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupBackgroundColorError"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<ColorPickerControl
-														value={value}
-														key={'popup-background-color-error-loading'}
-														onChange={(slug, newValue) => {
-															onChange(newValue);
-														}}
-														label={__('Error Loading Background Color', 'wp-ajaxify-comments')}
-														defaultColors={defaultPalette}
-														defaultColor={'#ff0000'}
-														slug={'popup-background-color-error-loading'}
+														value={ value }
+														key={ 'popup-background-color-error-loading' }
+														onChange={ ( slug, newValue ) => {
+															onChange( newValue );
+														} }
+														label={ __( 'Error Loading Background Color', 'wp-ajaxify-comments' ) }
+														defaultColors={ defaultPalette }
+														defaultColor={ '#ff0000' }
+														slug={ 'popup-background-color-error-loading' }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupTextColorError"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<ColorPickerControl
-														value={value}
-														key={'popup-text-color-error-loading'}
-														onChange={(slug, newValue) => {
-															onChange(newValue);
-														}}
-														label={__('Error Loading Text Color', 'wp-ajaxify-comments')}
-														defaultColors={defaultPalette}
-														defaultColor={'#000000'}
-														slug={'popup-text-color-error-loading'}
+														value={ value }
+														key={ 'popup-text-color-error-loading' }
+														onChange={ ( slug, newValue ) => {
+															onChange( newValue );
+														} }
+														label={ __( 'Error Loading Text Color', 'wp-ajaxify-comments' ) }
+														defaultColors={ defaultPalette }
+														defaultColor={ '#000000' }
+														slug={ 'popup-text-color-error-loading' }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<th scope="row">{__('Spacing and Opacity', 'wp-ajaxify-comments')}</th>
+								<th scope="row">{ __( 'Spacing and Opacity', 'wp-ajaxify-comments' ) }</th>
 								<td>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupOpacity"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<RangeControl
-														label={__('Overlay Opacity %', 'wp-ajaxify-comments')}
-														value={value}
-														onChange={onChange}
-														min={0}
-														max={100}
-														step={1}
-														help={__('Adjust the opacity of the overlay.', 'wp-ajaxify-comments')}
+														label={ __( 'Overlay Opacity %', 'wp-ajaxify-comments' ) }
+														value={ value }
+														onChange={ onChange }
+														min={ 0 }
+														max={ 100 }
+														step={ 1 }
+														help={ __( 'Adjust the opacity of the overlay.', 'wp-ajaxify-comments' ) }
 														color="var(--ajaxify-admin--color-main)"
 														trackColor="var(--ajaxify-admin--color-main)"
-														resetFallbackValue={70}
-														allowReset={true}
+														resetFallbackValue={ 70 }
+														allowReset={ true }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupCornerRadius"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<RangeControl
-														label={__('Popup Corner Radius (px)', 'wp-ajaxify-comments')}
-														value={value}
-														onChange={onChange}
-														min={0}
-														max={100}
-														step={1}
-														help={__('Adjust the corner radius of the overlay (in pixels).', 'wp-ajaxify-comments')}
+														label={ __( 'Popup Corner Radius (px)', 'wp-ajaxify-comments' ) }
+														value={ value }
+														onChange={ onChange }
+														min={ 0 }
+														max={ 100 }
+														step={ 1 }
+														help={ __( 'Adjust the corner radius of the overlay (in pixels).', 'wp-ajaxify-comments' ) }
 														color="var(--ajaxify-admin--color-main)"
 														trackColor="var(--ajaxify-admin--color-main)"
-														resetFallbackValue={5}
-														allowReset={true}
+														resetFallbackValue={ 5 }
+														allowReset={ true }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupMarginTop"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<RangeControl
-														label={__('Popup Margin Top (px)', 'wp-ajaxify-comments')}
-														value={value}
-														onChange={onChange}
-														min={0}
-														max={100}
-														step={1}
-														help={__('Adjust the margin top value of the overlay (in pixels).', 'wp-ajaxify-comments')}
+														label={ __( 'Popup Margin Top (px)', 'wp-ajaxify-comments' ) }
+														value={ value }
+														onChange={ onChange }
+														min={ 0 }
+														max={ 100 }
+														step={ 1 }
+														help={ __( 'Adjust the margin top value of the overlay (in pixels).', 'wp-ajaxify-comments' ) }
 														color="var(--ajaxify-admin--color-main)"
 														trackColor="var(--ajaxify-admin--color-main)"
-														resetFallbackValue={10}
-														allowReset={true}
+														resetFallbackValue={ 10 }
+														allowReset={ true }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupWidth"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<RangeControl
-														label={__('Popup Width (%)', 'wp-ajaxify-comments')}
-														value={value}
-														onChange={onChange}
-														min={0}
-														max={100}
-														step={1}
-														help={__('Adjust the width value as a percentage.', 'wp-ajaxify-comments')}
+														label={ __( 'Popup Width (%)', 'wp-ajaxify-comments' ) }
+														value={ value }
+														onChange={ onChange }
+														min={ 0 }
+														max={ 100 }
+														step={ 1 }
+														help={ __( 'Adjust the width value as a percentage.', 'wp-ajaxify-comments' ) }
 														color="var(--ajaxify-admin--color-main)"
 														trackColor="var(--ajaxify-admin--color-main)"
-														resetFallbackValue={30}
-														allowReset={true}
+														resetFallbackValue={ 30 }
+														allowReset={ true }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupPadding"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<RangeControl
-														label={__('Popup Padding (px)', 'wp-ajaxify-comments')}
-														value={value}
-														onChange={onChange}
-														min={0}
-														max={100}
-														step={1}
-														help={__('Adjust the padding value of the popup in pixels.', 'wp-ajaxify-comments')}
+														label={ __( 'Popup Padding (px)', 'wp-ajaxify-comments' ) }
+														value={ value }
+														onChange={ onChange }
+														min={ 0 }
+														max={ 100 }
+														step={ 1 }
+														help={ __( 'Adjust the padding value of the popup in pixels.', 'wp-ajaxify-comments' ) }
 														color="var(--ajaxify-admin--color-main)"
 														trackColor="var(--ajaxify-admin--color-main)"
-														resetFallbackValue={5}
-														allowReset={true}
+														resetFallbackValue={ 5 }
+														allowReset={ true }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<th scope="row">{__('Popover Text Styles', 'wp-ajaxify-comments')}</th>
+								<th scope="row">{ __( 'Popover Text Styles', 'wp-ajaxify-comments' ) }</th>
 								<td>
-								<div className="ajaxify-admin__control-row">
+									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupTextFontSize"
-											control={control}
-											rules={{ required: true }}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											rules={ { required: true } }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<TextControl
-														label={__('Font Size', 'wp-ajaxify-comments')}
+														label={ __( 'Font Size', 'wp-ajaxify-comments' ) }
 														type="text"
-														className={classNames('ajaxify-admin__text-control', {
+														className={ classNames( 'ajaxify-admin__text-control', {
 															'has-error': 'required' === errors.popupFadeIn?.type,
 															'has-error': 'pattern' === errors.popupFadeIn?.type,
 															'is-required': true,
-														})}
-														help={__('Font size (e.g. "14px", "1.1em")', 'wp-ajaxify-comments')}
+														} ) }
+														help={ __( 'Font size (e.g. "14px", "1.1em")', 'wp-ajaxify-comments' ) }
 														aria-required="true"
-														value={value}
-														onChange={onChange}
+														value={ value }
+														onChange={ onChange }
 													/>
-													{'required' === errors.popupTextFontSize?.type && (
+													{ 'required' === errors.popupTextFontSize?.type && (
 														<Notice
-															message={__(
+															message={ __(
 																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
+																'wp-ajaxify-comments',
+															) }
 															status="error"
 															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
 														/>
-													)}
+													) }
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupTextAlign"
-											control={control}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<AlignmentGroup
-														alignment={value}
-														onClick={onChange}
-														label={__('Text Alignment', 'wp-ajaxify-comments')}
-														alignLeftLabel={__('Left', 'wp-ajaxify-comments')}
-														alignCenterLabel={__('Center', 'wp-ajaxify-comments')}
-														alignRightLabel={__('Right', 'wp-ajaxify-comments')}
-														leftOn={true}
-														centerOn={true}
-														rightOn={true}
+														alignment={ value }
+														onClick={ onChange }
+														label={ __( 'Text Alignment', 'wp-ajaxify-comments' ) }
+														alignLeftLabel={ __( 'Left', 'wp-ajaxify-comments' ) }
+														alignCenterLabel={ __( 'Center', 'wp-ajaxify-comments' ) }
+														alignRightLabel={ __( 'Right', 'wp-ajaxify-comments' ) }
+														leftOn={ true }
+														centerOn={ true }
+														rightOn={ true }
 													/>
 												</>
-											)}
+											) }
 										/>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<th scope="row">{__('Timing and Transitions', 'wp-ajaxify-comments')}</th>
+								<th scope="row">{ __( 'Timing and Transitions', 'wp-ajaxify-comments' ) }</th>
 								<td>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupFadeIn"
-											control={control}
-											rules={{ required: true, pattern: /\d+/ }}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											rules={ { required: true, pattern: /\d+/ } }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<TextControl
-														label={__('Fade in time (ms)', 'wp-ajaxify-comments')}
+														label={ __( 'Fade in time (ms)', 'wp-ajaxify-comments' ) }
 														type="number"
-														className={classNames('ajaxify-admin__text-control', {
+														className={ classNames( 'ajaxify-admin__text-control', {
 															'has-error': 'required' === errors.popupFadeIn?.type,
 															'has-error': 'pattern' === errors.popupFadeIn?.type,
 															'is-required': true,
-														})}
-														help={__('The fade in time in milliseconds.', 'wp-ajaxify-comments')}
+														} ) }
+														help={ __( 'The fade in time in milliseconds.', 'wp-ajaxify-comments' ) }
 														aria-required="true"
-														value={value}
-														onChange={onChange}
+														value={ value }
+														onChange={ onChange }
 													/>
-													{'pattern' === errors.popupFadeIn?.type && (
+													{ 'pattern' === errors.popupFadeIn?.type && (
 														<Notice
-															message={__(
+															message={ __(
 																'Please enter only integers.',
-																'wp-ajaxify-comments'
-															)}
+																'wp-ajaxify-comments',
+															) }
 															status="error"
 															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
 														/>
-													)}
-													{'required' === errors.popupFadeIn?.type && (
+													) }
+													{ 'required' === errors.popupFadeIn?.type && (
 														<Notice
-															message={__(
+															message={ __(
 																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
+																'wp-ajaxify-comments',
+															) }
 															status="error"
 															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
 														/>
-													)}
+													) }
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupFadeOut"
-											control={control}
-											rules={{ required: true, pattern: /\d+/ }}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											rules={ { required: true, pattern: /\d+/ } }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<TextControl
-														label={__('Fade out time (ms)', 'wp-ajaxify-comments')}
+														label={ __( 'Fade out time (ms)', 'wp-ajaxify-comments' ) }
 														type="number"
-														className={classNames('ajaxify-admin__text-control', {
+														className={ classNames( 'ajaxify-admin__text-control', {
 															'has-error': 'required' === errors.popupFadeOut?.type,
 															'has-error': 'pattern' === errors.popupFadeOut?.type,
 															'is-required': true,
-														})}
-														help={__('The fade out time in milliseconds.', 'wp-ajaxify-comments')}
+														} ) }
+														help={ __( 'The fade out time in milliseconds.', 'wp-ajaxify-comments' ) }
 														aria-required="true"
-														value={value}
-														onChange={onChange}
+														value={ value }
+														onChange={ onChange }
 													/>
-													{'pattern' === errors.popupFadeOut?.type && (
+													{ 'pattern' === errors.popupFadeOut?.type && (
 														<Notice
-															message={__(
+															message={ __(
 																'Please enter only integers.',
-																'wp-ajaxify-comments'
-															)}
+																'wp-ajaxify-comments',
+															) }
 															status="error"
 															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
 														/>
-													)}
-													{'required' === errors.popupFadeOut?.type && (
+													) }
+													{ 'required' === errors.popupFadeOut?.type && (
 														<Notice
-															message={__(
+															message={ __(
 																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
+																'wp-ajaxify-comments',
+															) }
 															status="error"
 															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
 														/>
-													)}
+													) }
 												</>
-											)}
+											) }
 										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupTimeout"
-											control={control}
-											rules={{ required: true, pattern: /\d+/ }}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											rules={ { required: true, pattern: /\d+/ } }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<TextControl
-														label={__('Popover Timeout (ms)', 'wp-ajaxify-comments')}
+														label={ __( 'Popover Timeout (ms)', 'wp-ajaxify-comments' ) }
 														type="number"
-														className={classNames('ajaxify-admin__text-control', {
+														className={ classNames( 'ajaxify-admin__text-control', {
 															'has-error': 'required' === errors.popupTimeout?.type,
 															'has-error': 'pattern' === errors.popupTimeout?.type,
 															'is-required': true,
-														})}
-														help={__('How long should the popover display in milliseconds.', 'wp-ajaxify-comments')}
+														} ) }
+														help={ __( 'How long should the popover display in milliseconds.', 'wp-ajaxify-comments' ) }
 														aria-required="true"
-														value={value}
-														onChange={onChange}
+														value={ value }
+														onChange={ onChange }
 													/>
-													{'pattern' === errors.popupTimeout?.type && (
+													{ 'pattern' === errors.popupTimeout?.type && (
 														<Notice
-															message={__(
+															message={ __(
 																'Please enter only integers.',
-																'wp-ajaxify-comments'
-															)}
+																'wp-ajaxify-comments',
+															) }
 															status="error"
 															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
 														/>
-													)}
-													{'required' === errors.popupTimeout?.type && (
+													) }
+													{ 'required' === errors.popupTimeout?.type && (
 														<Notice
-															message={__(
+															message={ __(
 																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
+																'wp-ajaxify-comments',
+															) }
 															status="error"
 															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
 														/>
-													)}
+													) }
 												</>
-											)}
+											) }
 										/>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<th scope="row">{__('Popover Z-Index', 'wp-ajaxify-comments')}</th>
+								<th scope="row">{ __( 'Popover Z-Index', 'wp-ajaxify-comments' ) }</th>
 								<td>
 									<div className="ajaxify-admin__control-row">
 										<Controller
 											name="popupZindex"
-											control={control}
-											rules={{ required: true, pattern: /\d+/ }}
-											render={({ field: { onChange, value } }) => (
+											control={ control }
+											rules={ { required: true, pattern: /\d+/ } }
+											render={ ( { field: { onChange, value } } ) => (
 												<>
 													<TextControl
-														label={__('Overlay Z-Index', 'wp-ajaxify-comments')}
+														label={ __( 'Overlay Z-Index', 'wp-ajaxify-comments' ) }
 														type="number"
-														className={classNames('ajaxify-admin__text-control', {
+														className={ classNames( 'ajaxify-admin__text-control', {
 															'has-error': 'required' === errors.popupZindex?.type,
 															'has-error': 'pattern' === errors.popupZindex?.type,
 															'is-required': true,
-														})}
-														help={__('Set the z-index of the overlay popover.', 'wp-ajaxify-comments')}
+														} ) }
+														help={ __( 'Set the z-index of the overlay popover.', 'wp-ajaxify-comments' ) }
 														aria-required="true"
-														value={value}
-														onChange={onChange}
+														value={ value }
+														onChange={ onChange }
 													/>
-													{'pattern' === errors.popupZindex?.type && (
+													{ 'pattern' === errors.popupZindex?.type && (
 														<Notice
-															message={__(
+															message={ __(
 																'Please enter only integers.',
-																'wp-ajaxify-comments'
-															)}
+																'wp-ajaxify-comments',
+															) }
 															status="error"
 															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
 														/>
-													)}
-													{'required' === errors.popupZindex?.type && (
+													) }
+													{ 'required' === errors.popupZindex?.type && (
 														<Notice
-															message={__(
+															message={ __(
 																'This is a required field.',
-																'wp-ajaxify-comments'
-															)}
+																'wp-ajaxify-comments',
+															) }
 															status="error"
 															politeness="assertive"
-															inline={false}
-															icon={() => (<AlertCircle />)}
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
 														/>
-													)}
+													) }
 												</>
-											)}
+											) }
 										/>
 									</div>
 								</td>
 							</tr>
 						</tbody>
 					</table>
-					<div>
-						<a
-							onClick={ (e) => {
-								e.preventDefault();
-								showPreview(formValues, "loading");
-							} }
-							className="ajaxify-admin__preview-button"
-							href="#"
-						>
-							{__('Preview Loading', 'wp-ajaxify-comments')}
-						</a>
-					</div>
-					<div className="ajaxify-admin-buttons">
-						<Button
-							className={classNames(
-								'ajaxify__btn ajaxify__btn-primary ajaxify__btn--icon-right',
-								{ 'has-error': hasErrors() },
-								{ 'has-icon': saving || isSaved },
-								{ 'is-saving': saving && !isSaved },
-								{ 'is-saved': isSaved }
-							)}
-							type="submit"
-							text={getSaveText()}
-							icon={getSaveIcon()}
-							iconSize="18"
-							iconPosition="right"
-							disabled={saving}
-						/>
-						<Button
-							className={classNames(
-								'ajaxify__btn ajaxify__btn-danger ajaxify__btn--icon-right',
-								{ 'has-icon': resetting },
-								{ 'is-resetting': { resetting } }
-							)}
-							type="button"
-							text={getResetText()}
-							icon={resetting ? Spinner : false}
-							iconSize="18"
-							iconPosition="right"
-							disabled={saving || resetting}
-							onClick={(e) => {
-								setResetting(true);
-								handleReset(e);
-							}}
-						/>
-					</div>
-					{hasErrors() && (
-						<Notice
-							message={__(
-								'There are form validation errors. Please correct them above.',
-								'wp-ajaxify-comments'
-							)}
-							status="error"
-							politeness="polite"
-						/>
-					)}
-					{isSaved && (
-						<Notice
-							message={__('Your settings have been saved.', 'wp-ajaxify-comments')}
-							status="success"
-							politeness="assertive"
-						/>
-					)}
-					{isReset && (
-						<Notice
-							message={__('Your settings have been reset.', 'wp-ajaxify-comments')}
-							status="success"
-							politeness="assertive"
-						/>
-					)}
+					<SaveResetButtons
+						formValues={ formValues }
+						setError={ setError }
+						reset={ reset }
+						errors={ errors }
+						isDirty={ isDirty }
+						dirtyFields={ dirtyFields }
+						trigger={ trigger }
+					/>
 				</form>
 			</div>
 

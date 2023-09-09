@@ -35,7 +35,7 @@ html {
 
 	#ajaxify-admin-header {
 		margin: 0 !important;
-		padding: 0.6875rem 0.5rem 0.6875rem 1rem;
+		padding: 0.6875rem 40px 0.6875rem 40px;
 
 		#ajaxify-admin-header-content {
 			display: grid;
@@ -131,8 +131,8 @@ html {
 	grid-template-columns: 2fr 2px 8fr;
 	max-width: 69.5rem;
 	padding: 1.5rem;
-	padding-left: 0;
-	padding-right: 0;
+	padding-left: 40px;
+	padding-right: 40px;
 	margin: 0 auto;
 
 	nav.ajaxify-admin-options {
@@ -710,6 +710,7 @@ h3.ajaxify-admin-content-subheading {
 	margin-right: 10px;
 	line-height: 1;
 	height: unset;
+	outline: none;
 	max-height: unset;
 	vertical-align: middle;
 
@@ -749,6 +750,31 @@ h3.ajaxify-admin-content-subheading {
 			color: #FFF;
 			margin-right: 8px;
 			transition: all 0.5s ease-in-out;
+		}
+	}
+
+	&.ajaxify__btn-info {
+		background: #fff;
+		color: #333;
+		border-color: #FFF;
+
+		&:hover {
+			background: rgb(248, 247, 254);
+			color: #000;
+			border-color: #000;
+
+			svg path {
+				fill: #000;
+			}
+		}
+
+		svg {
+			display: inline-block;
+			margin-right: 8px;
+
+			path {
+				fill: #000;
+			}
 		}
 	}
 }
@@ -1043,7 +1069,7 @@ h3.ajaxify-admin-content-subheading {
 	position: fixed;
 	top: 32px;
 	right: 0;
-	z-index: 100;
+	z-index: 10000;
 	background: #0D3172;
 	color: #FFF;
 
@@ -1083,3 +1109,20 @@ h3.ajaxify-admin-content-subheading {
 		color: #000;
 	}
  }
+
+/* Appearance Preview */
+.ajaxify-admin-appearance-preview-row {
+	margin-top: 15px;
+	position: sticky;
+	background: $marsala;
+	padding: 20px;
+	z-index: 1000;
+}
+.ajaxify-admin-appearance-preview-row__buttons {
+	display: flex;
+	justify-content: space-between;
+
+	button {
+		border-color: #FFF;
+	}
+}

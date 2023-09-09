@@ -31,6 +31,7 @@ const SnackPop = ( props ) => {
 	const [ isBusy, setIsBusy ] = useState( false );
 	const [ isModalVisible, setIsModalVisible ] = useState( false );
 	const [ isSnackbarVisible, setIsSnackbarVisible ] = useState( false );
+	const [ snackbarTimeout, setSnackbarTimeout ] = useState( null );
 
 	useEffect( () => {
 		const getPromise = async () => {
@@ -39,6 +40,7 @@ const SnackPop = ( props ) => {
 		};
 		if ( ajaxOptions instanceof Promise ) {
 			// Set state to busy.
+			setNotificationOptions( snackbarDefaults );
 			setIsSnackbarVisible( true );
 			setIsBusy( true );
 
@@ -86,10 +88,11 @@ const SnackPop = ( props ) => {
 					setNotificationOptions( snackbarDefaults );
 					setIsModalVisible( true );
 				} else {
-					setTimeout( () => {
+					clearTimeout( snackbarTimeout );
+					setSnackbarTimeout( setTimeout( () => {
 						setIsSnackbarVisible( false );
 						setNotificationOptions( snackbarDefaults );
-					}, 10000 );
+					}, 6000 ) );
 				}
 			} ).catch( ( error ) => {
 				// Handle error

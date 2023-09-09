@@ -108,6 +108,10 @@ class Functions {
 				$sanitized_data[ $key ] = (int) $value;
 				continue;
 			}
+			if ( is_numeric( $value ) ) {
+				$sanitized_data[ $key ] = (float) $value;
+				continue;
+			}
 			if ( is_string( $value ) ) {
 				$sanitized_data[ $key ] = sanitize_text_field( $value );
 				continue;

@@ -11,7 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );
 }
 
-use DLXPlugins\WPAC\Functions as Functions;
+use DLXPlugins\WPAC\Functions;
+use DLXPlugins\WPAC\Options;
 
 /**
  * Init admin class for WPAC.
@@ -40,7 +41,7 @@ class Init {
 	 * Main constructor.
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'admin_init', array( $this, 'init' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
 		// Ajax option for saving options.
@@ -59,8 +60,109 @@ class Init {
 		new Tabs\Support();
 	}
 
+	/**
+	 * Save the WPAC options via Ajax.
+	 */
 	public function ajax_save_options() {
-		wp_send_json_success( array( 'message' => 'Options saved.', 'type' => 'success', 'dismissable' => true ) );
+		// Get form data.
+		$form_data = filter_input( INPUT_POST, 'formData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+
+		// Verify nonce.
+		$nonce        = $form_data['saveNonce'];
+		$nonce_action = sprintf(
+			'wpac-admin-%s-save-options',
+			$form_data['caller']
+		);
+		if ( ! wp_verify_nonce( $nonce, $nonce_action ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce or permission verification failed.', 'wp-ajaxify-comments' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		// Sanitize form data.
+		$form_data = Functions::sanitize_array_recursive( $form_data );
+
+		// Gather existing options.
+		$options = Options::get_options();
+
+		// Loop through form data and update options. Keys must exist in $options.
+		foreach ( $form_data as $key => $option_value ) {
+			if ( ! isset( $options[ $key ] ) ) {
+				continue;
+			}
+			$options[ $key ] = $option_value;
+		}
+
+		// Update options.
+		Options::update_options( $options );
+
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Your options have been saved.', 'wp-ajaxify-comments' ),
+				'type'        => 'success',
+				'dismissable' => true,
+			)
+		);
+	}
+
+	public function ajax_reset_options() {
+		// Get form data.
+		$form_data = filter_input( INPUT_POST, 'formData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+
+		// Verify nonce.
+		$nonce        = $form_data['resetNonce'];
+		$nonce_action = sprintf(
+			'wpac-admin-%s-reset-options',
+			$form_data['caller']
+		);
+		if ( ! wp_verify_nonce( $nonce, $nonce_action ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce or permission verification failed.', 'wp-ajaxify-comments' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		// Get defaults.
+		$options_defaults = Options::get_defaults();
+
+		// Loop through form data, replace with defaults.
+		foreach ( $form_data as $key => $option_value ) {
+			if ( ! isset( $options_defaults[ $key ] ) ) {
+				$form_data[ $key ] = $option_value;
+			} else {
+				$form_data[ $key ] = $options_defaults[ $key ];
+			}
+		}
+
+		// Gather existing options.
+		$options = Options::get_options();
+
+		// Loop through form data and update options. Keys must exist in $options.
+		foreach ( $form_data as $key => $option_value ) {
+			if ( ! isset( $options[ $key ] ) ) {
+				continue;
+			}
+			$options[ $key ] = $option_value;
+		}
+
+		// Update options.
+		Options::update_options( $options );
+
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Your options have been reset.', 'wp-ajaxify-comments' ),
+				'type'        => 'success',
+				'dismissable' => true,
+				'formData'    => $form_data,
+			)
+		);
 	}
 
 	/**
@@ -104,6 +206,44 @@ class Init {
 		} else {
 			add_action( 'admin_menu', array( $this, 'register_sub_menu' ) );
 		}
+
+		$options    = Options::get_options();
+		$is_debug   = (bool) $options['debug'];
+		$is_enabled = (bool) $options['enable'];
+		if ( $is_debug || ! $is_enabled ) {
+			add_action( 'after_plugin_row_' . plugin_basename( WPAC_FILE ), array( $this, 'after_plugin_row_notice' ), 10, 3 );
+		}
+	}
+
+	/**
+	 * Adds a notice to the plugin row in the plugins page.
+	 *
+	 * @access public
+	 * @see init
+	 * @param string $plugin_file Path to the plugin file.
+	 * @param array  $plugin_data An array of plugin data.
+	 * @param string $status      Status of the plugin.
+	 */
+	public function after_plugin_row_notice( $plugin_file, $plugin_data, $status ) {
+		$options    = Options::get_options();
+		$is_debug   = (bool) $options['debug'];
+		$is_enabled = (bool) $options['enable'];
+		if ( $is_debug ) {
+			$message = __( 'Ajaxify Comments is in debug mode. Please visit the settings to disable debug mode.', 'wp-ajaxify-comments' );
+		} else {
+			$message = __( 'Ajaxify Comments is disabled. Please visit the settings to enable Ajaxify Comments.', 'wp-ajaxify-comments' );
+		}
+		?>
+		<tr class="plugin-update-tr active">
+			<td colspan="4" class="plugin-update colspanchange">
+				<div class="notice inline notice-warning notice-alt">
+					<p>
+						<?php echo esc_html( $message ); ?>
+					</p>
+				</div>
+			</td>
+		</tr>
+		<?php
 	}
 
 	/**
@@ -149,7 +289,7 @@ class Init {
 	public function plugin_settings_link( $settings ) {
 		$setting_links = array(
 			'settings' => sprintf( '<a href="%s">%s</a>', esc_url( $this->get_url() ), esc_html__( 'Settings', 'wp-ajaxify-comments' ) ),
-			'docs' => sprintf( '<a href="%s">%s</a>', esc_url( $this->get_url() ), esc_html__( 'Docs', 'wp-ajaxify-comments' ) ),
+			'docs'     => sprintf( '<a href="%s">%s</a>', esc_url( $this->get_url() ), esc_html__( 'Docs', 'wp-ajaxify-comments' ) ),
 			'site'     => sprintf( '<a href="%s" style="color: #f60098;">%s</a>', esc_url( 'https://dlxplugins.com/plugins/ajaxify-comments/' ), esc_html__( 'Visit Site', 'wp-ajaxify-comments' ) ),
 		);
 		if ( ! is_array( $settings ) ) {

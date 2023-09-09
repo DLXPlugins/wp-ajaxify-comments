@@ -21472,7 +21472,8 @@ var SaveResetButtons = function SaveResetButtons(props) {
     reset = props.reset,
     errors = props.errors,
     isDirty = props.isDirty,
-    dirtyFields = props.dirtyFields;
+    dirtyFields = props.dirtyFields,
+    trigger = props.trigger;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     saving = _useState2[0],
@@ -21493,21 +21494,30 @@ var SaveResetButtons = function SaveResetButtons(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     savePromise = _useState10[0],
     setSavePromise = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState12 = _slicedToArray(_useState11, 2),
+    resetPromise = _useState12[0],
+    setResetPromise = _useState12[1];
+
+  /**
+   * Save the options by setting promise as state.
+   */
   var saveOptions = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var saveOptionsPromise, response;
+      var saveOptionsPromise;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            saveOptionsPromise = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wpac_save_options', formValues);
+            saveOptionsPromise = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wpac_save_options', {
+              formData: formValues
+            });
             setSavePromise(saveOptionsPromise);
             setSaving(true);
             _context.next = 5;
             return saveOptionsPromise;
           case 5:
-            response = _context.sent;
             setSaving(false);
-          case 7:
+          case 6:
           case "end":
             return _context.stop();
         }
@@ -21515,6 +21525,40 @@ var SaveResetButtons = function SaveResetButtons(props) {
     }));
     return function saveOptions() {
       return _ref2.apply(this, arguments);
+    };
+  }();
+
+  /**
+   * Reset the options by setting promise as state.
+   */
+  var resetOptions = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var resetOptionsPromise, resetResponse;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            resetOptionsPromise = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wpac_reset_options', {
+              formData: formValues
+            });
+            setResetPromise(resetOptionsPromise);
+            setResetting(true);
+            _context2.next = 5;
+            return resetOptionsPromise;
+          case 5:
+            resetResponse = _context2.sent;
+            reset(resetResponse.data.data.formData, {
+              keepErrors: false,
+              keepDirty: false
+            });
+            setResetting(false);
+          case 8:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
+    }));
+    return function resetOptions() {
+      return _ref3.apply(this, arguments);
     };
   }();
   var hasErrors = function hasErrors() {
@@ -21569,10 +21613,30 @@ var SaveResetButtons = function SaveResetButtons(props) {
     iconSize: "18",
     iconPosition: "right",
     disabled: saving,
-    onClick: function onClick(e) {
-      e.preventDefault();
-      saveOptions();
-    }
+    onClick: /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(e) {
+        var validationResult;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              e.preventDefault();
+              _context3.next = 3;
+              return trigger();
+            case 3:
+              validationResult = _context3.sent;
+              if (validationResult) {
+                saveOptions();
+              }
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3);
+      }));
+      return function (_x) {
+        return _ref4.apply(this, arguments);
+      };
+    }()
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ajaxify__btn ajaxify__btn-danger ajaxify__btn--icon-right', {
       'has-icon': resetting
@@ -21588,14 +21652,17 @@ var SaveResetButtons = function SaveResetButtons(props) {
     iconPosition: "right",
     disabled: saving || resetting,
     onClick: function onClick(e) {
-      setResetting(true);
-      onReset(e);
+      e.preventDefault();
+      resetOptions();
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "ajaxify-admin-notices-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_5__["default"], {
     ajaxOptions: savePromise,
     loadingMessage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving Options…', 'wp-ajaxify-comments')
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    ajaxOptions: resetPromise,
+    loadingMessage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Resetting to defaults…', 'wp-ajaxify-comments')
   }), hasErrors() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_3__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('There are form validation errors. Please correct them above.', 'wp-ajaxify-comments'),
     status: "error",
@@ -21684,6 +21751,10 @@ var SnackPop = function SnackPop(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     isSnackbarVisible = _useState8[0],
     setIsSnackbarVisible = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState10 = _slicedToArray(_useState9, 2),
+    snackbarTimeout = _useState10[0],
+    setSnackbarTimeout = _useState10[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var getPromise = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -21708,6 +21779,7 @@ var SnackPop = function SnackPop(props) {
     }();
     if (ajaxOptions instanceof Promise) {
       // Set state to busy.
+      setNotificationOptions(snackbarDefaults);
       setIsSnackbarVisible(true);
       setIsBusy(true);
       getPromise().then(function (response) {
@@ -21753,10 +21825,11 @@ var SnackPop = function SnackPop(props) {
           setNotificationOptions(snackbarDefaults);
           setIsModalVisible(true);
         } else {
-          setTimeout(function () {
+          clearTimeout(snackbarTimeout);
+          setSnackbarTimeout(setTimeout(function () {
             setIsSnackbarVisible(false);
             setNotificationOptions(snackbarDefaults);
-          }, 10000);
+          }, 6000));
         }
       })["catch"](function (error) {
         // Handle error

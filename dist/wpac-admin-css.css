@@ -3478,7 +3478,7 @@ html {
   position: relative; }
   #wpcontent #ajaxify-admin-header {
     margin: 0 !important;
-    padding: 0.6875rem 0.5rem 0.6875rem 1rem; }
+    padding: 0.6875rem 40px 0.6875rem 40px; }
     #wpcontent #ajaxify-admin-header #ajaxify-admin-header-content {
       display: grid;
       max-width: 69.5rem;
@@ -3547,8 +3547,8 @@ html {
   grid-template-columns: 2fr 2px 8fr;
   max-width: 69.5rem;
   padding: 1.5rem;
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 40px;
+  padding-right: 40px;
   margin: 0 auto; }
   .ajaxify-settings-tabs nav.ajaxify-admin-options a {
     position: relative;
@@ -3977,6 +3977,7 @@ h3.ajaxify-admin-content-subheading {
   margin-right: 10px;
   line-height: 1;
   height: unset;
+  outline: none;
   max-height: unset;
   vertical-align: middle; }
   .ajaxify-button:last-child {
@@ -4004,6 +4005,21 @@ h3.ajaxify-admin-content-subheading {
       color: #FFF;
       margin-right: 8px;
       transition: all 0.5s ease-in-out; }
+  .ajaxify-button.ajaxify__btn-info {
+    background: #fff;
+    color: #333;
+    border-color: #FFF; }
+    .ajaxify-button.ajaxify__btn-info:hover {
+      background: #f8f7fe;
+      color: #000;
+      border-color: #000; }
+      .ajaxify-button.ajaxify__btn-info:hover svg path {
+        fill: #000; }
+    .ajaxify-button.ajaxify__btn-info svg {
+      display: inline-block;
+      margin-right: 8px; }
+      .ajaxify-button.ajaxify__btn-info svg path {
+        fill: #000; }
 
 :root {
   --ajaxify-admin--color-notice--info: #e3f3f7;
@@ -4206,7 +4222,7 @@ h3.ajaxify-admin-content-subheading {
   position: fixed;
   top: 32px;
   right: 0;
-  z-index: 100;
+  z-index: 10000;
   background: #0D3172;
   color: #FFF; }
   .ajaxify-snackbar.components-snackbar .components-snackbar__content {
@@ -4234,6 +4250,20 @@ h3.ajaxify-admin-content-subheading {
   .ajaxify-snackbar.components-snackbar.ajaxify-snackbar-warning {
     background: #FFC107;
     color: #000; }
+
+/* Appearance Preview */
+.ajaxify-admin-appearance-preview-row {
+  margin-top: 15px;
+  position: sticky;
+  background: #873F49;
+  padding: 20px;
+  z-index: 1000; }
+
+.ajaxify-admin-appearance-preview-row__buttons {
+  display: flex;
+  justify-content: space-between; }
+  .ajaxify-admin-appearance-preview-row__buttons button {
+    border-color: #FFF; }
 
 
 /*# sourceMappingURL=wpac-admin-css.css.map*/

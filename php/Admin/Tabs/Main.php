@@ -14,8 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );
 }
 
-use DLXPlugins\WPAC\Functions as Functions;
-use DLXPlugins\WPAC\Options as Options;
+use DLXPlugins\WPAC\Functions;
+use DLXPlugins\WPAC\Options;
 
 /**
  * Output the main tab and content.
@@ -47,8 +47,9 @@ class Main {
 			'wpac-admin-home',
 			'wpacAdminHome',
 			array(
-				'getNonce'  => wp_create_nonce( 'wpac-admin-home-retrieve-options' ),
-				'saveNonce' => wp_create_nonce( 'wpac-admin-home-save-options' ),
+				'getNonce'   => wp_create_nonce( 'wpac-admin-home-retrieve-options' ),
+				'saveNonce'  => wp_create_nonce( 'wpac-admin-home-save-options' ),
+				'resetNonce' => wp_create_nonce( 'wpac-admin-home-reset-options' ),
 			)
 		);
 	}

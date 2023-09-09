@@ -38,79 +38,17 @@ class Options {
 		$current_options = self::get_options( $force );
 		foreach ( $options as $key => &$option ) {
 			switch ( $key ) {
-				case 'timer':
-					$timer = absint( $options[ $key ] );
-					if ( 0 === $timer ) {
-						$timer = 5;
-					}
-					$option = $timer;
-					break;
-				case 'min_comment_length':
-				case 'avatar_size':
-				case 'max_comment_length':
-					$option = absint( $options[ $key ] );
-					break;
-				case 'require_comment_length':
-				case 'require_comment_length_max':
-				case 'allow_delete_confirmation':
-				case 'allow_delete':
-				case 'delete_only':
-				case 'show_timer':
-				case 'allow_edit_notification':
-				case 'show_icons':
-				case 'show_stop_timer':
-				case 'allow_unlimited_editing':
-				case 'allow_front_end_character_limit':
-				case 'allow_front_end_editing':
-				case 'allow_front_end_moderation_menu':
-				case 'enable_avatars':
-				case 'enable_avatars_logged_in':
-				case 'enable_avatars_anonymous':
-				case 'enable_mailchimp':
-				case 'akismet_enabled':
-				case 'akismet_edit_comments_enabled':
-				case 'akismet_api_valid':
-				case 'akismet_active':
-				case 'akismet_logged_in_users_enabled':
-				case 'mentions_emails_enabled':
-				case 'mentions_checkbox_enabled':
-				case 'enable_gravatar_protection':
-				case 'slack_enabled':
-				case 'slack_moderation_enabled':
-				case 'slack_edit_comments_enabled':
-				case 'license_activated':
-				case 'turnstile_enabled':
-				case 'turnstile_logged_in_users_enabled':
-				case 'enable_comment_editing':
-				case 'enable_avatar_gravatar_fallback':
-				case 'enable_convertkit':
-				case 'convertkit_api_valid':
-				case 'enable_avatars_anonymous_remember':
-				case 'akismet_skip_pingbacks':
-				case 'akismet_skip_has_gravatar':
-				case 'disable_all_comments':
-				case 'disable_all_spam_protection':
-				case 'hide_comment_section':
+				case 'enable':
+				case 'debug':
+				case 'menuHelper':
+				case 'disableUrlUpdate':
+				case 'disableScrollToAnchor':
+				case 'useUncompressedScripts':
+				case 'placeScriptsInFooter':
+				case 'optimizeAjaxResponse':
+				case 'disableCache':
+				case 'enableByQuery':
 					$option = filter_var( $options[ $key ], FILTER_VALIDATE_BOOLEAN );
-					break;
-				case 'mentions_enabled':
-					$option = filter_var( $options[ $key ], FILTER_VALIDATE_BOOLEAN );
-					if ( true === $option ) {
-						Table_Mentions::create_table();
-					} else {
-						Table_Mentions::drop();
-					}
-					break;
-				case 'allow_comment_logging':
-					$option = filter_var( $options[ $key ], FILTER_VALIDATE_BOOLEAN );
-					if ( true === $option ) {
-						Table::create_table();
-					} else {
-						Table::drop();
-					}
-					break;
-				case 'slack_webhook_url':
-					$option = esc_url( $option );
 					break;
 				default:
 					if ( is_array( $option ) ) {
@@ -146,6 +84,13 @@ class Options {
 			$options = get_site_option( WPAC_OPTION_KEY, array() );
 		} else {
 			$options = get_option( WPAC_OPTION_KEY, array() );
+		}
+
+		// Set firsttimeinstall flag if options are empty.
+		if ( empty( $options ) ) {
+			$options['firstTimeInstall'] = true;
+		} else {
+			$options['firstTimeInstall'] = false;
 		}
 
 		$defaults      = self::get_defaults();

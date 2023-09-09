@@ -614,32 +614,6 @@ function wpac_is_login_page() {
 	return isset( $GLOBALS['pagenow'] ) && in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ) );
 }
 
-function wpac_add_settings_link( $links, $file ) {
-	static $this_plugin;
-	if ( ! $this_plugin ) {
-		$this_plugin = plugin_basename( __FILE__ );
-	}
-	if ( $file == $this_plugin ) {
-		$settings_link = '<a href="' . WPAC_SETTINGS_URL . '">Settings</a>';
-		$links[]       = $settings_link;
-	}
-	return $links;
-}
-add_filter( 'plugin_action_links', 'wpac_add_settings_link', 10, 2 );
-
-function wpac_admin_notice() {
-	if ( basename( $_SERVER['PHP_SELF'] ) == 'plugins.php' ) {
-		if ( ! wpac_get_option( 'enable' ) ) {
-			// Show error if plugin is not enabled
-			echo '<div class="error"><p><strong>' . sprintf( __( '%s is not enabled!', WPAC_DOMAIN ), WPAC_PLUGIN_NAME ) . '</strong> <a href="' . WPAC_SETTINGS_URL . '">' . __( 'Click here to configure the plugin.', WPAC_DOMAIN ) . '</a></p></div>';
-		} elseif ( wpac_get_option( 'debug' ) ) {
-			// Show info if plugin is running in debug mode
-			echo '<div class="updated"><p><strong>' . sprintf( __( '%s is running in debug mode!', WPAC_DOMAIN ), WPAC_PLUGIN_NAME ) . '</strong> <a href="' . WPAC_SETTINGS_URL . '">' . __( 'Click here to configure the plugin.', WPAC_DOMAIN ) . '</a></p></div>';
-		}
-	}
-}
-add_action( 'admin_notices', 'wpac_admin_notice' );
-
 function wpac_init() {
 	if ( isset( $_GET['WPACUnapproved'] ) ) {
 		header( 'X-WPAC-UNAPPROVED: ' . $_GET['WPACUnapproved'] );

@@ -11,8 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );
 }
 
-use DLXPlugins\WPAC\Functions as Functions;
-use DLXPlugins\WPAC\Options as Options;
+use DLXPlugins\WPAC\Functions;
+use DLXPlugins\WPAC\Options;
 
 /**
  * Output the appearance tab and content.
@@ -89,9 +89,10 @@ class Appearance {
 			'wpac-admin-appearance',
 			'wpacAdminAppearance',
 			array(
-				'getNonce'  => wp_create_nonce( 'wpac-admin-appearance-retrieve-options' ),
-				'saveNonce' => wp_create_nonce( 'wpac-admin-appearance-save-options' ),
-				'palette'   => Functions::get_theme_color_palette(),
+				'getNonce'   => wp_create_nonce( 'wpac-admin-appearance-retrieve-options' ),
+				'saveNonce'  => wp_create_nonce( 'wpac-admin-appearance-save-options' ),
+				'resetNonce' => wp_create_nonce( 'wpac-admin-appearance-reset-options' ),
+				'palette'    => Functions::get_theme_color_palette(),
 			)
 		);
 		remove_filter( 'ajaxify/comments/theme_color_palette', array( $this, 'theme_color_palette' ), 1, 1 );
