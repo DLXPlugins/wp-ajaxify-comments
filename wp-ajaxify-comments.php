@@ -39,11 +39,16 @@ if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {
 
 require_once 'functions.php';
 
+/**
+ * Run when the plugin is loaded.
+ */
 function plugins_loaded() {
 	if ( is_admin() ) {
 		$admin = new Admin\Init();
 		$admin->init();
 	}
+	$menu_helper = new Menu_Helper();
+	$menu_helper->run();
 
 	$options = Options::get_options();
 

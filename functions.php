@@ -430,7 +430,7 @@ function wpac_enqueue_scripts() {
 
 	$version  = Functions::get_plugin_version();
 	$options = Options::get_options();
-	$in_footer = (bool) $options['placeScriptsInFooter'];
+	$in_footer = (bool) $options['placeScriptsInFooter'] || (bool) $options['debug'];
 
 	if ( (bool) $options['debug'] || (bool) $options['useUncompressedScripts'] ) {
 		wp_enqueue_script(
