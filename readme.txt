@@ -1,7 +1,7 @@
 ﻿=== WP Ajaxify Comments ===
 Contributors: ronalfy
 Tags: AJAX, comments, comment, themes, theme
-Requires at least: 3.1.3
+Requires at least: 5.0
 Tested up to: 6.3.1
 Stable tag: 1.7.5
 License: GPLv2

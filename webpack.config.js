@@ -19,7 +19,7 @@ module.exports = ( env ) => {
 				'wpac-frontend-jquery-waypoints': './src/js/frontend/jquery.waypoints.js',
 				'wpac-frontend-jsuri': './src/js/frontend/jsuri.js',
 				'wpac-frontend-wp-ajaxify-comments': './src/js/frontend/wp-ajaxify-comments.js',
-
+				'wpac-frontend-menu-helper': [ './src/js/frontend/menu-helper.js', './src/scss/menu-helper.scss' ],
 			},
 			mode: env.mode,
 			devtool: 'production' === env.mode ? false : 'source-map',
@@ -31,7 +31,7 @@ module.exports = ( env ) => {
 			},
 			resolve: {
 				alias: {
-
+					Swal: path.resolve( __dirname, 'node_modules/sweetalert2/dist/sweetalert2.js' ),
 				},
 			},
 			module: {

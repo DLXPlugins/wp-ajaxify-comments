@@ -79,7 +79,7 @@ class Appearance {
 		);
 		wp_enqueue_script(
 			'wpac-jquery-block-ui',
-			Functions::get_plugin_url( 'js/jquery.blockUI.js' ),
+			Functions::get_plugin_url( 'dist/wpac-frontend-jquery-blockUI.js' ),
 			array( 'jquery' ),
 			Functions::get_plugin_version(),
 			true

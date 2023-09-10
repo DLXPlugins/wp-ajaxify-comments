@@ -50,21 +50,56 @@ function plugins_loaded() {
 	$menu_helper = new Menu_Helper();
 	$menu_helper->run();
 
+	// Load die handler. This should only affect if `HTTP_X_WPAC_REQUEST` server var is set.
+	add_filter( 'wp_die_handler', 'wpac_wp_die_handler' );
+}
+add_action( 'plugins_loaded', __NAMESPACE__ . '\plugins_loaded' );
+
+/**
+ * Run when WP has finished loading in.
+ *
+ * Queries should be initialized by now, so we can check for post variables.
+ */
+function wp() {
+	/**
+	 * Fires before the main WPAC actions/filters. Useful for hooking in early.
+	 */
+	do_action( 'dlxplugins/ajaxify/comments/wp' );
 	$options = Options::get_options();
 
+	$wpac_enable = sanitize_text_field( filter_input( INPUT_GET, 'wpac_enable', FILTER_DEFAULT ) );
+
+	/**
+	 * Filter whether to load the plugin's scripts.
+	 *
+	 * @param bool $can_force_script_override Whether to load the plugin's scripts. Pass `true` to force scripts to load.
+	 */
+	$can_force_script_override = apply_filters( 'dlxplugins/ajaxify/comments/force_load', false );
+
 	if ( ! is_admin() && ! wpac_is_login_page() ) {
-		if ( (bool) $options['enable'] || ( $options['enableByQuery'] && $_REQUEST['WPACEnable'] === wpac_get_secret() ) ) {
+		if ( (bool) $options['enable'] || ( $options['enableByQuery'] && wpac_get_secret() === $wpac_enable ) || $can_force_script_override ) {
+
+			/**
+			 * Filter whether to load the plugin's scripts.
+			 *
+			 * @since 2.0.0
+			 *
+			 * @param bool $can_load Whether to load the plugin's scripts. Pass `false` to prevent scripts from loading.
+			 */
+			$can_load = apply_filters( 'dlxplugins/ajaxify/comments/can_load', true );
+			if ( ! $can_load ) {
+				return;
+			}
 			add_filter( 'comments_array', 'wpac_comments_query_filter' );
 			add_action( 'wp_enqueue_scripts', 'wpac_initialize', 9 );
 			add_action( 'wp_enqueue_scripts', 'wpac_enqueue_scripts' );
 			add_filter( 'gettext', 'wpac_filter_gettext', 20, 3 );
-			add_filter( 'wp_die_handler', 'wpac_wp_die_handler' );
 			add_filter( 'option_page_comments', 'wpac_option_page_comments' );
 			add_filter( 'option_comments_per_page', 'wpac_option_comments_per_page' );
 		}
 	}
 }
-add_action( 'plugins_loaded', __NAMESPACE__ . '\plugins_loaded' );
+add_action( 'wp', __NAMESPACE__ . '\wp' );
 
 /* Setup plugin activation and redirection */
 register_activation_hook( __FILE__, __NAMESPACE__ . '\on_plugin_activation' );
@@ -77,7 +112,7 @@ add_action( 'admin_init', __NAMESPACE__ . '\activate_redirect' );
  */
 function can_redirect_on_activation() {
 	// Allow third-parties to prevent activation redirect.
-	$can_redirect = apply_filters( 'dlxplugins/ajaxify/comments/activation/redirect', true );
+	$can_redirect = apply_filters( 'dlxplugins/ajaxify/comments/activation/can_redirect', true );
 	if ( false === $can_redirect ) {
 		return false;
 	}
