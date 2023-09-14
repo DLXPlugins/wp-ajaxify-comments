@@ -19,12 +19,16 @@ class Menu_Helper {
 
 
 
+
 	/**
 	 * Class runner.
 	 */
 	public function run() {
 		// Add ajax action for checking if comments are open and there are comments.
 		add_action( 'wp_ajax_wpac_check_comment_status', array( $this, 'ajax_check_comment_status' ) );
+
+		// Add ajax action for saving the selectors.
+		add_action( 'wp_ajax_wpac_save_selectors', array( $this, 'ajax_save_selectors' ) );
 
 		// Bail if not on frontend.
 		if ( is_admin() ) {
@@ -62,10 +66,8 @@ class Menu_Helper {
 			if ( ! wp_verify_nonce( $nonce, 'wpac_enable_ajaxify_' . get_the_ID() ) ) {
 				return;
 			}
-		} else {
-			if ( ! wp_verify_nonce( $nonce, 'wpac_disable_ajaxify_' . get_the_ID() ) ) {
+		} elseif ( ! wp_verify_nonce( $nonce, 'wpac_disable_ajaxify_' . get_the_ID() ) ) {
 				return;
-			}
 		}
 
 		// We've made it this far, let's set the filter for force loading.
@@ -87,7 +89,7 @@ class Menu_Helper {
 	public function ajax_check_comment_status() {
 		// Get nonce.
 		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
-		
+
 		// Get the post ID.
 		$post_id = filter_input( INPUT_POST, 'postId', FILTER_VALIDATE_INT );
 
@@ -95,7 +97,7 @@ class Menu_Helper {
 		if ( ! wp_verify_nonce( $nonce, 'wpac_open_selector_helper_' . $post_id ) || ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error(
 				array(
-					'title' => __( 'Error', 'wp-ajaxify-comments' ),
+					'title'   => __( 'Error', 'wp-ajaxify-comments' ),
 					'message' => __( 'Could not verify nonce or permissions.', 'wp-ajaxify-comments' ),
 				)
 			);
@@ -107,7 +109,7 @@ class Menu_Helper {
 			if ( $is_jetpack_comments_enabled ) {
 				wp_send_json_error(
 					array(
-						'title' => __( 'Incompatible Plugin Found', 'wp-ajaxify-comments' ),
+						'title'   => __( 'Incompatible Plugin Found', 'wp-ajaxify-comments' ),
 						'message' => __( 'Jetpack Comments is enabled. Jetpack loads their comment form in an iframe. This prevents a lot of third-party comment integrations from working, including this plugin.', 'wp-ajaxify-comments' ),
 					)
 				);
@@ -119,7 +121,7 @@ class Menu_Helper {
 		if ( ! $post || ! comments_open( $post_id ) ) {
 			wp_send_json_error(
 				array(
-					'title' => __( 'Error: Comments are closed', 'wp-ajaxify-comments' ),
+					'title'   => __( 'Error: Comments are closed', 'wp-ajaxify-comments' ),
 					'message' => __( 'Comments are not open for this post. Please enable comments for this post and try Selector Helper again.', 'wp-ajaxify-comments' ),
 				)
 			);
@@ -135,15 +137,70 @@ class Menu_Helper {
 		if ( empty( $comments ) ) {
 			wp_send_json_error(
 				array(
-					'title' => __( 'Error: No comments found', 'wp-ajaxify-comments' ),
+					'title'   => __( 'Error: No comments found', 'wp-ajaxify-comments' ),
 					'message' => __( 'No comments were found for this post. Please add a comment and try Selector Helper again.', 'wp-ajaxify-comments' ),
 				)
 			);
 		}
 
-		wp_send_json_success( array(
-			'title' => __( 'Comment Tests Passed', 'wp-ajaxify-comments' ),
-			'message' => __( 'Your comment section looks good. Let\'s try to grab the selectors.', 'wp-ajaxify-comments' ) ) );
+		wp_send_json_success(
+			array(
+				'title'   => __( 'Comment Tests Passed', 'wp-ajaxify-comments' ),
+				'message' => __( 'Your comment section looks good. Let\'s try to grab the selectors.', 'wp-ajaxify-comments' ),
+			)
+		);
+	}
+
+	/**
+	 * Save the Ajax selectors.
+	 */
+	public function ajax_save_selectors() {
+		// Get nonce.
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+
+		// Security.
+		if ( ! wp_verify_nonce( $nonce, 'wpac_save_selector_helper' ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array(
+					'title'   => __( 'Error', 'wp-ajaxify-comments' ),
+					'message' => __( 'Could not verify nonce or permissions.', 'wp-ajaxify-comments' ),
+				)
+			);
+		}
+
+		// Get the selectors. Input is stringified object.
+		$comment_selectors = filter_input( INPUT_POST, 'selectors', FILTER_DEFAULT );
+		$comment_selectors = json_decode( $comment_selectors, true );
+
+		// Make sure we have selectors.
+		if ( empty( $comment_selectors ) ) {
+			wp_send_json_error(
+				array(
+					'title'   => __( 'Error', 'wp-ajaxify-comments' ),
+					'message' => __( 'No selectors were found. Please try again.', 'wp-ajaxify-comments' ),
+				)
+			);
+		}
+
+		// Get existing options.
+		$options = Options::get_options();
+		$options_to_merge = array();
+
+		// Loop through comment selectors.
+		foreach ( $comment_selectors as $index => $selector_arr ) {
+			$options_to_merge[ sanitize_text_field( $selector_arr['selectorOptionName'] ) ] = sanitize_text_field( $selector_arr['selector'] );
+		}
+
+		// Merge and update the options.
+		$options = wp_parse_args( $options_to_merge, $options );
+		Options::update_options( $options );
+
+		wp_send_json_success(
+			array(
+				'title'   => __( 'Selectors Have Been Saved', 'wp-ajaxify-comments' ),
+				'message' => __( 'You should be all set. Make sure Ajaxify Comments is enabled and leave a few test comments to be sure.', 'wp-ajaxify-comments' ),
+			)
+		);
 	}
 
 	/**
@@ -161,8 +218,9 @@ class Menu_Helper {
 			'wpac-menu-helper-js',
 			'wpacMenuHelper',
 			array(
-				'ajaxUrl' => esc_url( admin_url( 'admin-ajax.php' ) ),
-				'nonce'   => wp_create_nonce( 'wpac_open_selector_helper_' . get_the_ID() ),
+				'ajaxUrl'   => esc_url( admin_url( 'admin-ajax.php' ) ),
+				'nonce'     => wp_create_nonce( 'wpac_open_selector_helper_' . get_the_ID() ),
+				'saveNonce' => wp_create_nonce( 'wpac_save_selector_helper' ),
 			)
 		);
 		wp_set_script_translations( 'wpac-menu-helper-js', 'wp-ajaxify-comments' );
@@ -308,6 +366,24 @@ class Menu_Helper {
 				)
 			);
 		}
+
+		// Add shortcut to Ajaxify settings.
+		$admin_bar->add_node(
+			array(
+				'id'     => 'wpac-admin-settings',
+				'parent' => 'wpac-menu-helper',
+				'title'  => __( 'Visit Admin Settings', 'wp-ajaxify-comments' ),
+				'href'   => esc_url( Functions::get_settings_url() ),
+			)
+		);
+		$admin_bar->add_node(
+			array(
+				'id'     => 'wpac-admin-selector-settings',
+				'parent' => 'wpac-menu-helper',
+				'title'  => __( 'Visit Selector Settings', 'wp-ajaxify-comments' ),
+				'href'   => esc_url( Functions::get_settings_url( 'selectors' ) ),
+			)
+		);
 	}
 
 	/**
@@ -332,9 +408,9 @@ class Menu_Helper {
 		// Begin admin menu.
 		$admin_bar->add_node(
 			array(
-				'id'     => 'wpac-menu-helper-back-to-post',
-				'title'  => __( 'Back to Post', 'wp-ajaxify-comments' ),
-				'href'   => esc_url( $permalink ),
+				'id'    => 'wpac-menu-helper-back-to-post',
+				'title' => __( 'Back to Post', 'wp-ajaxify-comments' ),
+				'href'  => esc_url( $permalink ),
 			)
 		);
 	}
