@@ -725,7 +725,7 @@ h3.ajaxify-admin-content-subheading {
 	}
 
 	&.ajaxify__btn-secondary {
-		background: $marsala;
+		background: $dark_blue;
 		color: #ffffff;
 		border-color: #111;
 
@@ -735,12 +735,12 @@ h3.ajaxify-admin-content-subheading {
 			border-color: lighten(#111, 10%);
 		}
 
-		&.ajaxify-button-heart:hover svg {
+		&.ajaxify-button-heart svg {
 			color: pink;
 			transition: all 0.5s ease-in-out;
 		}
 
-		&.ajaxify-button-zap:hover svg {
+		&.ajaxify-button-zap svg {
 			color: yellow;
 			transition: all 0.5s ease-in-out;
 		}
@@ -836,8 +836,8 @@ h3.ajaxify-admin-content-subheading {
 	svg {
 		display: flex;
 		align-items: center;
-		width: 20px;
-		height: 20px;
+		width: 24px;
+		height: 24px;
 	}
 
 	&.ajaxify-admin__notice-type--error:not(.ajaxify-admin__notice-appearance--inline) {
@@ -892,7 +892,16 @@ h3.ajaxify-admin-content-subheading {
 			border-left-color: var(--ajaxify-admin--color-notice--info-alt);
 		}
 
-		svg path {
+		.ajaxify-admin__notice-icon {
+			svg:not(.lucide) path {
+				fill: var(--ajaxify-admin--color-notice--info-alt);
+			}
+			svg.lucide {
+				color: var(--ajaxify-admin--color-notice--info-alt);
+			}
+		}
+
+		svg:not(.lucide) path {
 			fill: var(--ajaxify-admin--color-notice--info-alt);
 		}
 	}

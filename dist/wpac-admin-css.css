@@ -4093,7 +4093,7 @@ h3.ajaxify-admin-content-subheading:after {
   border-color: #006400;
 }
 .ajaxify-button.ajaxify__btn-secondary {
-  background: #873F49;
+  background: #0B1C47;
   color: #ffffff;
   border-color: #111;
 }
@@ -4102,11 +4102,11 @@ h3.ajaxify-admin-content-subheading:after {
   color: #ffffff;
   border-color: #2b2b2b;
 }
-.ajaxify-button.ajaxify__btn-secondary.ajaxify-button-heart:hover svg {
+.ajaxify-button.ajaxify__btn-secondary.ajaxify-button-heart svg {
   color: pink;
   transition: all 0.5s ease-in-out;
 }
-.ajaxify-button.ajaxify__btn-secondary.ajaxify-button-zap:hover svg {
+.ajaxify-button.ajaxify__btn-secondary.ajaxify-button-zap svg {
   color: yellow;
   transition: all 0.5s ease-in-out;
 }
@@ -4185,8 +4185,8 @@ h3.ajaxify-admin-content-subheading:after {
 .ajaxify-admin__notice svg {
   display: flex;
   align-items: center;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 .ajaxify-admin__notice.ajaxify-admin__notice-type--error:not(.ajaxify-admin__notice-appearance--inline) {
   background-color: var(--ajaxify-admin--color-notice--error);
@@ -4228,7 +4228,13 @@ h3.ajaxify-admin-content-subheading:after {
 .ajaxify-admin__notice.ajaxify-admin__notice-type--info .components-notice {
   border-left-color: var(--ajaxify-admin--color-notice--info-alt);
 }
-.ajaxify-admin__notice.ajaxify-admin__notice-type--info svg path {
+.ajaxify-admin__notice.ajaxify-admin__notice-type--info .ajaxify-admin__notice-icon svg:not(.lucide) path {
+  fill: var(--ajaxify-admin--color-notice--info-alt);
+}
+.ajaxify-admin__notice.ajaxify-admin__notice-type--info .ajaxify-admin__notice-icon svg.lucide {
+  color: var(--ajaxify-admin--color-notice--info-alt);
+}
+.ajaxify-admin__notice.ajaxify-admin__notice-type--info svg:not(.lucide) path {
   fill: var(--ajaxify-admin--color-notice--info-alt);
 }
 .ajaxify-admin__notice.ajaxify-admin__notice-type--warning {

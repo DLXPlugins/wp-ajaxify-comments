@@ -7125,6 +7125,246 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   };
+
+  // Open comments.
+  var menuOpenCommentsButton = document.getElementById('wp-admin-bar-wpac-open-comments');
+  if (null !== menuOpenCommentsButton) {
+    menuOpenCommentsButton.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // Get URL Params (nonce, action).
+      var urlParams = new URLSearchParams(e.target.href);
+      var nonce = urlParams.get('nonce');
+      var postId = urlParams.get('post_id');
+      var isConfirm = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+        titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Open Comments for This Post?', 'wp-ajaxify-comments'),
+        text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comments are closed. Would you like to open them?', 'wp-ajaxify-comments'),
+        icon: 'success',
+        confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Open Comments', 'wp-ajaxify-comments'),
+        allowOutsideClick: false,
+        showCloseButton: true,
+        showConfirmButton: true,
+        iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-31.5 0-61.7-4.6-89.6-13.1L16 480 56.9 370.8C21.3 335.1 0 289.6 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208zM304.8 144l-29.1 29.1L323 220.4l29.1-29.1L304.8 144zm-51.7 51.7l-85.2 85.2L160 336.1l55.3-7.9L300.4 243l-47.3-47.3z"/></svg>'
+      });
+      isConfirm.then(function (result) {
+        if (result !== null && result !== void 0 && result.isConfirmed) {
+          // Fire ajax request.
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+            titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Opening Comments', 'wp-ajaxify-comments'),
+            text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Opening the comments.', 'wp-ajaxify-comments'),
+            icon: 'success',
+            iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-31.5 0-61.7-4.6-89.6-13.1L16 480 56.9 370.8C21.3 335.1 0 289.6 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208zM304.8 144l-29.1 29.1L323 220.4l29.1-29.1L304.8 144zm-51.7 51.7l-85.2 85.2L160 336.1l55.3-7.9L300.4 243l-47.3-47.3z"/></svg>',
+            allowOutsideClick: false,
+            showCloseButton: true,
+            didOpen: function didOpen() {
+              sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().showLoading();
+              var doAjax = /*#__PURE__*/function () {
+                var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+                  var response;
+                  return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+                    while (1) switch (_context3.prev = _context3.next) {
+                      case 0:
+                        _context3.next = 2;
+                        return fetch(wpacMenuHelper.ajaxUrl, {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                          },
+                          body: 'action=wpac_shortcut_open_comments&nonce=' + nonce + '&post_id=' + postId
+                        })["catch"](function (error) {
+                          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().showValidationMessage("Request failed: ".concat(error));
+                        });
+                      case 2:
+                        response = _context3.sent;
+                        return _context3.abrupt("return", response);
+                      case 4:
+                      case "end":
+                        return _context3.stop();
+                    }
+                  }, _callee3);
+                }));
+                return function doAjax() {
+                  return _ref3.apply(this, arguments);
+                };
+              }();
+              var ajaxPromise = doAjax();
+              ajaxPromise.then(function (response) {
+                // Show success message.
+                if (response.ok) {
+                  response.json().then(function (data) {
+                    var dataResponse = data.data;
+                    if (data.success) {
+                      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        titleText: dataResponse.title,
+                        text: dataResponse.message,
+                        icon: 'success',
+                        allowOutsideClick: false,
+                        showCloseButton: true,
+                        showCancelButton: true,
+                        showConfirmButton: true,
+                        timer: 4500,
+                        timerProgressBar: true,
+                        cancelButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cancel', 'wp-ajaxify-comments'),
+                        confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Refresh Post', 'wp-ajaxify-comments'),
+                        iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM369 193L241 321c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 159c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>'
+                      }).then(function (swalResult) {
+                        var _Swal$DismissReason;
+                        if (swalResult !== null && swalResult !== void 0 && swalResult.isConfirmed || (swalResult === null || swalResult === void 0 ? void 0 : swalResult.dismiss) === ((sweetalert2__WEBPACK_IMPORTED_MODULE_0___default()) === null || (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default()) === void 0 || (_Swal$DismissReason = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().DismissReason)) === null || _Swal$DismissReason === void 0 ? void 0 : _Swal$DismissReason.timer)) {
+                          window.location.reload();
+                        }
+                      });
+                    } else {
+                      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        titleText: dataResponse.title,
+                        text: dataResponse.message,
+                        icon: 'error',
+                        confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('OK', 'wp-ajaxify-comments'),
+                        allowOutsideClick: false,
+                        showCloseButton: true,
+                        iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>'
+                      });
+                    }
+                  });
+                } else {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('An unknown error occurred.', 'wp-ajaxify-comments'),
+                    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Something unexpected happened. Please try again.', 'wp-ajaxify-comments'),
+                    icon: 'error',
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                    cancelButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close', 'wp-ajaxify-comments'),
+                    allowOutsideClick: true,
+                    showCloseButton: true,
+                    iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><path fill="currentColor" d="M144 480H0V336c0-62.7 40.1-116 96-135.8V192c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96v36c55.2 14.2 96 64.3 96 124V480H512 144zM344 160H296v24V296v24h48V296 184 160zM296 352v48h48V352H296z"/></svg>'
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    });
+  }
+
+  // Open comments.
+  var menuCloseCommentsButton = document.getElementById('wp-admin-bar-wpac-close-comments');
+  if (null !== menuCloseCommentsButton) {
+    menuCloseCommentsButton.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // Get URL Params (nonce, action).
+      var urlParams = new URLSearchParams(e.target.href);
+      var nonce = urlParams.get('nonce');
+      var postId = urlParams.get('post_id');
+      var isConfirm = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+        titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close Comments for This Post?', 'wp-ajaxify-comments'),
+        text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comments are open. Would you like to close them?', 'wp-ajaxify-comments'),
+        icon: 'success',
+        confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close Comments', 'wp-ajaxify-comments'),
+        allowOutsideClick: false,
+        showCloseButton: true,
+        showConfirmButton: true,
+        iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM175 159c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>'
+      });
+      isConfirm.then(function (result) {
+        if (result !== null && result !== void 0 && result.isConfirmed) {
+          // Fire ajax request.
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+            titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Closing Comments', 'wp-ajaxify-comments'),
+            text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Closing the comments.', 'wp-ajaxify-comments'),
+            icon: 'success',
+            iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM175 159c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>',
+            allowOutsideClick: false,
+            showCloseButton: true,
+            didOpen: function didOpen() {
+              sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().showLoading();
+              var doAjax = /*#__PURE__*/function () {
+                var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+                  var response;
+                  return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+                    while (1) switch (_context4.prev = _context4.next) {
+                      case 0:
+                        _context4.next = 2;
+                        return fetch(wpacMenuHelper.ajaxUrl, {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                          },
+                          body: 'action=wpac_shortcut_close_comments&nonce=' + nonce + '&post_id=' + postId
+                        })["catch"](function (error) {
+                          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().showValidationMessage("Request failed: ".concat(error));
+                        });
+                      case 2:
+                        response = _context4.sent;
+                        return _context4.abrupt("return", response);
+                      case 4:
+                      case "end":
+                        return _context4.stop();
+                    }
+                  }, _callee4);
+                }));
+                return function doAjax() {
+                  return _ref4.apply(this, arguments);
+                };
+              }();
+              var ajaxPromise = doAjax();
+              ajaxPromise.then(function (response) {
+                // Show success message.
+                if (response.ok) {
+                  response.json().then(function (data) {
+                    var dataResponse = data.data;
+                    if (data.success) {
+                      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        titleText: dataResponse.title,
+                        text: dataResponse.message,
+                        icon: 'success',
+                        allowOutsideClick: false,
+                        showCloseButton: true,
+                        showCancelButton: true,
+                        showConfirmButton: true,
+                        timer: 4500,
+                        timerProgressBar: true,
+                        cancelButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cancel', 'wp-ajaxify-comments'),
+                        confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Refresh Post', 'wp-ajaxify-comments'),
+                        iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM369 193L241 321c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 159c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>'
+                      }).then(function (swalResult) {
+                        var _Swal$DismissReason2;
+                        if (swalResult !== null && swalResult !== void 0 && swalResult.isConfirmed || (swalResult === null || swalResult === void 0 ? void 0 : swalResult.dismiss) === ((sweetalert2__WEBPACK_IMPORTED_MODULE_0___default()) === null || (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default()) === void 0 || (_Swal$DismissReason2 = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().DismissReason)) === null || _Swal$DismissReason2 === void 0 ? void 0 : _Swal$DismissReason2.timer)) {
+                          window.location.reload();
+                        }
+                      });
+                    } else {
+                      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        titleText: dataResponse.title,
+                        text: dataResponse.message,
+                        icon: 'error',
+                        confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('OK', 'wp-ajaxify-comments'),
+                        allowOutsideClick: false,
+                        showCloseButton: true,
+                        iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>'
+                      });
+                    }
+                  });
+                } else {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('An unknown error occurred.', 'wp-ajaxify-comments'),
+                    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Something unexpected happened. Please try again.', 'wp-ajaxify-comments'),
+                    icon: 'error',
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                    cancelButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close', 'wp-ajaxify-comments'),
+                    allowOutsideClick: true,
+                    showCloseButton: true,
+                    iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><path fill="currentColor" d="M144 480H0V336c0-62.7 40.1-116 96-135.8V192c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96v36c55.2 14.2 96 64.3 96 124V480H512 144zM344 160H296v24V296v24h48V296 184 160zM296 352v48h48V352H296z"/></svg>'
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    });
+  }
 });
 })();
 

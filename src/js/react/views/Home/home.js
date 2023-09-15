@@ -14,7 +14,7 @@ import {
 	SelectControl,
 	RadioControl,
 } from '@wordpress/components';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Info, FileCode2 } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
@@ -121,8 +121,55 @@ const Interface = ( props ) => {
 	const onSubmit = ( formData ) => {
 	};
 
+	const getFirstTimeInstallNotification = () => {
+		// See if first time install by checking `first_time_install` query var.
+		// Get URL.
+		const url = new URL( window.location.href );
+		// Get query vars.
+		const queryVars = new URLSearchParams( url.search );
+		// Get first time install query var.
+		const firstTimeInstall = queryVars.get( 'first_time_install' );
+		// If first time install, show notification.
+		if ( ! firstTimeInstall ) {
+			return null;
+		}
+		return (
+			<div className="ajaxify-admin-panel-area">
+				<h2>
+					{ __( 'Welcome to Ajaxify Comments', 'wp-ajaxify-comments' ) }
+				</h2>
+				<p className="description">
+					{ __(
+						'Let\'s help you get started.',
+						'wp-ajaxify-comments',
+					) }
+				</p>
+				<Notice
+					message={ __(
+						'When first activated, Ajaxify Comments is not enabled by default. This is so you can set up any necessary selectors and set the appearance before enabling the Ajax functionality. To get started, please start with setting the selectors.', 'wp-ajaxify-comments' ) }
+					status="info"
+					politeness="assertive"
+					inline={ false }
+					icon={ () => <Info /> }
+				>
+					<div className="ajaxify-admin-component-row ajaxify-admin-component-row-button" style={ { marginTop: '15px' } }>
+						<Button
+							href={ wpacAdminHome.selectorsUrl }
+							className="ajaxify-button ajaxify__btn-secondary"
+							icon={ <FileCode2 style={ { color: 'currentColor' } } /> }
+						>
+							{ __( 'Set Selectors', 'wp-ajaxify-comments' ) }
+						</Button>
+					</div>
+
+				</Notice>
+			</div>
+		);
+	};
+
 	return (
 		<>
+			{ getFirstTimeInstallNotification() }
 			<div className="ajaxify-admin-panel-area">
 				{ getCommentEditingHeader() }
 				<form onSubmit={ handleSubmit( onSubmit ) }>

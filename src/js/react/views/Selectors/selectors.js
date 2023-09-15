@@ -13,7 +13,7 @@ import {
 	SelectControl,
 	RadioControl,
 } from '@wordpress/components';
-import { AlertCircle, Loader2, ClipboardCheck } from 'lucide-react';
+import { AlertCircle, Loader2, ClipboardCheck, Info } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
@@ -117,6 +117,41 @@ const Interface = ( props ) => {
 	const onSubmit = ( formData ) => {
 	};
 
+	const getFirstTimeInstallNotification = () => {
+		// See if first time install by checking `first_time_install` query var.
+		// Get URL.
+		const url = new URL( window.location.href );
+		// Get query vars.
+		const queryVars = new URLSearchParams( url.search );
+		// Get first time install query var.
+		const firstTimeInstall = queryVars.get( 'first_time_install' );
+		// If first time install, show notification.
+		if ( ! firstTimeInstall ) {
+			return null;
+		}
+		return (
+			<div className="ajaxify-admin-panel-area">
+				<h2>
+					{ __( 'Welcome to Ajaxify Comments Selectors', 'wp-ajaxify-comments' ) }
+				</h2>
+				<p className="description">
+					{ __(
+						'Selectors help Ajaxify Comments know about your comment section structure.',
+						'wp-ajaxify-comments',
+					) }
+				</p>
+				<Notice
+					message={ __(
+						'In order to post comments via Ajax, Ajaxify Comments needs to know about the structure of your comments section. Finding selectors is hard, so please enable Menu Helper and visit a post with comments. You will find all the settings you need under the Ajaxify menu item in the admin toolbar.', 'wp-ajaxify-comments' ) }
+					status="info"
+					politeness="assertive"
+					inline={ false }
+					icon={ () => <Info /> }
+				/>
+			</div>
+		);
+	};
+
 	const getCommentEditingHeader = () => {
 		return (
 			<>
@@ -135,6 +170,7 @@ const Interface = ( props ) => {
 
 	return (
 		<>
+			{ getFirstTimeInstallNotification() }
 			<div className="ajaxify-admin-panel-area">
 				{ getCommentEditingHeader() }
 				<form onSubmit={ handleSubmit( onSubmit ) }>

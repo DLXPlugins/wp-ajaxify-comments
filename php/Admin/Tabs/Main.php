@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Output main WPAC tab.
  *
@@ -6,6 +7,7 @@
  */
 
 namespace DLXPlugins\WPAC\Admin\Tabs;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );
 }
@@ -21,6 +23,7 @@ use DLXPlugins\WPAC\Options;
  * Output the main tab and content.
  */
 class Main {
+
 	/**
 	 * Constructor.
 	 */
@@ -47,9 +50,10 @@ class Main {
 			'wpac-admin-home',
 			'wpacAdminHome',
 			array(
-				'getNonce'   => wp_create_nonce( 'wpac-admin-home-retrieve-options' ),
-				'saveNonce'  => wp_create_nonce( 'wpac-admin-home-save-options' ),
-				'resetNonce' => wp_create_nonce( 'wpac-admin-home-reset-options' ),
+				'getNonce'     => wp_create_nonce( 'wpac-admin-home-retrieve-options' ),
+				'saveNonce'    => wp_create_nonce( 'wpac-admin-home-save-options' ),
+				'resetNonce'   => wp_create_nonce( 'wpac-admin-home-reset-options' ),
+				'selectorsUrl' => esc_url( add_query_arg( array( 'first_time_install' => '1' ), Functions::get_settings_url( 'selectors' ) ) ),
 			)
 		);
 	}
@@ -117,7 +121,7 @@ class Main {
 		if ( 'home' === $tab ) {
 			if ( empty( $sub_tab ) || 'home' === $sub_tab ) {
 				?>
-					<div id="wpac-tab-home"></div>
+				<div id="wpac-tab-home"></div>
 				<?php
 			}
 		}
