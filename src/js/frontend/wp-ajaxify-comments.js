@@ -1,4 +1,3 @@
-if (!window["WPAC"]) var WPAC = {};
 WPAC._Options = WPAC._Options || {}; 
 
 WPAC._BodyRegex = new RegExp("<body[^>]*>((.|\n|\r)*)</body>", "i");
@@ -40,7 +39,7 @@ WPAC._ShowMessage = function (message, type) {
 		timeout:(type == "loading") ? 0 : WPAC._Options.popupTimeout,
 		centerY: false,
 		centerX: true,
-		showOverlay: (type == "loading"),
+		showOverlay: (type == "loading" || type == "loadingPreview" ),
 		css: { 
 			width: WPAC._Options.popupWidth + "%",
 			left: ((100-WPAC._Options.popupWidth)/2) + "%",
@@ -54,7 +53,7 @@ WPAC._ShowMessage = function (message, type) {
 			opacity: WPAC._Options.popupOpacity/100, 
 			color: textColor,
 			textAlign: WPAC._Options.popupTextAlign,
-			cursor: (type == "loading") ? "wait" : "default",
+			cursor: (type == "loading" || type == "loadingPreview" ) ? "wait" : "default",
 			"font-size": WPAC._Options.popupTextFontSize
 		},
 		overlayCSS:  { 
@@ -164,6 +163,13 @@ WPAC._ReplaceComments = function(data, commentUrl, useFallbackUrl, formData, for
 		WPAC._LoadFallbackUrl(fallbackUrl);
 		return false;
 	}
+	// If length is greater than one, there may be greedy selectors.
+	if (oldCommentsContainer.length > 1) {
+		WPAC._Debug("error", "Comment form on requested page found multiple times (selector: '%s')", oldCommentsContainer);
+		oldCommentsContainer = oldCommentsContainer.filter(function() {
+			return jQuery(this).children().length > 0 && !jQuery(this).is(":header");
+		});
+	}
 	
 	var extractedBody = WPAC._ExtractBody(data);
 	if (extractedBody === false) {
@@ -180,6 +186,17 @@ WPAC._ReplaceComments = function(data, commentUrl, useFallbackUrl, formData, for
 		WPAC._LoadFallbackUrl(fallbackUrl);
 		return false;
 	}
+	if (newCommentsContainer.length > 1) {
+		WPAC._Debug("error", "Comment form on requested page found multiple times (selector: '%s')", newCommentsContainer);
+		console.log( newCommentsContainer );
+
+		// Find the first comment container that has children and is not a heading.
+		newCommentsContainer = newCommentsContainer.filter(function() {
+			return jQuery(this).children().length > 0 && !jQuery(this).is(":header");
+		});
+	}
+
+	
 
 	beforeUpdateComments(extractedBody, commentUrl);
 
@@ -428,6 +445,17 @@ WPAC.AttachForm = function(options) {
 				// Show success message
 				WPAC._ShowMessage(unapproved == '1' ? WPAC._Options.textPostedUnapproved : WPAC._Options.textPosted, "success");
 
+				/**
+				 * Sunshine Confetti Plugin integration.
+				 *
+				 * @since 3.0.0
+				 *
+				 * @see https://wordpress.org/plugins/confetti/
+				 */
+				if ( typeof window.wps_launch_confetti_cannon !== 'undefined' ) {
+					window.wps_launch_confetti_cannon();
+				}
+
 				// Replace comments (and return if replacing failed)
 				if (!WPAC._ReplaceComments(data, commentUrl, false, {}, "", options.selectorCommentsContainer, options.selectorCommentForm, options.selectorRespondContainer, 
 					options.beforeSelectElements, options.beforeUpdateComments, options.afterUpdateComments)) return;
@@ -520,6 +548,24 @@ WPAC.Init = function() {
 	} else {
 		WPAC.AttachForm();
 	}
+
+	// Set up loading preview handlers.
+	jQuery( '#wp-admin-bar-wpac-menu-helper-preview-overlay-loading a' ).on( 'click', function( e ) {
+		e.preventDefault();
+		WPAC._ShowMessage( "This is the loading preview...", "loadingPreview" );
+	} );
+
+	// Set up success preview handlers.
+	jQuery( '#wp-admin-bar-wpac-menu-helper-preview-overlay-success a' ).on( 'click', function( e ) {
+		e.preventDefault();
+		WPAC._ShowMessage( "This is a success message", "success" );
+	} );
+
+	// Set up error preview handlers.
+	jQuery( '#wp-admin-bar-wpac-menu-helper-preview-overlay-error a' ).on( 'click', function( e ) {
+		e.preventDefault();
+		WPAC._ShowMessage( "This is an error message", "error" );
+	} );
 	
 	// Set up idle timer
 	if (WPAC._Options.commentsEnabled && WPAC._Options.autoUpdateIdleTime > 0) {
