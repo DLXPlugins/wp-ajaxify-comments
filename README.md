@@ -2,6 +2,8 @@
 
 > Check out <a href="https://github.com/DLXPlugins/wp-ajaxify-comments/releases/tag/2.0.0-beta1">Ajaxify Comments 2.0 Beta 1</a>
 
+> Spin up [a test site of the plugin](https://app.instawp.io/launch?t=ajaxify-comments&d=v2).
+
 Ajaxify Comments allows you to post comments without a page reload. As a bonus, error messages that normally require a page reload for the user are also inline.
 
 ![ajaxify-comment](https://github.com/DLXPlugins/wp-ajaxify-comments/assets/636521/e011deba-3c3c-447f-8c04-4a2c350f694f)
