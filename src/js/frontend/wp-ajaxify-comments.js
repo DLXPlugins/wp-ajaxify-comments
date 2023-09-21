@@ -98,7 +98,20 @@ WPAC._DebugSelector = function(elementType, selector, optional) {
 }
 
 WPAC._AddQueryParamStringToUrl = function(url, param, value) {
-	return new Uri(url).replaceQueryParam(param, value).toString();
+	// Get URL object.
+	const urlObject = new URL(url);
+
+	// Get query params.
+	const queryParams = urlObject.searchParams;
+
+	// Set query param.
+	queryParams.set(param, value);
+
+	// Set query params.
+	urlObject.search = queryParams.toString();
+
+	// Return URL.
+	return urlObject.toString();
 }
 
 WPAC._LoadFallbackUrl = function(fallbackUrl) {
@@ -279,8 +292,15 @@ WPAC._TestCrossDomainScripting = function(url) {
 }
 
 WPAC._TestFallbackUrl = function(url) {
-	var url = new Uri(location.href); 
-	return (url.getQueryParamValue("WPACFallback") && url.getQueryParamValue("WPACRandom"));
+	// Get URL object.
+	const urlObject = new URL(url);
+
+	// Get query params.
+	const queryParams = urlObject.searchParams;
+	const fallbackParam = queryParams.get('WPACFallback');
+	const randomParam = queryParams.get('WPACRandom');
+
+	return (fallbackParam && randomParam);
 }
 
 WPAC.AttachForm = function(options) {

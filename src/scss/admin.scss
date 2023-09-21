@@ -695,7 +695,14 @@ h3.ajaxify-admin-content-subheading {
 		}
 	}
 }
-
+.ajaxify-info-text {
+	font-size: 16px;
+	line-height: 1.3;
+}
+.ajaxify-admin-panel-area > h2 ~ p {
+	font-size: 16px;
+	line-height: 1.3;
+}
 .ajaxify-button {
 	background: #fff;
 	color: #017e01;
