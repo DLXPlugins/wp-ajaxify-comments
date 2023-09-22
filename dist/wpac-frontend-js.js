@@ -2123,7 +2123,12 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
     WPAC._LoadFallbackUrl(fallbackUrl);
     return false;
   }
-  beforeSelectElements(extractedBody);
+
+  // Call before select elements.
+  if (beforeSelectElements !== '') {
+    var beforeSelect = new Function('extractedBody', beforeSelectElements);
+    beforeSelect(extractedBody);
+  }
   var newCommentsContainer = extractedBody.find(selectorCommentsContainer);
   if (!newCommentsContainer.length) {
     WPAC._Debug("error", "Comment container on requested page not found (selector: '%s')", selectorCommentsContainer);
@@ -2139,7 +2144,12 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
       return jQuery(this).children().length > 0 && !jQuery(this).is(":header");
     });
   }
-  beforeUpdateComments(extractedBody, commentUrl);
+
+  // Call before update comments.
+  if ('' !== beforeUpdateComments) {
+    var beforeComments = new Function('extractedBody', 'commentUrl', beforeUpdateComments);
+    beforeComments(extractedBody, commentUrl);
+  }
 
   // Update title
   var extractedTitle = WPAC._ExtractTitle(data);
@@ -2198,7 +2208,13 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
       if (formElement) formElement.focus();
     }
   }
-  afterUpdateComments(extractedBody, commentUrl);
+
+  // Call after update comments.
+  if ('' !== afterUpdateComments) {
+    console.log(afterUpdateComments);
+    var updateComments = new Function('extractedBody', 'commentUrl', afterUpdateComments);
+    updateComments(extractedBody, commentUrl);
+  }
   return true;
 };
 WPAC._TestCrossDomainScripting = function (url) {
@@ -2221,13 +2237,13 @@ WPAC.AttachForm = function (options) {
   options = jQuery.extend({
     selectorCommentForm: WPAC._Options.selectorCommentForm,
     selectorCommentPagingLinks: WPAC._Options.selectorCommentPagingLinks,
-    beforeSelectElements: WPAC._Callbacks.beforeSelectElements,
-    beforeSubmitComment: WPAC._Callbacks.beforeSubmitComment,
-    afterPostComment: WPAC._Callbacks.afterPostComment,
+    beforeSelectElements: WPACCallbacks.beforeSelectElements,
+    beforeSubmitComment: WPACCallbacks.beforeSubmitComment,
+    afterPostComment: WPACCallbacks.afterPostComment,
     selectorCommentsContainer: WPAC._Options.selectorCommentsContainer,
     selectorRespondContainer: WPAC._Options.selectorRespondContainer,
-    beforeUpdateComments: WPAC._Callbacks.beforeUpdateComments,
-    afterUpdateComments: WPAC._Callbacks.afterUpdateComments,
+    beforeUpdateComments: WPACCallbacks.beforeUpdateComments,
+    afterUpdateComments: WPACCallbacks.afterUpdateComments,
     scrollToAnchor: !WPAC._Options.disableScrollToAnchor,
     updateUrl: !WPAC._Options.disableUrlUpdate,
     selectorCommentLinks: WPAC._Options.selectorCommentLinks
@@ -2240,7 +2256,12 @@ WPAC.AttachForm = function (options) {
     WPAC._DebugSelector("comment paging links", options.selectorCommentPagingLinks, true);
     WPAC._DebugSelector("comment links", options.selectorCommentLinks, true);
   }
-  options.beforeSelectElements(jQuery(document));
+
+  // Try before submit comment. Using new function is not ideal here, but safer than exec.
+  if ('' !== WPACCallbacks.beforeSelectElements) {
+    var beforeSelect = new Function('dom', WPACCallbacks.beforeSelectElements);
+    beforeSelect(jQuery(document));
+  }
 
   // Get addHandler method
   if (jQuery(document).on) {
@@ -2295,7 +2316,12 @@ WPAC.AttachForm = function (options) {
   // Handle form submit
   var formSubmitHandler = function formSubmitHandler(event) {
     var form = jQuery(this);
-    options.beforeSubmitComment();
+
+    // Try before submit comment. Using new function is not ideal here, but safer than exec.
+    if (WPACCallbacks.beforeSubmitComment !== '') {
+      var beforeSubmit = new Function('dom', WPACCallbacks.beforeSubmitComment);
+      beforeSubmit(jQuery(document));
+    }
     var submitUrl = form.attr("action");
 
     // Cancel AJAX request if cross-domain scripting is detected
@@ -2367,7 +2393,12 @@ WPAC.AttachForm = function (options) {
         WPAC._Debug("info", "Found comment URL '%s' in X-WPAC-URL header.", commentUrl);
         var unapproved = request.getResponseHeader("X-WPAC-UNAPPROVED");
         WPAC._Debug("info", "Found unapproved state '%s' in X-WPAC-UNAPPROVED", unapproved);
-        options.afterPostComment(commentUrl, unapproved == '1');
+
+        // Try afterPostComment submit comment. Using new function is not ideal here, but safer than exec.
+        if (WPACCallbacks.afterPostComment !== '') {
+          var afterComment = new Function('commentUrl', 'unapproved', afterPostComment);
+          afterComment(commentUrl, unapproved == '1');
+        }
 
         // Show success message
         WPAC._ShowMessage(unapproved == '1' ? WPAC._Options.textPostedUnapproved : WPAC._Options.textPosted, "success");
@@ -2421,7 +2452,7 @@ WPAC.Init = function () {
   WPAC._Initialized = true;
 
   // Assert that environment is set up correctly
-  if (!WPAC._Options || !WPAC._Callbacks) {
+  if (!WPAC._Options || !WPACCallbacks) {
     WPAC._Debug("error", "Something unexpected happened, initialization failed. Please try to reinstall the plugin.");
     return false;
   }

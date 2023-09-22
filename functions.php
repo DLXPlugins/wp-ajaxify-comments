@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct acces not allowed!' );
 }
 
-use DLXPlugins\WPAC\Functions as Functions;
-use DLXPlugins\WPAC\Options as Options;
+use DLXPlugins\WPAC\Functions;
+use DLXPlugins\WPAC\Options;
 
 function wpac_get_secret() {
 	return substr( md5( NONCE_SALT . AUTH_KEY . LOGGED_IN_KEY . NONCE_KEY . AUTH_SALT . SECURE_AUTH_SALT . LOGGED_IN_SALT . NONCE_SALT ), 0, 10 );
@@ -55,8 +55,8 @@ function wpac_enqueue_scripts() {
 		return;
 	}
 
-	$version  = Functions::get_plugin_version();
-	$options = Options::get_options();
+	$version   = Functions::get_plugin_version();
+	$options   = Options::get_options();
 	$in_footer = (bool) $options['placeScriptsInFooter'] || (bool) $options['debug'] || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG );
 
 	if ( (bool) $options['debug'] || (bool) $options['useUncompressedScripts'] ) {
@@ -110,6 +110,19 @@ function wpac_enqueue_scripts() {
 			$in_footer
 		);
 	}
+
+	// Add callbacks as local.
+	wp_localize_script(
+		'wpAjaxifyComments',
+		'WPACCallbacks',
+		array(
+			'beforeSelectElements' => wpac_get_option( 'callbackOnBeforeSelectElements' ),
+			'beforeUpdateComments' => wpac_get_option( 'callbackOnBeforeUpdateComments' ),
+			'afterUpdateComments'  => wpac_get_option( 'callbackOnAfterUpdateComments' ),
+			'beforeSubmitComment'  => wpac_get_option( 'callbackOnBeforeSubmitComment' ),
+			'afterPostComment'     => wpac_get_option( 'callbackOnAfterPostComment' ),
+		)
+	);
 
 	/**
 	 * Sunshine Confetti Plugin integration.
@@ -237,7 +250,7 @@ function wpac_initialize() {
 	echo 'WPAC._Options={';
 	$options = Options::get_options();
 	foreach ( $options as $option_key => $option_value ) {
-		switch( $option_key ) {
+		switch ( $option_key ) {
 			case '0':
 			case '1':
 			case is_bool( $option_value ):
@@ -260,16 +273,7 @@ function wpac_initialize() {
 		echo $option_key . ':' . $option_value . ',';
 	}
 	echo 'commentsEnabled:' . ( wpac_comments_enabled() ? 'true' : 'false' ) . ',';
-	echo 'version:"' . wpac_get_version() . '"};';
-
-	// Callbacks.
-	echo 'WPAC._Callbacks={';
-	echo '"beforeSelectElements":function(dom){' . sanitize_text_field( wpac_get_option( 'callbackOnBeforeSelectElements' ) ) . '},';
-	echo '"beforeUpdateComments":function(newDom,commentUrl){' . sanitize_text_field( wpac_get_option( 'callbackOnBeforeUpdateComments' ) ) . '},';
-	echo '"afterUpdateComments":function(newDom,commentUrl){' . sanitize_text_field( wpac_get_option( 'callbackOnAfterUpdateComments' ) . '},' );
-	echo '"beforeSubmitComment":function(){' . sanitize_text_field( wpac_get_option( 'callbackOnBeforeSubmitComment' ) . '},' );
-	echo '"afterPostComment":function(commentUrl,unapproved){' . sanitize_text_field( wpac_get_option( 'callbackOnAfterPostComment' ) . '}' );
-	echo '};';
+	echo 'version:"' . esc_js( wpac_get_version() ) . '"};';
 
 	echo '</script>';
 }
@@ -433,5 +437,3 @@ function wpac_option_comments_per_page( $comments_per_page ) {
 	return( wpac_is_ajax_request() && isset( $_REQUEST['WPACAll'] ) && $_REQUEST['WPACAll'] ) ?
 		0 : $comments_per_page;
 }
-
-
