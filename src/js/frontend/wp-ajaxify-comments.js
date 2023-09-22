@@ -195,6 +195,10 @@ WPAC._ReplaceComments = function(data, commentUrl, useFallbackUrl, formData, for
 	if ( beforeSelectElements !== '' ) {
 		const beforeSelect = new Function( 'extractedBody', beforeSelectElements );
 		beforeSelect( extractedBody );
+
+		// Set up custom event.
+		const beforeSelectEvent = new CustomEvent( 'wpacBeforeSelectElements', { detail: { extractedBody: extractedBody } } );
+		document.dispatchEvent( beforeSelectEvent );
 	}
 	
 	var newCommentsContainer = extractedBody.find(selectorCommentsContainer);
@@ -406,6 +410,11 @@ WPAC.AttachForm = function(options) {
 		if ( WPACCallbacks.beforeSubmitComment !== '' ) {
 			const beforeSubmit = new Function( 'dom', WPACCallbacks.beforeSubmitComment );
 			beforeSubmit( jQuery(document) );
+
+			// Set up native event handler.
+			const beforeSubmitEvent = new CustomEvent( 'wpacBeforeSubmitComment', { detail: { dom: jQuery(document) } } );
+			document.dispatchEvent( beforeSubmitEvent );
+		
 		}
 
 		var submitUrl = form.attr("action");
