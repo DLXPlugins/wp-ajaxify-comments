@@ -2231,6 +2231,15 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
     console.log(afterUpdateComments);
     var updateComments = new Function('extractedBody', 'commentUrl', afterUpdateComments);
     updateComments(extractedBody, commentUrl);
+
+    // Set up native event handler.
+    var updateCommentsEvent = new CustomEvent('wpacAfterUpdateComments', {
+      detail: {
+        newDom: extractedBody,
+        commentUrl: commentUrl
+      }
+    });
+    document.dispatchEvent(updateCommentsEvent);
   }
   return true;
 };
