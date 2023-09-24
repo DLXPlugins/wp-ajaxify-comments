@@ -221,6 +221,10 @@ WPAC._ReplaceComments = function(data, commentUrl, useFallbackUrl, formData, for
 	if ( '' !== beforeUpdateComments ) {
 		const beforeComments = new Function( 'extractedBody', 'commentUrl', beforeUpdateComments );
 		beforeComments( extractedBody, commentUrl );
+
+		// Set up native event handler.
+		const beforeCommentsEvent = new CustomEvent( 'wpacBeforeUpdateComments', { detail: { newDom: extractedBody, commentUrl } } );
+		document.dispatchEvent( beforeCommentsEvent );
 	}
 
 	// Update title
@@ -349,6 +353,10 @@ WPAC.AttachForm = function(options) {
 	if ( '' !== WPACCallbacks.beforeSelectElements ) {
 		const beforeSelect = new Function( 'dom', WPACCallbacks.beforeSelectElements );
 		beforeSelect( jQuery(document) );
+
+		// Set up native event handler.
+		const beforeSelectEvent = new CustomEvent( 'wpacBeforeSelectElements', { detail: { dom: jQuery(document) } } );
+		document.dispatchEvent( beforeSelectEvent );
 	}
 	
 	// Get addHandler method
@@ -492,6 +500,10 @@ WPAC.AttachForm = function(options) {
 				if ( WPACCallbacks.afterPostComment !== '' ) {
 					const afterComment = new Function( 'commentUrl', 'unapproved', afterPostComment);
     				afterComment( commentUrl, unapproved == '1');
+
+					// Set up native event handler.
+					const afterCommentEvent = new CustomEvent( 'wpacAfterPostComment', { detail: { commentUrl, unapproved: unapproved == '1' } } );
+					document.dispatchEvent( afterCommentEvent );
 				}
 				
 				// Show success message

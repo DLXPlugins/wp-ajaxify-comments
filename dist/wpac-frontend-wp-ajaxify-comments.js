@@ -181,6 +181,14 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
   if (beforeSelectElements !== '') {
     var beforeSelect = new Function('extractedBody', beforeSelectElements);
     beforeSelect(extractedBody);
+
+    // Set up custom event.
+    var beforeSelectEvent = new CustomEvent('wpacBeforeSelectElements', {
+      detail: {
+        extractedBody: extractedBody
+      }
+    });
+    document.dispatchEvent(beforeSelectEvent);
   }
   var newCommentsContainer = extractedBody.find(selectorCommentsContainer);
   if (!newCommentsContainer.length) {
@@ -202,6 +210,15 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
   if ('' !== beforeUpdateComments) {
     var beforeComments = new Function('extractedBody', 'commentUrl', beforeUpdateComments);
     beforeComments(extractedBody, commentUrl);
+
+    // Set up native event handler.
+    var beforeCommentsEvent = new CustomEvent('wpacBeforeUpdateComments', {
+      detail: {
+        newDom: extractedBody,
+        commentUrl: commentUrl
+      }
+    });
+    document.dispatchEvent(beforeCommentsEvent);
   }
 
   // Update title
@@ -314,6 +331,14 @@ WPAC.AttachForm = function (options) {
   if ('' !== WPACCallbacks.beforeSelectElements) {
     var beforeSelect = new Function('dom', WPACCallbacks.beforeSelectElements);
     beforeSelect(jQuery(document));
+
+    // Set up native event handler.
+    var beforeSelectEvent = new CustomEvent('wpacBeforeSelectElements', {
+      detail: {
+        dom: jQuery(document)
+      }
+    });
+    document.dispatchEvent(beforeSelectEvent);
   }
 
   // Get addHandler method
@@ -374,6 +399,14 @@ WPAC.AttachForm = function (options) {
     if (WPACCallbacks.beforeSubmitComment !== '') {
       var beforeSubmit = new Function('dom', WPACCallbacks.beforeSubmitComment);
       beforeSubmit(jQuery(document));
+
+      // Set up native event handler.
+      var beforeSubmitEvent = new CustomEvent('wpacBeforeSubmitComment', {
+        detail: {
+          dom: jQuery(document)
+        }
+      });
+      document.dispatchEvent(beforeSubmitEvent);
     }
     var submitUrl = form.attr("action");
 
@@ -451,6 +484,15 @@ WPAC.AttachForm = function (options) {
         if (WPACCallbacks.afterPostComment !== '') {
           var afterComment = new Function('commentUrl', 'unapproved', afterPostComment);
           afterComment(commentUrl, unapproved == '1');
+
+          // Set up native event handler.
+          var afterCommentEvent = new CustomEvent('wpacAfterPostComment', {
+            detail: {
+              commentUrl: commentUrl,
+              unapproved: unapproved == '1'
+            }
+          });
+          document.dispatchEvent(afterCommentEvent);
         }
 
         // Show success message
