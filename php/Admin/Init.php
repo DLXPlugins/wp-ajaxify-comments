@@ -290,7 +290,7 @@ class Init {
 		$setting_links = array(
 			'settings' => sprintf( '<a href="%s">%s</a>', esc_url( $this->get_url() ), esc_html__( 'Settings', 'wp-ajaxify-comments' ) ),
 			'docs'     => sprintf( '<a href="%s">%s</a>', esc_url( 'https://docs.dlxplugins.com/v/ajaxify-comments/' ), esc_html__( 'Docs', 'wp-ajaxify-comments' ) ),
-			'site'     => sprintf( '<a href="%s" style="color: #f60098;">%s</a>', esc_url( 'https://dlxplugins.com/plugins/ajaxify-comments/' ), esc_html__( 'Ajaxify Home', 'wp-ajaxify-comments' ) ),
+			'site'     => sprintf( '<a href="%s" style="color: #f60098;">%s</a>', esc_url( 'https://dlxplugins.com/plugins/ajaxify-comments/' ), esc_html__( 'Visit Site', 'wp-ajaxify-comments' ) ),
 		);
 		if ( ! is_array( $settings ) ) {
 			return $setting_links;
