@@ -16609,7 +16609,7 @@ var SupportScreen = function SupportScreen(props) {
     className: "ajaxify-admin-component-row ajaxify-admin-component-row-button"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: "ajaxify-button ajaxify__btn-secondary",
-    href: "https://docs.dlxplugins.com/v/wp-ajaxify-comments/",
+    href: "https://docs.dlxplugins.com/v/ajaxify-comments/",
     target: "_blank",
     rel: "noopener noreferrer",
     icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null)
@@ -16661,13 +16661,13 @@ var SupportScreen = function SupportScreen(props) {
     target: "_blank",
     rel: "noopener noreferrer",
     icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"], null)
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('View More Plugins', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('View Deluxe Plugins', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: "ajaxify-button ajaxify__btn-secondary",
     href: "https://dlxplugins.com/support/",
     target: "_blank",
     rel: "noopener noreferrer",
     icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null)
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('View Plugin Tutorials', 'wp-ajaxify-comments'))))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('DLX Plugin Tutorials', 'wp-ajaxify-comments'))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SupportScreen);
 
