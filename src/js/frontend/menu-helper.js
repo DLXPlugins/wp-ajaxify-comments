@@ -287,7 +287,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 				} );
 
 				// Check to see if we found all the selectors.
-				if ( selectorList.length < 6 ) {
+				if ( selectorList.length < 5 ) {
 					Swal.fire( {
 						titleText: __( 'Unable to Find All Selectors', 'wp-ajaxify-comments' ),
 						html: __( 'We were unable to find all the required selectors. Please contact support at <a style="color: #FFF;" href="https://dlxplugins.com/support/">dlxplugins.com/support/</a>.', 'wp-ajaxify-comments' ),
