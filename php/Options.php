@@ -114,7 +114,6 @@ class Options {
 			'menuHelper'                     => false,
 			'selectorCommentForm'            => '#commentform,.ast-commentform,.comment-form',
 			'selectorCommentsContainer'      => '#comments,.comments-wrapper,.wp-block-comment-template,.ast-comment-list',
-			'selectorCommentList'            => '.comment-list',
 			'selectorCommentPagingLinks'     => '#comments [class^=\'nav-\'] a',
 			'selectorCommentLinks'           => '#comments a[href*="/comment-page-"]',
 			'selectorRespondContainer'       => '#respond',

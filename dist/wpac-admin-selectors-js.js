@@ -19893,7 +19893,6 @@ var Interface = function Interface(props) {
         menuHelper: data.menuHelper,
         selectorCommentForm: data.selectorCommentForm,
         selectorCommentsContainer: data.selectorCommentsContainer,
-        selectorCommentList: data.selectorCommentList,
         selectorCommentPagingLinks: data.selectorCommentPagingLinks,
         selectorCommentLinks: data.selectorCommentLinks,
         selectorRespondContainer: data.selectorRespondContainer,
@@ -20031,7 +20030,7 @@ var Interface = function Interface(props) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "ajaxify-admin__control-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
-    name: "selectorCommentList",
+    name: "selectorCommentForm",
     control: control,
     rules: {
       required: true,
@@ -20043,58 +20042,16 @@ var Interface = function Interface(props) {
         onChange = _ref3$field.onChange,
         value = _ref3$field.value;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comments List', 'wp-ajaxify-comments'),
-        type: "text",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames2 = {
-          'has-error': 'required' === ((_errors$selectorComme5 = errors.selectorCommentList) === null || _errors$selectorComme5 === void 0 ? void 0 : _errors$selectorComme5.type)
-        }, _defineProperty(_classNames2, "has-error", 'pattern' === ((_errors$selectorComme6 = errors.selectorCommentList) === null || _errors$selectorComme6 === void 0 ? void 0 : _errors$selectorComme6.type)), _defineProperty(_classNames2, 'is-required', true), _classNames2)),
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The CSS selector for the comments list wrapper.', 'wp-ajaxify-comments'),
-        "aria-required": "true",
-        value: value,
-        onChange: onChange
-      }), 'pattern' === ((_errors$selectorComme7 = errors.selectorCommentList) === null || _errors$selectorComme7 === void 0 ? void 0 : _errors$selectorComme7.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Please use valid comma-separated CSS selectors.', 'wp-ajaxify-comments'),
-        status: "error",
-        politeness: "assertive",
-        inline: false,
-        icon: function icon() {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
-        }
-      }), 'required' === ((_errors$selectorComme8 = errors.selectorCommentList) === null || _errors$selectorComme8 === void 0 ? void 0 : _errors$selectorComme8.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
-        status: "error",
-        politeness: "assertive",
-        inline: false,
-        icon: function icon() {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
-        }
-      }));
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-admin__control-row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
-    name: "selectorCommentForm",
-    control: control,
-    rules: {
-      required: true,
-      pattern: cssRegex
-    },
-    render: function render(_ref4) {
-      var _errors$selectorComme9, _errors$selectorComme10, _classNames3, _errors$selectorComme11, _errors$selectorComme12;
-      var _ref4$field = _ref4.field,
-        onChange = _ref4$field.onChange,
-        value = _ref4$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment Form', 'wp-ajaxify-comments'),
         type: "text",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames3 = {
-          'has-error': 'required' === ((_errors$selectorComme9 = errors.selectorCommentForm) === null || _errors$selectorComme9 === void 0 ? void 0 : _errors$selectorComme9.type)
-        }, _defineProperty(_classNames3, "has-error", 'pattern' === ((_errors$selectorComme10 = errors.selectorCommentForm) === null || _errors$selectorComme10 === void 0 ? void 0 : _errors$selectorComme10.type)), _defineProperty(_classNames3, 'is-required', true), _classNames3)),
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames2 = {
+          'has-error': 'required' === ((_errors$selectorComme5 = errors.selectorCommentForm) === null || _errors$selectorComme5 === void 0 ? void 0 : _errors$selectorComme5.type)
+        }, _defineProperty(_classNames2, "has-error", 'pattern' === ((_errors$selectorComme6 = errors.selectorCommentForm) === null || _errors$selectorComme6 === void 0 ? void 0 : _errors$selectorComme6.type)), _defineProperty(_classNames2, 'is-required', true), _classNames2)),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The CSS selector for the comment form. Can be comma separated.', 'wp-ajaxify-comments'),
         "aria-required": "true",
         value: value,
         onChange: onChange
-      }), 'pattern' === ((_errors$selectorComme11 = errors.selectorCommentForm) === null || _errors$selectorComme11 === void 0 ? void 0 : _errors$selectorComme11.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), 'pattern' === ((_errors$selectorComme7 = errors.selectorCommentForm) === null || _errors$selectorComme7 === void 0 ? void 0 : _errors$selectorComme7.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Please use valid comma-separated CSS selectors.', 'wp-ajaxify-comments'),
         status: "error",
         politeness: "assertive",
@@ -20102,7 +20059,7 @@ var Interface = function Interface(props) {
         icon: function icon() {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
         }
-      }), 'required' === ((_errors$selectorComme12 = errors.selectorCommentForm) === null || _errors$selectorComme12 === void 0 ? void 0 : _errors$selectorComme12.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), 'required' === ((_errors$selectorComme8 = errors.selectorCommentForm) === null || _errors$selectorComme8 === void 0 ? void 0 : _errors$selectorComme8.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
         status: "error",
         politeness: "assertive",
@@ -20121,17 +20078,17 @@ var Interface = function Interface(props) {
       required: true,
       pattern: cssRegex
     },
-    render: function render(_ref5) {
-      var _errors$selectorRespo, _errors$selectorRespo2, _classNames4, _errors$selectorRespo3, _errors$selectorRespo4;
-      var _ref5$field = _ref5.field,
-        onChange = _ref5$field.onChange,
-        value = _ref5$field.value;
+    render: function render(_ref4) {
+      var _errors$selectorRespo, _errors$selectorRespo2, _classNames3, _errors$selectorRespo3, _errors$selectorRespo4;
+      var _ref4$field = _ref4.field,
+        onChange = _ref4$field.onChange,
+        value = _ref4$field.value;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Respond Textarea Selector', 'wp-ajaxify-comments'),
         type: "text",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames4 = {
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames3 = {
           'has-error': 'required' === ((_errors$selectorRespo = errors.selectorRespondContainer) === null || _errors$selectorRespo === void 0 ? void 0 : _errors$selectorRespo.type)
-        }, _defineProperty(_classNames4, "has-error", 'pattern' === ((_errors$selectorRespo2 = errors.selectorRespondContainer) === null || _errors$selectorRespo2 === void 0 ? void 0 : _errors$selectorRespo2.type)), _defineProperty(_classNames4, 'is-required', true), _classNames4)),
+        }, _defineProperty(_classNames3, "has-error", 'pattern' === ((_errors$selectorRespo2 = errors.selectorRespondContainer) === null || _errors$selectorRespo2 === void 0 ? void 0 : _errors$selectorRespo2.type)), _defineProperty(_classNames3, 'is-required', true), _classNames3)),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The CSS selector for the Respond textarea.', 'wp-ajaxify-comments'),
         "aria-required": "true",
         value: value,
@@ -20163,17 +20120,17 @@ var Interface = function Interface(props) {
       required: true,
       pattern: cssRegex
     },
-    render: function render(_ref6) {
-      var _errors$selectorTexta, _errors$selectorTexta2, _classNames5, _errors$selectorTexta3, _errors$selectorTexta4;
-      var _ref6$field = _ref6.field,
-        onChange = _ref6$field.onChange,
-        value = _ref6$field.value;
+    render: function render(_ref5) {
+      var _errors$selectorTexta, _errors$selectorTexta2, _classNames4, _errors$selectorTexta3, _errors$selectorTexta4;
+      var _ref5$field = _ref5.field,
+        onChange = _ref5$field.onChange,
+        value = _ref5$field.value;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment Textarea Selector', 'wp-ajaxify-comments'),
         type: "text",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames5 = {
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames4 = {
           'has-error': 'required' === ((_errors$selectorTexta = errors.selectorTextarea) === null || _errors$selectorTexta === void 0 ? void 0 : _errors$selectorTexta.type)
-        }, _defineProperty(_classNames5, "has-error", 'pattern' === ((_errors$selectorTexta2 = errors.selectorTextarea) === null || _errors$selectorTexta2 === void 0 ? void 0 : _errors$selectorTexta2.type)), _defineProperty(_classNames5, 'is-required', true), _classNames5)),
+        }, _defineProperty(_classNames4, "has-error", 'pattern' === ((_errors$selectorTexta2 = errors.selectorTextarea) === null || _errors$selectorTexta2 === void 0 ? void 0 : _errors$selectorTexta2.type)), _defineProperty(_classNames4, 'is-required', true), _classNames4)),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The CSS selector for the main comment textarea.', 'wp-ajaxify-comments'),
         "aria-required": "true",
         value: value,
@@ -20205,17 +20162,17 @@ var Interface = function Interface(props) {
       required: true,
       pattern: cssRegex
     },
-    render: function render(_ref7) {
-      var _errors$selectorSubmi, _errors$selectorSubmi2, _classNames6, _errors$selectorSubmi3, _errors$selectorSubmi4;
-      var _ref7$field = _ref7.field,
-        onChange = _ref7$field.onChange,
-        value = _ref7$field.value;
+    render: function render(_ref6) {
+      var _errors$selectorSubmi, _errors$selectorSubmi2, _classNames5, _errors$selectorSubmi3, _errors$selectorSubmi4;
+      var _ref6$field = _ref6.field,
+        onChange = _ref6$field.onChange,
+        value = _ref6$field.value;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment Submit Button Selector', 'wp-ajaxify-comments'),
         type: "text",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames6 = {
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames5 = {
           'has-error': 'required' === ((_errors$selectorSubmi = errors.selectorSubmitButton) === null || _errors$selectorSubmi === void 0 ? void 0 : _errors$selectorSubmi.type)
-        }, _defineProperty(_classNames6, "has-error", 'pattern' === ((_errors$selectorSubmi2 = errors.selectorSubmitButton) === null || _errors$selectorSubmi2 === void 0 ? void 0 : _errors$selectorSubmi2.type)), _defineProperty(_classNames6, 'is-required', true), _classNames6)),
+        }, _defineProperty(_classNames5, "has-error", 'pattern' === ((_errors$selectorSubmi2 = errors.selectorSubmitButton) === null || _errors$selectorSubmi2 === void 0 ? void 0 : _errors$selectorSubmi2.type)), _defineProperty(_classNames5, 'is-required', true), _classNames5)),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The CSS selector for the comment submit button.', 'wp-ajaxify-comments'),
         "aria-required": "true",
         value: value,
@@ -20248,22 +20205,22 @@ var Interface = function Interface(props) {
     rules: {
       required: true
     },
-    render: function render(_ref8) {
-      var _errors$selectorComme13, _errors$selectorComme14, _classNames7, _errors$selectorComme15;
-      var _ref8$field = _ref8.field,
-        onChange = _ref8$field.onChange,
-        value = _ref8$field.value;
+    render: function render(_ref7) {
+      var _errors$selectorComme9, _errors$selectorComme10, _classNames6, _errors$selectorComme11;
+      var _ref7$field = _ref7.field,
+        onChange = _ref7$field.onChange,
+        value = _ref7$field.value;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Paging Links Selector', 'wp-ajaxify-comments'),
         type: "text",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames7 = {
-          'has-error': 'required' === ((_errors$selectorComme13 = errors.selectorCommentPagingLinks) === null || _errors$selectorComme13 === void 0 ? void 0 : _errors$selectorComme13.type)
-        }, _defineProperty(_classNames7, "has-error", 'pattern' === ((_errors$selectorComme14 = errors.selectorCommentPagingLinks) === null || _errors$selectorComme14 === void 0 ? void 0 : _errors$selectorComme14.type)), _defineProperty(_classNames7, 'is-required', true), _classNames7)),
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames6 = {
+          'has-error': 'required' === ((_errors$selectorComme9 = errors.selectorCommentPagingLinks) === null || _errors$selectorComme9 === void 0 ? void 0 : _errors$selectorComme9.type)
+        }, _defineProperty(_classNames6, "has-error", 'pattern' === ((_errors$selectorComme10 = errors.selectorCommentPagingLinks) === null || _errors$selectorComme10 === void 0 ? void 0 : _errors$selectorComme10.type)), _defineProperty(_classNames6, 'is-required', true), _classNames6)),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment paging links selector for Ajax pagination.', 'wp-ajaxify-comments'),
         "aria-required": "true",
         value: value,
         onChange: onChange
-      }), 'required' === ((_errors$selectorComme15 = errors.selectorCommentPagingLinks) === null || _errors$selectorComme15 === void 0 ? void 0 : _errors$selectorComme15.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), 'required' === ((_errors$selectorComme11 = errors.selectorCommentPagingLinks) === null || _errors$selectorComme11 === void 0 ? void 0 : _errors$selectorComme11.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
         status: "error",
         politeness: "assertive",
@@ -20281,22 +20238,22 @@ var Interface = function Interface(props) {
     rules: {
       required: true
     },
-    render: function render(_ref9) {
-      var _errors$selectorComme16, _errors$selectorComme17, _classNames8, _errors$selectorComme18;
-      var _ref9$field = _ref9.field,
-        onChange = _ref9$field.onChange,
-        value = _ref9$field.value;
+    render: function render(_ref8) {
+      var _errors$selectorComme12, _errors$selectorComme13, _classNames7, _errors$selectorComme14;
+      var _ref8$field = _ref8.field,
+        onChange = _ref8$field.onChange,
+        value = _ref8$field.value;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment Links Selector', 'wp-ajaxify-comments'),
         type: "text",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames8 = {
-          'has-error': 'required' === ((_errors$selectorComme16 = errors.selectorCommentLinks) === null || _errors$selectorComme16 === void 0 ? void 0 : _errors$selectorComme16.type)
-        }, _defineProperty(_classNames8, "has-error", 'pattern' === ((_errors$selectorComme17 = errors.selectorCommentLinks) === null || _errors$selectorComme17 === void 0 ? void 0 : _errors$selectorComme17.type)), _defineProperty(_classNames8, 'is-required', true), _classNames8)),
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames7 = {
+          'has-error': 'required' === ((_errors$selectorComme12 = errors.selectorCommentLinks) === null || _errors$selectorComme12 === void 0 ? void 0 : _errors$selectorComme12.type)
+        }, _defineProperty(_classNames7, "has-error", 'pattern' === ((_errors$selectorComme13 = errors.selectorCommentLinks) === null || _errors$selectorComme13 === void 0 ? void 0 : _errors$selectorComme13.type)), _defineProperty(_classNames7, 'is-required', true), _classNames7)),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Selector for the comment links.', 'wp-ajaxify-comments'),
         "aria-required": "true",
         value: value,
         onChange: onChange
-      }), 'required' === ((_errors$selectorComme18 = errors.selectorCommentLinks) === null || _errors$selectorComme18 === void 0 ? void 0 : _errors$selectorComme18.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), 'required' === ((_errors$selectorComme14 = errors.selectorCommentLinks) === null || _errors$selectorComme14 === void 0 ? void 0 : _errors$selectorComme14.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
         status: "error",
         politeness: "assertive",
@@ -20314,17 +20271,17 @@ var Interface = function Interface(props) {
     rules: {
       required: true
     },
-    render: function render(_ref10) {
-      var _errors$selectorError, _errors$selectorError2, _classNames9, _errors$selectorError3;
-      var _ref10$field = _ref10.field,
-        onChange = _ref10$field.onChange,
-        value = _ref10$field.value;
+    render: function render(_ref9) {
+      var _errors$selectorError, _errors$selectorError2, _classNames8, _errors$selectorError3;
+      var _ref9$field = _ref9.field,
+        onChange = _ref9$field.onChange,
+        value = _ref9$field.value;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Error Container Selector', 'wp-ajaxify-comments'),
         type: "text",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames9 = {
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames8 = {
           'has-error': 'required' === ((_errors$selectorError = errors.selectorErrorContainer) === null || _errors$selectorError === void 0 ? void 0 : _errors$selectorError.type)
-        }, _defineProperty(_classNames9, "has-error", 'pattern' === ((_errors$selectorError2 = errors.selectorErrorContainer) === null || _errors$selectorError2 === void 0 ? void 0 : _errors$selectorError2.type)), _defineProperty(_classNames9, 'is-required', true), _classNames9)),
+        }, _defineProperty(_classNames8, "has-error", 'pattern' === ((_errors$selectorError2 = errors.selectorErrorContainer) === null || _errors$selectorError2 === void 0 ? void 0 : _errors$selectorError2.type)), _defineProperty(_classNames8, 'is-required', true), _classNames8)),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is where any error messages will be shown.', 'wp-ajaxify-comments'),
         "aria-required": "true",
         value: value,
@@ -20344,17 +20301,17 @@ var Interface = function Interface(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
     name: "selectorPostContainer",
     control: control,
-    render: function render(_ref11) {
-      var _errors$selectorPostC, _errors$selectorPostC2, _classNames10, _errors$selectorPostC3;
-      var _ref11$field = _ref11.field,
-        onChange = _ref11$field.onChange,
-        value = _ref11$field.value;
+    render: function render(_ref10) {
+      var _errors$selectorPostC, _errors$selectorPostC2, _classNames9, _errors$selectorPostC3;
+      var _ref10$field = _ref10.field,
+        onChange = _ref10$field.onChange,
+        value = _ref10$field.value;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Post Container Selector', 'wp-ajaxify-comments'),
         type: "text",
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames10 = {
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', (_classNames9 = {
           'has-error': 'required' === ((_errors$selectorPostC = errors.selectorPostContainer) === null || _errors$selectorPostC === void 0 ? void 0 : _errors$selectorPostC.type)
-        }, _defineProperty(_classNames10, "has-error", 'pattern' === ((_errors$selectorPostC2 = errors.selectorPostContainer) === null || _errors$selectorPostC2 === void 0 ? void 0 : _errors$selectorPostC2.type)), _defineProperty(_classNames10, 'is-required', true), _classNames10)),
+        }, _defineProperty(_classNames9, "has-error", 'pattern' === ((_errors$selectorPostC2 = errors.selectorPostContainer) === null || _errors$selectorPostC2 === void 0 ? void 0 : _errors$selectorPostC2.type)), _defineProperty(_classNames9, 'is-required', true), _classNames9)),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Selector that matches post containers to enable support for multiple comment forms per page; leave empty to disable multiple comment form per page support. Please note: Each post container needs to have the ID attribute defined. If this option is set, all other selectors cannot select the elements by ID, but have to select the elements inside the post container for example by element and/or class.', 'wp-ajaxify-comments'),
         "aria-required": "true",
         value: value,

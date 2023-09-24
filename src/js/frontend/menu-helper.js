@@ -178,12 +178,6 @@ document.addEventListener( 'DOMContentLoaded', function() {
 							selectorOptionName: 'selectorCommentsContainer',
 							selectorLabel: __( 'Comments Container', 'wp-ajaxify-comments' ),
 						} );
-						selectorList.push( {
-							selector: commentSelector,
-							tagName: commentElementTagName,
-							selectorOptionName: 'selectorCommentList',
-							selectorLabel: __( 'Comment List', 'wp-ajaxify-comments' ),
-						} );
 					}
 				} );
 

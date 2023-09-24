@@ -111,7 +111,11 @@ add_action( 'admin_init', __NAMESPACE__ . '\activate_redirect' );
  * @return true if the user can be redirected. false if not.
  */
 function can_redirect_on_activation() {
-	// Allow third-parties to prevent activation redirect.
+	/**
+	 * Filter whether to redirect on plugin activation.
+	 *
+	 * @param bool $can_redirect Whether to redirect on plugin activation. Pass `false` to prevent redirect.
+	 */
 	$can_redirect = apply_filters( 'dlxplugins/ajaxify/comments/activation/can_redirect', true );
 	if ( false === $can_redirect ) {
 		return false;

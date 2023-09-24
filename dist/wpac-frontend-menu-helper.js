@@ -6909,12 +6909,6 @@ document.addEventListener('DOMContentLoaded', function () {
               selectorOptionName: 'selectorCommentsContainer',
               selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comments Container', 'wp-ajaxify-comments')
             });
-            selectorList.push({
-              selector: commentSelector,
-              tagName: commentElementTagName,
-              selectorOptionName: 'selectorCommentList',
-              selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comment List', 'wp-ajaxify-comments')
-            });
           }
         });
 
