@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import classNames from 'classnames';
 import { useAsyncResource } from 'use-async-resource';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import BeatLoader from 'react-spinners/BeatLoader';
 import SaveResetButtons from '../../components/SaveResetButtons';
 
@@ -11,10 +10,8 @@ import {
 	TextControl,
 	Button,
 	ToggleControl,
-	SelectControl,
-	RadioControl,
 } from '@wordpress/components';
-import { AlertCircle, Info, FileCode2 } from 'lucide-react';
+import { AlertCircle, Info, FileCode2, ExternalLink } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
@@ -70,20 +67,13 @@ const Interface = ( props ) => {
 	const { defaults } = props;
 	const response = defaults();
 	const { data, success } = response.data;
-	const [ saving, setSaving ] = useState( false );
-	const [ isSaved, setIsSaved ] = useState( false );
-	const [ resetting, setResetting ] = useState( false );
-	const [ isReset, setIsReset ] = useState( false );
 
 	const {
-		register,
 		control,
 		handleSubmit,
-		setValue,
 		getValues,
 		reset,
 		setError,
-		clearErrors,
 		trigger,
 	} = useForm( {
 		defaultValues: {
@@ -98,7 +88,7 @@ const Interface = ( props ) => {
 		},
 	} );
 	const formValues = useWatch( { control } );
-	const { errors, isDirty, dirtyFields, touchedFields } = useFormState( {
+	const { errors, isDirty, dirtyFields } = useFormState( {
 		control,
 	} );
 
@@ -118,6 +108,11 @@ const Interface = ( props ) => {
 		);
 	};
 
+	/**
+	 * Placeholder for submit event.
+	 *
+	 * @param {Object} formData contains the form data.
+	 */
 	const onSubmit = ( formData ) => {
 	};
 
@@ -159,6 +154,15 @@ const Interface = ( props ) => {
 							icon={ <FileCode2 style={ { color: 'currentColor' } } /> }
 						>
 							{ __( 'Set Selectors', 'wp-ajaxify-comments' ) }
+						</Button>
+						<Button
+							href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/getting-started"
+							className="ajaxify-button ajaxify__btn-secondary"
+							icon={ <ExternalLink style={ { color: 'currentColor' } } /> }
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{ __( 'Getting Started Guide', 'wp-ajaxify-comments' ) }
 						</Button>
 					</div>
 

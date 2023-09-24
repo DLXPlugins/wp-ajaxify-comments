@@ -421,7 +421,8 @@ h3.ajaxify-admin-content-subheading {
 	}
 }
 
-.ajaxify-panel-row {
+.ajaxify-panel-row,
+.ajaxify-admin__control-row {
 	p.components-base-control__help,
 	p.components-form-token-field__help {
 		font-size: 13px;
@@ -463,9 +464,9 @@ h3.ajaxify-admin-content-subheading {
 			position: relative;
 			display: block;
 			min-width: 200px;
-			max-width: 80%;
 			width: 100%;
-			font-size: 13px;
+			font-size: 14px;
+			padding: 8px 14px 8px 12px;
 		}
 
 		.components-radio-control__option {
@@ -565,6 +566,7 @@ h3.ajaxify-admin-content-subheading {
 
 		&.has-error {
 			border: 1px solid #bc2b2c;
+			box-shadow: none !important; /* override core style */
 
 			&:hover {
 				cursor: not-allowed;
@@ -820,8 +822,8 @@ h3.ajaxify-admin-content-subheading {
 
 	.ajaxify-admin__notice-message {
 		color: #393838;
-		font-size: 1.1em;
-		line-height: 1.2;
+		font-size: 1.2em;
+		line-height: 1.4;
 		font-weight: 500;
 	}
 

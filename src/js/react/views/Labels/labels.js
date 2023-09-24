@@ -128,7 +128,7 @@ const Interface = ( props ) => {
 			</>
 		);
 	};
-
+console.log( errors );
 	return (
 		<>
 			<div className="ajaxify-admin-panel-area">
@@ -150,8 +150,7 @@ const Interface = ( props ) => {
 														label={ __( 'Comment posted', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textPosted?.type,
-															'has-error': 'pattern' === errors.textPosted?.type,
+															'has-error': 'required' === errors.textPosted?.type || 'pattern' === errors.textPosted?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The text shown when a comment has been posted.', 'wp-ajaxify-comments' ) }
@@ -186,8 +185,7 @@ const Interface = ( props ) => {
 														label={ __( 'Comment posted (unapproved)', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textPostedUnapproved?.type,
-															'has-error': 'pattern' === errors.textPostedUnapproved?.type,
+															'has-error': 'required' === errors.textPostedUnapproved?.type || 'pattern' === errors.textPostedUnapproved?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The text shown when a comment has been posted but is unapproved.', 'wp-ajaxify-comments' ) }
@@ -222,8 +220,7 @@ const Interface = ( props ) => {
 														label={ __( 'Reload page', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textReloadPage?.type,
-															'has-error': 'pattern' === errors.textReloadPage?.type,
+															'has-error': 'required' === errors.textReloadPage?.type || 'pattern' === errors.textReloadPage?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The text shown when the page needs to be reloaded.', 'wp-ajaxify-comments' ) }
@@ -258,8 +255,7 @@ const Interface = ( props ) => {
 														label={ __( 'Post Comment Notification', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textPostComment?.type,
-															'has-error': 'pattern' === errors.textPostComment?.type,
+															'has-error': 'required' === errors.textPostComment?.type || 'pattern' === errors.textPostComment?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The text shown when a comment is successfully posted.', 'wp-ajaxify-comments' ) }
@@ -294,8 +290,7 @@ const Interface = ( props ) => {
 														label={ __( 'Refresh Comments Status Label', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textRefreshComments?.type,
-															'has-error': 'pattern' === errors.textRefreshComments?.type,
+															'has-error': 'required' === errors.textRefreshComments?.type || 'pattern' === errors.textRefreshComments?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The text shown when the comments are refreshing.', 'wp-ajaxify-comments' ) }
@@ -330,8 +325,7 @@ const Interface = ( props ) => {
 														label={ __( 'Unknown Error', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textUnknownError?.type,
-															'has-error': 'pattern' === errors.textUnknownError?.type,
+															'has-error': 'required' === errors.textUnknownError?.type || 'pattern' === errors.textUnknownError?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The text shown when an unknown error occurs.', 'wp-ajaxify-comments' ) }
@@ -368,8 +362,7 @@ const Interface = ( props ) => {
 														}
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorTypeComment?.type,
-															'has-error': 'pattern' === errors.textErrorTypeComment?.type,
+															'has-error': 'required' === errors.textErrorTypeComment?.type || 'pattern' === errors.textErrorTypeComment?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The text shown when the user has not typed a comment.', 'wp-ajaxify-comments' ) }
@@ -386,6 +379,7 @@ const Interface = ( props ) => {
 															status="error"
 															politeness="assertive"
 															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
 														/>
 													) }
 												</>
@@ -405,8 +399,7 @@ const Interface = ( props ) => {
 														}
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorCommentsClosed?.type,
-															'has-error': 'pattern' === errors.textErrorCommentsClosed?.type,
+															'has-error': 'required' === errors.textErrorCommentsClosed?.type || 'pattern' === errors.textErrorCommentsClosed?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The text shown when comments are closed.', 'wp-ajaxify-comments' ) }
@@ -423,6 +416,7 @@ const Interface = ( props ) => {
 															status="error"
 															politeness="assertive"
 															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
 														/>
 													) }
 												</>
@@ -442,8 +436,7 @@ const Interface = ( props ) => {
 														}
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorMustBeLoggedIn?.type,
-															'has-error': 'pattern' === errors.textErrorMustBeLoggedIn?.type,
+															'has-error': 'required' === errors.textErrorMustBeLoggedIn?.type || 'pattern' === errors.textErrorMustBeLoggedIn?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The text shown when the user must be logged in to post a comment.', 'wp-ajaxify-comments' ) }
@@ -458,6 +451,8 @@ const Interface = ( props ) => {
 																'wp-ajaxify-comments',
 															) }
 															status="error"
+															politeness="assertive"
+															icon={ () => ( <AlertCircle /> ) }
 														/>
 													) }
 												</>
@@ -477,8 +472,7 @@ const Interface = ( props ) => {
 														}
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorFillRequiredFields?.type,
-															'has-error': 'pattern' === errors.textErrorFillRequiredFields?.type,
+															'has-error': 'required' === errors.textErrorFillRequiredFields?.type || 'pattern' === errors.textErrorFillRequiredFields?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The text shown when the user has not filled in all required fields.', 'wp-ajaxify-comments' ) }
@@ -492,6 +486,9 @@ const Interface = ( props ) => {
 																'This is a required field.',
 																'wp-ajaxify-comments',
 															) }
+															status="error"
+															politeness="assertive"
+															icon={ () => ( <AlertCircle /> ) }
 														/>
 													) }
 												</>
@@ -507,8 +504,7 @@ const Interface = ( props ) => {
 												<>
 													<TextControl
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorInvalidEmailAddress?.type,
-															'has-error': 'pattern' === errors.textErrorInvalidEmailAddress?.type,
+															'has-error': 'required' === errors.textErrorInvalidEmailAddress?.type || 'pattern' === errors.textErrorInvalidEmailAddress?.type,
 															'is-required': true,
 														} ) }
 														label={
@@ -526,6 +522,9 @@ const Interface = ( props ) => {
 																'This is a required field.',
 																'wp-ajaxify-comments',
 															) }
+															status="error"
+															politeness="assertive"
+															icon={ () => ( <AlertCircle /> ) }
 														/>
 													) }
 												</>
@@ -546,8 +545,7 @@ const Interface = ( props ) => {
 														}
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.textErrorPostTooQuickly?.type,
-															'has-error': 'pattern' === errors.textErrorPostTooQuickly?.type,
+															'has-error': 'required' === errors.textErrorPostTooQuickly?.type || 'pattern' === errors.textErrorPostTooQuickly?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The text shown when the user is posting comments too quickly.', 'wp-ajaxify-comments' ) }
@@ -561,6 +559,9 @@ const Interface = ( props ) => {
 																'This is a required field.',
 																'wp-ajaxify-comments',
 															) }
+															status="error"
+															politeness="assertive"
+															icon={ () => ( <AlertCircle /> ) }
 														/>
 													) }
 												</>

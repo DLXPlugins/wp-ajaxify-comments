@@ -1,19 +1,16 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import classNames from 'classnames';
 import { useAsyncResource } from 'use-async-resource';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 import {
 	TextControl,
 	Button,
 	ToggleControl,
-	SelectControl,
-	RadioControl,
 } from '@wordpress/components';
-import { AlertCircle, Loader2, ClipboardCheck, Info } from 'lucide-react';
+import { AlertCircle, ExternalLink, Info } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
@@ -72,20 +69,12 @@ const Interface = ( props ) => {
 	const { defaults } = props;
 	const response = defaults();
 	const { data, success } = response.data;
-	const [ saving, setSaving ] = useState( false );
-	const [ isSaved, setIsSaved ] = useState( false );
-	const [ resetting, setResetting ] = useState( false );
-	const [ isReset, setIsReset ] = useState( false );
 
 	const {
-		register,
 		control,
 		handleSubmit,
-		setValue,
-		getValues,
 		reset,
 		setError,
-		clearErrors,
 		trigger,
 	} = useForm( {
 		defaultValues: {
@@ -105,14 +94,11 @@ const Interface = ( props ) => {
 		},
 	} );
 	const formValues = useWatch( { control } );
-	const { errors, isDirty, dirtyFields, touchedFields } = useFormState( {
+	const { errors, isDirty, dirtyFields } = useFormState( {
 		control,
 	} );
 
-	const hasErrors = () => {
-		return Object.keys( errors ).length > 0;
-	};
-
+	// Placeholder.
 	const onSubmit = ( formData ) => {
 	};
 
@@ -146,7 +132,28 @@ const Interface = ( props ) => {
 					politeness="assertive"
 					inline={ false }
 					icon={ () => <Info /> }
-				/>
+				>
+					<div className="ajaxify-admin-component-row ajaxify-admin-component-row-button" style={ { marginTop: '15px' } }>
+						<Button
+							href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/menu-helper"
+							className="ajaxify-button ajaxify__btn-secondary"
+							icon={ <ExternalLink style={ { color: 'currentColor' } } /> }
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{ __( 'Menu Helper Overview', 'wp-ajaxify-comments' ) }
+						</Button>
+						<Button
+							href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/getting-started"
+							className="ajaxify-button ajaxify__btn-secondary"
+							icon={ <ExternalLink style={ { color: 'currentColor' } } /> }
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{ __( 'Getting Started Guide', 'wp-ajaxify-comments' ) }
+						</Button>
+					</div>
+				</Notice>
 			</div>
 		);
 	};
@@ -182,17 +189,30 @@ const Interface = ( props ) => {
 										name="menuHelper"
 										control={ control }
 										render={ ( { field: { onChange, value } } ) => (
-											<ToggleControl
-												label={ __( 'Enable Menu Helper', 'wp-ajaxify-comments' ) }
-												checked={ value }
-												onChange={ ( boolValue ) => {
-													onChange( boolValue );
-												} }
-												help={ __(
-													'Enable menu helper to enable a helper in the admin menu in order to evaluate a comments page for the selectors needed.',
-													'wp-ajaxify-comments',
-												) }
-											/>
+											<>
+												<ToggleControl
+													label={ __( 'Enable Menu Helper', 'wp-ajaxify-comments' ) }
+													checked={ value }
+													onChange={ ( boolValue ) => {
+														onChange( boolValue );
+													} }
+													help={ __(
+														'Enable menu helper to enable a helper in the admin menu in order to evaluate a comments page for the selectors needed.',
+														'wp-ajaxify-comments',
+													) }
+												/>
+												<div className="ajaxify-admin-component-row ajaxify-admin-component-row-button" style={ { marginTop: '15px' } }>
+													<Button
+														href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/menu-helper"
+														className="ajaxify-button ajaxify__btn-secondary"
+														icon={ <ExternalLink style={ { color: 'currentColor' } } /> }
+														target="_blank"
+														rel="noopener noreferrer"
+													>
+														{ __( 'Menu Helper Overview', 'wp-ajaxify-comments' ) }
+													</Button>
+												</div>
+											</>
 										) }
 									/>
 								</td>
@@ -439,6 +459,17 @@ const Interface = ( props ) => {
 												</>
 											) }
 										/>
+										<div className="ajaxify-admin-component-row ajaxify-admin-component-row-button" style={ { marginTop: '15px' } }>
+											<Button
+												href="https://docs.dlxplugins.com/v/ajaxify-comments/advanced/selectors"
+												className="ajaxify-button ajaxify__btn-secondary"
+												icon={ <ExternalLink style={ { color: 'currentColor' } } /> }
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												{ __( 'Selectors Overview', 'wp-ajaxify-comments' ) }
+											</Button>
+										</div>
 									</div>
 								</td>
 							</tr>
