@@ -694,9 +694,9 @@ WPAC.LoadComments = function(url, options) {
 		selectorCommentsContainer: WPAC._Options.selectorCommentsContainer,
 		selectorRespondContainer: WPAC._Options.selectorRespondContainer,
 		disableCache: WPAC._Options.disableCache,
-		beforeSelectElements: WPAC._Callbacks.beforeSelectElements, 
-		beforeUpdateComments: WPAC._Callbacks.beforeUpdateComments,
-		afterUpdateComments: WPAC._Callbacks.afterUpdateComments,
+		beforeSelectElements: WPACCallbacks.beforeSelectElements, 
+		beforeUpdateComments: WPACCallbacks.beforeUpdateComments,
+		afterUpdateComments: WPACCallbacks.afterUpdateComments,
 	}, options || {});	
 	
 	// Save form data and focus

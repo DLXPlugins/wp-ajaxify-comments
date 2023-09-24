@@ -112,21 +112,22 @@ document.addEventListener( 'DOMContentLoaded', function() {
 				const selectorList = [];
 
 				// Find the comments container. todo - make filterable.
-				const commentListSelectors = [
-					'.wp-block-comment-template',
+				const commentContainerSelectors = [
+					'.wp-block-comments',
 					'#comments',
 					'.comments-wrapper',
-					'.ast-comment-list',
 					'.comments',
-					'.comment-list',
-					'.comment-area',
+					'.comments-area',
 				];
 
 				// Loop through each of the comment selectors.
 				// Find children and make sure its a comment.
 				// Make sure selected element is a comment list.
-				let foundCommentList = false;
-				commentListSelectors.forEach( ( commentSelector ) => {
+				let foundCommentContainer = false;
+				commentContainerSelectors.forEach( ( commentSelector ) => {
+					if ( foundCommentContainer ) {
+						return;
+					}
 					const commentElement = document.querySelector( commentSelector );
 					if ( commentElement ) {
 						const commentElementTagName = commentElement.tagName.toLowerCase();
@@ -136,41 +137,55 @@ document.addEventListener( 'DOMContentLoaded', function() {
 							return;
 						}
 
-						// Check to see if direct children contain LI, DIV.
+						// If element is a heading, bail.
+						if ( headingsArr.includes( commentElementTagName ) ) {
+							return;
+						}
+
+						// If the element is UL or OL, bail.
+						if ( 'ul' === commentElementTagName || 'ol' === commentElementTagName ) {
+							return;
+						}
+
+						// Check to see if direct children contain UL, OL.
 						// If not, skip.
-						let foundComment = false;
-						let skipCheck = false;
 						commentElement.childNodes.forEach( ( child ) => {
 							if ( child.tagName ) {
 								const childTagName = child.tagName.toLowerCase();
 
-								// IF tag name is a heading, bail.
-								if ( headingsArr.includes( childTagName ) ) {
-									skipCheck = true;
-									return;
-								}
-
-								if ( 'li' === childTagName || 'div' === childTagName ) {
-									foundComment = true;
+								// If direct child is a UL or OL, then parent is the comment container.
+								if ( 'ul' === childTagName || 'ol' === childTagName ) {
+									foundCommentContainer = true;
 								}
 							}
 						} );
-						if ( skipCheck ) {
+
+						// If we still haven't found the comment container, check that is has #respond or a form element.
+						if ( ! foundCommentContainer ) {
+							const respondOrForm = commentElement.querySelectorAll( '#respond, form' );
+							if ( null !== respondOrForm && respondOrForm.length > 0 ) {
+								foundCommentContainer = true;
+							}
 							return;
 						}
-						if ( ! foundComment ) {
+						// If we still haven't found it... search for .comment, which is usually on the comment list item.
+						if ( ! foundCommentContainer ) {
 							// Search for .comment.
 							const commentElementComment = commentElement.querySelector( '.comment' );
 							if ( commentElementComment ) {
-								foundComment = true;
+								// Find closest parent that matches the comment selector.
+								const commentElementCommentParent = commentElementComment.closest( commentSelector );
+								if ( commentElementCommentParent ) {
+									foundCommentContainer = true;
+								}
 							}
 						}
-						if ( ! foundComment ) {
+						if ( ! foundCommentContainer ) {
 							return;
 						}
 
 						// We've likely found the comment list. This is a valid container.
-						foundCommentList = true;
+						foundCommentContainer = true;
 
 						selectorList.push( {
 							selector: commentSelector,
@@ -178,6 +193,43 @@ document.addEventListener( 'DOMContentLoaded', function() {
 							selectorOptionName: 'selectorCommentsContainer',
 							selectorLabel: __( 'Comments Container', 'wp-ajaxify-comments' ),
 						} );
+					}
+				} );
+
+				// Now check to see if we can find the comment list.
+				let foundCommentList = false;
+				const commentListSelectors = [
+					'.comment-list',
+					'.comment-list-wrapper',
+					'.comment-list-container',
+					'.ast-comment-list',
+					'.wp-block-comment-template',
+				];
+				commentListSelectors.forEach( ( commentListSelector ) => {
+					if ( foundCommentList ) {
+						return;
+					}
+					const commentListElement = document.querySelector( commentListSelector );
+					if ( commentListElement ) {
+						const commentListElementTagName = commentListElement.tagName.toLowerCase();
+
+						// If child contains LI, or `.comment`, then we've found the comment list.
+						const commentListItems = commentListElement.querySelectorAll( 'li, .comment' );
+						if ( null !== commentListItems && commentListItems.length > 0 ) {
+							foundCommentList = true;
+						}
+
+						if ( 'ul' === commentListElementTagName || 'ol' === commentListElementTagName ) {
+							foundCommentList = true;
+						}
+						if ( foundCommentList ) {
+							selectorList.push( {
+								selector: commentListSelector,
+								tagName: commentListElementTagName,
+								selectorOptionName: 'selectorCommentList',
+								selectorLabel: __( 'Comment List', 'wp-ajaxify-comments' ),
+							} );
+						}
 					}
 				} );
 
@@ -287,7 +339,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 				} );
 
 				// Check to see if we found all the selectors.
-				if ( selectorList.length < 5 ) {
+				if ( selectorList.length < 6 ) {
 					Swal.fire( {
 						titleText: __( 'Unable to Find All Selectors', 'wp-ajaxify-comments' ),
 						html: __( 'We were unable to find all the required selectors. Please contact support at <a style="color: #FFF;" href="https://dlxplugins.com/support/">dlxplugins.com/support/</a>.', 'wp-ajaxify-comments' ),

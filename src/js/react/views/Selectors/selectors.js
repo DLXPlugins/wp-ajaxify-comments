@@ -81,6 +81,7 @@ const Interface = ( props ) => {
 			menuHelper: data.menuHelper,
 			selectorCommentForm: data.selectorCommentForm,
 			selectorCommentsContainer: data.selectorCommentsContainer,
+			selectorCommentList: data.selectorCommentList,
 			selectorCommentPagingLinks: data.selectorCommentPagingLinks,
 			selectorCommentLinks: data.selectorCommentLinks,
 			selectorRespondContainer: data.selectorRespondContainer,
@@ -253,6 +254,52 @@ const Interface = ( props ) => {
 														/>
 													) }
 													{ 'required' === errors.selectorCommentsContainer?.type && (
+														<Notice
+															message={ __(
+																'This is a required field.',
+																'wp-ajaxify-comments',
+															) }
+															status="error"
+															politeness="assertive"
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
+														/>
+													) }
+												</>
+											) }
+										/>
+									</div>
+									<div className="ajaxify-admin__control-row">
+										<Controller name="selectorCommentList"
+											control={ control }
+											rules={ { required: true, pattern: cssRegex } }
+											render={ ( { field: { onChange, value } } ) => (
+												<>
+													<TextControl
+														label={ __( 'Comments List', 'wp-ajaxify-comments' ) }
+														type="text"
+														className={ classNames( 'ajaxify-admin__text-control', {
+															'has-error': 'required' === errors.selectorCommentList?.type || 'pattern' === errors.selectorCommentList?.type,
+															'is-required': true,
+														} ) }
+														help={ __( 'The CSS selector for the comments list wrapper.', 'wp-ajaxify-comments' ) }
+														aria-required="true"
+														value={ value }
+														onChange={ onChange }
+													/>
+													{ 'pattern' === errors.selectorCommentList?.type && (
+														<Notice
+															message={ __(
+																'Please use valid comma-separated CSS selectors.',
+																'wp-ajaxify-comments',
+															) }
+															status="error"
+															politeness="assertive"
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
+														/>
+													) }
+													{ 'required' === errors.selectorCommentList?.type && (
 														<Notice
 															message={ __(
 																'This is a required field.',
