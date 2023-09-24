@@ -209,7 +209,6 @@ WPAC._ReplaceComments = function(data, commentUrl, useFallbackUrl, formData, for
 	}
 	if (newCommentsContainer.length > 1) {
 		WPAC._Debug("error", "Comment form on requested page found multiple times (selector: '%s')", newCommentsContainer);
-		console.log( newCommentsContainer );
 
 		// Find the first comment container that has children and is not a heading.
 		newCommentsContainer = newCommentsContainer.filter(function() {
@@ -296,7 +295,6 @@ WPAC._ReplaceComments = function(data, commentUrl, useFallbackUrl, formData, for
 
 	// Call after update comments.
 	if ( '' !== afterUpdateComments ) {
-		console.log( afterUpdateComments );
 		const updateComments = new Function( 'extractedBody', 'commentUrl', afterUpdateComments );
 		updateComments( extractedBody, commentUrl );
 
@@ -716,22 +714,26 @@ WPAC.LoadComments = function(url, options) {
 		beforeSend: function(xhr){ xhr.setRequestHeader("X-WPAC-REQUEST", "1"); },
 		success: function (data) {
 
-			// Replace comments (and return if replacing failed)
-			if (!WPAC._ReplaceComments(data, url, true, formData, formFocus, options.selectorCommentsContainer, options.selectorCommentForm, 
-				options.selectorRespondContainer, options.beforeSelectElements, options.beforeUpdateComments, options.afterUpdateComments)) return;
-			
-			if (options.updateUrl) WPAC._UpdateUrl(url);
+			try {
+				// Replace comments (and return if replacing failed)
+				if (!WPAC._ReplaceComments(data, url, true, formData, formFocus, options.selectorCommentsContainer, options.selectorCommentForm, 
+					options.selectorRespondContainer, options.beforeSelectElements, options.beforeUpdateComments, options.afterUpdateComments)) return;
+				
+				if (options.updateUrl) WPAC._UpdateUrl(url);
 
-			// Scroll to anchor
-			var waitForScrollToAnchor = false;
-			if (options.scrollToAnchor) {
-				var anchor = url.indexOf("#") >= 0 ? url.substr(url.indexOf("#")) : null;
-				if (anchor) {
-					WPAC._Debug("info", "Anchor '%s' extracted from url", anchor);
-					if (WPAC._ScrollToAnchor(anchor, options.updateUrl, function() { options.success(); } )) {
-						waitForScrollToAnchor = true;
+				// Scroll to anchor
+				var waitForScrollToAnchor = false;
+				if (options.scrollToAnchor) {
+					var anchor = url.indexOf("#") >= 0 ? url.substr(url.indexOf("#")) : null;
+					if (anchor) {
+						WPAC._Debug("info", "Anchor '%s' extracted from url", anchor);
+						if (WPAC._ScrollToAnchor(anchor, options.updateUrl, function() { options.success(); } )) {
+							waitForScrollToAnchor = true;
+						}
 					}
 				}
+			} catch ( e ) {
+				WPAC._Debug( 'error', 'Something went wrong while refreshing comments: %s', e );
 			}
 			
 			// Unblock UI
