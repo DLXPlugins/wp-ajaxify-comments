@@ -1,71 +1,101 @@
-﻿=== WP Ajaxify Comments ===
+﻿=== Ajaxify Comments ===
 Contributors: ronalfy
-Tags: AJAX, comments, comment, themes, theme
+Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.3.1
-Stable tag: 2.0.0 RC-2
-License: GPLv2
+Stable tag: 2.0.0
+Requires PHP: 7.2
+License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Donate link: https://github.com/sponsors/DLXPlugins
 
-WP Ajaxify Comments hooks into your comment form and adds AJAX functionality - no page reloads required when validating, posting or updating comments
+Ajaxify Comments hooks into WordPress comments and allows comment posting without reloading the page. It supports lazy loading, and allows comments to load in the background. This can help speed up your page load time.
 
 == Description ==
 
-**Introduction**
+Skip page reloads and separate error screens when posting comments. Ajaxify Comments hooks into your native WordPress comment system and allows comment posting without a page reload. Lazy loading is also supported, which can help speed up your page load time.
 
-When submitting the comment form, WordPress by default reloads the entire page. In the case of an error (e.g. an invalid email address or an empty comment field) the error message is shown on top of a new (blank) screen and the user has to use the browser's back button to correct his inputs before posting the comment again.
+=== TLDR ===
 
-The <a href="https://dlxplugins.com/plugins/ajaxify-comments">WP Ajaxify Comments WordPress plugin</a> hooks into any WordPress theme and adds AJAX functionality to the comment form: When the user submits his comment, the plugin sends the data to the WordPress backend without reloading the entire page. In the case of an error, the plugin shows an overlay containing the error message so that the user can correct his comment without navigating back. If the comment has been posted successfully, the plugin adds the (new) comment to the list of existing comments without leaving the page and shows an information overlay.
+Ajaxify Comments hooks into your theme and improves the usability of the comment form by validating and adding comments without the need of page reloads. Users can remain on the page and interact with new comments as they're posted. This plugin also supports lazy loading of comments, which can help speed up your page load time.
 
-Moreover this plugin includes an option to automatically refresh the comments on the current page while the user stays on your page without requiring a page reload.
+=== Introduction ===
 
-**tl;dr**
+When submitting the comment form, WordPress by default reloads the entire page. This can be a disorienting experience for the user. In the case of errors in the comment (invalid email, duplicate comment, empty comment), these often require a separate error screen and the user has to use the back button to edit their comment. This can be a frustrating experience for the user. Adding to that, comments can be resource intensive, and can slow down your page load time.
 
-WP Ajaxify Comments hooks into your theme and improves the usability of the comment form by validating and adding comments without the need of page reloads.
+With Ajaxify Comments, comments are posted without a page reload. If there are errors, the error message is shown immediately, so the user can correct their comment.
 
-**Technical note**
+Ajaxify Comments also comes with lazy loading of the comments section. For a page with a lot of comments, this can speed things up considerably. You can load comments when the DOM is ready or when the comment section is scrolled into view.
+
+Moreover this plugin includes an option to automatically refresh the comments on the current page while the user stays on your page without requiring a page reload. This can be helpful in busy comment sections where reply response time is important.
+
+=== Requirements and Compatibility ===
+
+Please use the native WordPress comment system with Ajaxify Comments.
+
+The plugin has integrations with:
+
+1. <a href="https://docs.dlxplugins.com/v/ajaxify-comments/plugin-integrations/confetti">Confetti</a> - Show confetti when a comment is posted.
+2. <a href="https://docs.dlxplugins.com/v/ajaxify-comments/plugin-integrations/comment-edit-core">Comment Edit Core</a> - Allow users to edit their comments.
+
+=== Technical Note ===
 
 Since the plugin hooks into the theme on client-side to intercept the comment form submit process, and to add new comments without reloading the page, the plugin needs to access the DOM nodes using jQuery selectors. The plugin comes with default values for these selectors that were successfully tested with WordPress' default themes "Twenty Ten", "Twenty Eleven", "Twenty Twelve", "Twenty Thirteen", "Twenty Fourteen", "Twenty Fifteen", "Twenty Sixteen". If required, the selectors can be customized to match your theme in the plugin's settings.
 
-**Important**
+=== Features ===
 
-If the plugin does not work out of the box with your theme, custom selectors could be defined in the plugin's settings. The plugin is highly customizable and *We're aware of only a few conflicts with any themes or other plugins that cannot be resolved* (see "Known incompatibilities" in the FAQ section).
+Ajaxify Comments is community supported. If you would like to add or change anything about the plugin, please consider assisting with the development on <a href="https://github.com/DLXPlugins/wp-ajaxify-comments">GitHub</a>.
 
-**Some features of the plugin**
+* Post comments without a page reload.
+* Show error messages without a page reload.
+* Lazy load comments.
+* Automatically refresh comments.
+* Comment form validation.
+* Support for pages with multiple comment forms.
+* Support for threaded and moderated comments.
+* Compatible with most spam plugins.
+* Menu Helper to help you find the right selectors for your theme.
+* Appearance preview to see how the plugin will look on your site.
+* Simulate Ajaxify Comments enabled or disabled for testing and to compare the difference.
+* Translate and customize the default WordPress comment messages.
 
-* Actively developed and supported
-* Validating and adding comments without page reloads
-* Seamless integration with almost every theme (default options should work with most themes)
-* i18n support (included localizations for ar, ca, da-DK, de-DE, es-ES, fa-IR, fr-FR, he-IL, hu-HU, nl-NL, pl-PL, pt-BR, ru-RU, sk-SK, tr-TR, uk, vi-VN, zh-CN)
-* Support for customizing (default) WordPress messages
-* Support for threaded comments
-* Support for comments that await moderation
-* Support for pages with multiple comment forms
-* Compatibility with comment spam protection plugins and other plugins that extend/manipulate the comment form
-* Admin frontend to customize the look and feel
-* (Automatic) fallback mode uses complete page reloads if the plugin is not configured properly or any incompatibility is detected
-* Client-side JavaScript API (see FAQ for more details)
-* Automatically updating comments while user stays on page
-* Option to load comments asynchronously with secondary AJAX request if page contains more than a specified number of comments
-* Option to save bandwidth for AJAX responses
-* Debug mode to support troubleshooting
+=== Questions/Help? ===
 
+Please use the <a href="https://wordpress.org/support/plugin/wp-ajaxify-comments">support forum</a> to ask questions or to report issues.
+
+> Most questions can be resolved by checking out our docs site. <a href="https://docs.dlxplugins.com/v/ajaxify-comments">https://docs.dlxplugins.com/v/ajaxify-comments</a> - the Search is AI, so it should be able to find what you're looking for.
 
 == Screenshots ==
 
-1. Info overlay after the comment has successfully been posted
-2. Error overlay with error message when posting a comment failed
-3. Settings page (for customizing the plugin)
+1. Ajaxify Comments demonstration with inline error messages displayed
+2. Info overlay after the comment has successfully been posted
+3. Error overlay with error message when posting a comment failed
+4. Settings page (for customizing the plugin)
 
 
 == Installation ==
 
 1. Upload wp-ajaxify-comments.zip to your WordPress plugins directory, usually `wp-content/plugins/` and unzip the file. It will create a `wp-content/plugins/wp-ajaxify-comments/` directory.
 1. Activate the plugin through the "Plugins" menu in WordPress.
-1. Enable the plugin on the plugin's settings page (Settings > WP Ajaxify Comments)
+1. Enable the plugin on the plugin's settings page (Settings > Ajaxify Comments)
 
 
 == Changelog ==
+
+= 2.0.0 =
+* Released 2024-09-24
+* Renamed WP Ajaxify Comments to Ajaxify Comments in the admin. Updated branding.
+* Completely refreshed admin interface. The admin is now organized into tabs with quick saving and reset options.
+* Appearance tab allows for a real-time preview of the plugin's appearance.
+* Appearance tab is a lot more user friendly, allowing for easy customization of the plugin's appearance.
+* Added Support tab with helpful links to documentation and support.
+* Removed admin notice on plugins screen.
+* Replaced admin notice with contextual plugin row notice. This will display whenever debug mode is on, or if the plugin is disabled.
+* Added first-time-installation notice for new users who are new to setting up the plugin.
+* Added synthetic callback events for the available callbacks. This allows developers to hook into the plugin's events without having to modify the plugin's code.
+* Callbacks have a slightly more secure implementation and execution.
+* Added a tool called Selector Helper, which will help users find the right selectors for their theme.
+* Please <a href="https://dlxplugins.com/announcements/ajaxify-comments-2-0-is-released/">read the announcement post</a> for more information.
 
 = 1.7.5 =
 * Released 2023-08-30
@@ -570,5 +600,5 @@ Bug-fix
 
 == Upgrade Notice ==
 
-= 1.7.5 =
-Ajaxify Comments is under new ownership. Making sure plugin works with WP 6.3+.
+= 2.0.0 =
+This is a major release. The entire admin has been refreshed. A new feature called Menu Helper can help you find the right comment selectors so you don't have to dive into source code each time you switch themes or set up the plugin. Appearance preview allows you to see how the plugin will look on your site. Simulate Ajaxify Comments enabled or disabled for testing and to compare the difference. The plugin has been renamed from WP Ajaxify Comments to Ajaxify Comments.
