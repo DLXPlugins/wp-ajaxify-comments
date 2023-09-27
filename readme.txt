@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.3.1
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -65,6 +65,10 @@ Please use the <a href="https://wordpress.org/support/plugin/wp-ajaxify-comments
 
 > Most questions can be resolved by checking out our docs site. <a href="https://docs.dlxplugins.com/v/ajaxify-comments">https://docs.dlxplugins.com/v/ajaxify-comments</a> - the Search is AI, so it should be able to find what you're looking for.
 
+=== Credits ===
+
+This plugin was initially developed by Jan Jonas starting in 2012. Company <a href="https://weweave.net/">weweave</a> maintained the plugin from 2014-2022.
+
 == Screenshots ==
 
 1. Ajaxify Comments demonstration with inline error messages displayed
@@ -81,6 +85,10 @@ Please use the <a href="https://wordpress.org/support/plugin/wp-ajaxify-comments
 
 
 == Changelog ==
+
+= 2.0.1 =
+* Released 2024-09-27
+* Lazy loading was referencing the wrong variable. This has been fixed.
 
 = 2.0.0 =
 * Released 2024-09-24
@@ -600,5 +608,5 @@ Bug-fix
 
 == Upgrade Notice ==
 
-= 2.0.0 =
-This is a major release. The entire admin has been refreshed. A new feature called Menu Helper can help you find the right comment selectors so you don't have to dive into source code each time you switch themes or set up the plugin. Appearance preview allows you to see how the plugin will look on your site. Simulate Ajaxify Comments enabled or disabled for testing and to compare the difference. The plugin has been renamed from WP Ajaxify Comments to Ajaxify Comments.
+= 2.0.1 =
+Lazy loading was referencing the wrong variable.
