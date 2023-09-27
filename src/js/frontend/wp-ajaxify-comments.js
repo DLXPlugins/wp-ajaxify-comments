@@ -752,7 +752,6 @@ WPAC.LoadComments = function(url, options) {
 
 jQuery(function() {
 	var initSuccesful = WPAC.Init();
-	console.log( WPAC );
 	if (0 === WPAC._Options.asyncCommentsThreshold) {
 		if (!initSuccesful) {
 			WPAC._LoadFallbackUrl(WPAC._AddQueryParamStringToUrl(window.location.href, "WPACFallback", "1"))
