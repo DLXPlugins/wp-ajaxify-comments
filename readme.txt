@@ -1,4 +1,4 @@
-﻿=== Ajaxify Comments ===
+﻿=== Ajaxify Comments - Lazy Load and No Reload Comments ===
 Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
@@ -79,9 +79,9 @@ This plugin was initially developed by Jan Jonas starting in 2012. Company <a hr
 
 == Installation ==
 
-1. Upload wp-ajaxify-comments.zip to your WordPress plugins directory, usually `wp-content/plugins/` and unzip the file. It will create a `wp-content/plugins/wp-ajaxify-comments/` directory.
-1. Activate the plugin through the "Plugins" menu in WordPress.
-1. Enable the plugin on the plugin's settings page (Settings > Ajaxify Comments)
+See: <a href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/installing-the-plugin">Plugin Installation</a>.
+
+If you have activated the plugin and are just getting started, please see our <a href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/getting-started">Getting Started</a> guide.
 
 
 == Changelog ==
