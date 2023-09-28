@@ -713,7 +713,6 @@ WPAC.LoadComments = function(url, options) {
 		type: "GET",
 		beforeSend: function(xhr){ xhr.setRequestHeader("X-WPAC-REQUEST", "1"); },
 		success: function (data) {
-
 			try {
 				// Replace comments (and return if replacing failed)
 				if (!WPAC._ReplaceComments(data, url, true, formData, formFocus, options.selectorCommentsContainer, options.selectorCommentForm, 

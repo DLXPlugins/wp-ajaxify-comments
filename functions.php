@@ -357,8 +357,36 @@ function wpac_is_ajax_request() {
 	return isset( $_SERVER['HTTP_X_WPAC_REQUEST'] ) && $_SERVER['HTTP_X_WPAC_REQUEST'];
 }
 
-function wpac_comments_query_filter( $query ) {
+function wpac_comments_template_query_args_filter( $comments ) {
+	if ( is_admin() && ! wpac_is_ajax_request() ) {
+		return $comments;
+	}
+	
+	// No comment filtering if request is a fallback or WPAC-AJAX request
+	if ( ( isset( $_REQUEST['WPACFallback'] ) && $_REQUEST['WPACFallback'] ) ) {
+		return $comments;
+	}
 
+	// If X-WPAC-REQUEST header is set, return all comments
+	if ( wpac_is_ajax_request() ) {
+		remove_filter( 'the_comments', 'wpac_comments_template_query_args_filter' );
+		return $comments;
+	}
+
+	$asyncCommentsThreshold = wpac_get_option( 'asyncCommentsThreshold' );
+	$commentsCount          = wp_count_comments( get_the_ID() )->approved;
+	if ( strlen( $asyncCommentsThreshold ) == 0 || $commentsCount == 0 || $asyncCommentsThreshold > $commentsCount ) {
+		return $comments;
+	}
+
+	return $comments;
+}
+
+function wpac_comments_query_filter( $query ) {
+	if ( is_admin() && ! wpac_is_ajax_request() ) {
+		return $query;
+	}
+	
 	// No comment filtering if request is a fallback or WPAC-AJAX request
 	if ( ( isset( $_REQUEST['WPACFallback'] ) && $_REQUEST['WPACFallback'] ) ) {
 		return $query;

@@ -90,7 +90,7 @@ function wp() {
 			if ( ! $can_load ) {
 				return;
 			}
-			add_filter( 'comments_array', 'wpac_comments_query_filter' );
+			add_filter( 'the_comments', 'wpac_comments_template_query_args_filter' );
 			add_action( 'wp_enqueue_scripts', 'wpac_initialize', 9 );
 			add_action( 'wp_enqueue_scripts', 'wpac_enqueue_scripts' );
 			add_filter( 'gettext', 'wpac_filter_gettext', 20, 3 );
