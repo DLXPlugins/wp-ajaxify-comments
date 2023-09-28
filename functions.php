@@ -223,6 +223,15 @@ function wpac_load_comments_async() {
 	return false;
 }
 
+/**
+ * If lazy loading is enabled on the frontend, output comments placeholder for Genesis themes.
+ */
+function wpac_genesis_before_comments() {
+	if ( Functions::is_lazy_loading_enabled( true, false ) ) {
+		echo '<div id="comments" class="comments-area"></div>';
+	}
+}
+
 function wpac_theme_has_html5_support() {
 	$html5Support = get_theme_support( 'html5' );
 	return $html5Support && in_array( 'script', $html5Support[0] );

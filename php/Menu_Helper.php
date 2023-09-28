@@ -447,8 +447,8 @@ class Menu_Helper {
 
 		// Set var for skipping ajaxify enabled status.
 		$check_ajaxify_enabled                 = true;
-		$dont_check_ajaxify_lazy_load_get_vars = false;
-		$check_ajaxify_lazy_load_get_vars      = true;
+		$dont_check_ajaxify_lazy_load_get_vars = true;
+		$check_ajaxify_lazy_load_get_vars      = false;
 
 		// Check if lazy loading is enabled.
 		$is_lazy_loading_enabled = Functions::is_lazy_loading_enabled(
@@ -469,8 +469,8 @@ class Menu_Helper {
 
 			// Check if lazy loading is being initiated by get variable.
 			$lazy_loading_enabled = Functions::is_lazy_loading_enabled(
-				$check_ajaxify_enabled,
-				$check_ajaxify_lazy_load_get_vars,
+				false,
+				true,
 				$post_id
 			);
 			if ( ! $lazy_loading_enabled ) {
@@ -478,19 +478,21 @@ class Menu_Helper {
 			}
 
 			// Show the menu item only if Query var isn't null.
-			$admin_bar->add_node(
-				array(
-					'id'     => 'wpac-ajaxify-lazy-loading-disable',
-					'parent' => 'wpac-menu-helper',
-					'title'  => __( 'Simulate Lazy Load Disabled', 'wp-ajaxify-comments' ),
-					'href'   => esc_url( $disable_lazy_loading_url ),
-				)
-			);
+			if ( Functions::is_ajaxify_enabled( true ) && ! $lazy_loading_enabled ) {
+				$admin_bar->add_node(
+					array(
+						'id'     => 'wpac-ajaxify-lazy-loading-disable',
+						'parent' => 'wpac-menu-helper',
+						'title'  => __( 'Simulate Lazy Load Disabled', 'wp-ajaxify-comments' ),
+						'href'   => esc_url( $disable_lazy_loading_url ),
+					)
+				);
+			}
 		} else {
 			// Get whether lazy loading is disabled via query var.
 			$lazy_loading_enabled = Functions::is_lazy_loading_enabled(
-				$check_ajaxify_enabled,
-				$check_ajaxify_lazy_load_get_vars,
+				false,
+				true,
 				$post_id
 			);
 
@@ -509,16 +511,17 @@ class Menu_Helper {
 				$enable_lazy_loading_url = get_permalink( $post_id );
 			}
 
-			// If `ajaxifyEnable` is in the URL, assume it's disabled via query var.
-			$admin_bar->add_node(
-				array(
-					'id'     => 'wpac-ajaxify-lazy-loading-enable',
-					'parent' => 'wpac-menu-helper',
-					'title'  => __( 'Simulate Lazy Load Enabled', 'wp-ajaxify-comments' ),
-					'href'   => esc_url( $enable_lazy_loading_url ),
-				)
-			);
-
+			// Add node to admin bar.
+			if ( Functions::is_ajaxify_enabled( true ) ) {
+				$admin_bar->add_node(
+					array(
+						'id'     => 'wpac-ajaxify-lazy-loading-enable',
+						'parent' => 'wpac-menu-helper',
+						'title'  => __( 'Simulate Lazy Load Enabled', 'wp-ajaxify-comments' ),
+						'href'   => esc_url( $enable_lazy_loading_url ),
+					)
+				);
+			}
 		}
 
 		// If comments are open, add close. If closed, add open.

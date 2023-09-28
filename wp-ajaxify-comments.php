@@ -74,6 +74,9 @@ function wp() {
 		add_filter( 'gettext', 'wpac_filter_gettext', 20, 3 );
 		add_filter( 'option_page_comments', 'wpac_option_page_comments' );
 		add_filter( 'option_comments_per_page', 'wpac_option_comments_per_page' );
+
+		// For Genesis compatibility.
+		add_filter( 'genesis_before_comments', 'wpac_genesis_before_comments' );
 	}
 }
 add_action( 'wp', __NAMESPACE__ . '\wp' );
