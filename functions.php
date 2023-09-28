@@ -361,7 +361,7 @@ function wpac_comments_template_query_args_filter( $comments ) {
 	if ( is_admin() && ! wpac_is_ajax_request() ) {
 		return $comments;
 	}
-	
+
 	// No comment filtering if request is a fallback or WPAC-AJAX request
 	if ( ( isset( $_REQUEST['WPACFallback'] ) && $_REQUEST['WPACFallback'] ) ) {
 		return $comments;
@@ -373,10 +373,15 @@ function wpac_comments_template_query_args_filter( $comments ) {
 		return $comments;
 	}
 
-	$asyncCommentsThreshold = wpac_get_option( 'asyncCommentsThreshold' );
-	$commentsCount          = wp_count_comments( get_the_ID() )->approved;
-	if ( strlen( $asyncCommentsThreshold ) == 0 || $commentsCount == 0 || $asyncCommentsThreshold > $commentsCount ) {
-		return $comments;
+	$async_comments     = wpac_get_option( 'asyncCommentsThreshold' );
+	$can_async_comments = $async_comments === 0;
+
+	// Check to see if we can async comments, and if so, return empty
+	// comment array to prevent comments from being loaded on initial page load.
+
+	$comments_count = (int) wp_count_comments( get_the_ID() )->approved;
+	if ( strlen( $async_comments ) > 0 && '0' === $async_comments && $comments_count > 0 ) {
+		return array();
 	}
 
 	return $comments;
@@ -386,7 +391,7 @@ function wpac_comments_query_filter( $query ) {
 	if ( is_admin() && ! wpac_is_ajax_request() ) {
 		return $query;
 	}
-	
+
 	// No comment filtering if request is a fallback or WPAC-AJAX request
 	if ( ( isset( $_REQUEST['WPACFallback'] ) && $_REQUEST['WPACFallback'] ) ) {
 		return $query;
