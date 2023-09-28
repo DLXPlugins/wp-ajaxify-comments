@@ -157,6 +157,152 @@ class Functions {
 	}
 
 	/**
+	 * Return if Ajaxify Comments "can" be marked as enabled. This is a pre-check.
+	 *
+	 * @param bool $skip_get_check Whether to skip the GET check or not.
+	 *
+	 * @return bool true if Ajaxify Comments can be marked as enabled, false (default) if not.
+	 */
+	public static function is_ajaxify_enabled( $skip_get_check = false ) {
+		$options = Options::get_options();
+		$ajaxify_get_enabled = filter_input( INPUT_GET, 'ajaxifyEnable', FILTER_VALIDATE_BOOLEAN );
+		$ajaxify_enabled     = (bool) $options['enable'];
+
+		// If get enabled is false, simulate Ajaxify disabled.
+		if ( null !== $ajaxify_get_enabled && ! $ajaxify_get_enabled && ! $skip_get_check ) {
+			$ajaxify_enabled = false;
+		}
+
+		// Get debug mode.
+		$ajaxify_debug_mode = (bool) $options['debug'];
+
+		/**
+		 * Filter whether to load the plugin.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param bool $can_force_enable Whether to load the plugin's scripts. Pass `true` to force scripts to load.
+		 */
+		$can_force_load = apply_filters( 'dlxplugins/ajaxify/comments/force_load', false );
+
+		/**
+		 * Filter whether to load the plugin's scripts.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param bool $can_load Whether to load the plugin. Pass `false` to prevent the plugin from loading.
+		 */
+		$can_load = apply_filters( 'dlxplugins/ajaxify/comments/can_load', true );
+
+		// If Script override, Ajaxify is enabled if allowed to load.
+		if ( ( $can_force_load && ! is_admin() && ! wpac_is_login_page() ) ) {
+			return $can_load;
+		}
+
+		// Check if enabled by query var.
+		$wpac_enable = sanitize_text_field( filter_input( INPUT_GET, 'wpac_enable', FILTER_DEFAULT ) );
+
+		if ( ! is_admin() && ! wpac_is_login_page() && $can_load ) {
+			if ( (bool) $options['enable'] || ( $options['enableByQuery'] && wpac_get_secret() === $wpac_enable ) ) {
+
+				// We've made it here. Ajaxify is enabled, and lazy loading is enabled.
+				$ajaxify_enabled = true;
+			}
+		}
+
+		// Return if Ajaxify can be marked as enabled.
+		return $ajaxify_enabled;
+	}
+
+	/**
+	 * Check if lazy loading is enabled.
+	 *
+	 * @param bool $skip_ajaxify_enabled_check Whether to skip the Ajaxify Comments is enabled or not.
+	 * @param bool $skip_get_check             Whether to skip the GET check or not.
+	 * @param int  $post_id                    Post ID to check if lazy loading is enabled for (optional). If not passed, get the global post ID via get_the_ID().
+	 *
+	 * @uses self::is_ajaxify_enabled()
+	 *
+	 * @return bool true if lazy loading is enabled, false if not.
+	 */
+	public static function is_lazy_loading_enabled( $skip_ajaxify_enabled_check = false, $skip_get_check = true, $post_id = null ) {
+
+		// If ajaxify is disabled, so is lazy loading. Skip this check via $skip_ajaxify_enabled_check.
+		if ( ! $skip_ajaxify_enabled_check && ! self::is_ajaxify_enabled() ) {
+			return false;
+		}
+
+		// Check GET variables to see if lazy loading is enabled via query var.
+		if ( ! $skip_get_check && self::is_ajaxify_enabled( $skip_get_check ) ) {
+			$ajaxify_lazy_loading_get_enabled = filter_input( INPUT_GET, 'ajaxifyLazyLoadEnable', FILTER_VALIDATE_BOOLEAN );
+			if ( null !== $ajaxify_lazy_loading_get_enabled ) {
+				// Query var is set, let's get post ID.
+				$post_id = filter_input( INPUT_GET, 'post_id', FILTER_VALIDATE_INT );
+
+				// Let's get nonce.
+				$nonce = filter_input( INPUT_GET, 'nonce', FILTER_DEFAULT );
+
+				// Let's verify the nonce.
+				if ( null !== $post_id && null !== $nonce ) {
+					$action = '';
+					if ( $ajaxify_lazy_loading_get_enabled ) {
+						$action = 'wpac_enable_ajaxify_lazy_loading_' . $post_id;
+					} else {
+						$action = 'wpac_disable_ajaxify_lazy_loading_' . $post_id;
+					}
+
+					// If nonce passes, we can force enable or disable.
+					if ( wp_verify_nonce( $nonce, $action ) ) {
+						return $ajaxify_lazy_loading_get_enabled;
+					}
+				}
+			}
+		}
+		
+
+		// Retrieve options.
+		$options = Options::get_options();
+
+		// Get lazy loading/async threshold. Async threshold is misleading here. If it's `0`, it means lazy loading is enabled. Otherwise, any other value, it's disabled.
+		$async_threshold = $options['asyncCommentsThreshold'];
+
+		// $async_threshold can be a string or a `0` value.
+		// If it's not an empty string, we need to convert to int.
+		// While taking account that `0` is a positive option, whereas empty string is not.
+		if ( strlen( $async_threshold ) > 0 ) {
+			$async_threshold = absint( $async_threshold );
+		} else {
+			$async_threshold = null;
+		}
+
+		// If not `0`, lazy loading is not enabled.
+		if ( 0 !== $async_threshold ) {
+			return false;
+		}
+		
+		// Get the async trigger.
+		$async_trigger = $options['asyncLoadTrigger']; /* can be DomReady, none, Viewport */
+
+		// If 'none', lazy loading is not enabled.
+		// Old behavior here was to not show any comments, which makes no sense.
+		// New behavior is to show comments normally.
+		if ( 'none' === $async_trigger ) {
+			return false;
+		}
+
+		// Get the approved comment count.
+		$comments_count = (int) wp_count_comments( $post_id ?? get_the_ID() )->approved;
+
+		// If no approved comments, lazy loading is not enabled.
+		if ( 0 === $comments_count ) {
+			return false;
+		}
+
+		// We've made it this far. All good to say lazy loading is enabled.
+		return true;
+	}
+
+	/**
 	 * Return a default color palette for the theme.
 	 *
 	 * @param array $palette_to_merge {.

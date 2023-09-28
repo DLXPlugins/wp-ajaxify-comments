@@ -65,38 +65,15 @@ function wp() {
 	 * Fires before the main WPAC actions/filters. Useful for hooking in early.
 	 */
 	do_action( 'dlxplugins/ajaxify/comments/wp' );
-	$options = Options::get_options();
-
-	$wpac_enable = sanitize_text_field( filter_input( INPUT_GET, 'wpac_enable', FILTER_DEFAULT ) );
-
-	/**
-	 * Filter whether to load the plugin's scripts.
-	 *
-	 * @param bool $can_force_script_override Whether to load the plugin's scripts. Pass `true` to force scripts to load.
-	 */
-	$can_force_script_override = apply_filters( 'dlxplugins/ajaxify/comments/force_load', false );
-
-	if ( ! is_admin() && ! wpac_is_login_page() ) {
-		if ( (bool) $options['enable'] || ( $options['enableByQuery'] && wpac_get_secret() === $wpac_enable ) || $can_force_script_override ) {
-
-			/**
-			 * Filter whether to load the plugin's scripts.
-			 *
-			 * @since 2.0.0
-			 *
-			 * @param bool $can_load Whether to load the plugin's scripts. Pass `false` to prevent scripts from loading.
-			 */
-			$can_load = apply_filters( 'dlxplugins/ajaxify/comments/can_load', true );
-			if ( ! $can_load ) {
-				return;
-			}
-			add_filter( 'the_comments', 'wpac_comments_template_query_args_filter' );
-			add_action( 'wp_enqueue_scripts', 'wpac_initialize', 9 );
-			add_action( 'wp_enqueue_scripts', 'wpac_enqueue_scripts' );
-			add_filter( 'gettext', 'wpac_filter_gettext', 20, 3 );
-			add_filter( 'option_page_comments', 'wpac_option_page_comments' );
-			add_filter( 'option_comments_per_page', 'wpac_option_comments_per_page' );
-		}
+	
+	// If Ajaxify enabled, run the plugin.
+	if ( Functions::is_ajaxify_enabled() ) {
+		add_filter( 'the_comments', 'wpac_comments_template_query_args_filter' );
+		add_action( 'wp_enqueue_scripts', 'wpac_initialize', 9 );
+		add_action( 'wp_enqueue_scripts', 'wpac_enqueue_scripts' );
+		add_filter( 'gettext', 'wpac_filter_gettext', 20, 3 );
+		add_filter( 'option_page_comments', 'wpac_option_page_comments' );
+		add_filter( 'option_comments_per_page', 'wpac_option_comments_per_page' );
 	}
 }
 add_action( 'wp', __NAMESPACE__ . '\wp' );

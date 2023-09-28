@@ -381,7 +381,7 @@ class Menu_Helper {
 		// Get debug mode.
 		$ajaxify_debug_mode = (bool) $options['debug'];
 
-		if ( $ajaxify_enabled || $ajaxify_get_enabled ) {
+		if ( $ajaxify_enabled || $ajaxify_debug_mode ) {
 			$disable_ajaxify_url = add_query_arg(
 				array(
 					'ajaxifyEnable' => '0',
@@ -390,11 +390,16 @@ class Menu_Helper {
 				),
 				$permalink
 			);
+
+			// Use permalink if enabled via get variable. // Strips query vars.
+			if ( $ajaxify_get_enabled ) {
+				$disable_ajaxify_url = get_permalink( $post_id );
+			}
 			$admin_bar->add_node(
 				array(
 					'id'     => 'wpac-ajaxify-disable',
 					'parent' => 'wpac-menu-helper',
-					'title'  => __( 'Simulate Disabled', 'wp-ajaxify-comments' ),
+					'title'  => __( 'Simulate Ajaxify Disabled', 'wp-ajaxify-comments' ),
 					'href'   => esc_url( $disable_ajaxify_url ),
 				)
 			);
@@ -408,11 +413,16 @@ class Menu_Helper {
 				),
 				$permalink
 			);
+
+			// If `ajaxifyEnable` is in the URL, assume it's disabled via query var.
+			if ( null !== $ajaxify_get_enabled ) {
+				$enable_ajaxify_url = get_permalink( $post_id );
+			}
 			$admin_bar->add_node(
 				array(
 					'id'     => 'wpac-ajaxify-enable',
 					'parent' => 'wpac-menu-helper',
-					'title'  => __( 'Simulate Enabled', 'wp-ajaxify-comments' ),
+					'title'  => __( 'Simulate Ajaxify Enabled', 'wp-ajaxify-comments' ),
 					'href'   => esc_url( $enable_ajaxify_url ),
 				)
 			);
@@ -434,6 +444,82 @@ class Menu_Helper {
 				),
 			)
 		);
+
+		// Set var for skipping ajaxify enabled status.
+		$check_ajaxify_enabled                 = true;
+		$dont_check_ajaxify_lazy_load_get_vars = false;
+		$check_ajaxify_lazy_load_get_vars      = true;
+
+		// Check if lazy loading is enabled.
+		$is_lazy_loading_enabled = Functions::is_lazy_loading_enabled(
+			$check_ajaxify_enabled,
+			$dont_check_ajaxify_lazy_load_get_vars,
+			$post_id
+		);
+
+		if ( $is_lazy_loading_enabled ) {
+			$disable_lazy_loading_url = add_query_arg(
+				array(
+					'ajaxifyLazyLoadEnable' => '0',
+					'nonce'                 => wp_create_nonce( 'wpac_disable_ajaxify_lazy_loading_' . $post_id ),
+					'post_id'               => $post_id,
+				),
+				$permalink
+			);
+
+			// Check if lazy loading is being initiated by get variable.
+			$lazy_loading_enabled = Functions::is_lazy_loading_enabled(
+				$check_ajaxify_enabled,
+				$check_ajaxify_lazy_load_get_vars,
+				$post_id
+			);
+			if ( ! $lazy_loading_enabled ) {
+				$disable_lazy_loading_url = get_permalink( $post_id );
+			}
+
+			// Show the menu item only if Query var isn't null.
+			$admin_bar->add_node(
+				array(
+					'id'     => 'wpac-ajaxify-lazy-loading-disable',
+					'parent' => 'wpac-menu-helper',
+					'title'  => __( 'Simulate Lazy Load Disabled', 'wp-ajaxify-comments' ),
+					'href'   => esc_url( $disable_lazy_loading_url ),
+				)
+			);
+		} else {
+			// Get whether lazy loading is disabled via query var.
+			$lazy_loading_enabled = Functions::is_lazy_loading_enabled(
+				$check_ajaxify_enabled,
+				$check_ajaxify_lazy_load_get_vars,
+				$post_id
+			);
+
+			// Enable Ajaxify Temporarily with a link.
+			$enable_lazy_loading_url = add_query_arg(
+				array(
+					'ajaxifyLazyLoadEnable' => '1',
+					'nonce'                 => wp_create_nonce( 'wpac_enable_ajaxify_lazy_loading_' . $post_id ),
+					'post_id'               => $post_id,
+				),
+				$permalink
+			);
+
+			// If lazy loading is enabled via query var.
+			if ( $lazy_loading_enabled ) {
+				$enable_lazy_loading_url = get_permalink( $post_id );
+			}
+
+			// If `ajaxifyEnable` is in the URL, assume it's disabled via query var.
+			$admin_bar->add_node(
+				array(
+					'id'     => 'wpac-ajaxify-lazy-loading-enable',
+					'parent' => 'wpac-menu-helper',
+					'title'  => __( 'Simulate Lazy Load Enabled', 'wp-ajaxify-comments' ),
+					'href'   => esc_url( $enable_lazy_loading_url ),
+				)
+			);
+
+		}
 
 		// If comments are open, add close. If closed, add open.
 		if ( comments_open() ) {

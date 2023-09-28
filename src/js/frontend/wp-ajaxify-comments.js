@@ -700,6 +700,18 @@ WPAC.LoadComments = function(url, options) {
 	// Save form data and focus
 	var formData = jQuery(options.selectorCommentForm).serializeArray();
 	var formFocus = (document.activeElement) ? jQuery("[name='"+document.activeElement.name+"']", options.selectorCommentForm).attr("name") : "";
+
+	// Get query strings form URL (ajaxifyLazyLoadEnable, nonce, post_id).
+	var urlObject = new URL(url);
+	var queryParams = urlObject.searchParams;
+	var ajaxifyLazyLoadEnable = queryParams.get('ajaxifyLazyLoadEnable');
+	var nonce = queryParams.get('nonce');
+	var postId = queryParams.get('post_id');
+
+	// Add to URL.
+	url = WPAC._AddQueryParamStringToUrl(url, 'ajaxifyLazyLoadEnable', ajaxifyLazyLoadEnable);
+	url = WPAC._AddQueryParamStringToUrl(url, 'nonce', nonce);
+	url = WPAC._AddQueryParamStringToUrl(url, 'post_id', postId);
 	
 	// Show loading info
 	if (options.showLoadingInfo)
@@ -751,7 +763,10 @@ WPAC.LoadComments = function(url, options) {
 
 jQuery(function() {
 	var initSuccesful = WPAC.Init();
-	if (0 === WPAC._Options.asyncCommentsThreshold) {
+	console.log( WPAC._Options );
+	if (true === WPAC._Options.lazyLoadEnabled) {
+		
+
 		if (!initSuccesful) {
 			WPAC._LoadFallbackUrl(WPAC._AddQueryParamStringToUrl(window.location.href, "WPACFallback", "1"))
 			return;

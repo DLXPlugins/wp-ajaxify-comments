@@ -217,17 +217,10 @@ function wpac_comments_enabled() {
 }
 
 function wpac_load_comments_async() {
-	$asyncCommentsThreshold = wpac_get_option( 'asyncCommentsThreshold' );
-	if ( strlen( $asyncCommentsThreshold ) == 0 ) {
-		return false;
+	if ( Functions::is_lazy_loading_enabled( true, false ) ) {
+		return true;
 	}
-
-	global $post;
-	$commentsCount = $post ? (int) get_comments_number( $post->ID ) : 0;
-	return (
-		$commentsCount > 0 &&
-		$asyncCommentsThreshold <= $commentsCount
-	);
+	return false;
 }
 
 function wpac_theme_has_html5_support() {
@@ -249,6 +242,7 @@ function wpac_initialize() {
 	// Options
 	echo 'WPAC._Options={';
 	$options = Options::get_options();
+	$options['lazyLoadEnabled'] = Functions::is_lazy_loading_enabled( false, false );
 	foreach ( $options as $option_key => $option_value ) {
 		switch ( $option_key ) {
 			case '0':
@@ -373,52 +367,20 @@ function wpac_comments_template_query_args_filter( $comments ) {
 		return $comments;
 	}
 
-	$async_comments     = wpac_get_option( 'asyncCommentsThreshold' );
-	$can_async_comments = $async_comments === 0;
+	//return $comments;
 
-	// Check to see if we can async comments, and if so, return empty
+	// Check to see if we can async (lazy load) comments, and if so, return empty
 	// comment array to prevent comments from being loaded on initial page load.
-
-	$comments_count = (int) wp_count_comments( get_the_ID() )->approved;
-	if ( strlen( $async_comments ) > 0 && '0' === $async_comments && $comments_count > 0 ) {
+	if ( ! wpac_is_ajax_request() ) {
+		if ( Functions::is_lazy_loading_enabled( false, false ) ) {
+			return array();
+		}
+	} elseif ( wpac_is_ajax_request() && Functions::is_lazy_loading_enabled( true, false ) ) {
 		return array();
 	}
 
+	// Nothing to change.
 	return $comments;
-}
-
-function wpac_comments_query_filter( $query ) {
-	if ( is_admin() && ! wpac_is_ajax_request() ) {
-		return $query;
-	}
-
-	// No comment filtering if request is a fallback or WPAC-AJAX request
-	if ( ( isset( $_REQUEST['WPACFallback'] ) && $_REQUEST['WPACFallback'] ) ) {
-		return $query;
-	}
-
-	if ( wpac_is_ajax_request() ) {
-
-		$skip = ( ( isset( $_REQUEST['WPACSkip'] ) && is_numeric( $_REQUEST['WPACSkip'] ) && $_REQUEST['WPACSkip'] > 0 ) ) ? $_REQUEST['WPACSkip'] : 0;
-		$take = ( ( isset( $_REQUEST['WPACTake'] ) && is_numeric( $_REQUEST['WPACTake'] ) && $_REQUEST['WPACTake'] > 0 ) ) ? $_REQUEST['WPACTake'] : count( $query );
-
-		if ( get_option( 'comment_order' ) === 'desc' ) {
-			return array_slice( $query, -$skip - $take, $take ); // Comment order: Newest at the top
-		} else {
-			return array_slice( $query, $skip, $take ); // Comment order:Oldest on the top
-		}
-	} else {
-		// Test asyncCommentsThreshold
-		$asyncCommentsThreshold = wpac_get_option( 'asyncCommentsThreshold' );
-		$commentsCount          = count( $query );
-		if ( strlen( $asyncCommentsThreshold ) == 0 || $commentsCount == 0 || $asyncCommentsThreshold > $commentsCount ) {
-			return $query;
-		}
-
-		// Filter/remove comments and set options to load comments with secondary AJAX request
-		echo '<script' . ( wpac_theme_has_html5_support() ? '' : ' type="text/javascript"' ) . '>WPAC._Options["loadCommentsAsync"]=true;</script>';
-		return array();
-	}
 }
 
 function wpac_filter_gettext( $translation, $text, $domain ) {
