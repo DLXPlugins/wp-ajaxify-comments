@@ -115,6 +115,9 @@ const Interface = ( props ) => {
 			lazyLoadPaginationStyle: data.lazyLoadPaginationStyle,
 			lazyLoadPaginationLocation: data.lazyLoadPaginationLocation,
 			lazyLoadingPaginationScrollToTop: data.lazyLoadingPaginationScrollToTop,
+			lazyLoadTriggerScrollOffset: data.lazyLoadTriggerScrollOffset,
+			saveNonce: wpacAdminLazyLoad.saveNonce,
+			resetNonce: wpacAdminLazyLoad.resetNonce,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -230,7 +233,7 @@ const Interface = ( props ) => {
 														render={ ( { field: { onChange, value } } ) => (
 															<>
 																<TextControl
-																	label={ __( 'HTML Element, ID, or Class', 'wp-ajaxify-comments' ) }
+																	label={ __( 'HTML ID, or Class', 'wp-ajaxify-comments' ) }
 																	help={ __( 'Enter a CSS selector for the element that will trigger the comments to load.', 'wp-ajaxify-comments' ) }
 																	value={ value }
 																	onChange={ onChange }
@@ -243,6 +246,52 @@ const Interface = ( props ) => {
 																	<Notice
 																		message={ __(
 																			'A valid CSS selector must be entered.',
+																			'wp-ajaxify-comments',
+																		) }
+																		status="error"
+																		politeness="assertive"
+																		inline={ false }
+																		icon={ () => <AlertCircle /> }
+																	/>
+																) }
+															</>
+														) }
+													/>
+												</div>
+											</>
+										)
+									}
+									{
+										( 'scroll' === getValues( 'lazyLoadTrigger' ) || 'comments' === getValues( 'lazyLoadTrigger' ) || 'element' === getValues( 'lazyLoadTrigger' ) ) && (
+											<>
+												<div className="ajaxify-admin__control-row">
+													<Controller
+														name="lazyLoadTriggerScrollOffset"
+														control={ control }
+														rules={ {
+															required: true,
+															pattern: {
+																value: /^[0-9]+$/,
+																message: __( 'Please enter a valid number.', 'wp-ajaxify-comments' ),
+															},
+														} }
+														render={ ( { field: { onChange, value } } ) => (
+															<>
+																<TextControl
+																	label={ __( 'Scroll Offset', 'wp-ajaxify-comments' ) }
+																	help={ 'scroll' === getValues( 'lazyLoadTrigger' ) ? __( 'Enter a vertical offset that is relative to the top viewport.', 'wp-ajaxify-comments' ) : __( 'Enter a vertical offset for that will trigger loading a certain number of pixels above the element.', 'wp-ajaxify-comments' ) }
+																	value={ value }
+																	type="number"
+																	onChange={ onChange }
+																	className={ classNames( 'ajaxify-admin__text-control', {
+																		'has-error': 'required' === errors.lazyLoadTriggerScrollOffset?.type,
+																		'is-required': true,
+																	} ) }
+																/>
+																{ errors.lazyLoadTriggerScrollOffset && (
+																	<Notice
+																		message={ __(
+																			'A valid number must be entered.',
 																			'wp-ajaxify-comments',
 																		) }
 																		status="error"

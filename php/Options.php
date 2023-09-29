@@ -32,11 +32,12 @@ class Options {
 	 * @since 1.0.0
 	 * @access public
 	 * @param array $options array of options to save.
+	 * @param bool  $merge_options Whether to merge options with old options or not.
 	 * @return array $options.
 	 */
-	public static function update_options( $options ) {
+	public static function update_options( $options, $merge_options = true ) {
 		$force           = true;
-		$current_options = self::get_options( $force, true );
+		$current_options = $merge_options ? self::get_options( $force, true ) : array();
 		foreach ( $options as $key => &$option ) {
 			switch ( $key ) {
 				case 'enable':
@@ -135,7 +136,7 @@ class Options {
 			unset( $options['asyncLoadTrigger'] );
 
 			// Update options.
-			self::update_options( $options );
+			self::update_options( $options, false );
 		}
 		self::$options = $options;
 		return $options;
@@ -214,7 +215,8 @@ class Options {
 			'lazyLoadDisplay'                  => 'overlay', /* can be overlay, inline, none */
 			'lazyLoadInlineLoadingType'        => 'spinner', /* can be spinner, skeleton, button, shortcode */
 			'lazyLoadTrigger'                  => 'domready', /* can be trigger, comments, domready, scroll */
-			'lazyLoadTriggerElement'		   => '',
+			'lazyLoadTriggerElement'           => '',
+			'lazyLoadTriggerScrollOffset'      => 0,
 			'lazyLoadPaginationEnabled'        => false,
 			'lazyLoadCommentsPerPage'          => 30,
 			'lazyLoadUseThemePagination'       => true,
