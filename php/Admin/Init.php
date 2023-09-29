@@ -57,6 +57,7 @@ class Init {
 		new Tabs\Callbacks();
 		new Tabs\Labels();
 		new Tabs\Lazy_Load();
+		new Tabs\Pagination();
 		new Tabs\Selectors();
 		new Tabs\Support();
 	}
