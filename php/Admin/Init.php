@@ -52,10 +52,11 @@ class Init {
 
 		// Init tabs.
 		new Tabs\Main();
-		new Tabs\Appearance();
 		new Tabs\Advanced();
+		new Tabs\Appearance();
 		new Tabs\Callbacks();
 		new Tabs\Labels();
+		new Tabs\Lazy_Load();
 		new Tabs\Selectors();
 		new Tabs\Support();
 	}

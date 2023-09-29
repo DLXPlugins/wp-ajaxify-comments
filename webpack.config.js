@@ -12,6 +12,7 @@ module.exports = ( env ) => {
 				'wpac-admin-labels-js': './src/js/react/views/Labels/index.js',
 				'wpac-admin-callbacks-js': './src/js/react/views/Callbacks/index.js',
 				'wpac-admin-advanced-js': './src/js/react/views/Advanced/index.js',
+				'wpac-admin-lazy-load-js': './src/js/react/views/LazyLoad/index.js',
 				'wpac-admin-support-js': './src/js/react/views/Support/index.js',
 				'wpac-frontend-js': './src/js/frontend/index.js',
 				'wpac-frontend-idle-timer': './src/js/frontend/idle-timer.js',
