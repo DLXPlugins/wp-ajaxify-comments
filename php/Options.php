@@ -7,7 +7,7 @@
 
 namespace DLXPlugins\WPAC;
 
-use DLXPlugins\WPAC\Functions as Functions;
+use DLXPlugins\WPAC\Functions;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );
@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class that updates and stores the options.
  */
 class Options {
+
 
 	/**
 	 * Array holding the options.
@@ -35,7 +36,7 @@ class Options {
 	 */
 	public static function update_options( $options ) {
 		$force           = true;
-		$current_options = self::get_options( $force );
+		$current_options = self::get_options( $force, true );
 		foreach ( $options as $key => &$option ) {
 			switch ( $key ) {
 				case 'enable':
@@ -48,6 +49,10 @@ class Options {
 				case 'optimizeAjaxResponse':
 				case 'disableCache':
 				case 'enableByQuery':
+				case 'lazyLoadEnabled':
+				case 'lazyLoadPaginationEnabled':
+				case 'lazyLoadUseThemePagination':
+				case 'lazyLoadingPaginationScrollToTop':
 					$option = filter_var( $options[ $key ], FILTER_VALIDATE_BOOLEAN );
 					break;
 				default:
@@ -76,7 +81,7 @@ class Options {
 	 *
 	 * @return array Array of options.
 	 */
-	public static function get_options( $force = false ) {
+	public static function get_options( $force = false, $skip_migrate = false ) {
 		if ( is_array( self::$options ) && ! $force ) {
 			return self::$options;
 		}
@@ -93,8 +98,45 @@ class Options {
 			$options['firstTimeInstall'] = false;
 		}
 
-		$defaults      = self::get_defaults();
-		$options       = wp_parse_args( $options, $defaults );
+		$defaults = self::get_defaults();
+		$options  = wp_parse_args( $options, $defaults );
+		// Port over lazy loading options.
+		if ( isset( $options['asyncCommentsThreshold'] ) && ! $skip_migrate ) {
+			// Get lazy loading/async threshold. Async threshold is misleading here. If it's `0`, it means lazy loading is enabled. Otherwise, any other value, it's disabled.
+			$async_threshold = $options['asyncCommentsThreshold'];
+
+			// Get the async trigger.
+			$async_trigger = $options['asyncLoadTrigger']; /* can be DomReady, none, Viewport */
+
+			// $async_threshold can be a string or a `0` value.
+			// If it's not an empty string, we need to convert to int.
+			// While taking account that `0` is a positive option, whereas empty string is not.
+			if ( strlen( $async_threshold ) > 0 ) {
+				$async_threshold = absint( $async_threshold );
+			} else {
+				$async_threshold = null;
+			}
+
+			// If not `0`, lazy loading is not enabled.
+			if ( 0 !== $async_threshold || 'none' === $async_trigger ) {
+				$options['lazyLoadEnabled'] = false;
+			}
+
+			// Set the new lazy loading trigger.
+			$options['lazyLoadTrigger'] = strtolower( $async_trigger );
+
+			// Set lazy loading flag.
+			if ( 0 === $async_threshold && 'none' !== $async_trigger ) {
+				$options['lazyLoadEnabled'] = true;
+			}
+
+			// Unset old vars.
+			unset( $options['asyncCommentsThreshold'] );
+			unset( $options['asyncLoadTrigger'] );
+
+			// Update options.
+			self::update_options( $options );
+		}
 		self::$options = $options;
 		return $options;
 	}
@@ -109,70 +151,78 @@ class Options {
 	 */
 	public static function get_defaults() {
 		$defaults = array(
-			'enable'                         => false,
-			'debug'                          => false,
-			'menuHelper'                     => false,
-			'selectorCommentForm'            => '#commentform,.ast-commentform,.comment-form',
-			'selectorCommentsContainer'      => '#comments,.comments-wrapper,.comments-area,.wp-block-comments',
-			'selectorCommentList'            => '.comment-list,.ast-comment-list,.wp-block-comment-template',
-			'selectorCommentPagingLinks'     => '#comments [class^=\'nav-\'] a',
-			'selectorCommentLinks'           => '#comments a[href*="/comment-page-"]',
-			'selectorRespondContainer'       => '#respond',
-			'selectorErrorContainer'         => 'p:parent',
-			'selectorSubmitButton'           => '#submit',
-			'selectorTextarea'               => '#comment',
-			'selectorPostContainer'          => '',
-			'scrollSpeed'                    => 500,
-			'autoUpdateIdleTime'             => 0,
-			'popupBackgroundColorLoading'    => '#000000',
-			'popupTextColorLoading'          => '#ffffff',
-			'popupBackgroundColorSuccess'    => '#008000',
-			'popupTextColorSuccess'          => '#FFFFFF',
-			'popupBackgroundColorError'      => '#FF0000',
-			'popupTextColorError'            => '#FFFFFF',
-			'popupOpacity'                   => 70,
-			'popupCornerRadius'              => 5,
-			'popupMarginTop'                 => 10,
-			'popupWidth'                     => 30,
-			'popupPadding'                   => 5,
-			'popupFadeIn'                    => 400,
-			'popupFadeOut'                   => 400,
-			'popupTimeout'                   => 3000,
-			'popupTextAlign'                 => 'center', /* can be left|center|right */
-			'popupTextFontSize'              => '14px',
-			'popupZindex'                    => 1000,
-			'textPosted'                     => __( 'Your comment has been posted. Thank you!', 'wp-ajaxify-comments' ),
-			'textPostedUnapproved'           => __( 'Your comment has been posted and is awaiting moderation. Thank you!', 'wp-ajaxify-comments' ),
-			'textReloadPage'                 => __( 'Reloading page. Please wait.', 'wp-ajaxify-comments' ),
-			'textPostComment'                => __( 'Posting your comment. Please wait.', 'wp-ajaxify-comments' ),
-			'textRefreshComments'            => __( 'Loading comments. Please wait.', 'wp-ajaxify-comments' ),
-			'textUnknownError'               => __( 'Something went wrong, your comment has not been posted.', 'wp-ajaxify-comments' ),
-			'textErrorTypeComment'           => __( 'Please type your comment text.', 'wp-ajaxify-comments' ),
-			'textErrorCommentsClosed'        => __( 'Sorry, comments are closed for this item.', 'wp-ajaxify-comments' ),
-			'textErrorMustBeLoggedIn'        => __( 'Sorry, you must be logged in to post a comment.', 'wp-ajaxify-comments' ),
-			'textErrorFillRequiredFields'    => __( 'Please fill the required fields (name, email).', 'wp-ajaxify-comments' ),
-			'textErrorInvalidEmailAddress'   => __( 'Please enter a valid email address.', 'wp-ajaxify-comments' ),
-			'textErrorPostTooQuickly'        => __( 'You are posting comments too quickly. Please wait a minute and resubmit your comment.', 'wp-ajaxify-comments' ),
-			'textErrorDuplicateComment'      => __( 'Duplicate comment detected. It looks like you have already submitted this comment.', 'wp-ajaxify-comments' ),
-			'callbackOnBeforeSelectElements' => '',
-			'callbackOnBeforeSubmitComment'  => '',
-			'callbackOnAfterPostComment'     => '',
-			'callbackOnBeforeUpdateComments' => '',
-			'callbackOnAfterUpdateComments'  => '',
-			'commentPagesUrlRegex'           => '',
-			'asyncCommentsThreshold'         => '',
-			'asyncLoadTrigger'               => 'DomReady', /* can be DomReady, none, Viewport */
-			'disableUrlUpdate'               => false,
-			'disableScrollToAnchor'          => false,
-			'useUncompressedScripts'         => false,
-			'placeScriptsInFooter'           => true,
-			'optimizeAjaxResponse'           => false,
-			'baseUrl'                        => '',
-			'disableCache'                   => false,
-			'enableByQuery'                  => false,
+			'enable'                           => false,
+			'debug'                            => false,
+			'menuHelper'                       => false,
+			'selectorCommentForm'              => '#commentform,.ast-commentform,.comment-form',
+			'selectorCommentsContainer'        => '#comments,.comments-wrapper,.comments-area,.wp-block-comments',
+			'selectorCommentList'              => '.comment-list,.ast-comment-list,.wp-block-comment-template',
+			'selectorCommentPagingLinks'       => '#comments [class^=\'nav-\'] a',
+			'selectorCommentLinks'             => '#comments a[href*="/comment-page-"]',
+			'selectorRespondContainer'         => '#respond',
+			'selectorErrorContainer'           => 'p:parent',
+			'selectorSubmitButton'             => '#submit',
+			'selectorTextarea'                 => '#comment',
+			'selectorPostContainer'            => '',
+			'scrollSpeed'                      => 500,
+			'autoUpdateIdleTime'               => 0,
+			'popupBackgroundColorLoading'      => '#000000',
+			'popupTextColorLoading'            => '#ffffff',
+			'popupBackgroundColorSuccess'      => '#008000',
+			'popupTextColorSuccess'            => '#FFFFFF',
+			'popupBackgroundColorError'        => '#FF0000',
+			'popupTextColorError'              => '#FFFFFF',
+			'popupOpacity'                     => 70,
+			'popupCornerRadius'                => 5,
+			'popupMarginTop'                   => 10,
+			'popupWidth'                       => 30,
+			'popupPadding'                     => 5,
+			'popupFadeIn'                      => 400,
+			'popupFadeOut'                     => 400,
+			'popupTimeout'                     => 3000,
+			'popupTextAlign'                   => 'center', /* can be left|center|right */
+			'popupTextFontSize'                => '14px',
+			'popupZindex'                      => 1000,
+			'textPosted'                       => __( 'Your comment has been posted. Thank you!', 'wp-ajaxify-comments' ),
+			'textPostedUnapproved'             => __( 'Your comment has been posted and is awaiting moderation. Thank you!', 'wp-ajaxify-comments' ),
+			'textReloadPage'                   => __( 'Reloading page. Please wait.', 'wp-ajaxify-comments' ),
+			'textPostComment'                  => __( 'Posting your comment. Please wait.', 'wp-ajaxify-comments' ),
+			'textRefreshComments'              => __( 'Loading comments. Please wait.', 'wp-ajaxify-comments' ),
+			'textUnknownError'                 => __( 'Something went wrong, your comment has not been posted.', 'wp-ajaxify-comments' ),
+			'textErrorTypeComment'             => __( 'Please type your comment text.', 'wp-ajaxify-comments' ),
+			'textErrorCommentsClosed'          => __( 'Sorry, comments are closed for this item.', 'wp-ajaxify-comments' ),
+			'textErrorMustBeLoggedIn'          => __( 'Sorry, you must be logged in to post a comment.', 'wp-ajaxify-comments' ),
+			'textErrorFillRequiredFields'      => __( 'Please fill the required fields (name, email).', 'wp-ajaxify-comments' ),
+			'textErrorInvalidEmailAddress'     => __( 'Please enter a valid email address.', 'wp-ajaxify-comments' ),
+			'textErrorPostTooQuickly'          => __( 'You are posting comments too quickly. Please wait a minute and resubmit your comment.', 'wp-ajaxify-comments' ),
+			'textErrorDuplicateComment'        => __( 'Duplicate comment detected. It looks like you have already submitted this comment.', 'wp-ajaxify-comments' ),
+			'callbackOnBeforeSelectElements'   => '',
+			'callbackOnBeforeSubmitComment'    => '',
+			'callbackOnAfterPostComment'       => '',
+			'callbackOnBeforeUpdateComments'   => '',
+			'callbackOnAfterUpdateComments'    => '',
+			'commentPagesUrlRegex'             => '',
+			'disableUrlUpdate'                 => false,
+			'disableScrollToAnchor'            => false,
+			'useUncompressedScripts'           => false,
+			'placeScriptsInFooter'             => true,
+			'optimizeAjaxResponse'             => false,
+			'baseUrl'                          => '',
+			'disableCache'                     => false,
+			'enableByQuery'                    => false,
+			'lazyLoadEnabled'                  => false,
+			'lazyLoadDisplay'                  => 'overlay', /* can be overlay, inline, none */
+			'lazyLoadInlineLoadingType'        => 'spinner', /* can be spinner, skeleton, button, shortcode */
+			'lazyLoadTrigger'                  => 'domready', /* can be trigger, comments, domready, scroll */
+			'lazyLoadTriggerElement'		   => '',
+			'lazyLoadPaginationEnabled'        => false,
+			'lazyLoadCommentsPerPage'          => 30,
+			'lazyLoadUseThemePagination'       => true,
+			'lazyLoadPaginationStyle'          => 'nextPrev', /* can be nextPrev, numbers, numbersRounded */
+			'lazyLoadPaginationLocation'       => 'bottom', /* can be top, bottom, both */
+			'lazyLoadingPaginationScrollToTop' => true,
 
 		);
 		return $defaults;
 	}
-
 }

@@ -84,8 +84,6 @@ const Interface = ( props ) => {
 	} = useForm( {
 		defaultValues: {
 			commentPagesUrlRegex: data.commentPagesUrlRegex,
-			asyncCommentsThreshold: data.asyncCommentsThreshold,
-			asyncLoadTrigger: data.asyncLoadTrigger,
 			disableUrlUpdate: data.disableUrlUpdate,
 			disableScrollToAnchor: data.disableScrollToAnchor,
 			useUncompressedScripts: data.useUncompressedScripts,
@@ -157,86 +155,6 @@ const Interface = ( props ) => {
 											aria-required="true"
 											value={ value }
 											onChange={ onChange }
-										/>
-									</>
-								) }
-							/>
-						</div>
-						<div className="ajaxify-admin__control-row">
-							<Controller
-								name="asyncCommentsThreshold"
-								control={ control }
-								rules={ { pattern: /^[0-9]+$/ } }
-								render={ ( { field: { onChange, value } } ) => (
-									<>
-										<TextControl
-											label={ __(
-												'Load Comments Async Threshold',
-												'wp-ajaxify-comments',
-											) }
-											type="number"
-											className={ classNames( 'ajaxify-admin__text-control', {
-												'has-error':
-													'required' === errors.asyncCommentsThreshold?.type,
-												'has-error':
-													'pattern' === errors.asyncCommentsThreshold?.type,
-												'is-required': true,
-											} ) }
-											help={ __(
-												'Load comments asynchronously with secondary AJAX request if more than the specified number of comments exist (0 for always load comments asynchronously). Leave empty to disable this feature.',
-												'wp-ajaxify-comments',
-											) }
-											aria-required="true"
-											value={ value }
-											onChange={ onChange }
-										/>
-										{ 'pattern' === errors.asyncCommentsThreshold?.type && (
-											<Notice
-												message={ __(
-													'Please enter a valid number.',
-													'wp-ajaxify-comments',
-												) }
-												status="error"
-												politeness="assertive"
-												inline={ false }
-												icon={ () => <AlertCircle /> }
-											/>
-										) }
-									</>
-								) }
-							/>
-						</div>
-						<div className="ajaxify-admin__control-row">
-							<Controller
-								name="asyncLoadTrigger"
-								control={ control }
-								render={ ( { field: { onChange, value } } ) => (
-									<>
-										<SelectControl
-											label={ __(
-												'Async Comments Load Trigger',
-												'wp-ajaxify-comments',
-											) }
-											value={ value }
-											onChange={ onChange }
-											options={ [
-												{
-													label: __( 'DomReady', 'wp-ajaxify-comments' ),
-													value: 'DomReady',
-												},
-												{
-													label: __( 'Viewport', 'wp-ajaxify-comments' ),
-													value: 'Viewport',
-												},
-												{
-													label: __( 'None', 'wp-ajaxify-comments' ),
-													value: 'None',
-												},
-											] }
-											help={ __(
-												"Trigger to load comments asynchronously ('DomReady': Load comments immediately, 'Viewport': Load comments when comments container is in viewport, 'None': Comment loading is triggered manually).",
-												'wp-ajaxify-comments',
-											) }
 										/>
 									</>
 								) }
