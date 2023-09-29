@@ -5,14 +5,14 @@ Plugin URI: https://dlxplugins.com/plugins/ajaxify-comments/
 Description: Ajaxify Comments hooks into your current theme and adds AJAX functionality to the comment form.
 Author: DLX Plugins
 Author URI: https://dlxplugins.com
-Version: 2.0.1
+Version: 2.0.5
 License: GPLv2
 Text Domain: wpac
 */
 
 namespace DLXPlugins\WPAC;
 
-define( 'WPAC_VERSION', '2.0.1' );
+define( 'WPAC_VERSION', '2.0.5' );
 define( 'WPAC_PLUGIN_NAME', 'WP Ajaxify Comments' );
 define( 'WPAC_SETTINGS_URL', 'admin.php?page=wp-ajaxify-comments' );
 define( 'WPAC_DOMAIN', 'wpac' );

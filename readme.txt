@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.3.1
-Stable tag: 2.0.1
+Stable tag: 2.0.5
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,12 @@ The plugin has integrations with:
 
 1. <a href="https://docs.dlxplugins.com/v/ajaxify-comments/plugin-integrations/confetti">Confetti</a> - Show confetti when a comment is posted.
 2. <a href="https://docs.dlxplugins.com/v/ajaxify-comments/plugin-integrations/comment-edit-core">Comment Edit Core</a> - Allow users to edit their comments.
+
+The following themes are supported out of the box:
+
+1. Astra
+2. Genesis
+3. Twenty Ten - Twenty Twenty Three
 
 === Technical Note ===
 
@@ -86,12 +92,17 @@ If you have activated the plugin and are just getting started, please see our <a
 
 == Changelog ==
 
+= 2.0.5 =
+* Released 2023-09-28
+* Refactoring lazy loading. It should be much more reliable now. It has been tested with Astra, Twenty Twenty-Three, and Genesis themes.
+* Updating Menu Helper to simulate lazy loading on or off.
+
 = 2.0.1 =
-* Released 2024-09-27
+* Released 2023-09-27
 * Lazy loading was referencing the wrong variable. This has been fixed.
 
 = 2.0.0 =
-* Released 2024-09-24
+* Released 2023-09-24
 * Renamed WP Ajaxify Comments to Ajaxify Comments in the admin. Updated branding.
 * Completely refreshed admin interface. The admin is now organized into tabs with quick saving and reset options.
 * Appearance tab allows for a real-time preview of the plugin's appearance.
@@ -608,5 +619,5 @@ Bug-fix
 
 == Upgrade Notice ==
 
-= 2.0.1 =
-Lazy loading was referencing the wrong variable.
+= 2.0.5 =
+Lazy loading should be much more reliable. Added out-of-the-box support for Genesis themes. Added options in Menu Helper to simulate lazy loading on or off.
