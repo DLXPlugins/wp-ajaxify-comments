@@ -14,7 +14,7 @@ import {
 	RangeControl,
 	RadioControl,
 } from '@wordpress/components';
-import { AlertCircle, Loader2, ClipboardCheck } from 'lucide-react';
+import { AlertCircle, Loader2, ClipboardCheck, Code } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
@@ -212,6 +212,22 @@ const Interface = ( props ) => {
 															{ value: 'scroll', label: __( 'Page Scroll Length', 'wp-ajaxify-comments' ) },
 														] }
 													/>
+													{
+														'external' === getValues( 'lazyLoadTrigger' ) && (
+															<>
+																<Notice
+																	message={ __(
+																		'You can trigger the comments to load externally by using the following JavaScript function: WPAC.RefreshComments();',
+																		'wp-ajaxify-comments',
+																	) }
+																	status="info"
+																	politeness="assertive"
+																	inline={ false }
+																	icon={ () => <Code /> }
+																/>
+															</>
+														)
+													}
 												</>
 											) }
 										/>
@@ -279,7 +295,7 @@ const Interface = ( props ) => {
 															<>
 																<TextControl
 																	label={ __( 'Scroll Offset', 'wp-ajaxify-comments' ) }
-																	help={ 'scroll' === getValues( 'lazyLoadTrigger' ) ? __( 'Enter a vertical offset that is relative to the top viewport.', 'wp-ajaxify-comments' ) : __( 'Enter a vertical offset for that will trigger loading a certain number of pixels above the element.', 'wp-ajaxify-comments' ) }
+																	help={ 'scroll' === getValues( 'lazyLoadTrigger' ) ? __( 'Enter a vertical offset that is relative to the top viewport. Entering 0 will assume an offest of 100%.', 'wp-ajaxify-comments' ) : __( 'Enter a vertical offset for that will trigger loading a certain number of pixels above the element. Entering 0 will assume an offest of 100%.', 'wp-ajaxify-comments' ) }
 																	value={ value }
 																	type="number"
 																	onChange={ onChange }

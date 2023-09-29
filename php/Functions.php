@@ -164,7 +164,7 @@ class Functions {
 	 * @return bool true if Ajaxify Comments can be marked as enabled, false (default) if not.
 	 */
 	public static function is_ajaxify_enabled( $skip_get_check = false ) {
-		$options = Options::get_options();
+		$options             = Options::get_options();
 		$ajaxify_get_enabled = filter_input( INPUT_GET, 'ajaxifyEnable', FILTER_VALIDATE_BOOLEAN );
 		$ajaxify_enabled     = (bool) $options['enable'];
 
@@ -258,35 +258,25 @@ class Functions {
 				}
 			}
 		}
-		
 
 		// Retrieve options.
 		$options = Options::get_options();
 
 		// Get lazy loading/async threshold. Async threshold is misleading here. If it's `0`, it means lazy loading is enabled. Otherwise, any other value, it's disabled.
-		$async_threshold = $options['asyncCommentsThreshold'];
+		$lazy_load_enabled = (bool) $options['lazyLoadEnabled'];
 
-		// $async_threshold can be a string or a `0` value.
-		// If it's not an empty string, we need to convert to int.
-		// While taking account that `0` is a positive option, whereas empty string is not.
-		if ( strlen( $async_threshold ) > 0 ) {
-			$async_threshold = absint( $async_threshold );
-		} else {
-			$async_threshold = null;
-		}
-
-		// If not `0`, lazy loading is not enabled.
-		if ( 0 !== $async_threshold ) {
+		// If lazy load isn't enabled by option, bail.
+		if ( false === $lazy_load_enabled ) {
 			return false;
 		}
-		
-		// Get the async trigger.
-		$async_trigger = $options['asyncLoadTrigger']; /* can be DomReady, none, Viewport */
+
+		// Get the lazy load trigger.
+		$lazy_load_trigger = $options['lazyLoadTrigger']; /* can be external, comments, domready, scroll, element */
 
 		// If 'none', lazy loading is not enabled.
 		// Old behavior here was to not show any comments, which makes no sense.
 		// New behavior is to show comments normally.
-		if ( 'none' === $async_trigger ) {
+		if ( 'none' === $lazy_load_trigger ) {
 			return false;
 		}
 

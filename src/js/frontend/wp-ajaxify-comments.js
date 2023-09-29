@@ -1,3 +1,7 @@
+import { createHooks } from '@wordpress/hooks';
+
+const wpacHooks = createHooks();
+
 WPAC._Options = WPAC._Options || {}; 
 
 WPAC._BodyRegex = new RegExp("<body[^>]*>((.|\n|\r)*)</body>", "i");
@@ -340,7 +344,16 @@ WPAC.AttachForm = function(options) {
 		scrollToAnchor: !WPAC._Options.disableScrollToAnchor,
 		updateUrl: !WPAC._Options.disableUrlUpdate,
 		selectorCommentLinks: WPAC._Options.selectorCommentLinks
-	}, options || {});	
+	}, options || {});
+
+	/**
+	 * Filter the options for Ajaxify Comments.
+	 *
+	 * @param { Object } options Options for Ajaxify Comments.
+	 * @param { string } url The URL to load.
+	 * @param { string } caller What function called the filter.
+	 */
+	options = wpacHooks.applyFilters( 'wpacJSOptions', options, '', 'AttachForm' );
 
 	if (WPAC._Options.debug && WPAC._Options.commentsEnabled) {
 		WPAC._Debug("info", "Attach form...")
@@ -659,14 +672,28 @@ WPAC._InitIdleTimer = function() {
 	jQuery(document).on("idle.idleTimer", WPAC._OnIdle);
 }
 
+/**
+ * Refresh the comments by Ajaxify Comments.
+ * @param { Object } options Optiosn for Ajaxify Comments.
+ * @returns comments.
+ */
 WPAC.RefreshComments = function(options) {
 	var url = location.href;
-	
 	if (WPAC._TestFallbackUrl(location.href)) {
 		WPAC._Debug("error", "Fallback URL was detected (url: '%s'), cancel AJAX request", url);
 		return false;   
 	}
+
+	/**
+	 * Filter the options for Ajaxify Comments.
+	 *
+	 * @param { Object } options Options for Ajaxify Comments.
+	 * @param { string } url The URL to load.
+	 * @param { string } caller What function called the filter.
+	 */
+	options = wpacHooks.applyFilters( 'wpacJSOptions', options, url, 'RefreshComments' );
 	
+	// Users can pass options as first parameter to override selectors.
 	return WPAC.LoadComments(url, options)
 }
 
@@ -696,6 +723,15 @@ WPAC.LoadComments = function(url, options) {
 		beforeUpdateComments: WPACCallbacks.beforeUpdateComments,
 		afterUpdateComments: WPACCallbacks.afterUpdateComments,
 	}, options || {});	
+
+	/**
+	 * Filter the options for Ajaxify Comments.
+	 *
+	 * @param { Object } options Options for Ajaxify Comments.
+	 * @param { string } url The URL to load.
+	 * @param { string } caller What function called the filter.
+	 */
+	options = wpacHooks.applyFilters( 'wpacJSOptions', options, url, 'LoadComments' );
 	
 	// Save form data and focus
 	var formData = jQuery(options.selectorCommentForm).serializeArray();
@@ -713,9 +749,7 @@ WPAC.LoadComments = function(url, options) {
 	url = WPAC._AddQueryParamStringToUrl(url, 'nonce', nonce);
 	url = WPAC._AddQueryParamStringToUrl(url, 'post_id', postId);
 	
-	// Show loading info
-	if (options.showLoadingInfo)
-		WPAC._ShowMessage(WPAC._Options.textRefreshComments, "loading");
+	
 
 	if (options.disableCache) 
 		url = WPAC._AddQueryParamStringToUrl(url, "WPACRandom", (new Date()).getTime());
@@ -763,7 +797,6 @@ WPAC.LoadComments = function(url, options) {
 
 jQuery(function() {
 	var initSuccesful = WPAC.Init();
-	console.log( WPAC._Options );
 	if (true === WPAC._Options.lazyLoadEnabled) {
 		
 
@@ -772,24 +805,69 @@ jQuery(function() {
 			return;
 		}
 
-		var asyncLoadTrigger = WPAC._Options.asyncLoadTrigger;
-		WPAC._Debug("info", "Loading comments asynchronously with secondary AJAX request (trigger: '%s')", asyncLoadTrigger);
+		const triggerType = WPAC._Options.lazyLoadTrigger;
+
+		const lazyLoadTrigger = WPAC._Options.lazyLoadTrigger;
+		const lazyLoadScrollOffset = parseInt( WPAC._Options.lazyLoadTriggerScrollOffset );
+		const lazyLoadElement = WPAC._Options.lazyLoadTriggerElement;
+		let lazyLoadOffset = parseInt( WPAC._Options.lazyLoadTriggerOffset );
+		if ( lazyLoadOffset === 0 ) {
+			lazyLoadOffset = '100%';
+		}
+		/**
+		 * Filter the offset for lazy loading.
+		 *
+		 * @see: http://imakewebthings.com/waypoints/api/offset-option/
+		 *
+		 * @param { string } lazyLoadOffset Offset for lazy loading.
+		 * @param { string } lazyLoadTrigger The trigger type for lazy loading.
+		 * @param { number } lazyLoadScrollOffset The scroll offset for lazy loading.
+		 * @param { string } lazyLoadElement The element for lazy loading.
+		 */
+		lazyLoadOffset = wpacHooks.applyFilters( 'wpacLazyLoadOffset', lazyLoadOffset, lazyLoadTrigger, lazyLoadScrollOffset, lazyLoadElement  );
+
+		WPAC._Debug("info", "Loading comments asynchronously with secondary AJAX request (trigger: '%s')", lazyLoadTrigger);
 		
 		if (window.location.hash) {
 			var regex = /^#comment-[0-9]+$/;
 			if (regex.test(window.location.hash)) {
 				WPAC._Debug("info", "Comment anchor in URL detected, force loading comments on DomReady (hash: '%s')", window.location.hash);
-				asyncLoadTrigger = "DomReady";
+				lazyLoadTrigger = "domready";
 			}
 		}
-		
-		if (asyncLoadTrigger == "Viewport") {
-			jQuery(WPAC._Options.selectorCommentsContainer).waypoint(function(direction) {
-				this.destroy();
-				WPAC.RefreshComments();
-			}, { offset: "100%" });
-		} else if (asyncLoadTrigger == "DomReady") {
-			WPAC.RefreshComments({scrollToAnchor: true}); // force scroll to anchor
+		switch ( lazyLoadTrigger ) {
+			case 'external':
+				break;
+			case 'comments':
+				const commentsContainer = document.querySelector( WPAC._Options.selectorCommentsContainer );
+				if ( null !== commentsContainer ) {
+					jQuery( commentsContainer ).waypoint( function( direction ) {
+						this.destroy();
+						WPAC._ShowMessage( WPAC._Options.textRefreshComments, "loading" );
+						WPAC.RefreshComments();
+						
+					}, { offset: lazyLoadScrollOffset ? lazyLoadScrollOffset : '100%' } );
+				} else {
+					WPAC._Debug("error", "Comments container not found for lazy loading when reaching the comments section.");
+				}
+				break;
+			case 'element':
+				const domElement = document.querySelector( lazyLoadElement );
+				if ( null !== domElement ) {
+					jQuery( domElement ).waypoint( function( direction ) {
+						this.destroy();
+						WPAC._ShowMessage( WPAC._Options.textRefreshComments, "loading" );
+						WPAC.RefreshComments();
+						
+					}, { offset: lazyLoadScrollOffset ? lazyLoadScrollOffset : '100%' } );
+				} else {
+					WPAC._Debug( 'error', 'Element not found for lazy loading when reaching the element.' );
+				}
+				break;
+			case 'domready':
+				
+				WPAC.RefreshComments({scrollToAnchor: true}); // force scroll to anchor.
+				break;
 		}
 	} 
 });

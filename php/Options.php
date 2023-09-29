@@ -214,7 +214,7 @@ class Options {
 			'lazyLoadEnabled'                  => false,
 			'lazyLoadDisplay'                  => 'overlay', /* can be overlay, inline, none */
 			'lazyLoadInlineLoadingType'        => 'spinner', /* can be spinner, skeleton, button, shortcode */
-			'lazyLoadTrigger'                  => 'domready', /* can be trigger, comments, domready, scroll */
+			'lazyLoadTrigger'                  => 'domready', /* can be external, comments, domready, scroll, element */
 			'lazyLoadTriggerElement'           => '',
 			'lazyLoadTriggerScrollOffset'      => 0,
 			'lazyLoadPaginationEnabled'        => false,
