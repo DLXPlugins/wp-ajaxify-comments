@@ -453,7 +453,7 @@ class Menu_Helper {
 		// Check if lazy loading is enabled.
 		$is_lazy_loading_enabled = Functions::is_lazy_loading_enabled(
 			$check_ajaxify_enabled,
-			$dont_check_ajaxify_lazy_load_get_vars,
+			$check_ajaxify_lazy_load_get_vars,
 			$post_id
 		);
 
