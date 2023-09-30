@@ -96,6 +96,17 @@ class Options {
 		$defaults      = self::get_defaults();
 		$options       = wp_parse_args( $options, $defaults );
 		self::$options = $options;
+
+		/**
+		 * Filter the options before they are returned.
+		 * Technically you can do this with a get_option filter, but this parses in any new defaults.
+		 *
+		 * @param array  $options The options to be output.
+		 */
+		$options = apply_filters(
+			'dlxplugins/ajaxify/comments/options/parsed',
+			$options,
+		);
 		return $options;
 	}
 

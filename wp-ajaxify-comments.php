@@ -20,29 +20,18 @@ define( 'WPAC_OPTION_PREFIX', WPAC_DOMAIN . '_' ); // used to save options in ve
 define( 'WPAC_OPTION_KEY', WPAC_DOMAIN ); // used to save options in version >= 0.9.0
 define( 'WPAC_FILE', __FILE__ );
 
-if ( function_exists( 'is_wp_version_compatible' ) && is_wp_version_compatible( '5.5' ) ) {
-	define( 'WPAC_WP_ERROR_PLEASE_TYPE_COMMENT', '<strong>Error</strong>: Please type your comment text.' );
-} else {
-	define( 'WPAC_WP_ERROR_PLEASE_TYPE_COMMENT', '<strong>Error</strong>: Please type a comment.' );
-}
-define( 'WPAC_WP_ERROR_COMMENTS_CLOSED', 'Sorry, comments are closed for this item.' );
-define( 'WPAC_WP_ERROR_MUST_BE_LOGGED_IN', 'Sorry, you must be logged in to post a comment.' );
-define( 'WPAC_WP_ERROR_FILL_REQUIRED_FIELDS', '<strong>Error</strong>: Please fill the required fields (name, email).' );
-define( 'WPAC_WP_ERROR_INVALID_EMAIL_ADDRESS', '<strong>Error</strong>: Please enter a valid email address.' );
-define( 'WPAC_WP_ERROR_POST_TOO_QUICKLY', 'You are posting comments too quickly. Slow down.' );
-define( 'WPAC_WP_ERROR_DUPLICATE_COMMENT', 'Duplicate comment detected; it looks as though you&#8217;ve already said that!' );
-
 // Support for site-level autoloading.
 if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {
 	require_once __DIR__ . '/lib/autoload.php';
 }
 
-require_once 'functions.php';
+require_once Functions::get_plugin_dir( 'functions.php' );
 
 /**
  * Run when the plugin is loaded.
  */
 function plugins_loaded() {
+
 	if ( is_admin() ) {
 		$admin = new Admin\Init();
 		$admin->init();
@@ -71,7 +60,6 @@ function wp() {
 		add_filter( 'the_comments', 'wpac_comments_template_query_args_filter' );
 		add_action( 'wp_enqueue_scripts', 'wpac_initialize', 9 );
 		add_action( 'wp_enqueue_scripts', 'wpac_enqueue_scripts' );
-		add_filter( 'gettext', 'wpac_filter_gettext', 20, 3 );
 		add_filter( 'option_page_comments', 'wpac_option_page_comments' );
 		add_filter( 'option_comments_per_page', 'wpac_option_comments_per_page' );
 
@@ -80,6 +68,49 @@ function wp() {
 	}
 }
 add_action( 'wp', __NAMESPACE__ . '\wp' );
+
+/**
+ * Fires before a comment is posted.
+ *
+ * @param int $comment_post_id The post ID the comment will be posted to.
+ */
+function pre_comment_on_post( $comment_post_id ) {
+	// Read in options for the plugin.
+	$options = Options::get_options();
+
+	/**
+	 * Filter: Filter the options on first load.
+	 * This is useful for adding new options or changing labels programmatically.
+	 *
+	 * @param array $options The options to be filtered.
+	 */
+	$options = apply_filters( 'dlxplugins/ajaxify/comments/options/first_load', $options );
+
+	// Start defining options. Allow others to override these (set a plugins_loaded priority of 9) when running the filter).
+	if ( ! defined( 'WPAC_WP_ERROR_PLEASE_TYPE_COMMENT' ) ) {
+		define( 'WPAC_WP_ERROR_PLEASE_TYPE_COMMENT', $options['textErrorTypeComment'] );
+	}
+	if ( ! defined( 'WPAC_WP_ERROR_COMMENTS_CLOSED' ) ) {
+		define( 'WPAC_WP_ERROR_COMMENTS_CLOSED', $options['textErrorCommentsClosed'] );
+	}
+	if ( ! defined( 'WPAC_WP_ERROR_MUST_BE_LOGGED_IN' ) ) {
+		define( 'WPAC_WP_ERROR_MUST_BE_LOGGED_IN', $options['textErrorMustBeLoggedIn'] );
+	}
+	if ( ! defined( 'WPAC_WP_ERROR_FILL_REQUIRED_FIELDS' ) ) {
+		define( 'WPAC_WP_ERROR_FILL_REQUIRED_FIELDS', $options['textErrorFillRequiredFields'] );
+	}
+	if ( ! defined( 'WPAC_WP_ERROR_INVALID_EMAIL_ADDRESS' ) ) {
+		define( 'WPAC_WP_ERROR_INVALID_EMAIL_ADDRESS', $options['textErrorInvalidEmailAddress'] );
+	}
+	if ( ! defined( 'WPAC_WP_ERROR_POST_TOO_QUICKLY' ) ) {
+		define( 'WPAC_WP_ERROR_POST_TOO_QUICKLY', $options['textErrorPostTooQuickly'] );
+	}
+	if ( ! defined( 'WPAC_WP_ERROR_DUPLICATE_COMMENT' ) ) {
+		define( 'WPAC_WP_ERROR_DUPLICATE_COMMENT', $options['textErrorDuplicateComment'] );
+	}
+	add_filter( 'gettext', 'wpac_filter_gettext', 20, 3 ); // todo - need to run earlier.
+}
+add_action( 'pre_comment_on_post', __NAMESPACE__ . '\pre_comment_on_post' );
 
 /* Setup plugin activation and redirection */
 register_activation_hook( __FILE__, __NAMESPACE__ . '\on_plugin_activation' );
