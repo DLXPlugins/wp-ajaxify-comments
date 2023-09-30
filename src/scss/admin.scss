@@ -1145,7 +1145,7 @@ h3.ajaxify-admin-content-subheading {
 	}
 }
 
-.ajaxify-spinner-wrapper svg {
+svg.ajaxify-icon-loading-animation-on {
 	animation: ajaxify-rotate 1s linear infinite;
 }
 .ajaxify-admin__popover-svgs {
@@ -1153,19 +1153,42 @@ h3.ajaxify-admin-content-subheading {
 	overflow-y: scroll;
 }
 .ajaxify-button-loading-svgs {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	column-gap: 15px;
-	row-gap: 15px;
-	padding: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+	max-height: 250px;
+	overflow-y: scroll;
+	border: 1px solid #ddd;
+	row-gap: 18px;
+	column-gap: 18px;
+	padding: 30px;
 
 	button.components-button.is-small:not(.has-text) {
-		width: 64px;
-		height: 64px;
+		background: $white;
+		padding: 8px;
+		width: 40px;
+		height: 40px;
 		svg {
-			width: 64px;
-			height: 64px;
-			size: 64px;
+			color: $black;
+			width: 40px;
+			height: 40px;
+			size: 40px;
+		}
+
+		&.is-pressed {
+			background: $black;
+			svg {
+				color: $white;
+			}
 		}
 	}
+}
+.ajaxify-icon-preview {
+	display: grid;
+	grid-template-columns: 72px 1fr;
+	margin: 15px 0;
+	align-items: center;
+	column-gap: 18px;
 }
