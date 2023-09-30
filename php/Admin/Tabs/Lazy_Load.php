@@ -41,6 +41,7 @@ class Lazy_Load {
 	 * @return array new color palette.
 	 */
 	public function theme_color_palette( $palette ) {
+		// Generate color palette for spinner background, icon, label, border.
 		$palette = array(
 			array(
 				'name'  => __( 'Black', 'wp-ajaxify-comments' ),
@@ -50,26 +51,67 @@ class Lazy_Load {
 			array(
 				'name'  => __( 'White', 'wp-ajaxify-comments' ),
 				'slug'  => 'ajaxify-white',
-				'color' => '#ffffff',
+				'color' => '#FFFFFF',
 			),
 			array(
-				'name'  => __( 'Success', 'wp-ajaxify-comments' ),
-				'slug'  => 'ajaxify-success',
-				'color' => '#008000',
+				'name'  => __( 'Dark Blue', 'wp-ajaxify-comments' ),
+				'slug'  => 'ajaxify-dark-blue',
+				'color' => '#1A237E',
 			),
 			array(
-				'name'  => __( 'Error', 'wp-ajaxify-comments' ),
-				'slug'  => 'ajaxify-error',
-				'color' => '#ff0000',
+				'name'  => __( 'Light Blue', 'wp-ajaxify-comments' ),
+				'slug'  => 'ajaxify-light-blue',
+				'color' => '#64B5F6',
+			),
+			array(
+				'name'  => __( 'Dark Green', 'wp-ajaxify-comments' ),
+				'slug'  => 'ajaxify-dark-green',
+				'color' => '#388E3C',
+			),
+			array(
+				'name'  => __( 'Light Green', 'wp-ajaxify-comments' ),
+				'slug'  => 'ajaxify-light-green',
+				'color' => '#81C784',
+			),
+			array(
+				'name'  => __( 'Dark Red', 'wp-ajaxify-comments' ),
+				'slug'  => 'ajaxify-dark-red',
+				'color' => '#D32F2F',
+			),
+			array(
+				'name'  => __( 'Light Red', 'wp-ajaxify-comments' ),
+				'slug'  => 'ajaxify-light-red',
+				'color' => '#E57373',
+			),
+			array(
+				'name'  => __( 'Dark Gray', 'wp-ajaxify-comments' ),
+				'slug'  => 'ajaxify-dark-gray',
+				'color' => '#616161',
+			),
+			array(
+				'name'  => __( 'Light Gray', 'wp-ajaxify-comments' ),
+				'slug'  => 'ajaxify-light-gray',
+				'color' => '#BDBDBD',
+			),
+			array(
+				'name'  => __( 'Gold', 'wp-ajaxify-comments' ),
+				'slug'  => 'ajaxify-gold',
+				'color' => '#FFD700',
+			),
+			array(
+				'name'  => __( 'Purple', 'wp-ajaxify-comments' ),
+				'slug'  => 'ajaxify-purple',
+				'color' => '#9C27B0',
 			),
 		);
 		return $palette;
 	}
 
 	/**
-	 * Include admin scripts for the home screen.
+	 * Include admin scripts for the lazy load screen.
 	 */
 	public function admin_scripts() {
+		$options = Options::get_options();
 		wp_enqueue_script(
 			'wpac-admin-lazy-load',
 			Functions::get_plugin_url( 'dist/wpac-admin-lazy-load-js.js' ),
@@ -77,7 +119,17 @@ class Lazy_Load {
 			Functions::get_plugin_version(),
 			true
 		);
-		add_filter( 'ajaxify/comments/theme_color_palette', array( $this, 'theme_color_palette' ), 1, 1 );
+		wp_enqueue_style(
+			'wpac-admin-lazy-load',
+			Functions::get_plugin_url( 'dist/wpac-lazy-load-css.css' ),
+			array(),
+			Functions::get_plugin_version(),
+			'all'
+		);
+		
+		
+		add_filter( 'ajaxify/comments/theme_color_palette', array( $this, 'theme_color_palette' ), 2, 1 );
+
 		wp_localize_script(
 			'wpac-admin-lazy-load',
 			'wpacAdminLazyLoad',
@@ -88,7 +140,7 @@ class Lazy_Load {
 				'palette'    => Functions::get_theme_color_palette(),
 			)
 		);
-		remove_filter( 'ajaxify/comments/theme_color_palette', array( $this, 'theme_color_palette' ), 1, 1 );
+		remove_filter( 'ajaxify/comments/theme_color_palette', array( $this, 'theme_color_palette' ), 2, 1 );
 	}
 
 	/**

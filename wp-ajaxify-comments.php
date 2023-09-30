@@ -47,8 +47,14 @@ function plugins_loaded() {
 		$admin = new Admin\Init();
 		$admin->init();
 	}
+
+	// Init menu helper.
 	$menu_helper = new Menu_Helper();
 	$menu_helper->run();
+
+	// Init lazy load.
+	$lazy_load = new Lazy_Load();
+	$lazy_load->run();
 
 	// Load die handler. This should only affect if `HTTP_X_WPAC_REQUEST` server var is set.
 	add_filter( 'wp_die_handler', 'wpac_wp_die_handler' );

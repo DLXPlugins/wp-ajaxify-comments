@@ -217,11 +217,17 @@ class Options {
 			'lazyLoadInlineLoadingType'        => 'spinner', /* can be spinner, skeleton, button, shortcode */
 			'lazyLoadInlineSpinner'            => 'LoadingGray1',
 			'lazyLoadInlineSpinnerLabelEnabled' => true,
+			'lazyLoadInlineSpinnerContainerBackgroundColor' => '#333333',
 			'lazyLoadInlineSpinnerLabel'       => __( 'Loading comments...', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineSpinnerLabelColor'  => '#FFFFFF',
+			'lazyLoadInlineSpinnerLabelFontSize' => 32,
+			'lazyLoadInlineSpinnerIconColor'   => '#FFFFFF',
+			
 			'lazyLoadTrigger'                  => 'domready', /* can be external, comments, domready, scroll, element */
 			'lazyLoadTriggerElement'           => '',
 			'lazyLoadInlineSpinnerSpeed' => 1.25,
 			'lazyLoadTriggerScrollOffset'      => 0,
+			'lazyLoadInlineSpinnerSize' => 72, /* pixels */
 			'lazyLoadPaginationEnabled'        => false,
 			'lazyLoadCommentsPerPage'          => 30,
 			'lazyLoadUseThemePagination'       => true,

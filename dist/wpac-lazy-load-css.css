@@ -1,0 +1,34 @@
+/*!**************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/scss/lazy-load.scss ***!
+  \**************************************************************************************************************************************************************************/
+@keyframes ajaxify-lazy-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.ajaxify-comments-spinner__wrapper {
+  background-color: var(--ajaxify-comments-spinner-container-background-color, #333);
+  padding: var(--ajaxify-comments-spinner-container-padding, 30px);
+}
+
+.ajaxify-comments-spinner__inner {
+  display: flex;
+  align-items: center;
+  font-size: var(--ajaxify-comments-spinner-container-font-size, 32px);
+  line-height: var(--ajaxify-comments-spinner-container-line-height, 1.25);
+  color: var(--ajaxify-comments-spinner-container-label-color, #FFFFFF);
+}
+
+.ajaxify-comments-spinner__icon {
+  margin-right: var(--ajaxify-comments-spinner-icon-margin-right, 20px);
+}
+
+.ajaxify-comments-spinner__icon svg {
+  display: block;
+  animation: ajaxify-lazy-rotate var(--ajaxify-comments-spinner-icon-animation-speed, 1.25s) linear infinite;
+  fill: var(--ajaxify-comments-spinner-icon-color, #FFFFFF);
+  width: var(--ajaxify-comments-spinner-icon-size, 72px);
+  height: var(--ajaxify-comments-spinner-icon-size, 72px);
+}
+
+/*# sourceMappingURL=wpac-lazy-load-css.css.map*/
