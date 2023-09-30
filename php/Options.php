@@ -220,6 +220,7 @@ class Options {
 			'lazyLoadInlineSpinnerLabel'       => __( 'Loading comments...', 'wp-ajaxify-comments' ),
 			'lazyLoadTrigger'                  => 'domready', /* can be external, comments, domready, scroll, element */
 			'lazyLoadTriggerElement'           => '',
+			'lazyLoadInlineSpinnerSpeed' => 1.25,
 			'lazyLoadTriggerScrollOffset'      => 0,
 			'lazyLoadPaginationEnabled'        => false,
 			'lazyLoadCommentsPerPage'          => 30,

@@ -14,6 +14,7 @@ html {
 
 :root {
 	--ajaxify-admin--color-main: #873F49;
+	--ajaxify-admin--color-black: #040A18;
 }
 
 /* overrride core theme color */
@@ -1145,12 +1146,15 @@ h3.ajaxify-admin-content-subheading {
 	}
 }
 
-svg.ajaxify-icon-loading-animation-on {
-	animation: ajaxify-rotate 1s linear infinite;
+:root {
+	--ajaxify-lazy-load-spinner-speed: 1.2s;
 }
-.ajaxify-admin__popover-svgs {
-	max-height: 250px;
-	overflow-y: scroll;
+
+svg.ajaxify-icon-loading-animation-on {
+	animation: ajaxify-rotate var( --ajaxify-lazy-load-spinner-speed ) linear infinite;
+}
+.ajaxify-admin__popover-svgs .ajaxify-admin__control-row {
+	margin-top: 20px;
 }
 .ajaxify-button-loading-svgs {
 	display: flex;
@@ -1164,6 +1168,7 @@ svg.ajaxify-icon-loading-animation-on {
 	row-gap: 18px;
 	column-gap: 18px;
 	padding: 30px;
+	margin-bottom: 20px;
 
 	button.components-button.is-small:not(.has-text) {
 		background: $white;
@@ -1191,4 +1196,12 @@ svg.ajaxify-icon-loading-animation-on {
 	margin: 15px 0;
 	align-items: center;
 	column-gap: 18px;
+}
+
+/* Range Control component */
+.components-range-control__mark {
+	top: -14px;
+}
+.components-range-control__mark-label {
+	margin-top: 8px;
 }

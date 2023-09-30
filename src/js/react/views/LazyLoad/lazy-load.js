@@ -20,8 +20,6 @@ import {
 	CardHeader,
 	CardBody,
 	CardFooter,
-	__experimentalText as Text,
-	__experimentalHeading as Heading,
 } from '@wordpress/components';
 import { AlertCircle, Loader2, ClipboardCheck, Code } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
@@ -120,6 +118,7 @@ const Interface = ( props ) => {
 			lazyLoadInlineLoadingType: data.lazyLoadInlineLoadingType,
 			lazyLoadInlineSpinnerLabel: data.lazyLoadInlineSpinnerLabel,
 			lazyLoadInlineSpinnerLabelEnabled: data.lazyLoadInlineSpinnerLabelEnabled,
+			lazyLoadInlineSpinnerSpeed: data.lazyLoadInlineSpinnerSpeed,
 			lazyLoadTrigger: data.lazyLoadTrigger,
 			lazyLoadTriggerElement: data.lazyLoadTriggerElement,
 			lazyLoadPaginationEnabled: data.lazyLoadPaginationEnabled,
@@ -205,7 +204,18 @@ const Interface = ( props ) => {
 				</p>
 				<div className="ajaxify-icon-preview">
 					<div className="ajaxify-icon-wrapper">
-						<LoadingSpinner width="64" height="64" className={ showLoadingSpinnerAnimation ? 'ajaxify-icon-loading-animation-on' : '' } />
+						<>
+							<style>
+								{
+									`
+									.ajaxify-icon-loading-animation-on {
+										--ajaxify-lazy-load-spinner-speed: ${ getValues( 'lazyLoadInlineSpinnerSpeed' ) }s;
+									}
+									`
+								}
+							</style>
+							<LoadingSpinner width="64" height="64" className={ showLoadingSpinnerAnimation ? 'ajaxify-icon-loading-animation-on' : '' } />
+						</>
 					</div>
 					<div className="ajaxify-icon-spin-control">
 						<Button
@@ -223,6 +233,72 @@ const Interface = ( props ) => {
 					{
 						getSpinners()
 					}
+				</div>
+				<div className="ajaxify-admin__control-row">
+
+					<Controller
+						name="lazyLoadInlineSpinnerSpeed"
+						control={ control }
+						render={ ( { field: { onChange, value } } ) => (
+							<>
+								<RangeControl
+									label={ __( 'Animation Speed and Duration', 'wp-ajaxify-comments' ) }
+									value={ value }
+									onChange={ onChange }
+									min={ 0.25 }
+									max={ 2 }
+									step={ 0.05 }
+									type={ 'stepper'}
+									allowReset={ false }
+									color="var(--ajaxify-admin--color-main)"
+									trackColor="var(--ajaxify-admin--color-main)"
+									currentInput={ 1.2 }
+									help={ __( 'Choose the time it takes for the loading animation to take place. For a faster animation, choose a lower value. For a slower animation, choose a higher value.', 'wp-ajaxify-comments' ) }
+									initialPosition={ 1.2 }
+									showTooltip={ true }
+									separatorType={
+										'topFullWidth'
+									}
+									marks={ [
+										{
+											value: 0.25,
+											label: __( 'Fastest', 'wp-ajaxify-comments' ),
+										},
+										{
+											value: 0.5,
+											label: __( '0.5s', 'wp-ajaxify-comments' ),
+										},
+										{
+											value: 0.75,
+											label: __( '0.75s', 'wp-ajaxify-comments' ),
+										},
+										{
+											value: 1,
+											label: __( '1s', 'wp-ajaxify-comments' ),
+										},
+										{
+											value: 1.25,
+											label: __( '1.25s', 'wp-ajaxify-comments' ),
+										},
+										{
+											value: 1.5,
+											label: __( '1.5s', 'wp-ajaxify-comments' ),
+										},
+										{
+											value: 1.75,
+											label: __( '1.75s', 'wp-ajaxify-comments' ),
+										},
+										{
+											value: 2,
+											label: __( 'Slowest', 'wp-ajaxify-comments' ),
+										},
+									]}
+									withInputField={ false }
+
+								/>
+							</>
+						) }
+					/>
 				</div>
 			</>
 		);
