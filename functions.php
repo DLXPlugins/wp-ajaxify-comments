@@ -422,9 +422,19 @@ function wpac_filter_gettext( $translation, $text, $domain ) {
 		strtolower( WPAC_WP_ERROR_DUPLICATE_COMMENT )     => 'textErrorDuplicateComment',
 	);
 
+	global $wpac_global_comment_post_id;
+	$post_type = get_post_type( $wpac_global_comment_post_id );
+
+	$options = apply_filters(
+		'dlxplugins/ajaxify/comments/options/pre_output',
+		Options::get_options(),
+		$wpac_global_comment_post_id,
+		$post_type
+	);
+
 	$lowerText = strtolower( $text );
 	if ( array_key_exists( $lowerText, $customWordpressTexts ) ) {
-		$customText = wpac_get_option( $customWordpressTexts[ $lowerText ] );
+		$customText = $options[ $customWordpressTexts[ $lowerText ] ];
 		if ( $customText ) {
 			return $customText;
 		}
