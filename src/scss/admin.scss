@@ -437,9 +437,6 @@ h3.ajaxify-admin-content-subheading {
 			font-size: 0.8125rem !important /* override core styles */
 		}
 	}
-	.components-select-control {
-		margin-bottom: 25px !important; /* override core styles */
-	}
 
 	// Text control styles.
 	.components-base-control,
@@ -1145,5 +1142,30 @@ h3.ajaxify-admin-content-subheading {
 		border-color: #FFF;
 		outline: none;
 		box-shadow: inset 0 0 0 1px #333 !important;
+	}
+}
+
+.ajaxify-spinner-wrapper svg {
+	animation: ajaxify-rotate 1s linear infinite;
+}
+.ajaxify-admin__popover-svgs {
+	max-height: 250px;
+	overflow-y: scroll;
+}
+.ajaxify-button-loading-svgs {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 15px;
+	row-gap: 15px;
+	padding: 20px;
+
+	button.components-button.is-small:not(.has-text) {
+		width: 64px;
+		height: 64px;
+		svg {
+			width: 64px;
+			height: 64px;
+			size: 64px;
+		}
 	}
 }

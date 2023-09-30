@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Options {
 
 
+
 	/**
 	 * Array holding the options.
 	 *
@@ -214,6 +215,9 @@ class Options {
 			'lazyLoadEnabled'                  => false,
 			'lazyLoadDisplay'                  => 'overlay', /* can be overlay, inline, none */
 			'lazyLoadInlineLoadingType'        => 'spinner', /* can be spinner, skeleton, button, shortcode */
+			'lazyLoadInlineSpinner'            => 'LoadingGray1',
+			'lazyLoadInlineSpinnerLabelEnabled' => true,
+			'lazyLoadInlineSpinnerLabel'       => __( 'Loading comments...', 'wp-ajaxify-comments' ),
 			'lazyLoadTrigger'                  => 'domready', /* can be external, comments, domready, scroll, element */
 			'lazyLoadTriggerElement'           => '',
 			'lazyLoadTriggerScrollOffset'      => 0,

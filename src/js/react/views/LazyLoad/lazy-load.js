@@ -5,12 +5,15 @@ import classNames from 'classnames';
 import { useAsyncResource } from 'use-async-resource';
 import { __, sprintf } from '@wordpress/i18n';
 import BeatLoader from 'react-spinners/BeatLoader';
+import * as LoadingSvgs from '../../icons/loading/index';
 
 import {
 	TextControl,
 	Button,
+	ButtonGroup,
 	ToggleControl,
 	SelectControl,
+	Popover,
 	RangeControl,
 	RadioControl,
 } from '@wordpress/components';
@@ -31,7 +34,6 @@ const retrieveLazyLoadOptions = () => {
 const cssRegex = /^(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)(?:=[\'"]?(.*?)[\'"]?)?\]|#[a-z0-9_-]+|\.(?:[a-z0-9_-]+))+(?:\s*,\s*(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)(?:=[\'"]?(.*?)[\'"]?)?\]|#[a-z0-9_-]+|\.(?:[a-z0-9_-]+))+)*/i;
 
 const defaultPalette = wpacAdminLazyLoad.palette;
-
 
 const LazyLoadScreen = ( props ) => {
 	const [ defaults, getDefaults ] = useAsyncResource(
@@ -82,6 +84,8 @@ const Interface = ( props ) => {
 	const [ isSaved, setIsSaved ] = useState( false );
 	const [ resetting, setResetting ] = useState( false );
 	const [ isReset, setIsReset ] = useState( false );
+	const [ selectLoadingSpinnerButtonRef, setSelectLoadingSpinnerButtonRef ] = useState( null );
+	const [ showLoadingSpinnerPopover, setShowLoadingSpinnerPopover ] = useState( false );
 
 	const getAdminBarHeight = () => {
 		const adminBar = document.getElementById( 'wpadminbar' );
@@ -107,6 +111,8 @@ const Interface = ( props ) => {
 			lazyLoadEnabled: data.lazyLoadEnabled,
 			lazyLoadDisplay: data.lazyLoadDisplay,
 			lazyLoadInlineLoadingType: data.lazyLoadInlineLoadingType,
+			lazyLoadInlineSpinnerLabel: data.lazyLoadInlineSpinnerLabel,
+			lazyLoadInlineSpinnerLabelEnabled: data.lazyLoadInlineSpinnerLabelEnabled,
 			lazyLoadTrigger: data.lazyLoadTrigger,
 			lazyLoadTriggerElement: data.lazyLoadTriggerElement,
 			lazyLoadPaginationEnabled: data.lazyLoadPaginationEnabled,
@@ -116,6 +122,7 @@ const Interface = ( props ) => {
 			lazyLoadPaginationLocation: data.lazyLoadPaginationLocation,
 			lazyLoadingPaginationScrollToTop: data.lazyLoadingPaginationScrollToTop,
 			lazyLoadTriggerScrollOffset: data.lazyLoadTriggerScrollOffset,
+			lazyLoadInlineSpinner: data.lazyLoadInlineSpinner,
 			saveNonce: wpacAdminLazyLoad.saveNonce,
 			resetNonce: wpacAdminLazyLoad.resetNonce,
 		},
@@ -144,6 +151,122 @@ const Interface = ( props ) => {
 						'wp-ajaxify-comments',
 					) }
 				</p>
+			</>
+		);
+	};
+
+	/**
+	 * Returns a button group with all the available loading spinners.
+	 *
+	 * @return {JSX.Element} Button group with spinners.
+	 */
+	const getSpinners = () => {
+		return (
+			<ButtonGroup className="ajaxify-button-loading-svgs">
+				{
+					( Object.entries( LoadingSvgs ).map( ( [ key, SvgComponent ] ) => {
+						return (
+							<Button
+								key={ key }
+								isSmall
+								isPrimary={ getValues( 'lazyLoadInlineSpinner' ) === key }
+								onClick={ () => {
+									setValue( 'lazyLoadInlineSpinner', key );
+								} }
+								icon={ <SvgComponent width="64" height="64" /> }
+								label={ key }
+							/>
+						);
+					} ) )
+				}
+			</ButtonGroup>
+		);
+	};
+
+	const getSpinnerOptions = () => {
+		if ( 'spinner' !== getValues( 'lazyLoadInlineLoadingType' ) ) {
+			return null;
+		}
+		const LoadingSpinner = LoadingSvgs[ getValues( 'lazyLoadInlineSpinner' ) ];
+		return (
+			<>
+				<h3>{ __( 'Select a Loading Spinner', 'wp-ajaxify-comments' ) }</h3>
+				<div className="ajaxify-admin__control-row">
+					<Controller
+						name="lazyLoadInlineSpinnerLabelEnabled"
+						control={ control }
+						render={ ( { field: { onChange, value } } ) => (
+							<>
+								<ToggleControl
+									label={ __( 'Enable Label for Spinner', 'wp-ajaxify-comments' ) }
+									help={ __( 'Show a loading label next to the spinner.', 'wp-ajaxify-comments' ) }
+									checked={ value }
+									onChange={ onChange }
+								/>
+							</>
+						) }
+					/>
+				</div>
+				{
+					getValues( 'lazyLoadInlineSpinnerLabelEnabled' ) && (
+						<div className="ajaxify-admin__control-row">
+							<Controller
+								name="lazyLoadInlineSpinnerLabel"
+								control={ control }
+								rules={ {
+									required: true,
+								} }
+								render={ ( { field: { onChange, value } } ) => (
+									<>
+										<TextControl
+											label={ __( 'Enter a label for the Spinner', 'wp-ajaxify-comments' ) }
+											help={ __( 'The label goes next to the spinner.', 'wp-ajaxify-comments' ) }
+											value={ value }
+											onChange={ onChange }
+											className={ classNames( 'ajaxify-admin__text-control', {
+												'has-error': 'required' === errors.lazyLoadInlineSpinnerLabel?.type,
+												'is-required': true,
+											} ) }
+										/>
+										{ errors?.lazyLoadInlineSpinnerLabel && (
+											<Notice
+												message={ __(
+													'This field is required.',
+													'wp-ajaxify-comments',
+												) }
+												status="error"
+												politeness="assertive"
+												inline={ false }
+												icon={ () => <AlertCircle /> }
+											/>
+										) }
+									</>
+								) }
+							/>
+						</div>
+					)
+				}
+				<Button
+					variant="primary"
+					onClick={ () => {
+						setShowLoadingSpinnerPopover( true );
+					} }
+					ref={ setSelectLoadingSpinnerButtonRef }
+				>
+					{ __( 'Select a Loading Spinner', 'wp-ajaxify-comments' ) }
+				</Button>
+				<Popover placement="top-end" focusOnMount={ false } expandOnMobile={ false } className="components-popover__content" anchor={ selectLoadingSpinnerButtonRef } style={{maxWidth: '400px'}}>
+					<div className="ajaxify-admin__popover-inner ajaxify-admin__popover-svgs">
+						{
+							getSpinners()
+						}
+					</div>
+				</Popover>
+				<div className="ajaxify-admin__spinner-preview">
+					<div className="ajaxify-spinner-wrapper">
+						<LoadingSpinner width="64" height="64" />
+					</div>
+				</div>
 			</>
 		);
 	};
@@ -361,6 +484,49 @@ const Interface = ( props ) => {
 									</div>
 								</td>
 							</tr>
+							{ 'inline' === getValues( 'lazyLoadDisplay' ) && (
+								<tr>
+									<th scope="row">{ __( 'Inline Loading', 'wp-ajaxify-comments' ) }</th>
+									<td>
+										<div className="ajaxify-admin__control-row">
+											<p className="description">
+												{ __(
+													'If you choose to display the loading message inline, how would you like to display it?', 'wp-ajaxify-comments',
+												) }
+											</p>
+										</div>
+										<div className="ajaxify-admin__control-row">
+											<Controller
+												name="lazyLoadInlineLoadingType"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<SelectControl
+															label={ __( 'Inline Loading Type', 'wp-ajaxify-comments' ) }
+															help={ __( 'Choose how you would like to display the loading message.', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															options={ [
+																{ value: 'spinner', label: __( 'Spinner (default)', 'wp-ajaxify-comments' ) },
+																{ value: 'skeleton', label: __( 'Loading Skeleton', 'wp-ajaxify-comments' ) },
+																{
+																	value: 'button',
+																	label: __( 'Loading Button', 'wp-ajaxify-comments' ),
+																},
+																{
+																	value: 'shortcode',
+																	label: __( 'Shortcode', 'wp-ajaxify-comments' ),
+																},
+															] }
+														/>
+													</>
+												) }
+											/>
+											{ getSpinnerOptions() }
+										</div>
+									</td>
+								</tr>
+							) }
 						</tbody>
 					</table>
 					<SaveResetButtons
