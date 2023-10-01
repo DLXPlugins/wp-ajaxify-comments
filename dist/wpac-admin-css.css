@@ -4317,6 +4317,9 @@ h3.ajaxify-admin-content-subheading:after {
 .ajaxify-admin__control-row .components-range-control__thumb-wrapper span {
   background: #873F49;
 }
+.ajaxify-admin__control-row .components-base-control__label {
+  width: 100%;
+}
 
 /* Color Component (forked from @GenerateBlocks) */
 .ajaxify-block-component-color-picker-wrapper,
@@ -4507,6 +4510,10 @@ h3.ajaxify-admin-content-subheading:after {
 
 svg.ajaxify-icon-loading-animation-on {
   animation: ajaxify-rotate var(--ajaxify-lazy-load-spinner-speed) linear infinite;
+}
+
+svg.ajaxify-icon-loading-animation-off {
+  animation: none !important; /* just to make sure */
 }
 
 .ajaxify-admin__popover-svgs .ajaxify-admin__control-row {

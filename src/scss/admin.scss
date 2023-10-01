@@ -946,6 +946,9 @@ h3.ajaxify-admin-content-subheading {
 			background: $marsala;
 		}
 	}
+	.components-base-control__label {
+		width: 100%;
+	}
 }
 
 /* Color Component (forked from @GenerateBlocks) */
@@ -1152,6 +1155,9 @@ h3.ajaxify-admin-content-subheading {
 
 svg.ajaxify-icon-loading-animation-on {
 	animation: ajaxify-rotate var( --ajaxify-lazy-load-spinner-speed ) linear infinite;
+}
+svg.ajaxify-icon-loading-animation-off {
+	animation: none !important; /* just to make sure */
 }
 .ajaxify-admin__popover-svgs .ajaxify-admin__control-row {
 	margin-top: 20px;

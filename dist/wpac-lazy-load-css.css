@@ -7,8 +7,18 @@
   }
 }
 .ajaxify-comments-spinner__wrapper {
+  position: relative;
   background-color: var(--ajaxify-comments-spinner-container-background-color, #333);
   padding: var(--ajaxify-comments-spinner-container-padding, 30px);
+}
+.ajaxify-comments-spinner__wrapper .ajaxify-admin__preview-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #FFF;
+}
+.ajaxify-comments-spinner__wrapper .ajaxify-comments-spinner__label {
+  color: var(--ajaxify-comments-spinner-label-color, #FFFFFF);
 }
 
 .ajaxify-comments-spinner__inner {

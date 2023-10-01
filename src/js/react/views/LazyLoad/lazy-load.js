@@ -20,6 +20,7 @@ import {
 	CardHeader,
 	CardBody,
 	CardFooter,
+	BaseControl,
 } from '@wordpress/components';
 import { AlertCircle, Loader2, ClipboardCheck, Code } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
@@ -135,6 +136,9 @@ const Interface = ( props ) => {
 			lazyLoadInlineSpinnerContainerBackgroundColor: data.lazyLoadInlineSpinnerContainerBackgroundColor,
 			lazyLoadInlineSpinnerLabelFontSize: data.lazyLoadInlineSpinnerLabelFontSize,
 			lazyLoadInlineSpinnerIconColor: data.lazyLoadInlineSpinnerIconColor,
+			lazyLoadInlineSpinnerLabelColor: data.lazyLoadInlineSpinnerLabelColor,
+			lazyLoadInlineSpinnerLayoutType: data.lazyLoadInlineSpinnerLayoutType,
+			lazyLoadInlineSpinnerLayoutAlignment: data.lazyLoadInlineSpinnerLayoutAlignment,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -201,38 +205,14 @@ const Interface = ( props ) => {
 		const LoadingSpinner = LoadingSvgs[ getValues( 'lazyLoadInlineSpinner' ) ];
 		return (
 			<>
-				<p className="description">
+				<p className="description" style={ { marginBottom: '15px' } }>
 					{ __(
-						'Choose a loading icon to display while comments are loading.', 'wp-ajaxify-comments',
+						'Choose a loading icon to display while comments are loading. A preview is shown below.', 'wp-ajaxify-comments',
 					) }
 				</p>
-				<div className="ajaxify-icon-preview">
-					<div className="ajaxify-icon-wrapper">
-						<>
-							<style>
-								{
-									`
-									.ajaxify-icon-loading-animation-on {
-										--ajaxify-lazy-load-spinner-speed: ${ getValues( 'lazyLoadInlineSpinnerSpeed' ) }s;
-									}
-									`
-								}
-							</style>
-							<LoadingSpinner width="64" height="64" className={ showLoadingSpinnerAnimation ? 'ajaxify-icon-loading-animation-on' : '' } />
-						</>
-					</div>
-					<div className="ajaxify-icon-spin-control">
-						<Button
-							variant="secondary"
-							label={ showLoadingSpinnerAnimation ? __( 'Stop Animation', 'wp-ajaxify-comments' ) : __( 'Start Animation', 'wp-ajaxify-comments' ) }
-							onClick={ () => {
-								setShowLoadingSpinnerAnimation( ! showLoadingSpinnerAnimation );
-							} }
-						>
-							{ showLoadingSpinnerAnimation ? __( 'Stop', 'wp-ajaxify-comments' ) : __( 'Spin', 'wp-ajaxify-comments' ) }
-						</Button>
-					</div>
-				</div>
+				{
+					getLoadingSpinnerPreview()
+				}
 				<div className="ajaxify-admin__popover-inner ajaxify-admin__popover-svgs">
 					{
 						getSpinners()
@@ -307,6 +287,51 @@ const Interface = ( props ) => {
 							</>
 						) }
 					/>
+				</div>
+			</>
+		);
+	};
+
+	const getLoadingSpinnerPreview = () => {
+		return (
+			<>
+				<style>
+					{
+						`:root {
+						--ajaxify-comments-spinner-container-background-color: ${ getValues( 'lazyLoadInlineSpinnerContainerBackgroundColor' ) };
+						--ajaxify-comments-spinner-container-font-size: ${ getValues( 'lazyLoadInlineSpinnerLabelFontSize' ) }px;
+						--ajaxify-comments-spinner-icon-color: ${ getValues( 'lazyLoadInlineSpinnerIconColor' ) };
+						--ajaxify-comments-spinner-icon-size: ${ getValues( 'lazyLoadInlineSpinnerSize' ) }px;
+						--ajaxify-comments-spinner-label-color: ${ getValues( 'lazyLoadInlineSpinnerLabelColor' ) };
+						--ajaxify-comments-spinner-icon-margin-right: 20px;
+						--ajaxify-comments-spinner-icon-animation-speed: ${ getValues( 'lazyLoadInlineSpinnerSpeed' ) }s;
+						--ajaxify-comments-spinner-container-padding: 30px;
+					}
+				`
+					}
+				</style>
+				<div className="ajaxify-admin__preview" style={ { marginBottom: '15px' } }>
+					<div className="ajaxify-comments-spinner__wrapper" aria-hidden="true">
+						<div className="ajaxify-comments-spinner__inner">
+							<div className="ajaxify-comments-spinner__icon">
+								<LoadingSpinnerPreview width={ getValues( 'lazyLoadInlineSpinnerSize' ) } height={ getValues( 'lazyLoadInlineSpinnerSize' ) } className={ showLoadingSpinnerAnimation ? 'ajaxify-icon-loading-animation-on' : 'ajaxify-icon-loading-animation-off' } />
+							</div>
+							<div className="ajaxify-comments-spinner__label" aria-hidden="true">
+								{ getValues( 'lazyLoadInlineSpinnerLabel' ) }
+							</div>
+						</div>
+						<div className="ajaxify-admin__preview-controls">
+							<Button
+								variant="secondary"
+								label={ showLoadingSpinnerAnimation ? __( 'Stop Animation', 'wp-ajaxify-comments' ) : __( 'Start Animation', 'wp-ajaxify-comments' ) }
+								onClick={ () => {
+									setShowLoadingSpinnerAnimation( ! showLoadingSpinnerAnimation );
+								} }
+							>
+								{ showLoadingSpinnerAnimation ? __( 'Stop', 'wp-ajaxify-comments' ) : __( 'Spin', 'wp-ajaxify-comments' ) }
+							</Button>
+						</div>
+					</div>
 				</div>
 			</>
 		);
@@ -580,8 +605,47 @@ const Interface = ( props ) => {
 										</td>
 									</tr>
 									<tr>
-										<th scope="row">{ __( 'Loading Label', 'wp-ajaxify-comments' ) }</th>
+										<th scope="row">{ __( 'Layout', 'wp-ajaxify-comments' ) }</th>
 										<td>
+											<div className="ajaxify-admin__control-row">
+												<Controller
+													name="lazyLoadInlineSpinnerLayoutType"
+													control={ control }
+													render={ ( { field: { onChange, value } } ) => (
+														<>
+															<BaseControl
+																id="lazyLoadInlineSpinnerLayoutType"
+																label={ __( 'Layout Type', 'wp-ajaxify-comments' ) }
+																help={ __( 'Choose a layout for this loading banner.', 'wp-ajaxify-comments' ) }
+															>
+																<ButtonGroup>
+																	<Button
+																		label={ __( 'Horizontal', 'wp-ajaxify-comments' ) }
+																		isPressed={ 'horizontal' === getValues( 'lazyLoadInlineSpinnerLayoutType' ) }
+																		onClick={ () => {
+																			setValue( 'lazyLoadInlineSpinnerLayoutType', 'horizontal' );
+																		}
+																		}
+
+																	>
+																		{ __( 'Horizontal', 'wp-ajaxify-comments' ) }
+																	</Button>
+																	<Button
+																		label={ __( 'Vertical', 'wp-ajaxify-comments' ) }
+																		isPressed={ 'vertical' === getValues( 'lazyLoadInlineSpinnerLayoutType' ) }
+																		onClick={ () => {
+																			setValue( 'lazyLoadInlineSpinnerLayoutType', 'vertical' );
+																		}
+																		}
+																	>
+																		{ __( 'Vertical', 'wp-ajaxify-comments' ) }
+																	</Button>
+																</ButtonGroup>
+															</BaseControl>
+														</>
+													) }
+												/>
+											</div>
 											<div className="ajaxify-admin__control-row">
 												<Controller
 													name="lazyLoadInlineSpinnerLabelEnabled"
@@ -640,58 +704,11 @@ const Interface = ( props ) => {
 										</td>
 									</tr>
 									<tr>
-										<th scope="row">{ __( 'Appearance and Preview', 'wp-ajaxify-comments' ) }</th>
+										<th scope="row">{ __( 'Colors', 'wp-ajaxify-comments' ) }</th>
 										<td>
-											<style>
-												{
-													`:root {
-														--ajaxify-comments-spinner-container-background-color: ${ getValues( 'lazyLoadInlineSpinnerContainerBackgroundColor' ) };
-														--ajaxify-comments-spinner-container-font-size: ${ getValues( 'lazyLoadInlineSpinnerLabelFontSize' ) }px;
-														--ajaxify-comments-spinner-icon-color: ${ getValues( 'lazyLoadInlineSpinnerIconColor' ) };
-														--ajaxify-comments-spinner-icon-size: ${ getValues( 'lazyLoadInlineSpinnerSize' ) }px;
-														--ajaxify-comments-spinner-label-color: #FFFFFF;
-														--ajaxify-comments-spinner-icon-margin-right: 20px;
-														--ajaxify-comments-spinner-icon-animation-speed: ${ getValues( 'lazyLoadInlineSpinnerSpeed' ) }s;
-														--ajaxify-comments-spinner-container-padding: 30px;
-													}
-												`
-												}
-											</style>
-											<div className="ajaxify-admin__preview">
-												<div className="ajaxify-comments-spinner__wrapper" aria-hidden="true">
-													<div className="ajaxify-comments-spinner__inner">
-														<div className="ajaxify-comments-spinner__icon">
-															<LoadingSpinnerPreview width={ getValues( 'lazyLoadInlineSpinnerSize' ) } height={ getValues( 'lazyLoadInlineSpinnerSize' ) } className="ajaxify-icon-loading-animation-on" />
-														</div>
-														<div className="ajaxify-comments-spinner__label" aria-hidden="true">
-															{ getValues( 'lazyLoadInlineSpinnerLabel' ) }
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="ajaxify-admin__control-row">
-												<Controller
-													name="lazyLoadInlineSpinnerSize"
-													control={ control }
-													render={ ( { field: { onChange, value } } ) => (
-														<>
-															<RangeControl
-																label={ __( 'Loading Icon Size', 'wp-ajaxify-comments' ) }
-																value={ value }
-																onChange={ onChange }
-																min={ 16 }
-																max={ 150 }
-																step={ 1 }
-																help={ __( 'Set the size of the loading icon.', 'wp-ajaxify-comments' ) }
-																color="var(--ajaxify-admin--color-main)"
-																trackColor="var(--ajaxify-admin--color-main)"
-																resetFallbackValue={ 72 }
-																allowReset={ true }
-															/>
-														</>
-													) }
-												/>
-											</div>
+											{
+												getLoadingSpinnerPreview()
+											}
 											<div className="ajaxify-admin__control-row">
 												<Controller
 													name="lazyLoadInlineSpinnerContainerBackgroundColor"
@@ -729,6 +746,89 @@ const Interface = ( props ) => {
 																defaultColors={ defaultPalette }
 																defaultColor={ '#FFFFFF' }
 																slug={ 'spinner-icon-color' }
+															/>
+														</>
+													) }
+												/>
+											</div>
+											<div className="ajaxify-admin__control-row">
+												<Controller
+													name="lazyLoadInlineSpinnerLabelColor"
+													control={ control }
+													render={ ( { field: { onChange, value } } ) => (
+														<>
+															<ColorPickerControl
+																value={ value }
+																key={ 'spinner-label-color' }
+																onChange={ ( slug, newValue ) => {
+																	onChange( newValue );
+																} }
+																label={ __( 'Label Text Color', 'wp-ajaxify-comments' ) }
+																defaultColors={ defaultPalette }
+																defaultColor={ '#000000' }
+																slug={ 'spinner-label-color' }
+															/>
+														</>
+													) }
+												/>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">{ __( 'Typography and Dimensions', 'wp-ajaxify-comments' ) }</th>
+										<td>
+											<div className="ajaxify-admin-appearance-preview-row" style={ { position: 'sticky', top: ( getAdminBarHeight() + 5 ) + 'px' } }>
+												<div className="ajaxify-admin-appearance-preview-row__buttons">
+													<Button
+														onClick={ ( e ) => {
+															e.preventDefault();
+															showPreview( formValues, 'loading' );
+														} }
+														className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
+														variant="secondary"
+													>
+														{ __( 'Preview Loading', 'wp-ajaxify-comments' ) }
+													</Button>
+													<Button
+														onClick={ ( e ) => {
+															e.preventDefault();
+															showPreview( formValues, 'success' );
+														} }
+														className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
+														variant="secondary"
+													>
+														{ __( 'Preview Success', 'wp-ajaxify-comments' ) }
+													</Button>
+													<Button
+														onClick={ ( e ) => {
+															e.preventDefault();
+															showPreview( formValues, 'error' );
+														} }
+														className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
+														variant="secondary"
+													>
+														{ __( 'Preview Error', 'wp-ajaxify-comments' ) }
+													</Button>
+												</div>
+											</div>
+											<div className="ajaxify-admin__control-row">
+												<Controller
+													name="lazyLoadInlineSpinnerSize"
+													control={ control }
+													render={ ( { field: { onChange, value } } ) => (
+														<>
+															<RangeControl
+																label={ __( 'Loading Icon Size', 'wp-ajaxify-comments' ) }
+																value={ value }
+																onChange={ onChange }
+																min={ 16 }
+																max={ 150 }
+																step={ 1 }
+																help={ __( 'Set the size of the loading icon.', 'wp-ajaxify-comments' ) }
+																color="var(--ajaxify-admin--color-main)"
+																trackColor="var(--ajaxify-admin--color-main)"
+																resetFallbackValue={ 72 }
+																allowReset={ true }
 															/>
 														</>
 													) }
