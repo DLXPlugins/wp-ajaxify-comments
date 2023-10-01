@@ -763,7 +763,6 @@ WPAC.LoadComments = function(url, options) {
 
 jQuery(function() {
 	var initSuccesful = WPAC.Init();
-	console.log( WPAC._Options );
 	if (true === WPAC._Options.lazyLoadEnabled) {
 		
 

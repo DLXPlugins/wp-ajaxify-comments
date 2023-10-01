@@ -8,7 +8,6 @@ import SendCommand from '../../utils/SendCommand';
 import SnackPop from '../SnackPop';
 
 export function onSave( formData, setError ) {
-	console.log( formData );
 
 }
 
