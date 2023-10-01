@@ -263,6 +263,21 @@ function wpac_initialize() {
 	echo 'WPAC._Options={';
 	$options = Options::get_options();
 	$options['lazyLoadEnabled'] = Functions::is_lazy_loading_enabled( false, false );
+
+	/**
+	 * Filter the options before they are output.
+	 * This is useful for adding custom options or modifying labels.
+	 *
+	 * @param array  $options The options to be output.
+	 * @param int    $post_id The post ID.
+	 * @param string $post_type The post type.
+	 */
+	$options = apply_filters(
+		'dlxplugins/ajaxify/comments/options/pre_output',
+		$options,
+		get_the_ID(),
+		get_post_type( get_the_ID() )
+	);
 	foreach ( $options as $option_key => $option_value ) {
 		switch ( $option_key ) {
 			case '0':
@@ -418,9 +433,19 @@ function wpac_filter_gettext( $translation, $text, $domain ) {
 		strtolower( WPAC_WP_ERROR_DUPLICATE_COMMENT )     => 'textErrorDuplicateComment',
 	);
 
+	global $wpac_global_comment_post_id;
+	$post_type = get_post_type( $wpac_global_comment_post_id );
+
+	$options = apply_filters(
+		'dlxplugins/ajaxify/comments/options/pre_output',
+		Options::get_options(),
+		$wpac_global_comment_post_id,
+		$post_type
+	);
+
 	$lowerText = strtolower( $text );
 	if ( array_key_exists( $lowerText, $customWordpressTexts ) ) {
-		$customText = wpac_get_option( $customWordpressTexts[ $lowerText ] );
+		$customText = $options[ $customWordpressTexts[ $lowerText ] ];
 		if ( $customText ) {
 			return $customText;
 		}

@@ -128,7 +128,6 @@ const Interface = ( props ) => {
 			</>
 		);
 	};
-console.log( errors );
 	return (
 		<>
 			<div className="ajaxify-admin-panel-area">

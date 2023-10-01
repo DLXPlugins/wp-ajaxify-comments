@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.3.1
-Stable tag: 2.0.5
+Stable tag: 2.0.7
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -91,6 +91,12 @@ If you have activated the plugin and are just getting started, please see our <a
 
 
 == Changelog ==
+
+= 2.0.7 =
+* Released 2023-09-30
+* Placed `gettext` call only on comment posting, improving performance.
+* Resolved improper `functions.php` inclusion.
+* New filter for changing options before they are output as JSON.
 
 = 2.0.5 =
 * Released 2023-09-28
@@ -619,5 +625,5 @@ Bug-fix
 
 == Upgrade Notice ==
 
-= 2.0.5 =
-Lazy loading should be much more reliable. Added out-of-the-box support for Genesis themes. Added options in Menu Helper to simulate lazy loading on or off.
+= 2.0.7 =
+Placed `gettext` call only on comment posting, improving performance. Resolved improper `functions.php` inclusion. New filter for changing options before they are output as JSON.

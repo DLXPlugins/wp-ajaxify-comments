@@ -140,6 +140,17 @@ class Options {
 			self::update_options( $options, false );
 		}
 		self::$options = $options;
+
+		/**
+		 * Filter the options before they are returned.
+		 * Technically you can do this with a get_option filter, but this parses in any new defaults.
+		 *
+		 * @param array  $options The options to be output.
+		 */
+		$options = apply_filters(
+			'dlxplugins/ajaxify/comments/options/parsed',
+			$options,
+		);
 		return $options;
 	}
 
