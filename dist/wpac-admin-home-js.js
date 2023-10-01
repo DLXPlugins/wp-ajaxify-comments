@@ -19250,9 +19250,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function onSave(formData, setError) {
-  console.log(formData);
-}
+function onSave(formData, setError) {}
 function onReset(_ref) {
   var formValues = _ref.formValues,
     setError = _ref.setError,

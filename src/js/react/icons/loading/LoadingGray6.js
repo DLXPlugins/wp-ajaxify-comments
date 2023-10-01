@@ -4,6 +4,7 @@ const SvgLoadingGray6 = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
     style={{
+      fill: "currentColor",
       fillRule: "evenodd",
       clipRule: "evenodd",
       strokeLinejoin: "round",

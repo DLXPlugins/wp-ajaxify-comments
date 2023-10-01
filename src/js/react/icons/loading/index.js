@@ -3,7 +3,6 @@ export { default as LoadingGray10 } from "./LoadingGray10";
 export { default as LoadingGray11 } from "./LoadingGray11";
 export { default as LoadingGray12 } from "./LoadingGray12";
 export { default as LoadingGray13 } from "./LoadingGray13";
-export { default as LoadingGray14 } from "./LoadingGray14";
 export { default as LoadingGray15 } from "./LoadingGray15";
 export { default as LoadingGray17 } from "./LoadingGray17";
 export { default as LoadingGray18 } from "./LoadingGray18";

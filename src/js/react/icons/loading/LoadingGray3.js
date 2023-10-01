@@ -15,13 +15,14 @@ const SvgLoadingGray3 = (props) => (
     <path
       d="M85.366 11.359c0 6.275-5.088 11.363-11.363 11.363-6.275 0-11.362-5.088-11.362-11.363C62.641 5.087 67.728 0 74.003 0s11.363 5.087 11.363 11.359Z"
       style={{
-        fill: "#fff",
+        fill: "currentColor",
         fillRule: "nonzero",
       }}
     />
     <path
       d="M116.981 19.912c0 6.276-5.087 11.363-11.362 11.363s-11.36-5.087-11.36-11.363c0-6.275 5.085-11.359 11.36-11.359 6.275 0 11.362 5.084 11.362 11.359Z"
       style={{
+        fill: "currentColor",
         opacity: 0.92,
         fillRule: "nonzero",
       }}
@@ -29,6 +30,7 @@ const SvgLoadingGray3 = (props) => (
     <path
       d="M139.453 42.387c0 6.272-5.087 11.36-11.362 11.36s-11.363-5.088-11.363-11.36c0-6.278 5.088-11.362 11.363-11.362 6.275 0 11.362 5.084 11.362 11.362Z"
       style={{
+        fill: "currentColor",
         opacity: 0.16,
         fillRule: "nonzero",
       }}
@@ -36,6 +38,7 @@ const SvgLoadingGray3 = (props) => (
     <path
       d="M148.006 74c0 6.278-5.087 11.362-11.362 11.362S125.281 80.278 125.281 74c0-6.272 5.088-11.359 11.363-11.359 6.275 0 11.362 5.087 11.362 11.359Z"
       style={{
+        fill: "currentColor",
         opacity: 0.24,
         fillRule: "nonzero",
       }}
@@ -43,6 +46,7 @@ const SvgLoadingGray3 = (props) => (
     <path
       d="M139.453 105.619c0 6.272-5.087 11.359-11.362 11.359s-11.363-5.087-11.363-11.359c0-6.275 5.088-11.363 11.363-11.363 6.275 0 11.362 5.088 11.362 11.363Z"
       style={{
+        fill: "currentColor",
         opacity: 0.32,
         fillRule: "nonzero",
       }}
@@ -50,6 +54,7 @@ const SvgLoadingGray3 = (props) => (
     <path
       d="M116.981 128.091c0 6.275-5.087 11.359-11.362 11.359s-11.36-5.084-11.36-11.359 5.085-11.363 11.36-11.363c6.275 0 11.362 5.088 11.362 11.363Z"
       style={{
+        fill: "currentColor",
         opacity: 0.4,
         fillRule: "nonzero",
       }}
@@ -57,6 +62,7 @@ const SvgLoadingGray3 = (props) => (
     <path
       d="M85.366 136.641c0 6.278-5.088 11.362-11.363 11.362-6.275 0-11.362-5.084-11.362-11.362 0-6.275 5.087-11.36 11.362-11.36s11.363 5.085 11.363 11.36Z"
       style={{
+        fill: "currentColor",
         opacity: 0.48,
         fillRule: "nonzero",
       }}
@@ -64,6 +70,7 @@ const SvgLoadingGray3 = (props) => (
     <path
       d="M53.75 128.091c0 6.275-5.088 11.359-11.363 11.359-6.275 0-11.362-5.084-11.362-11.359s5.087-11.363 11.362-11.363 11.363 5.088 11.363 11.363Z"
       style={{
+        fill: "currentColor",
         opacity: 0.56,
         fillRule: "nonzero",
       }}
@@ -71,6 +78,7 @@ const SvgLoadingGray3 = (props) => (
     <path
       d="M31.275 105.619c0 6.272-5.084 11.359-11.359 11.359s-11.363-5.087-11.363-11.359c0-6.275 5.088-11.363 11.363-11.363 6.275 0 11.359 5.088 11.359 11.363Z"
       style={{
+        fill: "currentColor",
         opacity: 0.64,
         fillRule: "nonzero",
       }}
@@ -78,6 +86,7 @@ const SvgLoadingGray3 = (props) => (
     <path
       d="M22.725 74c0 6.278-5.088 11.362-11.362 11.362C5.087 85.362 0 80.278 0 74c0-6.272 5.087-11.359 11.363-11.359 6.274 0 11.362 5.087 11.362 11.359Z"
       style={{
+        fill: "currentColor",
         opacity: 0.72,
         fillRule: "nonzero",
       }}
@@ -85,6 +94,7 @@ const SvgLoadingGray3 = (props) => (
     <path
       d="M31.275 42.387c0 6.272-5.084 11.36-11.359 11.36S8.553 48.659 8.553 42.387c0-6.278 5.088-11.362 11.363-11.362 6.275 0 11.359 5.084 11.359 11.362Z"
       style={{
+        fill: "currentColor",
         opacity: 0.8,
         fillRule: "nonzero",
       }}
@@ -92,6 +102,7 @@ const SvgLoadingGray3 = (props) => (
     <path
       d="M53.75 19.912c0 6.276-5.088 11.363-11.363 11.363-6.275 0-11.362-5.087-11.362-11.363 0-6.275 5.087-11.359 11.362-11.359S53.75 13.637 53.75 19.912Z"
       style={{
+        fill: "currentColor",
         opacity: 0.88,
         fillRule: "nonzero",
       }}

@@ -3,6 +3,7 @@ const SvgLoadingGray2 = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
+    color="currentColor"
     style={{
       fillRule: "evenodd",
       clipRule: "evenodd",

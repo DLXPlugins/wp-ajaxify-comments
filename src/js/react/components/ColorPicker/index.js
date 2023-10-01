@@ -187,6 +187,8 @@ const ColorPickerControl = ( props ) => {
 							className="ajaxify-block-component-color-picker"
 							onClose={ toggleClose }
 							noArrow={ false }
+							placement="left-end"
+							offset={ 20 }
 						>
 							<BaseControl key={ colorKey }>
 								<ColorPicker

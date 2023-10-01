@@ -23,6 +23,7 @@
 .ajaxify-comments-spinner__icon svg {
 	display: block;
 	animation: ajaxify-lazy-rotate var( --ajaxify-comments-spinner-icon-animation-speed, 1.25s ) linear infinite;
+	color: var( --ajaxify-comments-spinner-icon-color, #FFFFFF );
 	fill: var( --ajaxify-comments-spinner-icon-color, #FFFFFF );
 	width: var( --ajaxify-comments-spinner-icon-size, 72px );
 	height: var( --ajaxify-comments-spinner-icon-size, 72px );
