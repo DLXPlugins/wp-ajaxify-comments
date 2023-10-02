@@ -4318,6 +4318,9 @@ h3.ajaxify-admin-content-subheading:after {
   background: #873F49;
 }
 .ajaxify-admin__control-row .components-base-control__label {
+  width: auto;
+}
+.ajaxify-admin__control-row .components-button-group {
   width: 100%;
 }
 

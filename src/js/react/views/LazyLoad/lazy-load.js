@@ -120,7 +120,7 @@ const Interface = ( props ) => {
 			lazyLoadInlineSpinnerLabel: data.lazyLoadInlineSpinnerLabel,
 			lazyLoadInlineSpinnerLabelEnabled: data.lazyLoadInlineSpinnerLabelEnabled,
 			lazyLoadInlineSpinnerSpeed: data.lazyLoadInlineSpinnerSpeed,
-			lazyLoadInlineSpinnerSize: data.lazyLoadInlineSpinnerSize,
+			lazyLoadInlineSpinnerSizeDesktop: data.lazyLoadInlineSpinnerSizeDesktop,
 			lazyLoadTrigger: data.lazyLoadTrigger,
 			lazyLoadTriggerElement: data.lazyLoadTriggerElement,
 			lazyLoadPaginationEnabled: data.lazyLoadPaginationEnabled,
@@ -134,11 +134,12 @@ const Interface = ( props ) => {
 			saveNonce: wpacAdminLazyLoad.saveNonce,
 			resetNonce: wpacAdminLazyLoad.resetNonce,
 			lazyLoadInlineSpinnerContainerBackgroundColor: data.lazyLoadInlineSpinnerContainerBackgroundColor,
-			lazyLoadInlineSpinnerLabelFontSize: data.lazyLoadInlineSpinnerLabelFontSize,
+			lazyLoadInlineSpinnerLabelFontSizeDesktop: data.lazyLoadInlineSpinnerLabelFontSizeDesktop,
 			lazyLoadInlineSpinnerIconColor: data.lazyLoadInlineSpinnerIconColor,
 			lazyLoadInlineSpinnerLabelColor: data.lazyLoadInlineSpinnerLabelColor,
 			lazyLoadInlineSpinnerLayoutType: data.lazyLoadInlineSpinnerLayoutType,
 			lazyLoadInlineSpinnerLayoutAlignment: data.lazyLoadInlineSpinnerLayoutAlignment,
+			lazyLoadInlineSpinnerLayoutRTL: data.lazyLoadInlineSpinnerLayoutRTL,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -292,16 +293,24 @@ const Interface = ( props ) => {
 		);
 	};
 
-	const getLoadingSpinnerPreview = () => {
+	const getLoadingSpinnerPreview = ( device = 'Desktop' ) => {
+		const loadingPreviewWrapperClasses = classNames(
+			'ajaxify-comments-spinner__wrapper',
+			'ajaxify-comments-spinner__layout--' + getValues( 'lazyLoadInlineSpinnerLayoutType' ),
+			'ajaxify-comments-spinner__alignment--' + getValues( 'lazyLoadInlineSpinnerLayoutAlignment' ),
+			{
+				'ajaxify-comments-spinner__rtl': getValues( 'lazyLoadInlineSpinnerLayoutRTL' ),
+			},
+		);
 		return (
 			<>
 				<style>
 					{
 						`:root {
 						--ajaxify-comments-spinner-container-background-color: ${ getValues( 'lazyLoadInlineSpinnerContainerBackgroundColor' ) };
-						--ajaxify-comments-spinner-container-font-size: ${ getValues( 'lazyLoadInlineSpinnerLabelFontSize' ) }px;
+						--ajaxify-comments-spinner-container-font-size: ${ getValues( 'lazyLoadInlineSpinnerLabelFontSize' ) }${ device }px;
 						--ajaxify-comments-spinner-icon-color: ${ getValues( 'lazyLoadInlineSpinnerIconColor' ) };
-						--ajaxify-comments-spinner-icon-size: ${ getValues( 'lazyLoadInlineSpinnerSize' ) }px;
+						--ajaxify-comments-spinner-icon-size: ${ getValues( 'lazyLoadInlineSpinnerSize' ) }${ device }px;
 						--ajaxify-comments-spinner-label-color: ${ getValues( 'lazyLoadInlineSpinnerLabelColor' ) };
 						--ajaxify-comments-spinner-icon-margin-right: 20px;
 						--ajaxify-comments-spinner-icon-animation-speed: ${ getValues( 'lazyLoadInlineSpinnerSpeed' ) }s;
@@ -311,10 +320,10 @@ const Interface = ( props ) => {
 					}
 				</style>
 				<div className="ajaxify-admin__preview" style={ { marginBottom: '15px' } }>
-					<div className="ajaxify-comments-spinner__wrapper" aria-hidden="true">
+					<div className={ loadingPreviewWrapperClasses } aria-hidden="true">
 						<div className="ajaxify-comments-spinner__inner">
 							<div className="ajaxify-comments-spinner__icon">
-								<LoadingSpinnerPreview width={ getValues( 'lazyLoadInlineSpinnerSize' ) } height={ getValues( 'lazyLoadInlineSpinnerSize' ) } className={ showLoadingSpinnerAnimation ? 'ajaxify-icon-loading-animation-on' : 'ajaxify-icon-loading-animation-off' } />
+								<LoadingSpinnerPreview width={ getValues( 'lazyLoadInlineSpinnerSizeDesktop' ) } height={ getValues( 'lazyLoadInlineSpinnerSizeDesktop' ) } className={ showLoadingSpinnerAnimation ? 'ajaxify-icon-loading-animation-on' : 'ajaxify-icon-loading-animation-off' } />
 							</div>
 							<div className="ajaxify-comments-spinner__label" aria-hidden="true">
 								{ getValues( 'lazyLoadInlineSpinnerLabel' ) }
@@ -607,6 +616,9 @@ const Interface = ( props ) => {
 									<tr>
 										<th scope="row">{ __( 'Layout', 'wp-ajaxify-comments' ) }</th>
 										<td>
+											{
+												getLoadingSpinnerPreview()
+											}
 											<div className="ajaxify-admin__control-row">
 												<Controller
 													name="lazyLoadInlineSpinnerLayoutType"
@@ -642,6 +654,43 @@ const Interface = ( props ) => {
 																	</Button>
 																</ButtonGroup>
 															</BaseControl>
+														</>
+													) }
+												/>
+											</div>
+											<div className="ajaxify-admin__control-row">
+												<Controller
+													name="lazyLoadInlineSpinnerLayoutAlignment"
+													control={ control }
+													render={ ( { field: { onChange, value } } ) => (
+														<>
+															<AlignmentGroup
+																alignment={ value }
+																onClick={ onChange }
+																label={ __( 'Layout Alignment', 'wp-ajaxify-comments' ) }
+																alignLeftLabel={ __( 'Left', 'wp-ajaxify-comments' ) }
+																alignCenterLabel={ __( 'Center', 'wp-ajaxify-comments' ) }
+																alignRightLabel={ __( 'Right', 'wp-ajaxify-comments' ) }
+																leftOn={ true }
+																centerOn={ true }
+																rightOn={ true }
+															/>
+														</>
+													) }
+												/>
+											</div>
+											<div className="ajaxify-admin__control-row">
+												<Controller
+													name="lazyLoadInlineSpinnerLayoutRTL"
+													control={ control }
+													render={ ( { field: { onChange, value } } ) => (
+														<>
+															<ToggleControl
+																label={ __( 'Flip Layout', 'wp-ajaxify-comments' ) }
+																help={ __( 'Flip the order of the spinner and label.', 'wp-ajaxify-comments' ) }
+																checked={ value }
+																onChange={ onChange }
+															/>
 														</>
 													) }
 												/>
@@ -777,6 +826,14 @@ const Interface = ( props ) => {
 									<tr>
 										<th scope="row">{ __( 'Typography and Dimensions', 'wp-ajaxify-comments' ) }</th>
 										<td>
+											<div className="ajaxify-admin__preview-inline-modal">
+												<div className="ajaxify-admin__preview-inline-modal__inner" style={ { maxWidth: '320px' } }>
+													{
+														getLoadingSpinnerPreview( 'Desktop' )
+													}
+												</div>
+
+											</div>
 											<div className="ajaxify-admin-appearance-preview-row" style={ { position: 'sticky', top: ( getAdminBarHeight() + 5 ) + 'px' } }>
 												<div className="ajaxify-admin-appearance-preview-row__buttons">
 													<Button
@@ -836,7 +893,7 @@ const Interface = ( props ) => {
 											</div>
 											<div className="ajaxify-admin__control-row">
 												<Controller
-													name="lazyLoadInlineSpinnerLabelFontSize"
+													name="lazyLoadInlineSpinnerLabelFontSizeDesktop"
 													control={ control }
 													render={ ( { field: { onChange, value } } ) => (
 														<>
