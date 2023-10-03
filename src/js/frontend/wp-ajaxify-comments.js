@@ -33,6 +33,7 @@ WPAC._ShowMessage = function (message, type) {
 	}
 	
 	jQuery.blockUI({ 
+		blockMsgClass: "wpac-overlay",
 		message: message, 
 		fadeIn: WPAC._Options.popupFadeIn, 
 		fadeOut: WPAC._Options.popupFadeOut, 
