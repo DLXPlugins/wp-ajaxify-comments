@@ -43,12 +43,13 @@ WPAC._ShowMessage = function( message, type ) {
 		backgroundColor = WPAC._Options.popupBackgroundColorSuccess;
 		textColor = WPAC._Options.popupTextColorSuccess;
 	}
-
-	jQuery.blockUI( {
-		message,
-		fadeIn: WPAC._Options.popupFadeIn,
-		fadeOut: WPAC._Options.popupFadeOut,
-		timeout: type == 'loading' ? 0 : WPAC._Options.popupTimeout,
+	
+	jQuery.blockUI({ 
+		blockMsgClass: "wpac-overlay",
+		message: message, 
+		fadeIn: WPAC._Options.popupFadeIn, 
+		fadeOut: WPAC._Options.popupFadeOut, 
+		timeout:(type == "loading") ? 0 : WPAC._Options.popupTimeout,
 		centerY: false,
 		centerX: true,
 		showOverlay: type == 'loading' || type == 'loadingPreview',
