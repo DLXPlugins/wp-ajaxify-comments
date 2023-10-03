@@ -121,7 +121,6 @@ const Interface = ( props ) => {
 			lazyLoadInlineSpinnerLabel: data.lazyLoadInlineSpinnerLabel,
 			lazyLoadInlineSpinnerLabelEnabled: data.lazyLoadInlineSpinnerLabelEnabled,
 			lazyLoadInlineSpinnerSpeed: data.lazyLoadInlineSpinnerSpeed,
-			lazyLoadInlineSpinnerSizeDesktop: data.lazyLoadInlineSpinnerSizeDesktop,
 			lazyLoadTrigger: data.lazyLoadTrigger,
 			lazyLoadTriggerElement: data.lazyLoadTriggerElement,
 			lazyLoadPaginationEnabled: data.lazyLoadPaginationEnabled,
@@ -135,12 +134,26 @@ const Interface = ( props ) => {
 			saveNonce: wpacAdminLazyLoad.saveNonce,
 			resetNonce: wpacAdminLazyLoad.resetNonce,
 			lazyLoadInlineSpinnerContainerBackgroundColor: data.lazyLoadInlineSpinnerContainerBackgroundColor,
-			lazyLoadInlineSpinnerLabelFontSizeDesktop: data.lazyLoadInlineSpinnerLabelFontSizeDesktop,
 			lazyLoadInlineSpinnerIconColor: data.lazyLoadInlineSpinnerIconColor,
 			lazyLoadInlineSpinnerLabelColor: data.lazyLoadInlineSpinnerLabelColor,
 			lazyLoadInlineSpinnerLayoutType: data.lazyLoadInlineSpinnerLayoutType,
 			lazyLoadInlineSpinnerLayoutAlignment: data.lazyLoadInlineSpinnerLayoutAlignment,
 			lazyLoadInlineSpinnerLayoutRTL: data.lazyLoadInlineSpinnerLayoutRTL,
+			lazyLoadInlineSpinnerLabelFontSizeDesktop: data.lazyLoadInlineSpinnerLabelFontSizeDesktop,
+			lazyLoadInlineSpinnerSizeDesktop: data.lazyLoadInlineSpinnerSizeDesktop,
+			lazyLoadInlineSpinnerLabelLineHeightDesktop: data.lazyLoadInlineSpinnerLabelLineHeightDesktop,
+			lazyLoadInlineSpinnerGapDesktop: data.lazyLoadInlineSpinnerGapDesktop,
+			lazyLoadInlineSpinnerContainerPaddingDesktop: data.lazyLoadInlineSpinnerContainerPaddingDesktop,
+			lazyLoadInlineSpinnerLabelFontSizeTablet: data.lazyLoadInlineSpinnerLabelFontSizeTablet,
+			lazyLoadInlineSpinnerSizeTablet: data.lazyLoadInlineSpinnerSizeTablet,
+			lazyLoadInlineSpinnerLabelLineHeightTablet: data.lazyLoadInlineSpinnerLabelLineHeightTablet,
+			lazyLoadInlineSpinnerGapTablet: data.lazyLoadInlineSpinnerGapTablet,
+			lazyLoadInlineSpinnerContainerPaddingTablet: data.lazyLoadInlineSpinnerContainerPaddingTablet,
+			lazyLoadInlineSpinnerLabelFontSizeMobile: data.lazyLoadInlineSpinnerLabelFontSizeMobile,
+			lazyLoadInlineSpinnerSizeMobile: data.lazyLoadInlineSpinnerSizeMobile,
+			lazyLoadInlineSpinnerLabelLineHeightMobile: data.lazyLoadInlineSpinnerLabelLineHeightMobile,
+			lazyLoadInlineSpinnerGapMobile: data.lazyLoadInlineSpinnerGapMobile,
+			lazyLoadInlineSpinnerContainerPaddingMobile: data.lazyLoadInlineSpinnerContainerPaddingMobile,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -294,7 +307,7 @@ const Interface = ( props ) => {
 		);
 	};
 
-	const getLoadingSpinnerPreview = ( device = 'Desktop' ) => {
+	const getLoadingSpinnerPreview = ( device = 'Desktop', containerClass = 'ajaxify-spinner-preview' ) => {
 		const loadingPreviewWrapperClasses = classNames(
 			'ajaxify-comments-spinner__wrapper',
 			'ajaxify-comments-spinner__layout--' + getValues( 'lazyLoadInlineSpinnerLayoutType' ),
@@ -307,20 +320,23 @@ const Interface = ( props ) => {
 			<>
 				<style>
 					{
-						`:root {
+						`.${ containerClass } {
 						--ajaxify-comments-spinner-container-background-color: ${ getValues( 'lazyLoadInlineSpinnerContainerBackgroundColor' ) };
-						--ajaxify-comments-spinner-container-font-size-desktop: ${ getValues( 'lazyLoadInlineSpinnerLabelFontSize' + device ) }px;
+						--ajaxify-comments-spinner-container-font-size: ${ getValues( 'lazyLoadInlineSpinnerLabelFontSize' + device ) }px;
 						--ajaxify-comments-spinner-icon-color: ${ getValues( 'lazyLoadInlineSpinnerIconColor' ) };
-						--ajaxify-comments-spinner-icon-size-desktop: ${ getValues( 'lazyLoadInlineSpinnerSize' + device ) }px;
+						--ajaxify-comments-spinner-icon-size: ${ getValues( 'lazyLoadInlineSpinnerSize' + device ) }px;
+						--ajaxify-comments-spinner-container-line-height: ${ getValues( 'lazyLoadInlineSpinnerLabelLineHeight' + device ) }px;
 						--ajaxify-comments-spinner-label-color: ${ getValues( 'lazyLoadInlineSpinnerLabelColor' ) };
-						--ajaxify-comments-spinner-icon-margin-right: 20px;
+						--ajaxify-comments-spinner-icon-gap: ${ getValues( 'lazyLoadInlineSpinnerGap' + device ) }px;
 						--ajaxify-comments-spinner-icon-animation-speed: ${ getValues( 'lazyLoadInlineSpinnerSpeed' ) }s;
-						--ajaxify-comments-spinner-container-padding: 30px;
+						--ajaxify-comments-spinner-container-padding:  ${ getValues( 'lazyLoadInlineSpinnerContainerPadding' + device ) }px;
+
+						
 					}
 				`
 					}
 				</style>
-				<div className="ajaxify-admin__preview" style={ { marginBottom: '15px' } }>
+				<div className={ `ajaxify-admin__preview ${ containerClass }` } style={ { marginBottom: '15px' } }>
 					<div className={ loadingPreviewWrapperClasses } aria-hidden="true">
 						<div className="ajaxify-comments-spinner__inner">
 							<div className="ajaxify-comments-spinner__icon">
@@ -347,7 +363,139 @@ const Interface = ( props ) => {
 		);
 	};
 
+	const getResponsiveControls = ( newDeviceType ) => {
+		return (
+			<>
+				<div className="ajaxify-admin__control-row">
+					<Controller
+						name={ `lazyLoadInlineSpinnerSize${ newDeviceType }` }
+						control={ control }
+						render={ ( { field: { onChange, value } } ) => (
+							<>
+								<RangeControl
+									label={ __( 'Loading Icon Size', 'wp-ajaxify-comments' ) }
+									value={ getValues( 'lazyLoadInlineSpinnerSize' + newDeviceType ) }
+									onChange={ onChange }
+									min={ 16 }
+									max={ 150 }
+									step={ 1 }
+									help={ __( 'Set the size of the loading icon.', 'wp-ajaxify-comments' ) }
+									color="var(--ajaxify-admin--color-main)"
+									trackColor="var(--ajaxify-admin--color-main)"
+									resetFallbackValue={ 72 }
+									allowReset={ true }
+								/>
+							</>
+						) }
+					/>
+				</div>
+				<div className="ajaxify-admin__control-row">
+					<Controller
+						name={ `lazyLoadInlineSpinnerLabelFontSize${ newDeviceType }` }
+						control={ control }
+						render={ ( { field: { onChange, value } } ) => (
+							<>
+								<RangeControl
+									label={ __( 'Label Font Size', 'wp-ajaxify-comments' ) }
+									value={
+										getValues( 'lazyLoadInlineSpinnerLabelFontSize' + newDeviceType )
+									}
+									onChange={ onChange }
+									min={ 12 }
+									max={ 150 }
+									step={ 1 }
+									help={ __( 'Set the size of the label.', 'wp-ajaxify-comments' ) }
+									color="var(--ajaxify-admin--color-main)"
+									trackColor="var(--ajaxify-admin--color-main)"
+									resetFallbackValue={ 32 }
+									allowReset={ true }
+								/>
+							</>
+						) }
+					/>
+				</div>
+				<div className="ajaxify-admin__control-row">
+					<Controller
+						name={ `lazyLoadInlineSpinnerLabelLineHeight${ newDeviceType }` }
+						control={ control }
+						render={ ( { field: { onChange, value } } ) => (
+							<>
+								<RangeControl
+									label={ __( 'Label Line Height', 'wp-ajaxify-comments' ) }
+									value={ getValues( 'lazyLoadInlineSpinnerLabelLineHeight' + newDeviceType ) }
+									onChange={ onChange }
+									min={ 12 }
+									max={ 200 }
+									step={ 1 }
+									help={ __( 'Set the line height of the label.', 'wp-ajaxify-comments' ) }
+									color="var(--ajaxify-admin--color-main)"
+									trackColor="var(--ajaxify-admin--color-main)"
+									resetFallbackValue={48 }
+									allowReset={ true }
+								/>
+							</>
+						) }
+					/>
+				</div>
+				<div className="ajaxify-admin__control-row">
+					<Controller
+						name={ `lazyLoadInlineSpinnerGap${ newDeviceType }` }
+						control={ control }
+						render={ ( { field: { onChange, value } } ) => (
+							<>
+								<RangeControl
+									label={ __( 'Label and Icon Gap', 'wp-ajaxify-comments' ) }
+									value={ getValues( 'lazyLoadInlineSpinnerGap' + newDeviceType ) }
+									onChange={ onChange }
+									min={ 0 }
+									max={ 150 }
+									step={ 1 }
+									help={ __( 'Set the gap between the icon and label.', 'wp-ajaxify-comments' ) }
+									color="var(--ajaxify-admin--color-main)"
+									trackColor="var(--ajaxify-admin--color-main)"
+									resetFallbackValue={20 }
+									allowReset={ true }
+								/>
+							</>
+						) }
+					/>
+				</div>
+				<div className="ajaxify-admin__control-row">
+					<Controller
+						name={ `lazyLoadInlineSpinnerContainerPadding${ newDeviceType }` }
+						control={ control }
+						render={ ( { field: { onChange, value } } ) => (
+							<>
+								<RangeControl
+									label={ __( 'Padding', 'wp-ajaxify-comments' ) }
+									value={ getValues( 'lazyLoadInlineSpinnerContainerPadding' + newDeviceType ) }
+									onChange={ onChange }
+									min={ 0 }
+									max={ 200 }
+									step={ 1 }
+									help={ __( 'Set the padding of the container.', 'wp-ajaxify-comments' ) }
+									color="var(--ajaxify-admin--color-main)"
+									trackColor="var(--ajaxify-admin--color-main)"
+									resetFallbackValue={30 }
+									allowReset={ true }
+								/>
+							</>
+						) }
+					/>
+				</div>
+			</>
+		);
+	};
+
 	const LoadingSpinnerPreview = LoadingSvgs[ getValues( 'lazyLoadInlineSpinner' ) ];
+
+	// Get max widht for responsive preview. Assume desktop size is 600, as 600 is content size.
+	let maxWidth = '100%';
+	if ( 'Tablet' === deviceType ) {
+		maxWidth = '480px';
+	} else if ( 'Mobile' === deviceType ) {
+		maxWidth = '320px';
+	}
 
 	return (
 		<>
@@ -827,15 +975,7 @@ const Interface = ( props ) => {
 									<tr>
 										<th scope="row">{ __( 'Typography and Dimensions', 'wp-ajaxify-comments' ) }</th>
 										<td>
-											<div className="ajaxify-admin__preview-inline-modal">
-												<div className="ajaxify-admin__preview-inline-modal__inner" style={ { maxWidth: '320px' } }>
-													{
-														getLoadingSpinnerPreview( 'Desktop' )
-													}
-												</div>
-
-											</div>
-											<div className="ajaxify-admin-appearance-preview-row" style={ { position: 'sticky', top: ( getAdminBarHeight() + 5 ) + 'px' } }>
+											<div className="ajaxify-admin-appearance-preview-row">
 												<div className="ajaxify-admin-appearance-preview-row__buttons">
 													<Button
 														onClick={ ( e ) => {
@@ -875,52 +1015,17 @@ const Interface = ( props ) => {
 													</Button>
 												</div>
 											</div>
-											<div className="ajaxify-admin__control-row">
-												<Controller
-													name="lazyLoadInlineSpinnerSizeDesktop"
-													control={ control }
-													render={ ( { field: { onChange, value } } ) => (
-														<>
-															<RangeControl
-																label={ __( 'Loading Icon Size', 'wp-ajaxify-comments' ) }
-																value={ value }
-																onChange={ onChange }
-																min={ 16 }
-																max={ 150 }
-																step={ 1 }
-																help={ __( 'Set the size of the loading icon.', 'wp-ajaxify-comments' ) }
-																color="var(--ajaxify-admin--color-main)"
-																trackColor="var(--ajaxify-admin--color-main)"
-																resetFallbackValue={ 72 }
-																allowReset={ true }
-															/>
-														</>
-													) }
-												/>
+											<div className="ajaxify-admin__preview-inline-modal">
+												<div className="ajaxify-admin__preview-inline-modal__inner" style={ { marginTop: '20px', maxWidth } }>
+													{
+														getLoadingSpinnerPreview( deviceType, 'ajaxify-admin-responsive-preview' )
+													}
+												</div>
+
 											</div>
-											<div className="ajaxify-admin__control-row">
-												<Controller
-													name="lazyLoadInlineSpinnerLabelFontSizeDesktop"
-													control={ control }
-													render={ ( { field: { onChange, value } } ) => (
-														<>
-															<RangeControl
-																label={ __( 'Label Font Size', 'wp-ajaxify-comments' ) }
-																value={ value }
-																onChange={ onChange }
-																min={ 12 }
-																max={ 150 }
-																step={ 1 }
-																help={ __( 'Set the size of the label.', 'wp-ajaxify-comments' ) }
-																color="var(--ajaxify-admin--color-main)"
-																trackColor="var(--ajaxify-admin--color-main)"
-																resetFallbackValue={ 32 }
-																allowReset={ true }
-															/>
-														</>
-													) }
-												/>
-											</div>
+											{
+												getResponsiveControls( deviceType )
+											}
 										</td>
 									</tr>
 								</>

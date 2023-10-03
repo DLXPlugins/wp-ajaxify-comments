@@ -62,13 +62,11 @@
 .ajaxify-comments-spinner__inner {
   display: flex;
   align-items: center;
-  font-size: var(--ajaxify-comments-spinner-container-font-size-desktop, 32px);
-  line-height: var(--ajaxify-comments-spinner-container-line-height, 1.25);
+  font-size: var(--ajaxify-comments-spinner-container-font-size, 32px);
+  line-height: var(--ajaxify-comments-spinner-container-line-height, 48px);
   color: var(--ajaxify-comments-spinner-container-label-color, #FFFFFF);
-}
-
-.ajaxify-comments-spinner__icon {
-  margin-right: var(--ajaxify-comments-spinner-icon-margin-right, 20px);
+  row-gap: var(--ajaxify-comments-spinner-icon-gap, 20px);
+  column-gap: var(--ajaxify-comments-spinner-icon-gap, 20px);
 }
 
 .ajaxify-comments-spinner__icon svg {
@@ -76,8 +74,8 @@
   animation: ajaxify-lazy-rotate var(--ajaxify-comments-spinner-icon-animation-speed, 1.25s) linear infinite;
   color: var(--ajaxify-comments-spinner-icon-color, #FFFFFF);
   fill: var(--ajaxify-comments-spinner-icon-color, #FFFFFF);
-  width: var(--ajaxify-comments-spinner-icon-size-desktop, 72px);
-  height: var(--ajaxify-comments-spinner-icon-size-desktop, 72px);
+  width: var(--ajaxify-comments-spinner-icon-size, 72px);
+  height: var(--ajaxify-comments-spinner-icon-size, 72px);
 }
 
 /*# sourceMappingURL=wpac-lazy-load-css.css.map*/

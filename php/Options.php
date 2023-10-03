@@ -231,7 +231,7 @@ class Options {
 			'lazyLoadInlineSpinnerContainerBackgroundColor' => '#333333',
 			'lazyLoadInlineSpinnerLabel'           => __( 'Loading comments...', 'wp-ajaxify-comments' ),
 			'lazyLoadInlineSpinnerLabelColor'      => '#FFFFFF',
-			'lazyLoadInlineSpinnerLabelFontSizeDesktop'   => 32,
+			
 			'lazyLoadInlineSpinnerIconColor'       => '#FFFFFF',
 			'lazyLoadInlineSpinnerLayoutType'      => 'horizontal', /* can be horizontal, vertical */
 			'lazyLoadInlineSpinnerLayoutAlignment' => 'left', /* can be left, center, right */
@@ -240,13 +240,27 @@ class Options {
 			'lazyLoadTriggerElement'               => '',
 			'lazyLoadInlineSpinnerSpeed'           => 1.25,
 			'lazyLoadTriggerScrollOffset'          => 0,
-			'lazyLoadInlineSpinnerSizeDesktop'            => 72, /* pixels */
 			'lazyLoadPaginationEnabled'            => false,
 			'lazyLoadCommentsPerPage'              => 30,
 			'lazyLoadUseThemePagination'           => true,
 			'lazyLoadPaginationStyle'              => 'nextPrev', /* can be nextPrev, numbers, numbersRounded */
 			'lazyLoadPaginationLocation'           => 'bottom', /* can be top, bottom, both */
 			'lazyLoadingPaginationScrollToTop'     => true,
+			'lazyLoadInlineSpinnerLabelFontSizeDesktop'   => 42, /* pixels */
+			'lazyLoadInlineSpinnerSizeDesktop'            => 72, /* pixels */
+			'lazyLoadInlineSpinnerLabelLineHeightDesktop' => 54, /* px */
+			'lazyLoadInlineSpinnerContainerPaddingDesktop' => 35, /* pixels */
+			'lazyLoadInlineSpinnerGapDesktop'             => 20, /* pixels */
+			'lazyLoadInlineSpinnerLabelFontSizeTablet'    => 36, /* pixels */
+			'lazyLoadInlineSpinnerSizeTablet'             => 65, /* pixels */
+			'lazyLoadInlineSpinnerLabelLineHeightTablet'  => 42, /* px */
+			'lazyLoadInlineSpinnerContainerPaddingTablet' => 25, /* pixels */
+			'lazyLoadInlineSpinnerGapTablet'              => 15, /* pixels */
+			'lazyLoadInlineSpinnerLabelFontSizeMobile'    => 28, /* pixels */
+			'lazyLoadInlineSpinnerSizeMobile'             => 48, /* pixels */
+			'lazyLoadInlineSpinnerLabelLineHeightMobile'  => 34, /* px */
+			'lazyLoadInlineSpinnerContainerPaddingMobile' => 20, /* pixels */
+			'lazyLoadInlineSpinnerGapMobile'              => 15, /* pixels */
 
 		);
 		return $defaults;
