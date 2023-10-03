@@ -22,7 +22,7 @@ import {
 	CardFooter,
 	BaseControl,
 } from '@wordpress/components';
-import { AlertCircle, Loader2, ClipboardCheck, Code } from 'lucide-react';
+import { AlertCircle, Loader2, ClipboardCheck, Code, Monitor, Tablet, Smartphone } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
@@ -92,6 +92,7 @@ const Interface = ( props ) => {
 	const [ selectLoadingSpinnerButtonRef, setSelectLoadingSpinnerButtonRef ] = useState( null );
 	const [ showLoadingSpinnerPopover, setShowLoadingSpinnerPopover ] = useState( false );
 	const [ showLoadingSpinnerAnimation, setShowLoadingSpinnerAnimation ] = useState( false );
+	const [ deviceType, setDeviceType ] = useState( 'Desktop' );
 
 	const getAdminBarHeight = () => {
 		const adminBar = document.getElementById( 'wpadminbar' );
@@ -308,9 +309,9 @@ const Interface = ( props ) => {
 					{
 						`:root {
 						--ajaxify-comments-spinner-container-background-color: ${ getValues( 'lazyLoadInlineSpinnerContainerBackgroundColor' ) };
-						--ajaxify-comments-spinner-container-font-size: ${ getValues( 'lazyLoadInlineSpinnerLabelFontSize' ) }${ device }px;
+						--ajaxify-comments-spinner-container-font-size-desktop: ${ getValues( 'lazyLoadInlineSpinnerLabelFontSize' + device ) }px;
 						--ajaxify-comments-spinner-icon-color: ${ getValues( 'lazyLoadInlineSpinnerIconColor' ) };
-						--ajaxify-comments-spinner-icon-size: ${ getValues( 'lazyLoadInlineSpinnerSize' ) }${ device }px;
+						--ajaxify-comments-spinner-icon-size-desktop: ${ getValues( 'lazyLoadInlineSpinnerSize' + device ) }px;
 						--ajaxify-comments-spinner-label-color: ${ getValues( 'lazyLoadInlineSpinnerLabelColor' ) };
 						--ajaxify-comments-spinner-icon-margin-right: 20px;
 						--ajaxify-comments-spinner-icon-animation-speed: ${ getValues( 'lazyLoadInlineSpinnerSpeed' ) }s;
@@ -839,38 +840,44 @@ const Interface = ( props ) => {
 													<Button
 														onClick={ ( e ) => {
 															e.preventDefault();
-															showPreview( formValues, 'loading' );
+															setDeviceType( 'Desktop' );
 														} }
-														className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
+														isPressed={ 'Desktop' === deviceType }
+														className="ajaxify-button ajaxify-admin__preview-button"
 														variant="secondary"
+														icon={ <Monitor style={ { fill: 'none' } } /> }
 													>
-														{ __( 'Preview Loading', 'wp-ajaxify-comments' ) }
+														{ __( 'Desktop Options', 'wp-ajaxify-comments' ) }
 													</Button>
 													<Button
 														onClick={ ( e ) => {
 															e.preventDefault();
-															showPreview( formValues, 'success' );
+															setDeviceType( 'Tablet' );
 														} }
-														className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
+														isPressed={ 'Tablet' === deviceType }
+														className="ajaxify-button ajaxify-admin__preview-button"
 														variant="secondary"
+														icon={ <Tablet style={ { fill: 'none' } } /> }
 													>
-														{ __( 'Preview Success', 'wp-ajaxify-comments' ) }
+														{ __( 'Tablet Options', 'wp-ajaxify-comments' ) }
 													</Button>
 													<Button
 														onClick={ ( e ) => {
 															e.preventDefault();
-															showPreview( formValues, 'error' );
+															setDeviceType( 'Mobile' );
 														} }
-														className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
+														isPressed={ 'Mobile' === deviceType }
+														className="ajaxify-button ajaxify-admin__preview-button"
 														variant="secondary"
+														icon={ <Smartphone style={ { fill: 'none' } } /> }
 													>
-														{ __( 'Preview Error', 'wp-ajaxify-comments' ) }
+														{ __( 'Mobile Options', 'wp-ajaxify-comments' ) }
 													</Button>
 												</div>
 											</div>
 											<div className="ajaxify-admin__control-row">
 												<Controller
-													name="lazyLoadInlineSpinnerSize"
+													name="lazyLoadInlineSpinnerSizeDesktop"
 													control={ control }
 													render={ ( { field: { onChange, value } } ) => (
 														<>

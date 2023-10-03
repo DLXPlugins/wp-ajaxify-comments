@@ -65,7 +65,7 @@
 .ajaxify-comments-spinner__inner {
 	display: flex;
 	align-items: center;
-	font-size: var( --ajaxify-comments-spinner-container-font-size, 32px );
+	font-size: var( --ajaxify-comments-spinner-container-font-size-desktop, 32px );
 	line-height: var( --ajaxify-comments-spinner-container-line-height, 1.25 );
 	color: var( --ajaxify-comments-spinner-container-label-color, #FFFFFF );
 }
@@ -77,6 +77,6 @@
 	animation: ajaxify-lazy-rotate var( --ajaxify-comments-spinner-icon-animation-speed, 1.25s ) linear infinite;
 	color: var( --ajaxify-comments-spinner-icon-color, #FFFFFF );
 	fill: var( --ajaxify-comments-spinner-icon-color, #FFFFFF );
-	width: var( --ajaxify-comments-spinner-icon-size, 72px );
-	height: var( --ajaxify-comments-spinner-icon-size, 72px );
+	width: var( --ajaxify-comments-spinner-icon-size-desktop, 72px );
+	height: var( --ajaxify-comments-spinner-icon-size-desktop, 72px );
 }

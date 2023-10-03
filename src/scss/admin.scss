@@ -1149,6 +1149,13 @@ h3.ajaxify-admin-content-subheading {
 		border-color: #FFF;
 		outline: none;
 		box-shadow: inset 0 0 0 1px #333 !important;
+		
+		&.components-button {
+			color: $black;
+			&.is-pressed {
+				color: $white;
+			}
+		}
 	}
 }
 
