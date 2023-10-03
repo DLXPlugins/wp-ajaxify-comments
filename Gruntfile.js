@@ -8,6 +8,7 @@ module.exports = function( grunt ) {
 				files: [
 					{ src: [ 'wp-ajaxify-comments.php' ], dest: '/', filter: 'isFile' },
 					{ src: [ 'functions.php' ], dest: '/', filter: 'isFile' },
+					{ src: [ 'wpml-config.xml' ], dest: '/', filter: 'isFile' },
 					{ src: [ 'readme.txt' ], dest: '/', filter: 'isFile' },
 					{ src: [ 'assets/**' ], dest: '/' },
 					{ src: [ 'dist/**' ], dest: '/' },
