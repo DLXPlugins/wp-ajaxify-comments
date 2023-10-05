@@ -246,11 +246,17 @@ WPAC._ReplaceComments = function(
 	beforeUpdateComments,
 	afterUpdateComments,
 ) {
+	// Remove any lazy loading messages.
+	jQuery( '#wpac-lazy-load-content-clone' ).remove();
+
 	const fallbackUrl = useFallbackUrl
 		? WPAC._AddQueryParamStringToUrl( commentUrl, 'WPACFallback', '1' )
 		: commentUrl;
 
 	let oldCommentsContainer = jQuery( selectorCommentsContainer );
+	if ( WPAC._Options.lazyLoadIntoElement && 'comments' !== WPAC._Options.lazyLoadInlineDisplayLocation ) {
+		oldCommentsContainer = jQuery( WPAC._Options.lazyLoadInlineDisplayElement );
+	}
 	if ( ! oldCommentsContainer.length ) {
 		WPAC._Debug(
 			'error',
@@ -316,6 +322,12 @@ WPAC._ReplaceComments = function(
 		newCommentsContainer = newCommentsContainer.filter( function() {
 			return jQuery( this ).children().length > 0 && ! jQuery( this ).is( ':header' );
 		} );
+
+		// Find respond selector and remove.
+		const respondContainer = newCommentsContainer.find( selectorRespondContainer );
+		if ( respondContainer.length ) {
+			respondContainer.remove();
+		}
 	}
 
 	// Call before update comments.
@@ -341,8 +353,9 @@ WPAC._ReplaceComments = function(
 		document.title = jQuery( '<textarea />' ).html( extractedTitle ).text();
 	}
 
-	// Update comments container
-	oldCommentsContainer.replaceWith( newCommentsContainer );
+	// Empty old container, replace with innards of new container.
+	oldCommentsContainer.empty();
+	oldCommentsContainer.append( newCommentsContainer.children() );
 
 	if ( WPAC._Options.commentsEnabled ) {
 		const form = jQuery( selectorCommentForm );
@@ -558,7 +571,9 @@ WPAC.AttachForm = function( options ) {
 			return;
 		} // skip if paging link was clicked
 		const href = element.attr( 'href' );
-		const anchor = '#' + new Uri( href ).anchor();
+		// To use new URL.
+		const anchor = new URL( href ).hash;
+		
 		if ( jQuery( anchor ).length > 0 ) {
 			if ( options.updateUrl ) {
 				WPAC._UpdateUrl( href );
@@ -1069,7 +1084,8 @@ WPAC.LoadComments = function( url, options ) {
 		},
 		success( data ) {
 			try {
-				// Replace comments (and return if replacing failed)
+				console.log( data );
+
 				if (
 					! WPAC._ReplaceComments(
 						data,
@@ -1153,7 +1169,7 @@ jQuery( function() {
 
 		const triggerType = WPAC._Options.lazyLoadTrigger;
 
-		const lazyLoadTrigger = WPAC._Options.lazyLoadTrigger;
+		let lazyLoadTrigger = WPAC._Options.lazyLoadTrigger;
 		const lazyLoadScrollOffset = parseInt(
 			WPAC._Options.lazyLoadTriggerScrollOffset,
 		);
@@ -1161,6 +1177,58 @@ jQuery( function() {
 		let lazyLoadOffset = parseInt( WPAC._Options.lazyLoadTriggerOffset );
 		if ( lazyLoadOffset === 0 ) {
 			lazyLoadOffset = '100%';
+		}
+
+		// Determine where to load the lazy loading message (if not overlay).
+		const isLazyLoadInline = 'inline' === WPAC._Options.lazyLoadDisplay;
+		const lazyloadInlineDisplayLocation = WPAC._Options.lazyLoadInlineDisplayLocation; /* can be comments, element */
+		
+
+		// If inline, let's move the loader.
+		if ( WPAC._Options.lazyLoadIntoElement ) {
+			let lazyloadInlineDisplayElement = WPAC._Options.lazyLoadInlineDisplayElement;
+			if ( 'comments' === lazyloadInlineDisplayLocation ) {
+				lazyloadInlineDisplayElement = WPAC._Options.selectorCommentsContainer;
+			}
+
+			const lazyLoadContent = document.querySelector( '#wpac-lazy-load-content' ); // hardcoded selector.
+			if ( null !== lazyLoadContent ) {
+				// Clone it without ref.
+				const lazyLoadContentClone = jQuery.clone( lazyLoadContent );
+				lazyLoadContentClone.id = 'wpac-lazy-load-content-clone';
+
+				// Add display block and opacity 1.
+				lazyLoadContentClone.style.display = 'block';
+				lazyLoadContentClone.style.opacity = '1';
+
+				// Display the loader.
+				if ( 'comments' === lazyloadInlineDisplayLocation ) {
+					const commentsContainer = jQuery( lazyloadInlineDisplayElement );
+					if ( commentsContainer ) {
+						commentsContainer.prepend( lazyLoadContentClone );
+					} else {
+						WPAC._Debug(
+							'error',
+							'Comments container not found for lazy loading when reaching the comments section.',
+						);
+					}
+				} else if ( 'element' === lazyloadInlineDisplayLocation ) {
+					const domElement = jQuery( lazyloadInlineDisplayElement );
+					if ( domElement ) {
+						// add to top of comments element.
+						jQuery( domElement ).prepend( lazyLoadContentClone );
+
+						// Remove style attribute.
+						jQuery( domElement ).removeAttr( 'style' );
+						
+					} else {
+						WPAC._Debug(
+							'error',
+							'Element not found for lazy loading when reaching the element.',
+						);
+					}
+				}
+			}
 		}
 
 		/**

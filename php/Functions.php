@@ -437,15 +437,21 @@ class Functions {
 			'class'       => array(),
 			'width'       => array(),
 			'height'      => array(),
+			'style'       => array(),
 		);
 
 		$allowed_tags['path'] = array(
 			'd'       => array(),
 			'fill'    => array(),
 			'opacity' => array(),
+			'style'   => array(),
 		);
 
-		$allowed_tags['g'] = array();
+		$allowed_tags['g'] = array(
+			'fill'    => array(),
+			'opacity' => array(),
+			'style'   => array(),
+		);
 
 		$allowed_tags['circle'] = array(
 			'cx'     => array(),

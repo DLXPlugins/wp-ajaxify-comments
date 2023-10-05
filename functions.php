@@ -263,6 +263,15 @@ function wpac_initialize() {
 	echo 'WPAC._Options={';
 	$options = Options::get_options();
 	$options['lazyLoadEnabled'] = Functions::is_lazy_loading_enabled( false, false );
+	$options['lazyLoadIntoElement'] = false;
+
+	// Determine where to load the lazy loading message (if not overlay).
+	if ( Functions::is_lazy_loading_enabled( true, false ) ) {
+		$is_lazy_load_inline = 'inline' === $options['lazyLoadDisplay'];
+		if ( $is_lazy_load_inline ) {
+			$options['lazyLoadIntoElement'] = $options['lazyLoadInlineDisplayElement'];
+		}
+	}
 
 	/**
 	 * Filter the options before they are output.
@@ -278,8 +287,10 @@ function wpac_initialize() {
 		get_the_ID(),
 		get_post_type( get_the_ID() )
 	);
+	
 	foreach ( $options as $option_key => $option_value ) {
-		switch ( $option_key ) {
+		
+		switch ( $option_value ) {
 			case '0':
 			case '1':
 			case is_bool( $option_value ):
