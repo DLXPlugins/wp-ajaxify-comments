@@ -147,18 +147,13 @@ document.addEventListener( 'DOMContentLoaded', function() {
 							return;
 						}
 
-						// Check to see if direct children contain UL, OL.
-						// If not, skip.
-						commentElement.childNodes.forEach( ( child ) => {
-							if ( child.tagName ) {
-								const childTagName = child.tagName.toLowerCase();
+						// Check to see if children contain UL or OL. If so, we've found the container.
+						const ULs = commentElement.querySelectorAll( 'ul' );
+						const OLs = commentElement.querySelectorAll( 'ol' );
 
-								// If direct child is a UL or OL, then parent is the comment container.
-								if ( 'ul' === childTagName || 'ol' === childTagName ) {
-									foundCommentContainer = true;
-								}
-							}
-						} );
+						if ( ( null !== ULs && 1 === ULs.length && null === OLs ) || ( null !== OLs && 1 === OLs.length && null === ULs ) ) {
+							foundCommentContainer = true;
+						}
 
 						// If we still haven't found the comment container, check that is has #respond or a form element.
 						if ( ! foundCommentContainer ) {
@@ -166,7 +161,6 @@ document.addEventListener( 'DOMContentLoaded', function() {
 							if ( null !== respondOrForm && respondOrForm.length > 0 ) {
 								foundCommentContainer = true;
 							}
-							return;
 						}
 						// If we still haven't found it... search for .comment, which is usually on the comment list item.
 						if ( ! foundCommentContainer ) {
@@ -340,6 +334,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
 				// Check to see if we found all the selectors.
 				if ( selectorList.length < 6 ) {
+					WPAC._Debug("error", "We didn't find all the selectors. Selector List: ", selectorList );
+
 					Swal.fire( {
 						titleText: __( 'Unable to Find All Selectors', 'wp-ajaxify-comments' ),
 						html: __( 'We were unable to find all the required selectors. Please contact support at <a style="color: #FFF;" href="https://dlxplugins.com/support/">dlxplugins.com/support/</a>.', 'wp-ajaxify-comments' ),

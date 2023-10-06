@@ -97,6 +97,25 @@ class Init {
 			$options[ $key ] = $option_value;
 		}
 
+		$label_keys_to_translate = Options::get_string_label_keys();
+
+		foreach ( $label_keys_to_translate as $label_key ) {
+			$label_value = $options[ $label_key ];
+			do_action(
+				'wpml_register_string',
+				$label_value,
+				$label_key,
+				array(
+					'kind'  => 'Ajaxify',
+					'name'  => 'ajaxify-comments-labels',
+					'title' => 'Ajaxify Comment Labels',
+				),
+				$label_key,
+				'line'
+			);
+
+		}
+
 		// Update options.
 		Options::update_options( $options );
 

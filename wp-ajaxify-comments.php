@@ -7,7 +7,7 @@ Author: DLX Plugins
 Author URI: https://dlxplugins.com
 Version: 2.0.9
 License: GPLv2
-Text Domain: wpac
+Text Domain: wp-ajaxify-comments
 */
 
 namespace DLXPlugins\WPAC;

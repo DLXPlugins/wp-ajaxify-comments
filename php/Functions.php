@@ -164,7 +164,7 @@ class Functions {
 	 * @return bool true if Ajaxify Comments can be marked as enabled, false (default) if not.
 	 */
 	public static function is_ajaxify_enabled( $skip_get_check = false ) {
-		$options = Options::get_options();
+		$options             = Options::get_options();
 		$ajaxify_get_enabled = filter_input( INPUT_GET, 'ajaxifyEnable', FILTER_VALIDATE_BOOLEAN );
 		$ajaxify_enabled     = (bool) $options['enable'];
 
@@ -258,7 +258,6 @@ class Functions {
 				}
 			}
 		}
-		
 
 		// Retrieve options.
 		$options = Options::get_options();
@@ -279,7 +278,7 @@ class Functions {
 		if ( 0 !== $async_threshold ) {
 			return false;
 		}
-		
+
 		// Get the async trigger.
 		$async_trigger = $options['asyncLoadTrigger']; /* can be DomReady, none, Viewport */
 
