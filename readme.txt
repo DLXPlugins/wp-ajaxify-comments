@@ -120,9 +120,10 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 = 2.0.11 =
 * Released 2023-10-06
+* Added WPML support to the plugin (<a href="https://docs.dlxplugins.com/v/ajaxify-comments/advanced-topics/wpml-and-translations">docs on how to set this up</a>).
+* Added duplicate comment label setting.
 * Added support for the Ollie theme.
 * Updated Menu Helper to better support block-enabled themes.
-* Added WPML support to the plugin (<a href="https://docs.dlxplugins.com/v/ajaxify-comments/advanced-topics/wpml-and-translations">docs on how to set this up</a>).
 
 = 2.0.9 =
 * Released 2023-10-03
