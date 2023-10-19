@@ -22042,7 +22042,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 // Lazy import the spinner.
 
 var InlineSpinner = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().lazy(function () {
-  return Promise.all(/*! import() | inline-spinner-0.0.1 */[__webpack_require__.e("vendors-node_modules_wordpress_components_build-module_button-group_index_js-node_modules_wor-5ea78c"), __webpack_require__.e("inline-spinner-0.0.1")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-spinner */ "./src/js/react/views/LazyLoad/inline-spinner.js"));
+  return Promise.all(/*! import() | inline-spinner-0.0.1 */[__webpack_require__.e("vendors-node_modules_wordpress_components_build-module_button-group_index_js-node_modules_wor-2ebd9c"), __webpack_require__.e("src_js_react_components_Alignment_index_js-src_js_react_components_ColorPicker_index_js"), __webpack_require__.e("inline-spinner-0.0.1")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-spinner */ "./src/js/react/views/LazyLoad/inline-spinner.js"));
+});
+var InlineSkeleton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().lazy(function () {
+  return Promise.all(/*! import() | inline-skeleton-0.0.2 */[__webpack_require__.e("vendors-node_modules_wordpress_components_build-module_button-group_index_js-node_modules_wor-2ebd9c"), __webpack_require__.e("vendors-node_modules_fancyapps_ui_dist_index_esm_js-node_modules_lucide-react_dist_esm_icons_eye_js"), __webpack_require__.e("src_js_react_components_Alignment_index_js-src_js_react_components_ColorPicker_index_js"), __webpack_require__.e("inline-skeleton-0.0.2")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-skeleton */ "./src/js/react/views/LazyLoad/inline-skeleton.js"));
 });
 var retrieveLazyLoadOptions = function retrieveLazyLoadOptions() {
   return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wpac_get_lazy_load_options', {
@@ -22122,7 +22125,10 @@ var Interface = function Interface(props) {
         lazyLoadInlineSpinnerSizeMobile: data.lazyLoadInlineSpinnerSizeMobile,
         lazyLoadInlineSpinnerLabelLineHeightMobile: data.lazyLoadInlineSpinnerLabelLineHeightMobile,
         lazyLoadInlineSpinnerGapMobile: data.lazyLoadInlineSpinnerGapMobile,
-        lazyLoadInlineSpinnerContainerPaddingMobile: data.lazyLoadInlineSpinnerContainerPaddingMobile
+        lazyLoadInlineSpinnerContainerPaddingMobile: data.lazyLoadInlineSpinnerContainerPaddingMobile,
+        lazyLoadInlineSkeletonLoadingLabelEnabled: data.lazyLoadInlineSkeletonLoadingLabelEnabled,
+        lazyLoadInlineSkeletonLoadingLabel: data.lazyLoadInlineSkeletonLoadingLabel,
+        lazyLoadInlineSkeletonItemsShow: data.lazyLoadInlineSkeletonItemsShow
       }
     }),
     register = _useForm.register,
@@ -22445,7 +22451,22 @@ var Interface = function Interface(props) {
     control: control,
     errors: errors,
     setValue: setValue,
-    getValues: getValues
+    getValues: getValues,
+    clearErrors: clearErrors
+  }))), 'skeleton' === getValues('lazyLoadInlineLoadingType') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Skeleton', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Skeleton Options', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8___default()), {
+      color: '#873F49',
+      loading: true,
+      cssOverride: true,
+      size: 25,
+      speedMultiplier: 0.65
+    }))))
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(InlineSkeleton, {
+    control: control,
+    errors: errors,
+    setValue: setValue,
+    getValues: getValues,
+    clearErrors: clearErrors
   })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_7__["default"], {
     formValues: formValues,
     setError: setError,
@@ -83457,7 +83478,7 @@ function combine (array, callback) {
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.miniCss = (chunkId, promises) => {
-/******/ 			var cssChunks = {"inline-spinner-0.0.1":1};
+/******/ 			var cssChunks = {"inline-spinner-0.0.1":1,"inline-skeleton-0.0.2":1};
 /******/ 			if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 			else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 				promises.push(installedCssChunks[chunkId] = loadStylesheet(chunkId).then(() => {

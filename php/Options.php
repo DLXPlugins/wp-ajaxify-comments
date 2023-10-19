@@ -263,6 +263,9 @@ class Options {
 			'lazyLoadInlineSpinnerLabelLineHeightMobile'   => 34, /* px */
 			'lazyLoadInlineSpinnerContainerPaddingMobile'  => 20, /* pixels */
 			'lazyLoadInlineSpinnerGapMobile'               => 15, /* pixels */
+			'lazyLoadInlineSkeletonLoadingLabelEnabled'    => false,
+			'lazyLoadInlineSkeletonLoadingLabel' 		 => __( 'Loading comments...', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineSkeletonItemsShow' => 2,
 
 		);
 		return $defaults;

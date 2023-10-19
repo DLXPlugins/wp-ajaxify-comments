@@ -61,6 +61,7 @@
 		"rgb2hex": "^0.2.5",
 		"sass": "^1.66.1",
 		"sass-loader": "^13.3.2",
+		"sweetalert2": "^11.6.13",
 		"use-async-resource": "^2.2.2",
 		"util": "^0.12.4",
 		"webpack": "^5.76.2",
@@ -68,8 +69,8 @@
 		"webpack-remove-empty-scripts": "^0.7.3"
 	},
 	"dependencies": {
+		"@fancyapps/ui": "^5.0.24",
 		"@sweetalert2/theme-wordpress-admin": "^5.0.15",
-		"@sweetalert2/themes": "^5.0.15",
-		"sweetalert2": "^11.7.27"
+		"@sweetalert2/themes": "^5.0.15"
 	}
 }

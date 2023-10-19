@@ -26,6 +26,7 @@ class Lazy_Load {
 	public function run() {
 		add_action( 'comment_form_before', array( $this, 'output_spinner_html' ) );
 		add_action( 'wp_footer', array( $this, 'output_spinner_html' ) );
+		add_action( 'wp_footer', array( $this, 'output_skeleton_html' ) );
 	}
 
 	/**
@@ -39,6 +40,49 @@ class Lazy_Load {
 		$styles[] = 'stroke';
 		$styles[] = 'color';
 		return $styles;
+	}
+
+	/**
+	 * Output skeleton HTML.
+	 */
+	public function output_skeleton_html() {
+		$options = Options::get_options();
+
+		// If lazy loading is not enabled, bail.
+		if ( ! Functions::is_lazy_loading_enabled( false, true ) ) {
+			return;
+		}
+
+		// If inline is not selected or spinner isn't the type, bail.
+		if ( 'inline' !== $options['lazyLoadDisplay'] || 'skeleton' !== $options['lazyLoadInlineLoadingType'] ) {
+			return;
+		}
+		?>
+		<div id="wpac-lazy-load-content" style="visibility: hidden; opacity: 0;" aria-hidden="true">
+			<?php
+			$can_show_heading = (bool) $options['lazyLoadInlineSkeletonLoadingLabelEnabled'];
+			$skeleton_heading = sanitize_text_field( $options['lazyLoadInlineSkeletonLoadingLabel'] );
+			if ( $can_show_heading && ! empty( $skeleton_heading ) ):
+				?>
+				<h2 class="ajaxify-skeleton-heading"><?php echo esc_html( $skeleton_heading ); ?></h2>
+				<?php
+			endif;
+			// Get how many rows to show.
+			$number_of_rows = (int) $options['lazyLoadInlineSkeletonItemsShow'];
+			for ( $i = 0; $i < $number_of_rows; $i++ ) :
+				?>
+				<div class="ajaxify-loading-skeleton">
+					<div class="ajaxify-skeleton-comment-header">
+						<div class="ajaxify-skeleton-avatar"></div>
+						<div class="ajaxify-skeleton-comment-meta"></div>
+					</div>
+					<div class="ajaxify-skeleton-comment-body"></div>
+				</div>
+				<?php
+			endfor;
+			?>
+		</div>
+		<?php
 	}
 
 	/**

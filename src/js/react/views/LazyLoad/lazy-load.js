@@ -19,6 +19,7 @@ import SaveResetButtons from '../../components/SaveResetButtons';
 // Lazy import the spinner.
 
 const InlineSpinner = React.lazy( () => import( /* webpackChunkName: "inline-spinner-0.0.1" */ './inline-spinner' ) );
+const InlineSkeleton = React.lazy( () => import( /* webpackChunkName: "inline-skeleton-0.0.2" */ './inline-skeleton' ) );
 
 const retrieveLazyLoadOptions = () => {
 	return SendCommand( 'wpac_get_lazy_load_options', {
@@ -128,6 +129,9 @@ const Interface = ( props ) => {
 			lazyLoadInlineSpinnerLabelLineHeightMobile: data.lazyLoadInlineSpinnerLabelLineHeightMobile,
 			lazyLoadInlineSpinnerGapMobile: data.lazyLoadInlineSpinnerGapMobile,
 			lazyLoadInlineSpinnerContainerPaddingMobile: data.lazyLoadInlineSpinnerContainerPaddingMobile,
+			lazyLoadInlineSkeletonLoadingLabelEnabled: data.lazyLoadInlineSkeletonLoadingLabelEnabled,
+			lazyLoadInlineSkeletonLoadingLabel: data.lazyLoadInlineSkeletonLoadingLabel,
+			lazyLoadInlineSkeletonItemsShow: data.lazyLoadInlineSkeletonItemsShow,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -518,6 +522,38 @@ const Interface = ( props ) => {
 													errors={ errors }
 													setValue={ setValue }
 													getValues={ getValues }
+													clearErrors={ clearErrors }
+												/>
+											</Suspense>
+										</>
+									) }
+									{ 'skeleton' === getValues( 'lazyLoadInlineLoadingType' ) && (
+										<>
+											<Suspense
+												fallback={
+													<>
+														<tr>
+															<th>{ __( 'Loading Skeleton', 'wp-ajaxify-comments' ) }</th>
+															<td>
+																<h2>{ __( 'Loading Skeleton Options', 'wp-ajaxify-comments' ) }</h2>
+																<BeatLoader
+																	color={ '#873F49' }
+																	loading={ true }
+																	cssOverride={ true }
+																	size={ 25 }
+																	speedMultiplier={ 0.65 }
+																/>
+															</td>
+														</tr>
+													</>
+												}
+											>
+												<InlineSkeleton
+													control={ control }
+													errors={ errors }
+													setValue={ setValue }
+													getValues={ getValues }
+													clearErrors={ clearErrors }
 												/>
 											</Suspense>
 										</>

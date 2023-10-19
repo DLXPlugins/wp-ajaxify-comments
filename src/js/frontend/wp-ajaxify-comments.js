@@ -1200,6 +1200,7 @@ jQuery( function() {
 				// Add display block and opacity 1.
 				lazyLoadContentClone.style.display = 'block';
 				lazyLoadContentClone.style.opacity = '1';
+				lazyLoadContentClone.style.visibility = 'visible';
 
 				// Display the loader.
 				if ( 'comments' === lazyloadInlineDisplayLocation ) {

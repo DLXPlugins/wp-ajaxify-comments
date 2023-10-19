@@ -1,360 +1,6 @@
 "use strict";
 (self["webpackChunkwp_ajaxify_comments"] = self["webpackChunkwp_ajaxify_comments"] || []).push([["inline-spinner-0.0.1"],{
 
-/***/ "./src/js/react/components/Alignment/index.js":
-/*!****************************************************!*\
-  !*** ./src/js/react/components/Alignment/index.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/base-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button-group/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button/index.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.scss */ "./src/js/react/components/Alignment/editor.scss");
-/**
- * Alignment Group (Left|Center|Right) with a label and button icons.
- *
- * Pass onClick prop to propagate up to parent. Values are (left|center|right).
- */
-
-
-
-
-
-var AlignmentGroup = function AlignmentGroup(props) {
-  var alignment = props.alignment,
-    label = props.label,
-    alignLeftLabel = props.alignLeftLabel,
-    alignCenterLabel = props.alignCenterLabel,
-    alignRightLabel = props.alignRightLabel,
-    leftOn = props.leftOn,
-    centerOn = props.centerOn,
-    rightOn = props.rightOn;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-alignment-component-base"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    id: "ajaxify-alignment-component-base",
-    label: label
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, leftOn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    isPressed: 'left' === alignment ? true : false,
-    isSecondary: true,
-    icon: "editor-alignleft",
-    label: alignLeftLabel,
-    onClick: function onClick() {
-      props.onClick('left');
-    }
-  }), centerOn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    isPressed: 'center' === alignment ? true : false,
-    isSecondary: true,
-    icon: "editor-aligncenter",
-    label: alignCenterLabel,
-    onClick: function onClick() {
-      props.onClick('center');
-    }
-  }), rightOn && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    isPressed: 'right' === alignment ? true : false,
-    isSecondary: true,
-    icon: "editor-alignright",
-    label: alignRightLabel,
-    onClick: function onClick() {
-      props.onClick('right');
-    }
-  })))));
-};
-AlignmentGroup.defaultProps = {
-  alignment: 'left',
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Change Alignment', 'wp-ajaxify-comments'),
-  alignLeftLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__._x)('Align Left', 'Align items left', 'wp-ajaxify-comments'),
-  alignCenterLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__._x)('Align Center', 'Align items center/middle', 'wp-ajaxify-comments'),
-  alignRightLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__._x)('Align Right', 'Align items right', 'wp-ajaxify-comments'),
-  leftOn: true,
-  centerOn: true,
-  rightOn: true
-};
-AlignmentGroup.propTypes = {
-  alignment: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string),
-  label: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string),
-  alignLeftLabel: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string),
-  alignCenterLabel: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string),
-  alignRightLabel: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().string),
-  leftOn: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool),
-  centerOn: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool),
-  rightOn: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().bool)
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AlignmentGroup);
-
-/***/ }),
-
-/***/ "./src/js/react/components/ColorPicker/index.js":
-/*!******************************************************!*\
-  !*** ./src/js/react/components/ColorPicker/index.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var rgb2hex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rgb2hex */ "./node_modules/rgb2hex/index.js");
-/* harmony import */ var rgb2hex__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(rgb2hex__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/base-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/tooltip/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/popover/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/color-picker/legacy-adapter.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/range-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/color-palette/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button/index.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-/**
- * Color Picker.
- *
- * Credit: Forked from @generateblocks
- */
-
-
-
-
-
-
-
-var ColorPickerControl = function ColorPickerControl(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.slug),
-    _useState2 = _slicedToArray(_useState, 2),
-    colorKey = _useState2[0],
-    setColorKey = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    _useState4 = _slicedToArray(_useState3, 2),
-    isVisible = _useState4[0],
-    setIsVisible = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.value),
-    _useState6 = _slicedToArray(_useState5, 2),
-    color = _useState6[0],
-    setColor = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props.opacity),
-    _useState8 = _slicedToArray(_useState7, 2),
-    opacity = _useState8[0],
-    setOpacity = _useState8[1];
-  var defaultColor = props.defaultColor,
-    defaultColors = props.defaultColors,
-    value = props.value,
-    _onChange = props.onChange,
-    onOpacityChange = props.onOpacityChange,
-    label = props.label,
-    _props$alpha = props.alpha,
-    alpha = _props$alpha === void 0 ? false : _props$alpha,
-    slug = props.slug,
-    _props$hideLabelFromV = props.hideLabelFromVision,
-    hideLabelFromVision = _props$hideLabelFromV === void 0 ? false : _props$hideLabelFromV;
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    setColor(value);
-  }, [value]);
-
-  /**
-   * Return a color based on passed alpha value.
-   *
-   * @param {string} colorValue   hex, rgb, rgba, or CSS var.
-   * @param {number} opacityValue The opacity (from 0 - 1).
-   * @return {string} The color in hex, rgba, or CSS var format.
-   */
-  var getColor = function getColor(colorValue) {
-    var opacityValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-    // Test for CSS var values in color value.
-    if (colorValue.indexOf('var(') === 0) {
-      return colorValue;
-    }
-
-    // Test for RGBA at the beginning, and return value.
-    if (colorValue.indexOf('rgba') === 0) {
-      // Calculate hex value from rgba.
-      var hex = rgb2hex__WEBPACK_IMPORTED_MODULE_3___default()(colorValue).hex;
-      return hex_to_rgba__WEBPACK_IMPORTED_MODULE_2___default()(hex, opacityValue);
-    }
-
-    // Test for RGB at the beginning, and return hex if found.
-    if (colorValue.indexOf('rgb') === 0) {
-      return hex_to_rgba__WEBPACK_IMPORTED_MODULE_2___default()(rgb2hex__WEBPACK_IMPORTED_MODULE_3___default()(colorValue).hex, opacityValue);
-    }
-    if (alpha) {
-      return hex_to_rgba__WEBPACK_IMPORTED_MODULE_2___default()(colorValue, opacityValue);
-    }
-    return colorValue;
-  };
-
-  // Retrieve colors while avoiding duplicates.
-  var getDefaultColors = function getDefaultColors() {
-    var existingColors = [];
-    var newColors = [];
-    defaultColors.forEach(function (maybeNewColor, index) {
-      if (!existingColors.includes(maybeNewColor.color)) {
-        existingColors.push(maybeNewColor.color);
-        newColors.push(maybeNewColor);
-      }
-    });
-    return newColors;
-  };
-  var opacityIcon = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: 24,
-    height: 24,
-    viewBox: "0 0 488.47 488.47"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
-    d: "M244.235 0S61.058 174.454 61.058 314.016c0 96.347 82.011 174.454 183.177 174.454s183.177-78.107 183.177-174.454C427.412 174.454 244.235 0 244.235 0zm0 91.588c46.976 52.953 97.174 123.655 114.946 183.177H129.292c17.771-59.522 67.968-130.223 114.943-183.177z"
-  }));
-
-  /**
-   * Toggle whether the color popup is showing.
-   */
-  var toggleVisible = function toggleVisible() {
-    setIsVisible(true);
-  };
-
-  /**
-   * Close color popup if visible.
-   */
-  var toggleClose = function toggleClose() {
-    if (isVisible) {
-      setIsVisible(false);
-    }
-  };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    className: "ajaxify-block-component-color-picker-wrapper"
-  }, !!label && !hideLabelFromVision && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-    className: "ajaxify-block-color-component-label"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, label)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-block-component-color-picker"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-block-color-picker-area ajaxify-block-component-color-picker-palette"
-  }, !isVisible && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('components-color-palette__item-wrapper components-circular-option-picker__option-wrapper ajaxify-block-color-picker-area ajaxify-block-component-color-picker-palette', value ? '' : 'components-color-palette__custom-color')
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Choose Color', 'ajaxify-block')
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    type: "button",
-    "aria-expanded": isVisible,
-    className: "components-button components-circular-option-picker__option is-pressed",
-    onClick: toggleVisible,
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Custom color picker', 'ajaxify-block'),
-    style: {
-      background: getColor(color, opacity)
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "components-color-palette__custom-color-gradient"
-  }))))), isVisible && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('components-color-palette__item-wrapper components-circular-option-picker__option-wrapper ajaxify-block-color-picker-area ajaxify-block-component-color-picker-palette', value ? '' : 'components-color-palette__custom-color')
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Choose Color', 'ajaxify-block')
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    type: "button",
-    "aria-expanded": isVisible,
-    className: "components-button components-circular-option-picker__option is-pressed",
-    onClick: toggleClose,
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Custom color picker', 'ajaxify-block'),
-    style: {
-      background: getColor(color, opacity)
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "components-color-palette__custom-color-gradient"
-  })))), isVisible && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    className: "ajaxify-block-component-color-picker",
-    onClose: toggleClose,
-    noArrow: false,
-    placement: "left-end",
-    offset: 20
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    key: colorKey
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.LegacyAdapter, {
-    key: colorKey,
-    color: color,
-    onChangeComplete: function onChangeComplete(newColor) {
-      var maybeNewColor = getColor(newColor.hex, opacity);
-      setColor(maybeNewColor);
-      _onChange(slug, maybeNewColor);
-    },
-    disableAlpha: true,
-    defaultValue: defaultColor
-  })), alpha && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-block-component-color-opacity"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Opacity', 'ajaxify-block')
-  }, opacityIcon), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    value: opacity,
-    onChange: function onChange(opacityValue) {
-      var newColor = getColor(color, opacityValue);
-      setOpacity(opacityValue);
-      setColor(newColor);
-      _onChange(slug, newColor);
-      onOpacityChange(opacityValue);
-    },
-    min: 0,
-    max: 1,
-    step: 0.01,
-    initialPosition: 1
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    className: "ajaxify-block-component-color-picker-palette"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    colors: getDefaultColors(),
-    value: color,
-    onChange: function onChange(newColor) {
-      var maybeNewColor = getColor(newColor);
-      _onChange(slug, maybeNewColor);
-      setColor(maybeNewColor);
-    },
-    disableCustomColors: true,
-    clearable: false
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "components-color-clear-color"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    onClick: function onClick() {
-      _onChange(slug, defaultColor);
-      setColor(defaultColor);
-    }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Clear Color', 'ajaxify-block')))))));
-};
-ColorPickerControl.propTypes = {
-  label: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().string),
-  onChange: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().func).isRequired,
-  onOpacityChange: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().func),
-  value: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().string),
-  defaultColor: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().string),
-  alpha: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().bool),
-  hideLabelFromVision: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().bool),
-  defaultColors: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().array).isRequired
-};
-ColorPickerControl.defaultProps = {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Color', 'ajaxify-block'),
-  value: '',
-  defaultColor: 'transparent',
-  alpha: false,
-  hideLabelFromVision: false,
-  onOpacityChange: function onOpacityChange() {}
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorPickerControl);
-
-/***/ }),
-
 /***/ "./src/js/react/icons/loading/LoadingGray1.js":
 /*!****************************************************!*\
   !*** ./src/js/react/icons/loading/LoadingGray1.js ***!
@@ -1968,29 +1614,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _icons_loading_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../icons/loading/index */ "./src/js/react/icons/loading/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button-group/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/range-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/base-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/toggle-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/text-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/notice/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button-group/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/range-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/base-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/toggle-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/text-control/index.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/monitor.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/tablet.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/smartphone.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_Alignment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Alignment */ "./src/js/react/components/Alignment/index.js");
 /* harmony import */ var _components_ColorPicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ColorPicker */ "./src/js/react/components/ColorPicker/index.js");
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Notice */ "./src/js/react/components/Notice/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -2021,13 +1668,13 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
    * @return {JSX.Element} Button group with spinners.
    */
   var getSpinners = function getSpinners() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
       className: "ajaxify-button-loading-svgs"
     }, Object.entries(_icons_loading_index__WEBPACK_IMPORTED_MODULE_1__).map(function (_ref) {
       var _ref2 = _slicedToArray(_ref, 2),
         key = _ref2[0],
         SvgComponent = _ref2[1];
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
         key: key,
         isSmall: true,
         isPressed: getValues('lazyLoadInlineSpinner') === key,
@@ -2057,14 +1704,14 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       className: "ajaxify-admin__popover-inner ajaxify-admin__popover-svgs"
     }, getSpinners()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerSpeed",
       control: control,
       render: function render(_ref3) {
         var _ref3$field = _ref3.field,
           onChange = _ref3$field.onChange,
           value = _ref3$field.value;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Animation Speed and Duration', 'wp-ajaxify-comments'),
           value: value,
           onChange: onChange,
@@ -2140,7 +1787,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       "aria-hidden": "true"
     }, getValues('lazyLoadInlineSpinnerLabel'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__preview-controls"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
       variant: "secondary",
       label: showLoadingSpinnerAnimation ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Stop Animation', 'wp-ajaxify-comments') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Start Animation', 'wp-ajaxify-comments'),
       onClick: function onClick() {
@@ -2151,14 +1798,14 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
   var getResponsiveControls = function getResponsiveControls(newDeviceType) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerSize".concat(newDeviceType),
       control: control,
       render: function render(_ref4) {
         var _ref4$field = _ref4.field,
           onChange = _ref4$field.onChange,
           value = _ref4$field.value;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Loading Icon Size', 'wp-ajaxify-comments'),
           value: getValues('lazyLoadInlineSpinnerSize' + newDeviceType),
           onChange: onChange,
@@ -2174,14 +1821,14 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerLabelFontSize".concat(newDeviceType),
       control: control,
       render: function render(_ref5) {
         var _ref5$field = _ref5.field,
           onChange = _ref5$field.onChange,
           value = _ref5$field.value;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Label Font Size', 'wp-ajaxify-comments'),
           value: getValues('lazyLoadInlineSpinnerLabelFontSize' + newDeviceType),
           onChange: onChange,
@@ -2197,14 +1844,14 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerLabelLineHeight".concat(newDeviceType),
       control: control,
       render: function render(_ref6) {
         var _ref6$field = _ref6.field,
           onChange = _ref6$field.onChange,
           value = _ref6$field.value;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Label Line Height', 'wp-ajaxify-comments'),
           value: getValues('lazyLoadInlineSpinnerLabelLineHeight' + newDeviceType),
           onChange: onChange,
@@ -2220,14 +1867,14 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerGap".concat(newDeviceType),
       control: control,
       render: function render(_ref7) {
         var _ref7$field = _ref7.field,
           onChange = _ref7$field.onChange,
           value = _ref7$field.value;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Label and Icon Gap', 'wp-ajaxify-comments'),
           value: getValues('lazyLoadInlineSpinnerGap' + newDeviceType),
           onChange: onChange,
@@ -2243,14 +1890,14 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerContainerPadding".concat(newDeviceType),
       control: control,
       render: function render(_ref8) {
         var _ref8$field = _ref8.field,
           onChange = _ref8$field.onChange,
           value = _ref8$field.value;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Padding', 'wp-ajaxify-comments'),
           value: getValues('lazyLoadInlineSpinnerContainerPadding' + newDeviceType),
           onChange: onChange,
@@ -2275,24 +1922,24 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       scope: "row"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Layout', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, getLoadingSpinnerPreview(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerLayoutType",
       control: control,
       render: function render(_ref9) {
         var _ref9$field = _ref9.field,
           onChange = _ref9$field.onChange,
           value = _ref9$field.value;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
           id: "lazyLoadInlineSpinnerLayoutType",
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Layout Type', 'wp-ajaxify-comments'),
           help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Choose a layout for this loading banner.', 'wp-ajaxify-comments')
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Horizontal', 'wp-ajaxify-comments'),
           isPressed: 'horizontal' === getValues('lazyLoadInlineSpinnerLayoutType'),
           onClick: function onClick() {
             setValue('lazyLoadInlineSpinnerLayoutType', 'horizontal');
           }
-        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Horizontal', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Horizontal', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Vertical', 'wp-ajaxify-comments'),
           isPressed: 'vertical' === getValues('lazyLoadInlineSpinnerLayoutType'),
           onClick: function onClick() {
@@ -2302,7 +1949,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerLayoutAlignment",
       control: control,
       render: function render(_ref10) {
@@ -2323,14 +1970,14 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerLayoutRTL",
       control: control,
       render: function render(_ref11) {
         var _ref11$field = _ref11.field,
           onChange = _ref11$field.onChange,
           value = _ref11$field.value;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Flip Layout', 'wp-ajaxify-comments'),
           help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Flip the order of the spinner and label.', 'wp-ajaxify-comments'),
           checked: value,
@@ -2339,14 +1986,14 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerLabelEnabled",
       control: control,
       render: function render(_ref12) {
         var _ref12$field = _ref12.field,
           onChange = _ref12$field.onChange,
           value = _ref12$field.value;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Label for Spinner', 'wp-ajaxify-comments'),
           help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show a loading label next to the spinner.', 'wp-ajaxify-comments'),
           checked: value,
@@ -2355,7 +2002,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       }
     })), getValues('lazyLoadInlineSpinnerLabelEnabled') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerLabel",
       control: control,
       rules: {
@@ -2366,7 +2013,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
         var _ref13$field = _ref13.field,
           onChange = _ref13$field.onChange,
           value = _ref13$field.value;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter a label for the Spinner', 'wp-ajaxify-comments'),
           help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('The label goes next to the spinner.', 'wp-ajaxify-comments'),
           value: value,
@@ -2375,7 +2022,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
             'has-error': 'required' === ((_errors$lazyLoadInlin = errors.lazyLoadInlineSpinnerLabel) === null || _errors$lazyLoadInlin === void 0 ? void 0 : _errors$lazyLoadInlin.type),
             'is-required': true
           })
-        }), (errors === null || errors === void 0 ? void 0 : errors.lazyLoadInlineSpinnerLabel) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        }), (errors === null || errors === void 0 ? void 0 : errors.lazyLoadInlineSpinnerLabel) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
           message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-ajaxify-comments'),
           status: "error",
           politeness: "assertive",
@@ -2389,7 +2036,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       scope: "row"
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Colors', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, getLoadingSpinnerPreview(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerContainerBackgroundColor",
       control: control,
       render: function render(_ref14) {
@@ -2411,7 +2058,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerIconColor",
       control: control,
       render: function render(_ref15) {
@@ -2433,7 +2080,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
       name: "lazyLoadInlineSpinnerLabelColor",
       control: control,
       render: function render(_ref16) {
@@ -2458,7 +2105,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       className: "ajaxify-admin-appearance-preview-row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin-appearance-preview-row__buttons"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
       onClick: function onClick(e) {
         e.preventDefault();
         setDeviceType('Desktop');
@@ -2471,7 +2118,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
           fill: 'none'
         }
       })
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Desktop Options', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Desktop Options', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
       onClick: function onClick(e) {
         e.preventDefault();
         setDeviceType('Tablet');
@@ -2484,7 +2131,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
           fill: 'none'
         }
       })
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Tablet Options', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Tablet Options', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
       onClick: function onClick(e) {
         e.preventDefault();
         setDeviceType('Mobile');
@@ -2530,14 +2177,112 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
 
 /***/ }),
 
-/***/ "./src/js/react/components/Alignment/editor.scss":
-/*!*******************************************************!*\
-  !*** ./src/js/react/components/Alignment/editor.scss ***!
-  \*******************************************************/
+/***/ "./node_modules/lucide-react/dist/esm/icons/monitor.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/monitor.js ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Monitor)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * lucide-react v0.268.0 - ISC
+ */
+
+
+
+const Monitor = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Monitor", [
+  [
+    "rect",
+    { width: "20", height: "14", x: "2", y: "3", rx: "2", key: "48i651" }
+  ],
+  ["line", { x1: "8", x2: "16", y1: "21", y2: "21", key: "1svkeh" }],
+  ["line", { x1: "12", x2: "12", y1: "17", y2: "21", key: "vw1qmm" }]
+]);
+
+
+//# sourceMappingURL=monitor.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/smartphone.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/smartphone.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Smartphone)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * lucide-react v0.268.0 - ISC
+ */
+
+
+
+const Smartphone = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Smartphone", [
+  [
+    "rect",
+    {
+      width: "14",
+      height: "20",
+      x: "5",
+      y: "2",
+      rx: "2",
+      ry: "2",
+      key: "1yt0o3"
+    }
+  ],
+  ["path", { d: "M12 18h.01", key: "mhygvu" }]
+]);
+
+
+//# sourceMappingURL=smartphone.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/tablet.js":
+/*!************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/tablet.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Tablet)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * lucide-react v0.268.0 - ISC
+ */
+
+
+
+const Tablet = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Tablet", [
+  [
+    "rect",
+    {
+      width: "16",
+      height: "20",
+      x: "4",
+      y: "2",
+      rx: "2",
+      ry: "2",
+      key: "76otgf"
+    }
+  ],
+  ["line", { x1: "12", x2: "12.01", y1: "18", y2: "18", key: "1dp563" }]
+]);
+
+
+//# sourceMappingURL=tablet.js.map
 
 
 /***/ })

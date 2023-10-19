@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import * as LoadingSvgs from '../../icons/loading/index';
-import { Button, ButtonGroup, RangeControl, BaseControl, ToggleControl, TextControl, Notice } from '@wordpress/components';
+import { Button, ButtonGroup, RangeControl, BaseControl, ToggleControl, TextControl } from '@wordpress/components';
 import { AlertCircle, Monitor, Tablet, Smartphone } from 'lucide-react';
 import { __ } from '@wordpress/i18n';
 import { Controller } from 'react-hook-form';
 import classNames from 'classnames';
 import AlignmentGroup from '../../components/Alignment';
 import ColorPickerControl from '../../components/ColorPicker';
+import Notice from '../../components/Notice';
 
 const defaultPalette = wpacAdminLazyLoad.palette;
 
