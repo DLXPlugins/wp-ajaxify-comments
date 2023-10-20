@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.3.1
-Stable tag: 2.0.11
+Stable tag: 2.0.14
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -118,6 +118,11 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Changelog ==
 
+= 2.0.14 =
+* Released 2023-10-20
+* Resolving Ajax compatibility issue with Ninja Forms.
+* Successfully tested with WP 6.4.
+
 = 2.0.11 =
 * Released 2023-10-06
 * Added WPML support to the plugin (<a href="https://docs.dlxplugins.com/v/ajaxify-comments/advanced-topics/wpml-and-translations">docs on how to set this up</a>).
@@ -166,5 +171,5 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Upgrade Notice ==
 
-= 2.0.11 =
-Added baked-in WPML compatibility. Updated Menu Helper to work with the new Ollie theme.
+= 2.0.14 =
+Resolving Ajax issue with Ninja Forms. Successfully tested with WP 6.4.
