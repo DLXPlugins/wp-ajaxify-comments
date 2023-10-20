@@ -1253,3 +1253,60 @@ p.components-base-control__help {
 .fancybox__container {
 	z-index: 9999;
 }
+
+/* Plugin Integrations */
+.ajaxify-plugin-integrations-wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 40px;
+	row-gap: 40px;
+}
+.ajaxify-plugin-integration {
+
+	background-color: #FFF;
+	border: 1px solid #DDD;
+	border-radius: 3px;
+}
+.ajaxify-plugin-integration-info {
+	display: flex;
+	column-gap: 25px;
+	align-items: center;
+	padding: 0px 20px;
+	padding-bottom: 10px;
+	min-height: 125px;
+
+	.ajaxify-plugin-integration-icon {
+		img {
+			width: 52px;
+			height: 52px;
+		}
+	}
+	.ajaxify-plugin-integration-meta {
+		flex: 1;
+		h3 {
+			margin: 0;
+			margin-bottom: 8px;
+		}
+		p {
+			font-size: 13px;
+		}
+	}
+}
+.ajaxify-plugin-integration-actions {
+	background: #F7F7F7;
+	border-top: 1px solid #ddd;
+	padding: 10px 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	
+
+	.ajaxify-plugin-integration-button {
+		text-align: right;
+		button {
+			text-align: center;
+			justify-content: center;
+			min-width: 125px;
+		}
+	}
+}

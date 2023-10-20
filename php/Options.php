@@ -264,11 +264,11 @@ class Options {
 			'lazyLoadInlineSpinnerContainerPaddingMobile'  => 20, /* pixels */
 			'lazyLoadInlineSpinnerGapMobile'               => 15, /* pixels */
 			'lazyLoadInlineSkeletonLoadingLabelEnabled'    => false,
-			'lazyLoadInlineSkeletonLoadingLabel' 		 => __( 'Loading comments...', 'wp-ajaxify-comments' ),
-			'lazyLoadInlineSkeletonItemsShow' => 2,
-			'lazyLoadInlineShortcode' => '',
-			'lazyLoadInlineLoadingButtonLabel' => __( 'Load Comments', 'wp-ajaxify-comments' ),
-			'lazyLoadInlineLoadingButtonLabelLoading' => __( 'Loading Comments...', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineSkeletonLoadingLabel'           => __( 'Loading comments...', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineSkeletonItemsShow'              => 2,
+			'lazyLoadInlineShortcode'                      => '',
+			'lazyLoadInlineLoadingButtonLabel'             => __( 'Load Comments', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineLoadingButtonLabelLoading'      => __( 'Loading Comments...', 'wp-ajaxify-comments' ),
 
 		);
 		return $defaults;

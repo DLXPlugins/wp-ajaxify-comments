@@ -123,6 +123,9 @@ class Settings {
 			<symbol aria-hidden="true" data-prefix="fad" data-icon="comment-dots" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="comment-dots">
 				<path fill="currentColor" class="fa-primary" d="M96 240a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm128 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm160-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/><path class="fa-secondary" fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM128 208a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm96 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z" opacity="0.4" />
 			</symbol>
+			<symbol aria-hidden="true" data-prefix="fad" data-icon="plug-plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="plug-plus">
+				<path fill="currentColor" class="fa-primary" d="M288 368a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-80c-8.8 0-16 7.2-16 16v48H368c-8.8 0-16 7.2-16 16s7.2 16 16 16h48v48c0 8.8 7.2 16 16 16s16-7.2 16-16V384h48c8.8 0 16-7.2 16-16s-7.2-16-16-16H448V304c0-8.8-7.2-16-16-16z"/><path fill="currentColor" class="fa-secondary" d="M128 32v96H64V32C64 14.3 78.3 0 96 0s32 14.3 32 32zm192 0v96H256V32c0-17.7 14.3-32 32-32s32 14.3 32 32zM0 192c0-17.7 14.3-32 32-32H352c17.7 0 32 14.3 32 32c0 2.3-.3 4.6-.7 6.8C309.8 220 256 287.7 256 368c0 11.4 1.1 22.5 3.1 33.3c-11.1 5.1-22.9 9-35.1 11.5V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V412.8C87 398 32 333.4 32 256V224c-17.7 0-32-14.3-32-32z" opacity="0.4"/>
+			</symbol>
 		</svg>
 		<?php do_action( 'dlxplugins/ajaxify/admin/header_content' ); ?>
 		<?php

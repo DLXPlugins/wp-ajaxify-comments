@@ -14,6 +14,7 @@ module.exports = ( env ) => {
 				'wpac-admin-advanced-js': './src/js/react/views/Advanced/index.js',
 				'wpac-admin-lazy-load-js': './src/js/react/views/LazyLoad/index.js',
 				'wpac-admin-support-js': './src/js/react/views/Support/index.js',
+				'wpac-admin-integrations-js': './src/js/react/views/Integrations/index.js',
 				'wpac-frontend-js': './src/js/frontend/index.js',
 				'wpac-frontend-idle-timer': './src/js/frontend/idle-timer.js',
 				'wpac-frontend-jquery-blockUI': './src/js/frontend/jquery.blockUI.js',
@@ -28,7 +29,7 @@ module.exports = ( env ) => {
 			output: {
 				filename: '[name].js',
 				sourceMapFilename: '[file].map[query]',
-				assetModuleFilename: 'fonts/[name][ext]',
+				assetModuleFilename: 'assets/[name][ext]',
 				clean: true,
 			},
 			resolve: {
@@ -98,6 +99,13 @@ module.exports = ( env ) => {
 						include: [ path.resolve( __dirname, 'fonts' ) ],
 						exclude: /(node_modules|bower_components)/,
 						type: 'asset/resource',
+					},
+					{
+						test: /\.(gif?|png|jpg)$/,
+						exclude: /(node_modules|bower_components)/,
+						use: {
+							loader: 'url-loader',
+						},
 					},
 				],
 			},
