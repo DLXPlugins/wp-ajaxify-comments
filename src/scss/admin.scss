@@ -441,7 +441,7 @@ h3.ajaxify-admin-content-subheading {
 	}
 
 	// Text control styles.
-	.components-base-control,
+	.components-base-control::not(.components-range-control__number),
 	.components-form-token-field,
 	.ajaxify-admin__button-group--align {
 		margin-bottom: 25px;

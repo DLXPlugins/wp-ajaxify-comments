@@ -1782,7 +1782,7 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
       width: getValues('lazyLoadInlineSpinnerSizeDesktop'),
       height: getValues('lazyLoadInlineSpinnerSizeDesktop'),
       className: showLoadingSpinnerAnimation ? 'ajaxify-icon-loading-animation-on' : 'ajaxify-icon-loading-animation-off'
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    })), getValues('lazyLoadInlineSpinnerLabelEnabled') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-comments-spinner__label",
       "aria-hidden": "true"
     }, getValues('lazyLoadInlineSpinnerLabel'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

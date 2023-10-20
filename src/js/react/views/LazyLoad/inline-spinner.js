@@ -181,9 +181,11 @@ const InlineSpinnerOptions = ( props ) => {
 							<div className="ajaxify-comments-spinner__icon">
 								<LoadingSpinnerPreview width={ getValues( 'lazyLoadInlineSpinnerSizeDesktop' ) } height={ getValues( 'lazyLoadInlineSpinnerSizeDesktop' ) } className={ showLoadingSpinnerAnimation ? 'ajaxify-icon-loading-animation-on' : 'ajaxify-icon-loading-animation-off' } />
 							</div>
-							<div className="ajaxify-comments-spinner__label" aria-hidden="true">
-								{ getValues( 'lazyLoadInlineSpinnerLabel' ) }
-							</div>
+							{ getValues( 'lazyLoadInlineSpinnerLabelEnabled' ) && (
+								<div className="ajaxify-comments-spinner__label" aria-hidden="true">
+									{ getValues( 'lazyLoadInlineSpinnerLabel' ) }
+								</div>
+							) }
 						</div>
 						<div className="ajaxify-admin__preview-controls">
 							<Button

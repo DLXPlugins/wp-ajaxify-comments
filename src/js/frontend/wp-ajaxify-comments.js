@@ -1174,6 +1174,7 @@ jQuery( function() {
 			WPAC._Options.lazyLoadTriggerScrollOffset,
 		);
 		const lazyLoadElement = WPAC._Options.lazyLoadTriggerElement;
+		const lazyLoadInlineType = WPAC._Options.lazyLoadInlineLoadingType;
 		let lazyLoadOffset = parseInt( WPAC._Options.lazyLoadTriggerOffset );
 		if ( lazyLoadOffset === 0 ) {
 			lazyLoadOffset = '100%';
@@ -1202,6 +1203,13 @@ jQuery( function() {
 				lazyLoadContentClone.style.opacity = '1';
 				lazyLoadContentClone.style.visibility = 'visible';
 
+				// Determine trigger if button.
+				if ( 'button' === lazyLoadInlineType ) {
+					// This will make it so that a button must be clicked to load comments.
+					lazyLoadTrigger = 'external';
+					
+				}
+
 				// Display the loader.
 				if ( 'comments' === lazyloadInlineDisplayLocation ) {
 					const commentsContainer = jQuery( lazyloadInlineDisplayElement );
@@ -1228,6 +1236,16 @@ jQuery( function() {
 							'Element not found for lazy loading when reaching the element.',
 						);
 					}
+				}
+
+				// Init lazy loading button (if any).
+				const lazyLoadButton = document.querySelector( '.ajaxify-comments-loading-button-wrapper button' );
+				if ( null !== lazyLoadButton ) {
+					lazyLoadButton.addEventListener( 'click', function( e ) {
+						e.preventDefault();
+						lazyLoadButton.innerHTML = WPAC._Options.lazyLoadInlineLoadingButtonLabelLoading;
+						WPAC.RefreshComments();
+					} );
 				}
 			}
 		}

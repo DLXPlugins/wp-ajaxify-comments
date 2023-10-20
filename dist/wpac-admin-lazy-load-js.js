@@ -22128,7 +22128,8 @@ var Interface = function Interface(props) {
         lazyLoadInlineSpinnerContainerPaddingMobile: data.lazyLoadInlineSpinnerContainerPaddingMobile,
         lazyLoadInlineSkeletonLoadingLabelEnabled: data.lazyLoadInlineSkeletonLoadingLabelEnabled,
         lazyLoadInlineSkeletonLoadingLabel: data.lazyLoadInlineSkeletonLoadingLabel,
-        lazyLoadInlineSkeletonItemsShow: data.lazyLoadInlineSkeletonItemsShow
+        lazyLoadInlineSkeletonItemsShow: data.lazyLoadInlineSkeletonItemsShow,
+        lazyLoadInlineShortcode: data.lazyLoadInlineShortcode
       }
     }),
     register = _useForm.register,
@@ -22467,7 +22468,41 @@ var Interface = function Interface(props) {
     setValue: setValue,
     getValues: getValues,
     clearErrors: clearErrors
-  })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }))), 'shortcode' === getValues('lazyLoadInlineLoadingType') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "row"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Shortcode', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-admin__control-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
+    name: "lazyLoadInlineShortcode",
+    control: control,
+    rules: {
+      required: true
+    },
+    render: function render(_ref9) {
+      var _errors$lazyLoadInlin5, _errors$lazyLoadInlin6;
+      var _ref9$field = _ref9.field,
+        onChange = _ref9$field.onChange,
+        value = _ref9$field.value;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Shortcode', 'wp-ajaxify-comments'),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter a shortcode to display while comments are loading.', 'wp-ajaxify-comments'),
+        value: value,
+        onChange: onChange,
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', {
+          'has-error': 'required' === ((_errors$lazyLoadInlin5 = errors.lazyLoadInlineShortcode) === null || _errors$lazyLoadInlin5 === void 0 ? void 0 : _errors$lazyLoadInlin5.type),
+          'is-required': true
+        })
+      }), 'required' === ((_errors$lazyLoadInlin6 = errors.lazyLoadInlineShortcode) === null || _errors$lazyLoadInlin6 === void 0 ? void 0 : _errors$lazyLoadInlin6.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
+        status: "error",
+        politeness: "assertive",
+        inline: false,
+        icon: function icon() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null);
+        }
+      }));
+    }
+  })))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_7__["default"], {
     formValues: formValues,
     setError: setError,
     reset: reset,

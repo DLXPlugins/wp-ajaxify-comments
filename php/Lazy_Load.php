@@ -24,9 +24,51 @@ class Lazy_Load {
 	 * Class runner.
 	 */
 	public function run() {
-		add_action( 'comment_form_before', array( $this, 'output_spinner_html' ) );
+		//add_action( 'comment_form_before', array( $this, 'output_spinner_html' ) );
 		add_action( 'wp_footer', array( $this, 'output_spinner_html' ) );
 		add_action( 'wp_footer', array( $this, 'output_skeleton_html' ) );
+		add_action( 'wp_footer', array( $this, 'output_shortcode_html' ) );
+		add_action( 'wp_footer', array( $this, 'output_loading_button_html' ) );
+	}
+
+	/**
+	 * Output loading button HTML.
+	 */
+	public function output_loading_button_html() {
+		$options = Options::get_options();
+
+		// If lazy loading is not enabled, bail.
+		if ( ! Functions::is_lazy_loading_enabled( false, true ) ) {
+			return;
+		}
+
+		// If inline is not selected or shortcode isn't the type, bail.
+		if ( 'inline' !== $options['lazyLoadDisplay'] || 'button' !== $options['lazyLoadInlineLoadingType'] ) {
+			return;
+		}
+
+		?>
+		<div id="wpac-lazy-load-content" style="visibility: hidden; opacity: 0;" aria-hidden="true">
+			<style>
+				:root {
+					--ajaxify-comments-loading-button-font-size: 18px;
+					--ajaxify-comments-loading-button-line-height: 1.5;
+				}
+			</style>
+			<div class="ajaxify-comments-loading-button-wrapper">
+				<?php
+				$button_text = sanitize_text_field( $options['lazyLoadInlineLoadingButtonLabel'] );
+				if ( ! empty( $button_text ) ) :
+					?>
+					<button class="ajaxify-comments-loading-button">
+						<?php echo esc_html( $button_text ); ?>
+					</button>
+					<?php
+				endif;
+				?>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**
@@ -40,6 +82,32 @@ class Lazy_Load {
 		$styles[] = 'stroke';
 		$styles[] = 'color';
 		return $styles;
+	}
+
+	/**
+	 * Output shortcode HTML.
+	 */
+	public function output_shortcode_html() {
+		$options = Options::get_options();
+
+		// If lazy loading is not enabled, bail.
+		if ( ! Functions::is_lazy_loading_enabled( false, true ) ) {
+			return;
+		}
+
+		// If inline is not selected or shortcode isn't the type, bail.
+		if ( 'inline' !== $options['lazyLoadDisplay'] || 'shortcode' !== $options['lazyLoadInlineLoadingType'] ) {
+			return;
+		}
+
+		// Get shortcode arguments.
+		$shortcode         = sanitize_text_field( $options['lazyLoadInlineShortcode'] );
+		$shortcode_content = do_shortcode( $shortcode );
+
+		// Echo out shortcode content.
+		echo '<div id="wpac-lazy-load-content" style="visibility: hidden; opacity: 0;" aria-hidden="true">';
+		echo wp_kses_post( $shortcode_content );
+		echo '</div>';
 	}
 
 	/**
@@ -62,7 +130,7 @@ class Lazy_Load {
 			<?php
 			$can_show_heading = (bool) $options['lazyLoadInlineSkeletonLoadingLabelEnabled'];
 			$skeleton_heading = sanitize_text_field( $options['lazyLoadInlineSkeletonLoadingLabel'] );
-			if ( $can_show_heading && ! empty( $skeleton_heading ) ):
+			if ( $can_show_heading && ! empty( $skeleton_heading ) ) :
 				?>
 				<h2 class="ajaxify-skeleton-heading"><?php echo esc_html( $skeleton_heading ); ?></h2>
 				<?php
@@ -138,7 +206,7 @@ class Lazy_Load {
 		add_filter( 'safe_style_css', array( $this, 'add_safe_css' ) );
 		if ( false === $icon_svg ) {
 			if ( file_exists( $spinner_dir ) ) {
-				
+
 				$icon_svg = wp_kses(
 					file_get_contents( $spinner_dir ),
 					Functions::get_kses_allowed_html( true )
@@ -228,6 +296,6 @@ class Lazy_Load {
 		<?php
 		$html = ob_get_clean();
 		remove_filter( 'safe_style_css', array( $this, 'add_safe_css' ) );
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }

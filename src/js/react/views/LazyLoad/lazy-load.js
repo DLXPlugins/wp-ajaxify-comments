@@ -132,6 +132,7 @@ const Interface = ( props ) => {
 			lazyLoadInlineSkeletonLoadingLabelEnabled: data.lazyLoadInlineSkeletonLoadingLabelEnabled,
 			lazyLoadInlineSkeletonLoadingLabel: data.lazyLoadInlineSkeletonLoadingLabel,
 			lazyLoadInlineSkeletonItemsShow: data.lazyLoadInlineSkeletonItemsShow,
+			lazyLoadInlineShortcode: data.lazyLoadInlineShortcode,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -556,6 +557,50 @@ const Interface = ( props ) => {
 													clearErrors={ clearErrors }
 												/>
 											</Suspense>
+										</>
+									) }
+									{ 'shortcode' === getValues( 'lazyLoadInlineLoadingType' ) && (
+										<>
+											<tr>
+												<th scope="row">
+													{ __( 'Shortcode', 'wp-ajaxify-comments' ) }
+												</th>
+												<td>
+													<div className="ajaxify-admin__control-row">
+														<Controller
+															name="lazyLoadInlineShortcode"
+															control={ control }
+															rules={ { required: true } }
+															render={ ( { field: { onChange, value } } ) => (
+																<>
+																	<TextControl
+																		label={ __( 'Shortcode', 'wp-ajaxify-comments' ) }
+																		help={ __( 'Enter a shortcode to display while comments are loading.', 'wp-ajaxify-comments' ) }
+																		value={ value }
+																		onChange={ onChange }
+																		className={ classNames( 'ajaxify-admin__text-control', {
+																			'has-error': 'required' === errors.lazyLoadInlineShortcode?.type,
+																			'is-required': true,
+																		} ) }
+																	/>
+																	{ 'required' === errors.lazyLoadInlineShortcode?.type && (
+																		<Notice
+																			message={ __(
+																				'This is a required field.',
+																				'wp-ajaxify-comments',
+																			) }
+																			status="error"
+																			politeness="assertive"
+																			inline={ false }
+																			icon={ () => ( <AlertCircle /> ) }
+																		/>
+																	) }
+																</>
+															) }
+														/>
+													</div>
+												</td>
+											</tr>
 										</>
 									) }
 								</>

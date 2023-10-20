@@ -3837,46 +3837,46 @@ h3.ajaxify-admin-content-subheading:after {
   font-weight: 700 !important; /* override core styles */
   font-size: 0.8125rem !important;
 }
-.ajaxify-panel-row .components-base-control,
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number),
 .ajaxify-panel-row .components-form-token-field,
 .ajaxify-panel-row .ajaxify-admin__button-group--align,
-.ajaxify-admin__control-row .components-base-control,
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number),
 .ajaxify-admin__control-row .components-form-token-field,
 .ajaxify-admin__control-row .ajaxify-admin__button-group--align {
   margin-bottom: 25px;
 }
-.ajaxify-panel-row .components-base-control.has-error,
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number).has-error,
 .ajaxify-panel-row .components-form-token-field.has-error,
 .ajaxify-panel-row .ajaxify-admin__button-group--align.has-error,
-.ajaxify-admin__control-row .components-base-control.has-error,
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number).has-error,
 .ajaxify-admin__control-row .components-form-token-field.has-error,
 .ajaxify-admin__control-row .ajaxify-admin__button-group--align.has-error {
   margin-bottom: 5px;
 }
-.ajaxify-panel-row .components-base-control:last-child,
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number):last-child,
 .ajaxify-panel-row .components-form-token-field:last-child,
 .ajaxify-panel-row .ajaxify-admin__button-group--align:last-child,
-.ajaxify-admin__control-row .components-base-control:last-child,
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number):last-child,
 .ajaxify-admin__control-row .components-form-token-field:last-child,
 .ajaxify-admin__control-row .ajaxify-admin__button-group--align:last-child {
   margin-bottom: 0;
 }
-.ajaxify-panel-row .components-base-control label,
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number) label,
 .ajaxify-panel-row .components-form-token-field label,
 .ajaxify-panel-row .ajaxify-admin__button-group--align label,
-.ajaxify-admin__control-row .components-base-control label,
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number) label,
 .ajaxify-admin__control-row .components-form-token-field label,
 .ajaxify-admin__control-row .ajaxify-admin__button-group--align label {
   font-weight: 700;
 }
-.ajaxify-panel-row .components-base-control input[type=text],
-.ajaxify-panel-row .components-base-control input[type=number],
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number) input[type=text],
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number) input[type=number],
 .ajaxify-panel-row .components-form-token-field input[type=text],
 .ajaxify-panel-row .components-form-token-field input[type=number],
 .ajaxify-panel-row .ajaxify-admin__button-group--align input[type=text],
 .ajaxify-panel-row .ajaxify-admin__button-group--align input[type=number],
-.ajaxify-admin__control-row .components-base-control input[type=text],
-.ajaxify-admin__control-row .components-base-control input[type=number],
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number) input[type=text],
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number) input[type=number],
 .ajaxify-admin__control-row .components-form-token-field input[type=text],
 .ajaxify-admin__control-row .components-form-token-field input[type=number],
 .ajaxify-admin__control-row .ajaxify-admin__button-group--align input[type=text],
@@ -3888,28 +3888,28 @@ h3.ajaxify-admin-content-subheading:after {
   font-size: 14px;
   padding: 8px 14px 8px 12px;
 }
-.ajaxify-panel-row .components-base-control .components-radio-control__option,
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number) .components-radio-control__option,
 .ajaxify-panel-row .components-form-token-field .components-radio-control__option,
 .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option,
-.ajaxify-admin__control-row .components-base-control .components-radio-control__option,
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number) .components-radio-control__option,
 .ajaxify-admin__control-row .components-form-token-field .components-radio-control__option,
 .ajaxify-admin__control-row .ajaxify-admin__button-group--align .components-radio-control__option {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
 }
-.ajaxify-panel-row .components-base-control .components-radio-control__option:last-child,
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number) .components-radio-control__option:last-child,
 .ajaxify-panel-row .components-form-token-field .components-radio-control__option:last-child,
 .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option:last-child,
-.ajaxify-admin__control-row .components-base-control .components-radio-control__option:last-child,
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number) .components-radio-control__option:last-child,
 .ajaxify-admin__control-row .components-form-token-field .components-radio-control__option:last-child,
 .ajaxify-admin__control-row .ajaxify-admin__button-group--align .components-radio-control__option:last-child {
   margin-bottom: 0;
 }
-.ajaxify-panel-row .components-base-control .components-radio-control__option input[type=radio],
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number) .components-radio-control__option input[type=radio],
 .ajaxify-panel-row .components-form-token-field .components-radio-control__option input[type=radio],
 .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option input[type=radio],
-.ajaxify-admin__control-row .components-base-control .components-radio-control__option input[type=radio],
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number) .components-radio-control__option input[type=radio],
 .ajaxify-admin__control-row .components-form-token-field .components-radio-control__option input[type=radio],
 .ajaxify-admin__control-row .ajaxify-admin__button-group--align .components-radio-control__option input[type=radio] {
   position: relative;
@@ -3918,20 +3918,20 @@ h3.ajaxify-admin-content-subheading:after {
   height: 20px;
   width: 20px;
 }
-.ajaxify-panel-row .components-base-control .components-radio-control__option input[type=radio]:checked,
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number) .components-radio-control__option input[type=radio]:checked,
 .ajaxify-panel-row .components-form-token-field .components-radio-control__option input[type=radio]:checked,
 .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option input[type=radio]:checked,
-.ajaxify-admin__control-row .components-base-control .components-radio-control__option input[type=radio]:checked,
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number) .components-radio-control__option input[type=radio]:checked,
 .ajaxify-admin__control-row .components-form-token-field .components-radio-control__option input[type=radio]:checked,
 .ajaxify-admin__control-row .ajaxify-admin__button-group--align .components-radio-control__option input[type=radio]:checked {
   background: #9949cf;
   border-color: #9949cf;
   color: #fff;
 }
-.ajaxify-panel-row .components-base-control .components-radio-control__option input[type=radio]:checked:before,
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number) .components-radio-control__option input[type=radio]:checked:before,
 .ajaxify-panel-row .components-form-token-field .components-radio-control__option input[type=radio]:checked:before,
 .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option input[type=radio]:checked:before,
-.ajaxify-admin__control-row .components-base-control .components-radio-control__option input[type=radio]:checked:before,
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number) .components-radio-control__option input[type=radio]:checked:before,
 .ajaxify-admin__control-row .components-form-token-field .components-radio-control__option input[type=radio]:checked:before,
 .ajaxify-admin__control-row .ajaxify-admin__button-group--align .components-radio-control__option input[type=radio]:checked:before {
   position: absolute;
@@ -3945,10 +3945,10 @@ h3.ajaxify-admin-content-subheading:after {
   left: 0;
   top: 0;
 }
-.ajaxify-panel-row .components-base-control .components-radio-control__option label,
+.ajaxify-panel-row .components-base-control::not(.components-range-control__number) .components-radio-control__option label,
 .ajaxify-panel-row .components-form-token-field .components-radio-control__option label,
 .ajaxify-panel-row .ajaxify-admin__button-group--align .components-radio-control__option label,
-.ajaxify-admin__control-row .components-base-control .components-radio-control__option label,
+.ajaxify-admin__control-row .components-base-control::not(.components-range-control__number) .components-radio-control__option label,
 .ajaxify-admin__control-row .components-form-token-field .components-radio-control__option label,
 .ajaxify-admin__control-row .ajaxify-admin__button-group--align .components-radio-control__option label {
   font-weight: 400;
