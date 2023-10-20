@@ -65,7 +65,7 @@ class Init {
 	 */
 	public function ajax_save_options() {
 		// Get form data.
-		$form_data = filter_input( INPUT_POST, 'formData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		$form_data = filter_input( INPUT_POST, 'ajaxifyFormData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 
 		// Verify nonce.
 		$nonce        = $form_data['saveNonce'];
@@ -130,7 +130,7 @@ class Init {
 
 	public function ajax_reset_options() {
 		// Get form data.
-		$form_data = filter_input( INPUT_POST, 'formData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		$form_data = filter_input( INPUT_POST, 'ajaxifyFormData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 
 		// Verify nonce.
 		$nonce        = $form_data['resetNonce'];
