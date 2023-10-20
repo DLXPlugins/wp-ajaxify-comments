@@ -68,7 +68,7 @@ class Init {
 	 */
 	public function ajax_save_options() {
 		// Get form data.
-		$form_data = filter_input( INPUT_POST, 'formData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		$form_data = filter_input( INPUT_POST, 'ajaxifyFormData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 
 		// Verify nonce.
 		$nonce        = $form_data['saveNonce'];
@@ -100,6 +100,25 @@ class Init {
 			$options[ $key ] = $option_value;
 		}
 
+		$label_keys_to_translate = Options::get_string_label_keys();
+
+		foreach ( $label_keys_to_translate as $label_key ) {
+			$label_value = $options[ $label_key ];
+			do_action(
+				'wpml_register_string',
+				$label_value,
+				$label_key,
+				array(
+					'kind'  => 'Ajaxify',
+					'name'  => 'ajaxify-comments-labels',
+					'title' => 'Ajaxify Comment Labels',
+				),
+				$label_key,
+				'line'
+			);
+
+		}
+
 		// Update options.
 		Options::update_options( $options );
 
@@ -114,7 +133,7 @@ class Init {
 
 	public function ajax_reset_options() {
 		// Get form data.
-		$form_data = filter_input( INPUT_POST, 'formData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		$form_data = filter_input( INPUT_POST, 'ajaxifyFormData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 
 		// Verify nonce.
 		$nonce        = $form_data['resetNonce'];

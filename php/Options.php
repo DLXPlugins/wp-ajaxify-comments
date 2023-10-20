@@ -141,16 +141,37 @@ class Options {
 		}
 		self::$options = $options;
 
+		// Get WPML to translate the options. This only seems to work on the frontend.
+		$label_keys_to_translate = self::get_string_label_keys();
+		foreach ( $label_keys_to_translate as $label_key ) {
+			$label_value = $options[ $label_key ];
+
+			$translated_string = apply_filters(
+				'wpml_translate_string',
+				$label_value,
+				$label_key,
+				array(
+					'kind'  => 'Ajaxify',
+					'name'  => 'ajaxify-comments-labels',
+					'title' => 'Ajaxify Comment Labels',
+				)
+			);
+
+			$options[ $label_key ] = $translated_string;
+
+		}
+
 		/**
 		 * Filter the options before they are returned.
-		 * Technically you can do this with a get_option filter, but this parses in any new defaults.
+		 * Technically you can do this with a get_option filter, but this parses in any new defaults and translations.
 		 *
 		 * @param array  $options The options to be output.
 		 */
-		$options = apply_filters(
+		$options       = apply_filters(
 			'dlxplugins/ajaxify/comments/options/parsed',
 			$options,
 		);
+		self::$options = $options;
 		return $options;
 	}
 
@@ -273,4 +294,5 @@ class Options {
 		);
 		return $defaults;
 	}
+
 }

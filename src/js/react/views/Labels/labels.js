@@ -567,6 +567,42 @@ const Interface = ( props ) => {
 											) }
 										/>
 									</div>
+									<div className="ajaxify-admin__control-row ajaxify-admin__control-row--last">
+										<Controller
+											name="textErrorDuplicateComment"
+											control={ control }
+											rules={ { required: true } }
+											render={ ( { field: { onChange, value } } ) => (
+												<>
+													<TextControl
+														label={
+															__( 'Error \'Duplicate comment\':', 'wp-ajaxify-comments' )
+														}
+														type="text"
+														className={ classNames( 'ajaxify-admin__text-control', {
+															'has-error': 'required' === errors.textErrorDuplicateComment?.type || 'pattern' === errors.textErrorDuplicateComment?.type,
+															'is-required': true,
+														} ) }
+														help={ __( 'The text shown when the user has posted a duplicate comment.', 'wp-ajaxify-comments' ) }
+														aria-required="true"
+														value={ value }
+														onChange={ onChange }
+													/>
+													{ 'required' === errors.textErrorDuplicateComment?.type && (
+														<Notice
+															message={ __(
+																'This is a required field.',
+																'wp-ajaxify-comments',
+															) }
+															status="error"
+															politeness="assertive"
+															icon={ () => ( <AlertCircle /> ) }
+														/>
+													) }
+												</>
+											) }
+										/>
+									</div>
 								</td>
 							</tr>
 						</tbody>

@@ -38,7 +38,7 @@ const SaveResetButtons = ( props ) => {
 	 * Save the options by setting promise as state.
 	 */
 	const saveOptions = async () => {
-		const saveOptionsPromise = SendCommand( 'wpac_save_options', { formData: formValues } );
+		const saveOptionsPromise = SendCommand( 'wpac_save_options', { ajaxifyFormData: formValues } );
 		setSavePromise( saveOptionsPromise );
 		setSaving( true );
 		await saveOptionsPromise;
@@ -49,7 +49,7 @@ const SaveResetButtons = ( props ) => {
 	 * Reset the options by setting promise as state.
 	 */
 	const resetOptions = async () => {
-		const resetOptionsPromise = SendCommand( 'wpac_reset_options', { formData: formValues } );
+		const resetOptionsPromise = SendCommand( 'wpac_reset_options', { ajaxifyFormData: formValues } );
 		setResetPromise( resetOptionsPromise );
 		setResetting( true );
 		const resetResponse = await resetOptionsPromise;
