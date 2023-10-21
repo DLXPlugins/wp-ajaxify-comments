@@ -4,6 +4,7 @@ module.exports = {
 		es2021: true,
 	},
 	globals: {
+		ajaxurl: 'readonly',
 		wpacAdminAdvanced: 'readonly',
 		wpacAdminCallbacks: 'readonly',
 		wpacAdminHome: 'readonly',

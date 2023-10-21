@@ -47,30 +47,10 @@ class Integrations {
 				'saveNonce'          => wp_create_nonce( 'wpac-admin-integrations-save-options' ),
 				'resetNonce'         => wp_create_nonce( 'wpac-admin-integrations-reset-options' ),
 				'palette'            => Functions::get_theme_color_palette(),
-				'confettiInstallUrl' => esc_url_raw(
-					wp_nonce_url(
-						add_query_arg(
-							array(
-								'action' => 'install-plugin',
-								'plugin' => 'confetti',
-							),
-							admin_url( 'update.php' )
-						),
-						'install-plugin_confetti'
-					)
-				),
-				'cecInstallUrl'      => esc_url_raw(
-					wp_nonce_url(
-						add_query_arg(
-							array(
-								'action' => 'install-plugin',
-								'plugin' => 'simple-comment-editing',
-							),
-							admin_url( 'update.php' )
-						),
-						'install-plugin_simple-comment-editing'
-					)
-				),
+				'confettiInstallNonce' => wp_create_nonce( 'install-plugin_confetti' ),
+				'confettiActivateNonce' => wp_create_nonce( 'activate-plugin_confetti' ),
+				'cecInstallNonce' => wp_create_nonce( 'install-plugin_simple-comment-editing' ),
+				'cecActivateNonce' => wp_create_nonce( 'activate-plugin_simple-comment-editing' ),
 			)
 		);
 	}

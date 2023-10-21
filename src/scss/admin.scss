@@ -785,6 +785,18 @@ h3.ajaxify-admin-content-subheading {
 			}
 		}
 	}
+	&.is-loading {
+
+		svg {
+			width: 24px;
+			height: 24px;
+			animation: ajaxify-rotate 1s linear infinite;
+
+			path {
+				fill: #FFF;
+			}
+		}
+	}
 }
 
 :root {
@@ -1299,6 +1311,7 @@ p.components-base-control__help {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	align-items: center;
+	min-height: 55px;
 	
 
 	.ajaxify-plugin-integration-button {

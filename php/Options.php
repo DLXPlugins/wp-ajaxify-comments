@@ -295,4 +295,30 @@ class Options {
 		return $defaults;
 	}
 
+	/**
+	 * Get a list of the string label keys.
+	 *
+	 * @return array Array of string label keys.
+	 */
+	public static function get_string_label_keys() {
+		return array(
+			'textPosted',
+			'textPostedUnapproved',
+			'textReloadPage',
+			'textPostComment',
+			'textRefreshComments',
+			'textUnknownError',
+			'textErrorTypeComment',
+			'textErrorCommentsClosed',
+			'textErrorMustBeLoggedIn',
+			'textErrorFillRequiredFields',
+			'textErrorInvalidEmailAddress',
+			'textErrorPostTooQuickly',
+			'textErrorDuplicateComment',
+			'lazyLoadInlineSpinnerLabel',
+			'lazyLoadInlineSkeletonLoadingLabel',
+			'lazyLoadInlineLoadingButtonLabel',
+			'lazyLoadInlineLoadingButtonLabelLoading',
+		);
+	}
 }
