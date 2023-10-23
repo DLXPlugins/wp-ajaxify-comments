@@ -177,6 +177,7 @@ const InlineSpinnerOptions = ( props ) => {
 				</style>
 				<div className={ `ajaxify-admin__preview ${ containerClass }` } style={ { marginBottom: '15px' } }>
 					<div className={ loadingPreviewWrapperClasses } aria-hidden="true">
+						<span className="ajaxify-comments-spinner__preview-label">{ __( 'Preview', 'wp-ajaxify-comments' ) }</span>
 						<div className="ajaxify-comments-spinner__inner">
 							<div className="ajaxify-comments-spinner__icon">
 								<LoadingSpinnerPreview width={ getValues( 'lazyLoadInlineSpinnerSizeDesktop' ) } height={ getValues( 'lazyLoadInlineSpinnerSizeDesktop' ) } className={ showLoadingSpinnerAnimation ? 'ajaxify-icon-loading-animation-on' : 'ajaxify-icon-loading-animation-off' } />

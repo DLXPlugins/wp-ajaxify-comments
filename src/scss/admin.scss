@@ -1176,6 +1176,18 @@ h3.ajaxify-admin-content-subheading {
 	--ajaxify-lazy-load-spinner-speed: 1.2s;
 }
 
+.ajaxify-comments-spinner__inner {
+	position: relative;
+}
+.ajaxify-comments-spinner__preview-label {
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	color: var( --ajaxify-comments-spinner-label-color, #FFFFFF );
+	letter-spacing: 0.1em;
+}
+
 svg.ajaxify-icon-loading-animation-on {
 	animation: ajaxify-rotate var( --ajaxify-lazy-load-spinner-speed ) linear infinite;
 }
