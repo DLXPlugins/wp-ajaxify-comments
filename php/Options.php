@@ -290,6 +290,10 @@ class Options {
 			'lazyLoadInlineShortcode'                      => '',
 			'lazyLoadInlineLoadingButtonLabel'             => __( 'Load Comments', 'wp-ajaxify-comments' ),
 			'lazyLoadInlineLoadingButtonLabelLoading'      => __( 'Loading Comments...', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineButtonLabel' 				  => __( 'Load Comments', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineButtonLabelLoading' 			  => __( 'Loading Comments...', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineButtonSpinner'                        => 'LoadingGray1',
+			'lazyLoadInlineButtonAppearance' => 'rounded', /* can be rounded, rectangle, link.*/
 
 		);
 		return $defaults;
@@ -319,6 +323,8 @@ class Options {
 			'lazyLoadInlineSkeletonLoadingLabel',
 			'lazyLoadInlineLoadingButtonLabel',
 			'lazyLoadInlineLoadingButtonLabelLoading',
+			'lazyLoadInlineButtonLabel',
+			'lazyLoadInlineButtonLabelLoading',
 		);
 	}
 }

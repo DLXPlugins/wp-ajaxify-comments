@@ -3,6 +3,34 @@
 		transform: rotate(360deg);
 	}
 }
+.ajaxify-btn-reset,
+.ajaxify-btn-reset:focus,
+.ajaxify-btn-reset:hover {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+	text-transform: unset;
+}
+.ajaxify-btn-reset.show-cursor {
+	cursor: pointer;
+}
+.ajaxify-btn-reset,
+.ajaxify-btn-reset:focus,
+.ajaxify-btn-reset:hover {
+	button {
+		background: none;
+		color: inherit;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		outline: inherit;
+		text-transform: unset;
+	}
+}
+
 #wpac-lazy-load-content {
 	transition: opacity 0.5s ease-in-out;
 	display: none;
@@ -138,3 +166,5 @@
     animation: ajaxifyLoadingSkeleton 4s infinite ease-in-out;
 	border-radius: 5px;
 }
+
+

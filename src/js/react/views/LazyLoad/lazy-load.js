@@ -20,6 +20,7 @@ import SaveResetButtons from '../../components/SaveResetButtons';
 
 const InlineSpinner = React.lazy( () => import( /* webpackChunkName: "inline-spinner-0.0.1" */ './inline-spinner' ) );
 const InlineSkeleton = React.lazy( () => import( /* webpackChunkName: "inline-skeleton-0.0.2" */ './inline-skeleton' ) );
+const InlineButton = React.lazy( () => import( /* webpackChunkName: "inline-button-0.0.1" */ './inline-button' ) );
 
 const retrieveLazyLoadOptions = () => {
 	return SendCommand( 'wpac_get_lazy_load_options', {
@@ -133,6 +134,9 @@ const Interface = ( props ) => {
 			lazyLoadInlineSkeletonLoadingLabel: data.lazyLoadInlineSkeletonLoadingLabel,
 			lazyLoadInlineSkeletonItemsShow: data.lazyLoadInlineSkeletonItemsShow,
 			lazyLoadInlineShortcode: data.lazyLoadInlineShortcode,
+			lazyLoadInlineButtonLabel: data.lazyLoadInlineButtonLabel,
+			lazyLoadInlineButtonLabelLoading: data.lazyLoadInlineButtonLabelLoading,
+			lazyLoadInlineButtonAppearance: data.lazyLoadInlineButtonAppearance,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -607,6 +611,37 @@ const Interface = ( props ) => {
 							) }
 						</tbody>
 					</table>
+					{ 'button' === getValues( 'lazyLoadInlineLoadingType' ) && (
+						<>
+							<Suspense
+								fallback={
+									<>
+										<tr>
+											<th>{ __( 'Inline Loading Button', 'wp-ajaxify-comments' ) }</th>
+											<td>
+												<h2>{ __( 'Loading Button Options', 'wp-ajaxify-comments' ) }</h2>
+												<BeatLoader
+													color={ '#873F49' }
+													loading={ true }
+													cssOverride={ true }
+													size={ 25 }
+													speedMultiplier={ 0.65 }
+												/>
+											</td>
+										</tr>
+									</>
+								}
+							>
+								<InlineButton
+									control={ control }
+									errors={ errors }
+									setValue={ setValue }
+									getValues={ getValues }
+									clearErrors={ clearErrors }
+								/>
+							</Suspense>
+						</>
+					) }
 					<SaveResetButtons
 						formValues={ formValues }
 						setError={ setError }

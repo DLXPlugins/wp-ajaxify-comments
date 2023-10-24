@@ -1335,3 +1335,55 @@ p.components-base-control__help {
 		}
 	}
 }
+
+/* Button Designer styles */
+.ajaxify-button-designer {
+	margin-bottom: 35px;
+}
+.ajaxify-button-designer__body {
+	display: grid;
+	grid-template-columns: 1fr 280px;
+}
+.ajaxify-button-designer__header {
+	border: 1px solid #e0e0e0;
+	border-bottom: 0;
+	padding: 10px 30px;
+	padding-left: 16px;
+	background: var( --ajaxify-admin--color-main );
+	color: #FFF;
+	margin-bottom: 0;
+
+	h3 {
+		color: #FFF;
+	}
+}
+.ajaxify-button-designer__preview {
+	display: flex;
+	border: 1px solid #e0e0e0;
+	justify-content: center;
+	align-items: center;
+	border-right: 0;
+	height: 100%;
+}
+.ajaxify-button-designer__sidebar {
+	border: 1px solid #e0e0e0;
+	border-top: 0;
+
+	.ajaxify-button-designer__sidebar-body {
+		min-height: 300px;
+		max-height: 300px;
+		overflow-y: scroll;
+	}
+	
+
+	.components-panel__body {
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+	.components-base-control {
+		.components-base-control__label {
+			display: block;
+		}
+	}
+}
