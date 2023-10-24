@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.4
-Stable tag: 2.0.14
+Stable tag: 2.0.15
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -17,7 +17,10 @@ Skip page reloads and separate error screens when posting comments. Ajaxify Comm
 
 === TLDR ===
 
+<a href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/getting-started">Getting Started Guide</a> | <a href="https://github.com/sponsors/DLXPlugins">Sponsor us on GitHub</a> | <a href="https://dlxplugins.com/plugins/ajaxify-comments">Ajaxify Home</a>
+
 Ajaxify Comments hooks into your theme and improves the usability of the comment form by validating and adding comments without the need of page reloads. Users can remain on the page and interact with new comments as they're posted. This plugin also supports lazy loading of comments, which can help speed up your page load time.
+
 
 === Introduction ===
 
@@ -118,6 +121,10 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Changelog ==
 
+= 2.0.15 =
+* Released 2023-10-24
+* Fixing undefined callback error with OnAfterPostComment callback.
+
 = 2.0.14 =
 * Released 2023-10-20
 * Resolving Ajax compatibility issue with Ninja Forms.
@@ -171,5 +178,5 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Upgrade Notice ==
 
-= 2.0.14 =
-Resolving Ajax issue with Ninja Forms. Successfully tested with WP 6.4.
+= 2.0.15 =
+Resolving JS error involving the OnAfterPostComment callback.

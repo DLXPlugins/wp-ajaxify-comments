@@ -501,7 +501,7 @@ WPAC.AttachForm = function(options) {
 
 				// Try afterPostComment submit comment. Using new function is not ideal here, but safer than exec.
 				if ( WPACCallbacks.afterPostComment !== '' ) {
-					const afterComment = new Function( 'commentUrl', 'unapproved', afterPostComment);
+					const afterComment = new Function( 'commentUrl', 'unapproved', options.afterPostComment);
     				afterComment( commentUrl, unapproved == '1');
 
 					// Set up native event handler.
