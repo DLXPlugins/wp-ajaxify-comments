@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, RangeControl, ToggleControl, TextControl, BaseControl, PanelBody} from '@wordpress/components';
+import { Button, ButtonGroup, RangeControl, ToggleControl, TextControl, BaseControl, PanelBody, Popover } from '@wordpress/components';
 import { AlertCircle, Eye } from 'lucide-react';
 import { __ } from '@wordpress/i18n';
 import { Controller } from 'react-hook-form';
@@ -9,14 +9,7 @@ import AlignmentGroup from '../../components/Alignment';
 import ColorPickerControl from '../../components/ColorPicker';
 import Notice from '../../components/Notice';
 
-const InlineButton = ( props ) => {
-
-	return (
-		<>
-			Hi for buttons!
-		</>
-	);
-};
+const defaultPalette = wpacAdminLazyLoad.palette;
 
 const InlineButtonOptions = ( props ) => {
 	const {
@@ -95,7 +88,28 @@ const InlineButtonOptions = ( props ) => {
 								title={ __( 'Colors', 'wp-ajaxify-comments' ) }
 								initialOpen={ false }
 							>
-								Colors
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineButtonBackgroundColor"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<ColorPickerControl
+													value={ value }
+													key={ 'inline-button-background-color' }
+													onChange={ ( slug, newValue ) => {
+														onChange( newValue );
+													} }
+													label={ __( 'Background Color', 'wp-ajaxify-comments' ) }
+													defaultColors={ defaultPalette }
+													defaultColor={ '#000000' }
+													slug={ 'inline-button-background-color' }
+													alpha={ true }
+												/>
+											</>
+										) }
+									/>
+								</div>
 							</PanelBody>
 							<PanelBody
 								title={ __( 'Spacing', 'wp-ajaxify-comments' ) }

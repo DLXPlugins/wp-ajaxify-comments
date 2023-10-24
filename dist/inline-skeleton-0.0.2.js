@@ -1,1 +1,225 @@
-"use strict";(self.webpackChunkwp_ajaxify_comments=self.webpackChunkwp_ajaxify_comments||[]).push([[680],{46714:(e,n,a)=>{a.d(n,{Z:()=>u});var t=a(67294),l=a(45697),o=a.n(l),r=a(32304),i=a(66819),c=a(4906),s=a(62248),m=function(e){var n=e.alignment,a=e.label,l=e.alignLeftLabel,o=e.alignCenterLabel,r=e.alignRightLabel,m=e.leftOn,u=e.centerOn,f=e.rightOn;return t.createElement("div",{className:"ajaxify-alignment-component-base"},t.createElement(i.ZP,{id:"ajaxify-alignment-component-base",label:a},t.createElement(c.Z,null,t.createElement(t.Fragment,null,m&&t.createElement(s.ZP,{isPressed:"left"===n,isSecondary:!0,icon:"editor-alignleft",label:l,onClick:function(){e.onClick("left")}}),u&&t.createElement(s.ZP,{isPressed:"center"===n,isSecondary:!0,icon:"editor-aligncenter",label:o,onClick:function(){e.onClick("center")}}),f&&t.createElement(s.ZP,{isPressed:"right"===n,isSecondary:!0,icon:"editor-alignright",label:r,onClick:function(){e.onClick("right")}})))))};m.defaultProps={alignment:"left",label:(0,r.__)("Change Alignment","wp-ajaxify-comments"),alignLeftLabel:(0,r._x)("Align Left","Align items left","wp-ajaxify-comments"),alignCenterLabel:(0,r._x)("Align Center","Align items center/middle","wp-ajaxify-comments"),alignRightLabel:(0,r._x)("Align Right","Align items right","wp-ajaxify-comments"),leftOn:!0,centerOn:!0,rightOn:!0},m.propTypes={alignment:o().string,label:o().string,alignLeftLabel:o().string,alignCenterLabel:o().string,alignRightLabel:o().string,leftOn:o().bool,centerOn:o().bool,rightOn:o().bool};const u=m},95263:(e,n,a)=>{a.d(n,{Z:()=>E});var t=a(67294),l=a(94184),o=a.n(l),r=a(91685),i=a.n(r),c=a(21306),s=a.n(c),m=a(32304),u=a(45697),f=a.n(u),p=a(66819),d=a(96643),y=a(31466),g=a(5787),b=a(3830),h=a(86278),v=a(62248);function k(e,n){return function(e){if(Array.isArray(e))return e}(e)||function(e,n){var a=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=a){var t,l,o,r,i=[],c=!0,s=!1;try{if(o=(a=a.call(e)).next,0===n){if(Object(a)!==a)return;c=!1}else for(;!(c=(t=o.call(a)).done)&&(i.push(t.value),i.length!==n);c=!0);}catch(e){s=!0,l=e}finally{try{if(!c&&null!=a.return&&(r=a.return(),Object(r)!==r))return}finally{if(s)throw l}}return i}}(e,n)||function(e,n){if(e){if("string"==typeof e)return x(e,n);var a=Object.prototype.toString.call(e).slice(8,-1);return"Object"===a&&e.constructor&&(a=e.constructor.name),"Map"===a||"Set"===a?Array.from(e):"Arguments"===a||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a)?x(e,n):void 0}}(e,n)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function x(e,n){(null==n||n>e.length)&&(n=e.length);for(var a=0,t=new Array(n);a<n;a++)t[a]=e[a];return t}var _=function(e){var n=k((0,t.useState)(e.slug),2),a=n[0],l=(n[1],k((0,t.useState)(!1),2)),r=l[0],c=l[1],u=k((0,t.useState)(e.value),2),f=u[0],x=u[1],_=k((0,t.useState)(e.opacity),2),E=_[0],j=_[1],w=e.defaultColor,C=e.defaultColors,L=e.value,S=e.onChange,N=e.onOpacityChange,Z=e.label,O=e.alpha,A=void 0!==O&&O,P=e.slug,I=e.hideLabelFromVision,z=void 0!==I&&I;(0,t.useEffect)((function(){x(L)}),[L]);var F,R,V=function(e){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:1;if(0===e.indexOf("var("))return e;if(0===e.indexOf("rgba")){var a=s()(e).hex;return i()(a,n)}return 0===e.indexOf("rgb")?i()(s()(e).hex,n):A?i()(e,n):e},T=t.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:24,height:24,viewBox:"0 0 488.47 488.47"},t.createElement("path",{d:"M244.235 0S61.058 174.454 61.058 314.016c0 96.347 82.011 174.454 183.177 174.454s183.177-78.107 183.177-174.454C427.412 174.454 244.235 0 244.235 0zm0 91.588c46.976 52.953 97.174 123.655 114.946 183.177H129.292c17.771-59.522 67.968-130.223 114.943-183.177z"})),H=function(){r&&c(!1)};return t.createElement(p.ZP,{className:"ajaxify-block-component-color-picker-wrapper"},!!Z&&!z&&t.createElement("h3",{className:"ajaxify-block-color-component-label"},t.createElement("span",null,Z)),t.createElement("div",{className:"ajaxify-block-component-color-picker"},t.createElement("div",{className:"ajaxify-block-color-picker-area ajaxify-block-component-color-picker-palette"},!r&&t.createElement(t.Fragment,null,t.createElement("div",{className:o()("components-color-palette__item-wrapper components-circular-option-picker__option-wrapper ajaxify-block-color-picker-area ajaxify-block-component-color-picker-palette",L?"":"components-color-palette__custom-color")},t.createElement(d.Z,{text:(0,m.__)("Choose Color","ajaxify-block")},t.createElement("button",{type:"button","aria-expanded":r,className:"components-button components-circular-option-picker__option is-pressed",onClick:function(){c(!0)},"aria-label":(0,m.__)("Custom color picker","ajaxify-block"),style:{background:V(f,E)}},t.createElement("span",{className:"components-color-palette__custom-color-gradient"}))))),r&&t.createElement("div",{className:o()("components-color-palette__item-wrapper components-circular-option-picker__option-wrapper ajaxify-block-color-picker-area ajaxify-block-component-color-picker-palette",L?"":"components-color-palette__custom-color")},t.createElement(d.Z,{text:(0,m.__)("Choose Color","ajaxify-block")},t.createElement("button",{type:"button","aria-expanded":r,className:"components-button components-circular-option-picker__option is-pressed",onClick:H,"aria-label":(0,m.__)("Custom color picker","ajaxify-block"),style:{background:V(f,E)}},t.createElement("span",{className:"components-color-palette__custom-color-gradient"})))),r&&t.createElement(y.ZP,{className:"ajaxify-block-component-color-picker",onClose:H,noArrow:!1,placement:"left-end",offset:20},t.createElement(p.ZP,{key:a},t.createElement(g.A,{key:a,color:f,onChangeComplete:function(e){var n=V(e.hex,E);x(n),S(P,n)},disableAlpha:!0,defaultValue:w})),A&&t.createElement("div",{className:"ajaxify-block-component-color-opacity"},t.createElement(d.Z,{text:(0,m.__)("Opacity","ajaxify-block")},T),t.createElement(b.Z,{value:E,onChange:function(e){var n=V(f,e);j(e),x(n),S(P,n),N(e)},min:0,max:1,step:.01,initialPosition:1})),t.createElement(p.ZP,{className:"ajaxify-block-component-color-picker-palette"},t.createElement(h.ZP,{colors:(F=[],R=[],C.forEach((function(e,n){F.includes(e.color)||(F.push(e.color),R.push(e))})),R),value:f,onChange:function(e){var n=V(e);S(P,n),x(n)},disableCustomColors:!0,clearable:!1})),t.createElement("div",{className:"components-color-clear-color"},t.createElement(v.ZP,{onClick:function(){S(P,w),x(w)}},(0,m.__)("Clear Color","ajaxify-block")))))))};_.propTypes={label:f().string,onChange:f().func.isRequired,onOpacityChange:f().func,value:f().string,defaultColor:f().string,alpha:f().bool,hideLabelFromVision:f().bool,defaultColors:f().array.isRequired},_.defaultProps={label:(0,m.__)("Color","ajaxify-block"),value:"",defaultColor:"transparent",alpha:!1,hideLabelFromVision:!1,onOpacityChange:function(){}};const E=_},91962:(e,n,a)=>{a.r(n),a.d(n,{default:()=>g});var t=a(67294),l=a(40314),o=a(9545),r=a(3830),i=a(62248),c=a(47653);const s=(0,a(72919).Z)("Eye",[["path",{d:"M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z",key:"rwhkz3"}],["circle",{cx:"12",cy:"12",r:"3",key:"1v7zrd"}]]);var m=a(32304),u=a(87536),f=a(68252),p=(a(94184),a(46714),a(95263),a(27202));function d(e,n){(null==n||n>e.length)&&(n=e.length);for(var a=0,t=new Array(n);a<n;a++)t[a]=e[a];return t}var y=function(e){var n,a,l=e.rows,o=e.showHeading,r=e.heading,i=(n=(0,t.useState)(!1),a=2,function(e){if(Array.isArray(e))return e}(n)||function(e,n){var a=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=a){var t,l,o,r,i=[],c=!0,s=!1;try{if(o=(a=a.call(e)).next,0===n){if(Object(a)!==a)return;c=!1}else for(;!(c=(t=o.call(a)).done)&&(i.push(t.value),i.length!==n);c=!0);}catch(e){s=!0,l=e}finally{try{if(!c&&null!=a.return&&(r=a.return(),Object(r)!==r))return}finally{if(s)throw l}}return i}}(n,a)||function(e,n){if(e){if("string"==typeof e)return d(e,n);var a=Object.prototype.toString.call(e).slice(8,-1);return"Object"===a&&e.constructor&&(a=e.constructor.name),"Map"===a||"Set"===a?Array.from(e):"Arguments"===a||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a)?d(e,n):void 0}}(n,a)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}());return i[0],i[1],t.createElement(t.Fragment,null,o&&t.createElement("h2",null,r),function(){for(var e,n=[],a=0;a<l;a++)n.push((e=a,t.createElement("div",{className:"ajaxify-loading-skeleton",key:e},t.createElement("div",{className:"ajaxify-skeleton-comment-header"},t.createElement("div",{className:"ajaxify-skeleton-avatar"}),t.createElement("div",{className:"ajaxify-skeleton-comment-meta"})),t.createElement("div",{className:"ajaxify-skeleton-comment-body"}))));return n}())};const g=function(e){var n=e.control,a=e.errors,d=(e.setValue,e.getValues),g=e.clearErrors;return t.createElement(t.Fragment,null,t.createElement(t.Fragment,null,t.createElement("tr",{className:"ajaxify-admin__loading-spinner-row"},t.createElement("th",{scope:"row"},(0,m.__)("Loading Spinner","wp-ajaxify-comments")),t.createElement("td",null,t.createElement("div",{className:"ajaxify-admin__control-row"},t.createElement(u.Qr,{name:"lazyLoadInlineSkeletonLoadingLabelEnabled",control:n,render:function(e){var n=e.field,a=n.onChange,o=n.value;return t.createElement(t.Fragment,null,t.createElement(l.Z,{label:(0,m.__)("Show Loading Skeleton Heading","wp-ajaxify-comments"),help:(0,m.__)("Show a heading above the loading skeleton.","wp-ajaxify-comments"),checked:o,onChange:a}))}})),d("lazyLoadInlineSkeletonLoadingLabelEnabled")&&t.createElement(t.Fragment,null,t.createElement("div",{className:"ajaxify-admin__control-row"},t.createElement(u.Qr,{name:"lazyLoadInlineSkeletonLoadingLabel",control:n,rules:{required:!0},render:function(e){var n=e.field,l=n.onChange,r=n.value;return t.createElement(t.Fragment,null,t.createElement(o.Z,{label:(0,m.__)("Loading Skeleton Heading","wp-ajaxify-comments"),help:(0,m.__)("The heading above the loading skeleton.","wp-ajaxify-comments"),value:r,onChange:function(e){g("lazyLoadInlineSkeletonLoadingLabel"),l(e)}}),a.lazyLoadInlineSkeletonLoadingLabel&&t.createElement(p.Z,{message:(0,m.__)("This field is required.","wp-ajaxify-comments"),status:"error",politeness:"assertive",inline:!1,icon:function(){return t.createElement(c.Z,null)}}))}}))),t.createElement("div",{className:"ajaxify-admin__control-row"},t.createElement(u.Qr,{name:"lazyLoadInlineSkeletonItemsShow",control:n,render:function(e){var n=e.field,a=n.onChange,l=n.value;return t.createElement(t.Fragment,null,t.createElement(r.Z,{label:(0,m.__)("Number of Skeletons to Show","wp-ajaxify-comments"),value:l,onChange:a,min:1,max:10,step:1,help:(0,m.__)("Set how many loading instances that should show.","wp-ajaxify-comments"),color:"var(--ajaxify-admin--color-main)",trackColor:"var(--ajaxify-admin--color-main)",resetFallbackValue:1}))}})),t.createElement("div",{className:"ajaxify-admin__control-row"},t.createElement(i.ZP,{label:(0,m.__)("Preview Loading Skeleton","wp-ajaxify-comments"),className:"ajaxify-button ajaxify__btn-secondary has-text has-icon",icon:t.createElement(s,null),"data-src":"#ajaxify-skeleton-preview","data-fancybox":!0,onClick:function(e){e.preventDefault(),f.KR.show([{src:"#ajaxify-skeleton-preview",type:"clone",autoStart:!0}])}},(0,m.__)("Preview","wp-ajaxify-comments"))),t.createElement("div",{id:"ajaxify-skeleton-preview",style:{display:"none",width:"80%",margin:"0 auto"}},t.createElement(y,{rows:d("lazyLoadInlineSkeletonItemsShow"),showHeading:d("lazyLoadInlineSkeletonLoadingLabelEnabled"),heading:d("lazyLoadInlineSkeletonLoadingLabel")}))))))}}}]);
+"use strict";
+(self["webpackChunkwp_ajaxify_comments"] = self["webpackChunkwp_ajaxify_comments"] || []).push([["inline-skeleton-0.0.2"],{
+
+/***/ "./src/js/react/views/LazyLoad/inline-skeleton.js":
+/*!********************************************************!*\
+  !*** ./src/js/react/views/LazyLoad/inline-skeleton.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/toggle-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/text-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/range-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button/index.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/eye.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "./node_modules/@wordpress/i18n/build-module/index.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var _fancyapps_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fancyapps/ui */ "./node_modules/@fancyapps/ui/dist/index.esm.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_Alignment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Alignment */ "./src/js/react/components/Alignment/index.js");
+/* harmony import */ var _components_ColorPicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ColorPicker */ "./src/js/react/components/ColorPicker/index.js");
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Notice */ "./src/js/react/components/Notice/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+var InlineSkeleton = function InlineSkeleton(props) {
+  var rows = props.rows,
+    showHeading = props.showHeading,
+    heading = props.heading;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    showFancybox = _useState2[0],
+    setShowFancybox = _useState2[1];
+  var getRow = function getRow(key) {
+    var row = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-loading-skeleton",
+      key: key
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-skeleton-comment-header"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-skeleton-avatar"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-skeleton-comment-meta"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-skeleton-comment-body"
+    }));
+    return row;
+  };
+  var getRows = function getRows() {
+    // For loop and return rows.
+    var loadingRows = [];
+    for (var i = 0; i < rows; i++) {
+      loadingRows.push(getRow(i));
+    }
+    return loadingRows;
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, showHeading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, heading), getRows());
+};
+var InlineSkeletonOptions = function InlineSkeletonOptions(props) {
+  var control = props.control,
+    errors = props.errors,
+    setValue = props.setValue,
+    getValues = props.getValues,
+    clearErrors = props.clearErrors;
+  var getLoadingSkeletonOptions = function getLoadingSkeletonOptions() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+      className: "ajaxify-admin__loading-spinner-row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+      scope: "row"
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Loading Spinner', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-admin__control-row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+      name: "lazyLoadInlineSkeletonLoadingLabelEnabled",
+      control: control,
+      render: function render(_ref) {
+        var _ref$field = _ref.field,
+          onChange = _ref$field.onChange,
+          value = _ref$field.value;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Show Loading Skeleton Heading', 'wp-ajaxify-comments'),
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Show a heading above the loading skeleton.', 'wp-ajaxify-comments'),
+          checked: value,
+          onChange: onChange
+        }));
+      }
+    })), getValues('lazyLoadInlineSkeletonLoadingLabelEnabled') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-admin__control-row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+      name: "lazyLoadInlineSkeletonLoadingLabel",
+      control: control,
+      rules: {
+        required: true
+      },
+      render: function render(_ref2) {
+        var _ref2$field = _ref2.field,
+          _onChange = _ref2$field.onChange,
+          value = _ref2$field.value;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Loading Skeleton Heading', 'wp-ajaxify-comments'),
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The heading above the loading skeleton.', 'wp-ajaxify-comments'),
+          value: value,
+          onChange: function onChange(e) {
+            clearErrors('lazyLoadInlineSkeletonLoadingLabel');
+            _onChange(e);
+          }
+        }), errors.lazyLoadInlineSkeletonLoadingLabel && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This field is required.', 'wp-ajaxify-comments'),
+          status: "error",
+          politeness: "assertive",
+          inline: false,
+          icon: function icon() {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], null);
+          }
+        }));
+      }
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-admin__control-row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
+      name: "lazyLoadInlineSkeletonItemsShow",
+      control: control,
+      render: function render(_ref3) {
+        var _ref3$field = _ref3.field,
+          onChange = _ref3$field.onChange,
+          value = _ref3$field.value;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Number of Skeletons to Show', 'wp-ajaxify-comments'),
+          value: value,
+          onChange: onChange,
+          min: 1,
+          max: 10,
+          step: 1,
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Set how many loading instances that should show.', 'wp-ajaxify-comments'),
+          color: "var(--ajaxify-admin--color-main)",
+          trackColor: "var(--ajaxify-admin--color-main)",
+          resetFallbackValue: 1
+        }));
+      }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-admin__control-row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Preview Loading Skeleton', 'wp-ajaxify-comments'),
+      className: "ajaxify-button ajaxify__btn-secondary has-text has-icon",
+      icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null),
+      "data-src": "#ajaxify-skeleton-preview",
+      "data-fancybox": true,
+      onClick: function onClick(e) {
+        e.preventDefault();
+        _fancyapps_ui__WEBPACK_IMPORTED_MODULE_2__.Fancybox.show([{
+          src: '#ajaxify-skeleton-preview',
+          type: 'clone',
+          autoStart: true
+        }]);
+      }
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Preview', 'wp-ajaxify-comments'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      id: "ajaxify-skeleton-preview",
+      style: {
+        display: 'none',
+        width: '80%',
+        margin: '0 auto'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(InlineSkeleton, {
+      rows: getValues('lazyLoadInlineSkeletonItemsShow'),
+      showHeading: getValues('lazyLoadInlineSkeletonLoadingLabelEnabled'),
+      heading: getValues('lazyLoadInlineSkeletonLoadingLabel')
+    })))));
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, getLoadingSkeletonOptions());
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InlineSkeletonOptions);
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/eye.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/eye.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Eye)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * lucide-react v0.268.0 - ISC
+ */
+
+
+
+const Eye = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Eye", [
+  [
+    "path",
+    { d: "M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z", key: "rwhkz3" }
+  ],
+  ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
+]);
+
+
+//# sourceMappingURL=eye.js.map
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=inline-skeleton-0.0.2.js.map

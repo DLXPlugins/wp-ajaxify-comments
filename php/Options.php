@@ -294,6 +294,8 @@ class Options {
 			'lazyLoadInlineButtonLabelLoading' 			  => __( 'Loading Comments...', 'wp-ajaxify-comments' ),
 			'lazyLoadInlineButtonSpinner'                        => 'LoadingGray1',
 			'lazyLoadInlineButtonAppearance' => 'rounded', /* can be rounded, rectangle, link.*/
+			'lazyLoadInlineButtonBackgroundColor' => '#333333',
+			'lazyLoadInlineButtonTextColor' => '#FFFFFF',
 
 		);
 		return $defaults;

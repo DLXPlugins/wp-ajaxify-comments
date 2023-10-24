@@ -137,6 +137,8 @@ const Interface = ( props ) => {
 			lazyLoadInlineButtonLabel: data.lazyLoadInlineButtonLabel,
 			lazyLoadInlineButtonLabelLoading: data.lazyLoadInlineButtonLabelLoading,
 			lazyLoadInlineButtonAppearance: data.lazyLoadInlineButtonAppearance,
+			lazyLoadInlineButtonBackgroundColor: data.lazyLoadInlineButtonBackgroundColor,
+			lazyLoadInlineButtonTextColor: data.lazyLoadInlineButtonTextColor,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -616,19 +618,16 @@ const Interface = ( props ) => {
 							<Suspense
 								fallback={
 									<>
-										<tr>
-											<th>{ __( 'Inline Loading Button', 'wp-ajaxify-comments' ) }</th>
-											<td>
-												<h2>{ __( 'Loading Button Options', 'wp-ajaxify-comments' ) }</h2>
-												<BeatLoader
-													color={ '#873F49' }
-													loading={ true }
-													cssOverride={ true }
-													size={ 25 }
-													speedMultiplier={ 0.65 }
-												/>
-											</td>
-										</tr>
+										<div>
+											<h2>{ __( 'Loading Button Options', 'wp-ajaxify-comments' ) }</h2>
+											<BeatLoader
+												color={ '#873F49' }
+												loading={ true }
+												cssOverride={ true }
+												size={ 25 }
+												speedMultiplier={ 0.65 }
+											/>
+										</div>
 									</>
 								}
 							>

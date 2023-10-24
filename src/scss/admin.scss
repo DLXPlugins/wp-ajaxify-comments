@@ -1341,6 +1341,7 @@ p.components-base-control__help {
 	margin-bottom: 35px;
 }
 .ajaxify-button-designer__body {
+	position: relative;
 	display: grid;
 	grid-template-columns: 1fr 280px;
 }
@@ -1370,9 +1371,11 @@ p.components-base-control__help {
 	border-top: 0;
 
 	.ajaxify-button-designer__sidebar-body {
+		position: relative;
 		min-height: 300px;
 		max-height: 300px;
-		overflow-y: scroll;
+		overflow: hidden scroll;
+		z-index: 1000;
 	}
 	
 
