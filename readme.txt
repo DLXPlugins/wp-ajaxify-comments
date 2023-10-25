@@ -121,6 +121,16 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Changelog ==
 
+= 2.1.0 =
+* Released 2023-10-25
+* New tabs: Added Integrations tab to showcase compatible plugins and a Lazy Load tab to control the lazy load options.
+* Lazy loading: Lazy Loading is now more clearly enabled or disabled via admin options.
+* Lazy Loading: Added External, Comments Scrolled Into Viewport, Dom Element Reached, and Page Scroll Length as triggers.
+* Lazy Loading: Deprecated Viewport Trigger in favor of Dom Element and Comment sections reached.
+* Lazy Loading: Deprecated None option in favor of External trigger.
+* Lazy Loading: Added scroll offset for lazy loading when targeting sections or elements.
+* Details in the <a href="https://dlxplugins.com/announcements/ajaxify-comments-2-1-0-released-with-lazy-load-improvements/">Ajaxify Lazy Loading announcement post</a>.
+
 = 2.0.15 =
 * Released 2023-10-24
 * Fixing undefined callback error with OnAfterPostComment callback.
@@ -178,5 +188,5 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Upgrade Notice ==
 
-= 2.0.15 =
-Resolving JS error involving the OnAfterPostComment callback.
+= 2.1.0 =
+Easier lazy loading is here. Choose from five separate triggers to lazy load your comments, and set a scroll offset for earlier or later comment loading.

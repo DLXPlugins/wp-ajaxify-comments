@@ -246,6 +246,9 @@ class Options {
 			'enableByQuery'                  => false,
 			'lazyLoadEnabled'                => false,
 			'lazyLoadDisplay'                => 'overlay', /* can be overlay, inline, none */
+			'lazyLoadTrigger'                => 'domready', /* can be external, comments, domready, scroll, element */
+			'lazyLoadTriggerElement'         => '',
+			'lazyLoadInlineDisplayElement'   => '#comments',
 		);
 		return $defaults;
 	}
