@@ -119,15 +119,6 @@ class Lazy_Load {
 			Functions::get_plugin_version(),
 			true
 		);
-		wp_enqueue_style(
-			'wpac-admin-lazy-load',
-			Functions::get_plugin_url( 'dist/wpac-lazy-load-css.css' ),
-			array(),
-			Functions::get_plugin_version(),
-			'all'
-		);
-		
-		
 		add_filter( 'ajaxify/comments/theme_color_palette', array( $this, 'theme_color_palette' ), 2, 1 );
 
 		wp_localize_script(

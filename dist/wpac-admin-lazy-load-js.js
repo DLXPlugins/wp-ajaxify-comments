@@ -22042,17 +22042,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-// Lazy import the spinner.
-
-var InlineSpinner = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().lazy(function () {
-  return Promise.all(/*! import() | inline-spinner-0.0.1 */[__webpack_require__.e("vendors-node_modules_wordpress_components_build-module_button-group_index_js-node_modules_wor-2ebd9c"), __webpack_require__.e("src_js_react_components_Alignment_index_js-src_js_react_components_ColorPicker_index_js"), __webpack_require__.e("inline-spinner-0.0.1")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-spinner */ "./src/js/react/views/LazyLoad/inline-spinner.js"));
-});
-var InlineSkeleton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().lazy(function () {
-  return Promise.all(/*! import() | inline-skeleton-0.0.2 */[__webpack_require__.e("vendors-node_modules_wordpress_components_build-module_button-group_index_js-node_modules_wor-2ebd9c"), __webpack_require__.e("vendors-node_modules_fancyapps_ui_dist_index_esm_js"), __webpack_require__.e("src_js_react_components_Alignment_index_js-src_js_react_components_ColorPicker_index_js"), __webpack_require__.e("inline-skeleton-0.0.2")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-skeleton */ "./src/js/react/views/LazyLoad/inline-skeleton.js"));
-});
-var InlineButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().lazy(function () {
-  return Promise.all(/*! import() | inline-button-0.0.1 */[__webpack_require__.e("vendors-node_modules_wordpress_components_build-module_button-group_index_js-node_modules_wor-2ebd9c"), __webpack_require__.e("vendors-node_modules_fancyapps_ui_dist_index_esm_js"), __webpack_require__.e("src_js_react_components_Alignment_index_js-src_js_react_components_ColorPicker_index_js"), __webpack_require__.e("inline-button-0.0.1")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-button */ "./src/js/react/views/LazyLoad/inline-button.js"));
-});
 var retrieveLazyLoadOptions = function retrieveLazyLoadOptions() {
   return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wpac_get_lazy_load_options', {
     nonce: wpacAdminLazyLoad.getNonce
@@ -22094,53 +22083,11 @@ var Interface = function Interface(props) {
         lazyLoadEnabled: data.lazyLoadEnabled,
         lazyLoadDisplay: data.lazyLoadDisplay,
         lazyLoadInlineLoadingType: data.lazyLoadInlineLoadingType,
-        lazyLoadInlineSpinnerLabel: data.lazyLoadInlineSpinnerLabel,
-        lazyLoadInlineSpinnerLabelEnabled: data.lazyLoadInlineSpinnerLabelEnabled,
-        lazyLoadInlineSpinnerSpeed: data.lazyLoadInlineSpinnerSpeed,
         lazyLoadTrigger: data.lazyLoadTrigger,
         lazyLoadTriggerElement: data.lazyLoadTriggerElement,
-        lazyLoadPaginationEnabled: data.lazyLoadPaginationEnabled,
-        lazyLoadCommentsPerPage: data.lazyLoadCommentsPerPage,
-        lazyLoadUseThemePagination: data.lazyLoadUseThemePagination,
-        lazyLoadPaginationStyle: data.lazyLoadPaginationStyle,
-        lazyLoadPaginationLocation: data.lazyLoadPaginationLocation,
-        lazyLoadingPaginationScrollToTop: data.lazyLoadingPaginationScrollToTop,
         lazyLoadTriggerScrollOffset: data.lazyLoadTriggerScrollOffset,
-        lazyLoadInlineSpinner: data.lazyLoadInlineSpinner,
         saveNonce: wpacAdminLazyLoad.saveNonce,
-        resetNonce: wpacAdminLazyLoad.resetNonce,
-        lazyLoadInlineDisplayLocation: data.lazyLoadInlineDisplayLocation,
-        lazyLoadInlineDisplayElement: data.lazyLoadInlineDisplayElement,
-        lazyLoadInlineSpinnerContainerBackgroundColor: data.lazyLoadInlineSpinnerContainerBackgroundColor,
-        lazyLoadInlineSpinnerIconColor: data.lazyLoadInlineSpinnerIconColor,
-        lazyLoadInlineSpinnerLabelColor: data.lazyLoadInlineSpinnerLabelColor,
-        lazyLoadInlineSpinnerLayoutType: data.lazyLoadInlineSpinnerLayoutType,
-        lazyLoadInlineSpinnerLayoutAlignment: data.lazyLoadInlineSpinnerLayoutAlignment,
-        lazyLoadInlineSpinnerLayoutRTL: data.lazyLoadInlineSpinnerLayoutRTL,
-        lazyLoadInlineSpinnerLabelFontSizeDesktop: data.lazyLoadInlineSpinnerLabelFontSizeDesktop,
-        lazyLoadInlineSpinnerSizeDesktop: data.lazyLoadInlineSpinnerSizeDesktop,
-        lazyLoadInlineSpinnerLabelLineHeightDesktop: data.lazyLoadInlineSpinnerLabelLineHeightDesktop,
-        lazyLoadInlineSpinnerGapDesktop: data.lazyLoadInlineSpinnerGapDesktop,
-        lazyLoadInlineSpinnerContainerPaddingDesktop: data.lazyLoadInlineSpinnerContainerPaddingDesktop,
-        lazyLoadInlineSpinnerLabelFontSizeTablet: data.lazyLoadInlineSpinnerLabelFontSizeTablet,
-        lazyLoadInlineSpinnerSizeTablet: data.lazyLoadInlineSpinnerSizeTablet,
-        lazyLoadInlineSpinnerLabelLineHeightTablet: data.lazyLoadInlineSpinnerLabelLineHeightTablet,
-        lazyLoadInlineSpinnerGapTablet: data.lazyLoadInlineSpinnerGapTablet,
-        lazyLoadInlineSpinnerContainerPaddingTablet: data.lazyLoadInlineSpinnerContainerPaddingTablet,
-        lazyLoadInlineSpinnerLabelFontSizeMobile: data.lazyLoadInlineSpinnerLabelFontSizeMobile,
-        lazyLoadInlineSpinnerSizeMobile: data.lazyLoadInlineSpinnerSizeMobile,
-        lazyLoadInlineSpinnerLabelLineHeightMobile: data.lazyLoadInlineSpinnerLabelLineHeightMobile,
-        lazyLoadInlineSpinnerGapMobile: data.lazyLoadInlineSpinnerGapMobile,
-        lazyLoadInlineSpinnerContainerPaddingMobile: data.lazyLoadInlineSpinnerContainerPaddingMobile,
-        lazyLoadInlineSkeletonLoadingLabelEnabled: data.lazyLoadInlineSkeletonLoadingLabelEnabled,
-        lazyLoadInlineSkeletonLoadingLabel: data.lazyLoadInlineSkeletonLoadingLabel,
-        lazyLoadInlineSkeletonItemsShow: data.lazyLoadInlineSkeletonItemsShow,
-        lazyLoadInlineShortcode: data.lazyLoadInlineShortcode,
-        lazyLoadInlineButtonLabel: data.lazyLoadInlineButtonLabel,
-        lazyLoadInlineButtonLabelLoading: data.lazyLoadInlineButtonLabelLoading,
-        lazyLoadInlineButtonAppearance: data.lazyLoadInlineButtonAppearance,
-        lazyLoadInlineButtonBackgroundColor: data.lazyLoadInlineButtonBackgroundColor,
-        lazyLoadInlineButtonTextColor: data.lazyLoadInlineButtonTextColor
+        resetNonce: wpacAdminLazyLoad.resetNonce
       }
     }),
     register = _useForm.register,
@@ -22344,9 +22291,6 @@ var Interface = function Interface(props) {
           value: 'overlay',
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Overlay (default)', 'wp-ajaxify-comments')
         }, {
-          value: 'inline',
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Inline', 'wp-ajaxify-comments')
-        }, {
           value: 'none',
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('None', 'wp-ajaxify-comments')
         }]
@@ -22416,118 +22360,7 @@ var Interface = function Interface(props) {
         }
       }));
     }
-  })))), 'inline' === getValues('lazyLoadDisplay') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
-    scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Inline Loading', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-admin__control-row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('If you choose to display the loading message inline, how would you like to display it?', 'wp-ajaxify-comments'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-admin__control-row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
-    name: "lazyLoadInlineLoadingType",
-    control: control,
-    render: function render(_ref8) {
-      var _ref8$field = _ref8.field,
-        onChange = _ref8$field.onChange,
-        value = _ref8$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Inline Loading Type', 'wp-ajaxify-comments'),
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Choose how you would like to display the loading message.', 'wp-ajaxify-comments'),
-        value: value,
-        onChange: onChange,
-        options: [{
-          value: 'spinner',
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Spinner (default)', 'wp-ajaxify-comments')
-        }, {
-          value: 'skeleton',
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Skeleton', 'wp-ajaxify-comments')
-        }, {
-          value: 'button',
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Button', 'wp-ajaxify-comments')
-        }, {
-          value: 'shortcode',
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Shortcode', 'wp-ajaxify-comments')
-        }]
-      }));
-    }
-  })))), 'spinner' === getValues('lazyLoadInlineLoadingType') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
-    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Inline Spinner', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Inline Options', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8___default()), {
-      color: '#873F49',
-      loading: true,
-      cssOverride: true,
-      size: 25,
-      speedMultiplier: 0.65
-    }))))
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(InlineSpinner, {
-    control: control,
-    errors: errors,
-    setValue: setValue,
-    getValues: getValues,
-    clearErrors: clearErrors
-  }))), 'skeleton' === getValues('lazyLoadInlineLoadingType') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
-    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Skeleton', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Skeleton Options', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8___default()), {
-      color: '#873F49',
-      loading: true,
-      cssOverride: true,
-      size: 25,
-      speedMultiplier: 0.65
-    }))))
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(InlineSkeleton, {
-    control: control,
-    errors: errors,
-    setValue: setValue,
-    getValues: getValues,
-    clearErrors: clearErrors
-  }))), 'shortcode' === getValues('lazyLoadInlineLoadingType') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
-    scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Shortcode', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-admin__control-row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
-    name: "lazyLoadInlineShortcode",
-    control: control,
-    rules: {
-      required: true
-    },
-    render: function render(_ref9) {
-      var _errors$lazyLoadInlin5, _errors$lazyLoadInlin6;
-      var _ref9$field = _ref9.field,
-        onChange = _ref9$field.onChange,
-        value = _ref9$field.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Shortcode', 'wp-ajaxify-comments'),
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter a shortcode to display while comments are loading.', 'wp-ajaxify-comments'),
-        value: value,
-        onChange: onChange,
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('ajaxify-admin__text-control', {
-          'has-error': 'required' === ((_errors$lazyLoadInlin5 = errors.lazyLoadInlineShortcode) === null || _errors$lazyLoadInlin5 === void 0 ? void 0 : _errors$lazyLoadInlin5.type),
-          'is-required': true
-        })
-      }), 'required' === ((_errors$lazyLoadInlin6 = errors.lazyLoadInlineShortcode) === null || _errors$lazyLoadInlin6 === void 0 ? void 0 : _errors$lazyLoadInlin6.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-ajaxify-comments'),
-        status: "error",
-        politeness: "assertive",
-        inline: false,
-        icon: function icon() {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null);
-        }
-      }));
-    }
-  })))))))), 'button' === getValues('lazyLoadInlineLoadingType') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
-    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Button Options', 'wp-ajaxify-comments')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8___default()), {
-      color: '#873F49',
-      loading: true,
-      cssOverride: true,
-      size: 25,
-      speedMultiplier: 0.65
-    })))
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(InlineButton, {
-    control: control,
-    errors: errors,
-    setValue: setValue,
-    getValues: getValues,
-    clearErrors: clearErrors
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_7__["default"], {
     formValues: formValues,
     setError: setError,
     reset: reset,
@@ -83311,9 +83144,6 @@ function combine (array, callback) {
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -83339,37 +83169,6 @@ function combine (array, callback) {
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/ensure chunk */
-/******/ 	(() => {
-/******/ 		__webpack_require__.f = {};
-/******/ 		// This file contains only the entry chunk.
-/******/ 		// The chunk loading function for additional chunks
-/******/ 		__webpack_require__.e = (chunkId) => {
-/******/ 			return Promise.all(Object.keys(__webpack_require__.f).reduce((promises, key) => {
-/******/ 				__webpack_require__.f[key](chunkId, promises);
-/******/ 				return promises;
-/******/ 			}, []));
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/get javascript chunk filename */
-/******/ 	(() => {
-/******/ 		// This function allow to reference async chunks
-/******/ 		__webpack_require__.u = (chunkId) => {
-/******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + ".js";
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/get mini-css chunk filename */
-/******/ 	(() => {
-/******/ 		// This function allow to reference async chunks
-/******/ 		__webpack_require__.miniCssF = (chunkId) => {
-/******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + ".css";
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -83385,52 +83184,6 @@ function combine (array, callback) {
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/load script */
-/******/ 	(() => {
-/******/ 		var inProgress = {};
-/******/ 		var dataWebpackPrefix = "wp-ajaxify-comments:";
-/******/ 		// loadScript function to load a script via script tag
-/******/ 		__webpack_require__.l = (url, done, key, chunkId) => {
-/******/ 			if(inProgress[url]) { inProgress[url].push(done); return; }
-/******/ 			var script, needAttach;
-/******/ 			if(key !== undefined) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				for(var i = 0; i < scripts.length; i++) {
-/******/ 					var s = scripts[i];
-/******/ 					if(s.getAttribute("src") == url || s.getAttribute("data-webpack") == dataWebpackPrefix + key) { script = s; break; }
-/******/ 				}
-/******/ 			}
-/******/ 			if(!script) {
-/******/ 				needAttach = true;
-/******/ 				script = document.createElement('script');
-/******/ 		
-/******/ 				script.charset = 'utf-8';
-/******/ 				script.timeout = 120;
-/******/ 				if (__webpack_require__.nc) {
-/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
-/******/ 				}
-/******/ 				script.setAttribute("data-webpack", dataWebpackPrefix + key);
-/******/ 		
-/******/ 				script.src = url;
-/******/ 			}
-/******/ 			inProgress[url] = [done];
-/******/ 			var onScriptComplete = (prev, event) => {
-/******/ 				// avoid mem leaks in IE.
-/******/ 				script.onerror = script.onload = null;
-/******/ 				clearTimeout(timeout);
-/******/ 				var doneFns = inProgress[url];
-/******/ 				delete inProgress[url];
-/******/ 				script.parentNode && script.parentNode.removeChild(script);
-/******/ 				doneFns && doneFns.forEach((fn) => (fn(event)));
-/******/ 				if(prev) return prev(event);
-/******/ 			}
-/******/ 			var timeout = setTimeout(onScriptComplete.bind(null, undefined, { type: 'timeout', target: script }), 120000);
-/******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
-/******/ 			script.onload = onScriptComplete.bind(null, script.onload);
-/******/ 			needAttach && document.head.appendChild(script);
-/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
@@ -83451,201 +83204,6 @@ function combine (array, callback) {
 /******/ 			if (!module.children) module.children = [];
 /******/ 			return module;
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src;
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) {
-/******/ 					var i = scripts.length - 1;
-/******/ 					while (i > -1 && !scriptUrl) scriptUrl = scripts[i--].src;
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/css loading */
-/******/ 	(() => {
-/******/ 		if (typeof document === "undefined") return;
-/******/ 		var createStylesheet = (chunkId, fullhref, oldTag, resolve, reject) => {
-/******/ 			var linkTag = document.createElement("link");
-/******/ 		
-/******/ 			linkTag.rel = "stylesheet";
-/******/ 			linkTag.type = "text/css";
-/******/ 			var onLinkComplete = (event) => {
-/******/ 				// avoid mem leaks.
-/******/ 				linkTag.onerror = linkTag.onload = null;
-/******/ 				if (event.type === 'load') {
-/******/ 					resolve();
-/******/ 				} else {
-/******/ 					var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-/******/ 					var realHref = event && event.target && event.target.href || fullhref;
-/******/ 					var err = new Error("Loading CSS chunk " + chunkId + " failed.\n(" + realHref + ")");
-/******/ 					err.code = "CSS_CHUNK_LOAD_FAILED";
-/******/ 					err.type = errorType;
-/******/ 					err.request = realHref;
-/******/ 					if (linkTag.parentNode) linkTag.parentNode.removeChild(linkTag)
-/******/ 					reject(err);
-/******/ 				}
-/******/ 			}
-/******/ 			linkTag.onerror = linkTag.onload = onLinkComplete;
-/******/ 			linkTag.href = fullhref;
-/******/ 		
-/******/ 			if (oldTag) {
-/******/ 				oldTag.parentNode.insertBefore(linkTag, oldTag.nextSibling);
-/******/ 			} else {
-/******/ 				document.head.appendChild(linkTag);
-/******/ 			}
-/******/ 			return linkTag;
-/******/ 		};
-/******/ 		var findStylesheet = (href, fullhref) => {
-/******/ 			var existingLinkTags = document.getElementsByTagName("link");
-/******/ 			for(var i = 0; i < existingLinkTags.length; i++) {
-/******/ 				var tag = existingLinkTags[i];
-/******/ 				var dataHref = tag.getAttribute("data-href") || tag.getAttribute("href");
-/******/ 				if(tag.rel === "stylesheet" && (dataHref === href || dataHref === fullhref)) return tag;
-/******/ 			}
-/******/ 			var existingStyleTags = document.getElementsByTagName("style");
-/******/ 			for(var i = 0; i < existingStyleTags.length; i++) {
-/******/ 				var tag = existingStyleTags[i];
-/******/ 				var dataHref = tag.getAttribute("data-href");
-/******/ 				if(dataHref === href || dataHref === fullhref) return tag;
-/******/ 			}
-/******/ 		};
-/******/ 		var loadStylesheet = (chunkId) => {
-/******/ 			return new Promise((resolve, reject) => {
-/******/ 				var href = __webpack_require__.miniCssF(chunkId);
-/******/ 				var fullhref = __webpack_require__.p + href;
-/******/ 				if(findStylesheet(href, fullhref)) return resolve();
-/******/ 				createStylesheet(chunkId, fullhref, null, resolve, reject);
-/******/ 			});
-/******/ 		}
-/******/ 		// object to store loaded CSS chunks
-/******/ 		var installedCssChunks = {
-/******/ 			"wpac-admin-lazy-load-js": 0
-/******/ 		};
-/******/ 		
-/******/ 		__webpack_require__.f.miniCss = (chunkId, promises) => {
-/******/ 			var cssChunks = {"inline-spinner-0.0.1":1,"inline-skeleton-0.0.2":1,"inline-button-0.0.1":1};
-/******/ 			if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
-/******/ 			else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
-/******/ 				promises.push(installedCssChunks[chunkId] = loadStylesheet(chunkId).then(() => {
-/******/ 					installedCssChunks[chunkId] = 0;
-/******/ 				}, (e) => {
-/******/ 					delete installedCssChunks[chunkId];
-/******/ 					throw e;
-/******/ 				}));
-/******/ 			}
-/******/ 		};
-/******/ 		
-/******/ 		// no hmr
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"wpac-admin-lazy-load-js": 0
-/******/ 		};
-/******/ 		
-/******/ 		__webpack_require__.f.j = (chunkId, promises) => {
-/******/ 				// JSONP chunk loading for javascript
-/******/ 				var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
-/******/ 				if(installedChunkData !== 0) { // 0 means "already installed".
-/******/ 		
-/******/ 					// a Promise means "currently loading".
-/******/ 					if(installedChunkData) {
-/******/ 						promises.push(installedChunkData[2]);
-/******/ 					} else {
-/******/ 						if(true) { // all chunks have JS
-/******/ 							// setup Promise in chunk cache
-/******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
-/******/ 							promises.push(installedChunkData[2] = promise);
-/******/ 		
-/******/ 							// start chunk loading
-/******/ 							var url = __webpack_require__.p + __webpack_require__.u(chunkId);
-/******/ 							// create error before stack unwound to get useful stacktrace later
-/******/ 							var error = new Error();
-/******/ 							var loadingEnded = (event) => {
-/******/ 								if(__webpack_require__.o(installedChunks, chunkId)) {
-/******/ 									installedChunkData = installedChunks[chunkId];
-/******/ 									if(installedChunkData !== 0) installedChunks[chunkId] = undefined;
-/******/ 									if(installedChunkData) {
-/******/ 										var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-/******/ 										var realSrc = event && event.target && event.target.src;
-/******/ 										error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
-/******/ 										error.name = 'ChunkLoadError';
-/******/ 										error.type = errorType;
-/******/ 										error.request = realSrc;
-/******/ 										installedChunkData[1](error);
-/******/ 									}
-/******/ 								}
-/******/ 							};
-/******/ 							__webpack_require__.l(url, loadingEnded, "chunk-" + chunkId, chunkId);
-/******/ 						}
-/******/ 					}
-/******/ 				}
-/******/ 		};
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		// no on chunks loaded
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 		
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkwp_ajaxify_comments"] = self["webpackChunkwp_ajaxify_comments"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/nonce */
-/******/ 	(() => {
-/******/ 		__webpack_require__.nc = undefined;
 /******/ 	})();
 /******/ 	
 /************************************************************************/

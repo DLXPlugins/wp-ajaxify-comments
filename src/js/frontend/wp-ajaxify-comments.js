@@ -293,13 +293,13 @@ WPAC._ReplaceComments = function(
 	if ( beforeSelectElements !== '' ) {
 		const beforeSelect = new Function( 'extractedBody', beforeSelectElements );
 		beforeSelect( extractedBody );
-
-		// Set up custom event.
-		const beforeSelectEvent = new CustomEvent( 'wpacBeforeSelectElements', {
-			detail: { extractedBody },
-		} );
-		document.dispatchEvent( beforeSelectEvent );
 	}
+
+	// Set up custom event.
+	const beforeSelectEvent = new CustomEvent( 'wpacBeforeSelectElements', {
+		detail: { extractedBody },
+	} );
+	document.dispatchEvent( beforeSelectEvent );
 
 	let newCommentsContainer = extractedBody.find( selectorCommentsContainer );
 	if ( ! newCommentsContainer.length ) {
@@ -338,13 +338,13 @@ WPAC._ReplaceComments = function(
 			beforeUpdateComments,
 		);
 		beforeComments( extractedBody, commentUrl );
-
-		// Set up native event handler.
-		const beforeCommentsEvent = new CustomEvent( 'wpacBeforeUpdateComments', {
-			detail: { newDom: extractedBody, commentUrl },
-		} );
-		document.dispatchEvent( beforeCommentsEvent );
 	}
+
+	// Set up native event handler.
+	const beforeCommentsEvent = new CustomEvent( 'wpacBeforeUpdateComments', {
+		detail: { newDom: extractedBody, commentUrl },
+	} );
+	document.dispatchEvent( beforeCommentsEvent );
 
 	// Update title
 	const extractedTitle = WPAC._ExtractTitle( data );
@@ -429,7 +429,6 @@ WPAC._ReplaceComments = function(
 			}
 		}
 	}
-
 	// Call after update comments.
 	if ( '' !== afterUpdateComments ) {
 		const updateComments = new Function(
@@ -438,13 +437,12 @@ WPAC._ReplaceComments = function(
 			afterUpdateComments,
 		);
 		updateComments( extractedBody, commentUrl );
-
-		// Set up native event handler.
-		const updateCommentsEvent = new CustomEvent( 'wpacAfterUpdateComments', {
-			detail: { newDom: extractedBody, commentUrl },
-		} );
-		document.dispatchEvent( updateCommentsEvent );
 	}
+	// Set up native event handler.
+	const updateCommentsEvent = new CustomEvent( 'wpacAfterUpdateComments', {
+		detail: { newDom: extractedBody, commentUrl },
+	} );
+	document.dispatchEvent( updateCommentsEvent );
 
 	return true;
 };
@@ -1051,18 +1049,20 @@ WPAC.LoadComments = function( url, options ) {
 	// Get query strings form URL (ajaxifyLazyLoadEnable, nonce, post_id).
 	const urlObject = new URL( url );
 	const queryParams = urlObject.searchParams;
-	const ajaxifyLazyLoadEnable = queryParams.get( 'ajaxifyLazyLoadEnable' );
-	const nonce = queryParams.get( 'nonce' );
-	const postId = queryParams.get( 'post_id' );
+	if ( queryParams.has( 'ajaxifyLazyLoadEnable' ) ) {
+		const ajaxifyLazyLoadEnable = queryParams.get( 'ajaxifyLazyLoadEnable' );
+		const nonce = queryParams.get( 'nonce' );
+		const postId = queryParams.get( 'post_id' );
 
-	// Add to URL.
-	url = WPAC._AddQueryParamStringToUrl(
-		url,
-		'ajaxifyLazyLoadEnable',
-		ajaxifyLazyLoadEnable,
-	);
-	url = WPAC._AddQueryParamStringToUrl( url, 'nonce', nonce );
-	url = WPAC._AddQueryParamStringToUrl( url, 'post_id', postId );
+		// Add to URL.
+		url = WPAC._AddQueryParamStringToUrl(
+			url,
+			'ajaxifyLazyLoadEnable',
+			ajaxifyLazyLoadEnable,
+		);
+		url = WPAC._AddQueryParamStringToUrl( url, 'nonce', nonce );
+		url = WPAC._AddQueryParamStringToUrl( url, 'post_id', postId );
+	}
 
 	if ( options.disableCache ) {
 		url = WPAC._AddQueryParamStringToUrl(
@@ -1080,7 +1080,6 @@ WPAC.LoadComments = function( url, options ) {
 		},
 		success( data ) {
 			try {
-				console.log( data );
 
 				if (
 					! WPAC._ReplaceComments(
@@ -1343,6 +1342,7 @@ jQuery( function() {
 					'Lazy loading: Waiting on Dom to be ready for lazy loading.',
 					window.location.hash,
 				);
+				WPAC._ShowMessage( WPAC._Options.textRefreshComments, 'loading' );
 				WPAC.RefreshComments( { scrollToAnchor: true } ); // force scroll to anchor.
 				break;
 			case 'scroll':

@@ -22,7 +22,6 @@ module.exports = ( env ) => {
 				'wpac-frontend-jsuri': './src/js/frontend/jsuri.js',
 				'wpac-frontend-wp-ajaxify-comments': './src/js/frontend/wp-ajaxify-comments.js',
 				'wpac-frontend-menu-helper': [ './src/js/frontend/menu-helper.js', './src/scss/menu-helper.scss' ],
-				'wpac-lazy-load-css': './src/scss/lazy-load.scss',
 			},
 			mode: env.mode,
 			devtool: 'production' === env.mode ? false : 'source-map',
