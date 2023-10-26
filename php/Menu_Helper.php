@@ -478,7 +478,7 @@ class Menu_Helper {
 			}
 
 			// Show the menu item only if Query var isn't null.
-			if ( Functions::is_ajaxify_enabled( true ) && ! $lazy_loading_enabled ) {
+			if ( Functions::is_ajaxify_enabled( true ) && $lazy_loading_enabled ) {
 				$admin_bar->add_node(
 					array(
 						'id'     => 'wpac-ajaxify-lazy-loading-disable',

@@ -1,4 +1,5 @@
 @import '../../node_modules/@wordpress/components/build-style/style.css';
+@import '../../node_modules/@fancyapps/ui/dist/fancybox/fancybox.css';
 @import 'breakpoints-mixin.scss';
 
 $black: #040A18;
@@ -14,6 +15,7 @@ html {
 
 :root {
 	--ajaxify-admin--color-main: #873F49;
+	--ajaxify-admin--color-black: #040A18;
 }
 
 /* overrride core theme color */
@@ -437,12 +439,9 @@ h3.ajaxify-admin-content-subheading {
 			font-size: 0.8125rem !important /* override core styles */
 		}
 	}
-	.components-select-control {
-		margin-bottom: 25px !important; /* override core styles */
-	}
 
 	// Text control styles.
-	.components-base-control,
+	.components-base-control::not(.components-range-control__number),
 	.components-form-token-field,
 	.ajaxify-admin__button-group--align {
 		margin-bottom: 25px;
@@ -704,6 +703,7 @@ h3.ajaxify-admin-content-subheading {
 .ajaxify-admin-panel-area > h2 ~ p {
 	font-size: 16px;
 	line-height: 1.3;
+	margin-bottom: 15px;
 }
 .ajaxify-button {
 	background: #fff;
@@ -783,6 +783,18 @@ h3.ajaxify-admin-content-subheading {
 
 			path {
 				fill: #000;
+			}
+		}
+	}
+	&.is-loading {
+
+		svg {
+			width: 24px;
+			height: 24px;
+			animation: ajaxify-rotate 1s linear infinite;
+
+			path {
+				fill: #FFF;
 			}
 		}
 	}
@@ -947,6 +959,12 @@ h3.ajaxify-admin-content-subheading {
 		span {
 			background: $marsala;
 		}
+	}
+	.components-base-control__label {
+		width: auto
+	}
+	.components-button-group {
+		width: 100%;
 	}
 }
 
@@ -1145,5 +1163,231 @@ h3.ajaxify-admin-content-subheading {
 		border-color: #FFF;
 		outline: none;
 		box-shadow: inset 0 0 0 1px #333 !important;
+		
+		&.components-button {
+			color: $black;
+			&.is-pressed {
+				color: $white;
+			}
+		}
+	}
+}
+
+:root {
+	--ajaxify-lazy-load-spinner-speed: 1.2s;
+}
+
+.ajaxify-comments-spinner__inner {
+	position: relative;
+}
+.ajaxify-comments-spinner__preview-label {
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	color: var( --ajaxify-comments-spinner-label-color, #FFFFFF );
+	letter-spacing: 0.1em;
+}
+
+svg.ajaxify-icon-loading-animation-on {
+	animation: ajaxify-rotate var( --ajaxify-lazy-load-spinner-speed ) linear infinite;
+}
+svg.ajaxify-icon-loading-animation-off {
+	animation: none !important; /* just to make sure */
+}
+.ajaxify-admin__popover-svgs .ajaxify-admin__control-row {
+	margin-top: 20px;
+}
+.ajaxify-button-loading-svgs {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+	max-height: 250px;
+	overflow-y: scroll;
+	border: 1px solid #ddd;
+	row-gap: 18px;
+	column-gap: 18px;
+	padding: 30px;
+	margin-bottom: 20px;
+
+	button.components-button.is-small:not(.has-text) {
+		background: $white;
+		padding: 8px;
+		width: 40px;
+		height: 40px;
+		svg {
+			color: $black;
+			width: 40px;
+			height: 40px;
+			size: 40px;
+		}
+
+		&.is-pressed {
+			background: $black;
+			svg {
+				color: $white;
+			}
+		}
+	}
+}
+.ajaxify-icon-preview {
+	display: grid;
+	grid-template-columns: 72px 1fr;
+	margin: 15px 0;
+	align-items: center;
+	column-gap: 18px;
+}
+
+/* Range Control component */
+.components-range-control__mark {
+	top: -14px;
+}
+.components-range-control__mark-label {
+	margin-top: 8px;
+}
+
+.form-table-row-sections {
+	tr {
+		display: grid;
+		grid-template-columns: 250px 1fr;
+		border-bottom: 1px solid #eee;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+}
+.form-table td {
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+	p:first-of-type {
+		margin-top: 0;
+		padding-top: 0;
+	}
+	p.description {
+		font-size: 16px;
+	}
+}
+p.components-base-control__help {
+	margin-top: 8px !important;
+	font-size: 14px !important;
+}
+.fancybox__container {
+	z-index: 9999;
+}
+
+/* Plugin Integrations */
+.ajaxify-plugin-integrations-wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 40px;
+	row-gap: 40px;
+}
+.ajaxify-plugin-integration {
+
+	background-color: #FFF;
+	border: 1px solid #DDD;
+	border-radius: 3px;
+}
+.ajaxify-plugin-integration-info {
+	display: flex;
+	column-gap: 25px;
+	align-items: center;
+	padding: 0px 20px;
+	padding-bottom: 10px;
+	min-height: 125px;
+
+	.ajaxify-plugin-integration-icon {
+		img {
+			width: 52px;
+			height: 52px;
+		}
+	}
+	.ajaxify-plugin-integration-meta {
+		flex: 1;
+		h3 {
+			margin: 0;
+			margin-bottom: 8px;
+		}
+		p {
+			font-size: 13px;
+		}
+	}
+}
+.ajaxify-plugin-integration-actions {
+	background: #F7F7F7;
+	border-top: 1px solid #ddd;
+	padding: 10px 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	min-height: 55px;
+	
+
+	.ajaxify-plugin-integration-button {
+		text-align: right;
+		button {
+			text-align: center;
+			justify-content: center;
+			min-width: 125px;
+		}
+	}
+}
+
+/* Button Designer styles */
+.ajaxify-button-designer {
+	margin-bottom: 35px;
+}
+.ajaxify-button-designer__body {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 280px;
+}
+.ajaxify-button-designer__header {
+	border: 1px solid #e0e0e0;
+	border-bottom: 0;
+	padding: 10px 30px;
+	padding-left: 16px;
+	background: var( --ajaxify-admin--color-main );
+	color: #FFF;
+	margin-bottom: 0;
+
+	h3 {
+		color: #FFF;
+	}
+}
+.ajaxify-button-designer__preview {
+	display: flex;
+	border: 1px solid #e0e0e0;
+	justify-content: center;
+	align-items: center;
+	border-right: 0;
+	height: 100%;
+}
+.ajaxify-button-designer__sidebar {
+	border: 1px solid #e0e0e0;
+	border-top: 0;
+
+	.ajaxify-button-designer__sidebar-body {
+		position: relative;
+		min-height: 300px;
+		max-height: 300px;
+		overflow: hidden scroll;
+		z-index: 1000;
+	}
+	
+
+	.components-panel__body {
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+	.components-base-control {
+		.components-base-control__label {
+			display: block;
+		}
 	}
 }

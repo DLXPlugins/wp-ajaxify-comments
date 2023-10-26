@@ -4,6 +4,7 @@ module.exports = {
 		es2021: true,
 	},
 	globals: {
+		ajaxurl: 'readonly',
 		wpacAdminAdvanced: 'readonly',
 		wpacAdminCallbacks: 'readonly',
 		wpacAdminHome: 'readonly',
@@ -11,6 +12,8 @@ module.exports = {
 		wpacAdminLabels: 'readonly',
 		wpacAdminSelectors: 'readonly',
 		wpacMenuHelper: 'readonly',
+		wpacAdminLazyLoad: 'readonly',
+		wpacAdminIntegrations: 'readonly',
 	},
 	extends: [
 		'eslint:recommended',

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 import { __, _x } from '@wordpress/i18n';
 
-import { Button, ButtonGroup } from '@wordpress/components';
+import { BaseControl, Button, ButtonGroup } from '@wordpress/components';
 
 import './editor.scss';
 
@@ -26,46 +26,50 @@ const AlignmentGroup = ( props ) => {
 
 	return (
 		<div className="ajaxify-alignment-component-base">
-			<span className="ajaxify-alignment-component-label">{ label }</span>
-			<ButtonGroup>
-				<>
-					{ leftOn &&
-					<Button
-						isPressed={ 'left' === alignment ? true : false }
-						isSecondary
-						icon="editor-alignleft"
-						label={ alignLeftLabel }
-						onClick={ () => {
-							props.onClick( 'left' );
-						} }
-					/>
-					}
-					{ centerOn &&
-					<Button
-						isPressed={ 'center' === alignment ? true : false }
-						isSecondary
-						icon="editor-aligncenter"
-						label={ alignCenterLabel }
-						onClick={ () => {
-							props.onClick( 'center' );
-						} }
-					/>
-					}
-					{ rightOn &&
-					<Button
-						isPressed={ 'right' === alignment ? true : false }
-						isSecondary
-						icon="editor-alignright"
-						label={ alignRightLabel }
-						onClick={ () => {
-							props.onClick( 'right' );
-						} }
-					/>
-					}
+			<BaseControl
+				id="ajaxify-alignment-component-base"
+				label={ label }
+			>
+				<ButtonGroup>
+					<>
+						{ leftOn &&
+						<Button
+							isPressed={ 'left' === alignment ? true : false }
+							isSecondary
+							icon="editor-alignleft"
+							label={ alignLeftLabel }
+							onClick={ () => {
+								props.onClick( 'left' );
+							} }
+						/>
+						}
+						{ centerOn &&
+						<Button
+							isPressed={ 'center' === alignment ? true : false }
+							isSecondary
+							icon="editor-aligncenter"
+							label={ alignCenterLabel }
+							onClick={ () => {
+								props.onClick( 'center' );
+							} }
+						/>
+						}
+						{ rightOn &&
+						<Button
+							isPressed={ 'right' === alignment ? true : false }
+							isSecondary
+							icon="editor-alignright"
+							label={ alignRightLabel }
+							onClick={ () => {
+								props.onClick( 'right' );
+							} }
+						/>
+						}
 
-				</>
+					</>
 
-			</ButtonGroup>
+				</ButtonGroup>
+			</BaseControl>
 		</div>
 	);
 };

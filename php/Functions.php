@@ -41,6 +41,7 @@ class Functions {
 		return false;
 	}
 
+
 	/**
 	 * Return the URL to the admin screen
 	 *
@@ -137,7 +138,7 @@ class Functions {
 	}
 
 	/**
-	 * Checks to see if an asset is activated or not.
+	 * Checks to see if a plugin is activated or not.
 	 *
 	 * @since 1.0.0
 	 *
@@ -146,13 +147,36 @@ class Functions {
 	 *
 	 * @return bool true if activated, false if not.
 	 */
-	public static function is_activated( $path, $type = 'plugin' ) {
+	public static function is_activated( $path ) {
 
 		// Gets all active plugins on the current site.
 		$active_plugins = self::is_multisite() ? get_site_option( 'active_sitewide_plugins' ) : get_option( 'active_plugins', array() );
 		if ( in_array( $path, $active_plugins, true ) ) {
 			return true;
 		}
+		return false;
+	}
+
+	/**
+	 * Checks to see if a plugin is installed or not.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $path Path to the asset.
+	 * @param string $type Type to check if it is installed or not.
+	 *
+	 * @return bool true if installed, false if not.
+	 */
+	public static function is_installed( $path ) {
+
+		// Get all plugins for current site.
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		$all_plugins = get_plugins();
+
+		if ( array_key_exists( $path, $all_plugins ) ) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -263,29 +287,20 @@ class Functions {
 		$options = Options::get_options();
 
 		// Get lazy loading/async threshold. Async threshold is misleading here. If it's `0`, it means lazy loading is enabled. Otherwise, any other value, it's disabled.
-		$async_threshold = $options['asyncCommentsThreshold'];
+		$lazy_load_enabled = (bool) $options['lazyLoadEnabled'];
 
-		// $async_threshold can be a string or a `0` value.
-		// If it's not an empty string, we need to convert to int.
-		// While taking account that `0` is a positive option, whereas empty string is not.
-		if ( strlen( $async_threshold ) > 0 ) {
-			$async_threshold = absint( $async_threshold );
-		} else {
-			$async_threshold = null;
-		}
-
-		// If not `0`, lazy loading is not enabled.
-		if ( 0 !== $async_threshold ) {
+		// If lazy load isn't enabled by option, bail.
+		if ( false === $lazy_load_enabled ) {
 			return false;
 		}
 
-		// Get the async trigger.
-		$async_trigger = $options['asyncLoadTrigger']; /* can be DomReady, none, Viewport */
+		// Get the lazy load trigger.
+		$lazy_load_trigger = $options['lazyLoadTrigger']; /* can be external, comments, domready, scroll, element */
 
 		// If 'none', lazy loading is not enabled.
 		// Old behavior here was to not show any comments, which makes no sense.
 		// New behavior is to show comments normally.
-		if ( 'none' === $async_trigger ) {
+		if ( 'none' === $lazy_load_trigger ) {
 			return false;
 		}
 
@@ -446,15 +461,21 @@ class Functions {
 			'class'       => array(),
 			'width'       => array(),
 			'height'      => array(),
+			'style'       => array(),
 		);
 
 		$allowed_tags['path'] = array(
 			'd'       => array(),
 			'fill'    => array(),
 			'opacity' => array(),
+			'style'   => array(),
 		);
 
-		$allowed_tags['g'] = array();
+		$allowed_tags['g'] = array(
+			'fill'    => array(),
+			'opacity' => array(),
+			'style'   => array(),
+		);
 
 		$allowed_tags['circle'] = array(
 			'cx'     => array(),

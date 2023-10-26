@@ -18,6 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Options {
 
+
+
 	/**
 	 * Array holding the options.
 	 *
@@ -31,11 +33,12 @@ class Options {
 	 * @since 1.0.0
 	 * @access public
 	 * @param array $options array of options to save.
+	 * @param bool  $merge_options Whether to merge options with old options or not.
 	 * @return array $options.
 	 */
-	public static function update_options( $options ) {
+	public static function update_options( $options, $merge_options = true ) {
 		$force           = true;
-		$current_options = self::get_options( $force );
+		$current_options = $merge_options ? self::get_options( $force, true ) : array();
 		foreach ( $options as $key => &$option ) {
 			switch ( $key ) {
 				case 'enable':
@@ -48,6 +51,10 @@ class Options {
 				case 'optimizeAjaxResponse':
 				case 'disableCache':
 				case 'enableByQuery':
+				case 'lazyLoadEnabled':
+				case 'lazyLoadPaginationEnabled':
+				case 'lazyLoadUseThemePagination':
+				case 'lazyLoadingPaginationScrollToTop':
 					$option = filter_var( $options[ $key ], FILTER_VALIDATE_BOOLEAN );
 					break;
 				default:
@@ -76,7 +83,7 @@ class Options {
 	 *
 	 * @return array Array of options.
 	 */
-	public static function get_options( $force = false ) {
+	public static function get_options( $force = false, $skip_migrate = false ) {
 		if ( is_array( self::$options ) && ! $force ) {
 			return self::$options;
 		}
@@ -95,6 +102,44 @@ class Options {
 
 		$defaults = self::get_defaults();
 		$options  = wp_parse_args( $options, $defaults );
+		// Port over lazy loading options.
+		if ( isset( $options['asyncCommentsThreshold'] ) && ! $skip_migrate ) {
+			// Get lazy loading/async threshold. Async threshold is misleading here. If it's `0`, it means lazy loading is enabled. Otherwise, any other value, it's disabled.
+			$async_threshold = $options['asyncCommentsThreshold'];
+
+			// Get the async trigger.
+			$async_trigger = $options['asyncLoadTrigger']; /* can be DomReady, none, Viewport */
+
+			// $async_threshold can be a string or a `0` value.
+			// If it's not an empty string, we need to convert to int.
+			// While taking account that `0` is a positive option, whereas empty string is not.
+			if ( strlen( $async_threshold ) > 0 ) {
+				$async_threshold = absint( $async_threshold );
+			} else {
+				$async_threshold = null;
+			}
+
+			// If not `0`, lazy loading is not enabled.
+			if ( 0 !== $async_threshold || 'none' === $async_trigger ) {
+				$options['lazyLoadEnabled'] = false;
+			}
+
+			// Set the new lazy loading trigger.
+			$options['lazyLoadTrigger'] = strtolower( $async_trigger );
+
+			// Set lazy loading flag.
+			if ( 0 === $async_threshold && 'none' !== $async_trigger ) {
+				$options['lazyLoadEnabled'] = true;
+			}
+
+			// Unset old vars.
+			unset( $options['asyncCommentsThreshold'] );
+			unset( $options['asyncLoadTrigger'] );
+
+			// Update options.
+			self::update_options( $options, false );
+		}
+		self::$options = $options;
 
 		// Get WPML to translate the options. This only seems to work on the frontend.
 		$label_keys_to_translate = self::get_string_label_keys();
@@ -191,8 +236,6 @@ class Options {
 			'callbackOnBeforeUpdateComments' => '',
 			'callbackOnAfterUpdateComments'  => '',
 			'commentPagesUrlRegex'           => '',
-			'asyncCommentsThreshold'         => '',
-			'asyncLoadTrigger'               => 'DomReady', /* can be DomReady, none, Viewport */
 			'disableUrlUpdate'               => false,
 			'disableScrollToAnchor'          => false,
 			'useUncompressedScripts'         => false,
@@ -201,7 +244,11 @@ class Options {
 			'baseUrl'                        => '',
 			'disableCache'                   => false,
 			'enableByQuery'                  => false,
-
+			'lazyLoadEnabled'                => false,
+			'lazyLoadDisplay'                => 'overlay', /* can be overlay, inline, none */
+			'lazyLoadTrigger'                => 'domready', /* can be external, comments, domready, scroll, element */
+			'lazyLoadTriggerElement'         => '',
+			'lazyLoadInlineDisplayElement'   => '#comments',
 		);
 		return $defaults;
 	}

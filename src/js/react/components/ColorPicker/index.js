@@ -3,7 +3,6 @@
  *
  * Credit: Forked from @generateblocks
  */
-import './editor.scss';
 import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
 import hexToRgba from 'hex-to-rgba';
@@ -187,6 +186,8 @@ const ColorPickerControl = ( props ) => {
 							className="ajaxify-block-component-color-picker"
 							onClose={ toggleClose }
 							noArrow={ false }
+							placement="left-end"
+							offset={ 20 }
 						>
 							<BaseControl key={ colorKey }>
 								<ColorPicker

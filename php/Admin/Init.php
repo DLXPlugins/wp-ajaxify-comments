@@ -50,14 +50,174 @@ class Init {
 		// Ajax option for resetting options.
 		add_action( 'wp_ajax_wpac_reset_options', array( $this, 'ajax_reset_options' ) );
 
+		// Ajax option for installing a plugin.
+		add_action( 'wp_ajax_wpac_install_plugin', array( $this, 'ajax_install_plugin' ) );
+
+		// Ajax option for activating a plugin.
+		add_action( 'wp_ajax_wpac_activate_plugin', array( $this, 'ajax_activate_plugin' ) );
+
+		// Get plugin status.
+		add_action( 'wp_ajax_wpac_get_plugin_status', array( $this, 'ajax_get_plugin_status' ) );
+
 		// Init tabs.
 		new Tabs\Main();
-		new Tabs\Appearance();
 		new Tabs\Advanced();
+		new Tabs\Appearance();
 		new Tabs\Callbacks();
+		new Tabs\Integrations();
 		new Tabs\Labels();
+		new Tabs\Lazy_Load();
+		//new Tabs\Pagination();
 		new Tabs\Selectors();
 		new Tabs\Support();
+	}
+
+	public function ajax_get_plugin_status() {
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		$path  = sanitize_text_field( urldecode( filter_input( INPUT_POST, 'path', FILTER_DEFAULT ) ) );
+
+		if ( ! wp_verify_nonce( $nonce, 'wpac-admin-integrations-retrieve-options' ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce or permission verification failed.', 'wp-ajaxify-comments' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		// Check if plugin is installed.
+		$is_installed = false;
+		if ( Functions::is_installed( $path ) ) {
+			$is_installed = true;
+		}
+
+		// Check if plugin is active (if so, it is installed).
+		$is_active = false;
+		if ( Functions::is_activated( $path ) ) {
+			$is_active    = true;
+			$is_installed = true;
+		}
+
+		// Send response.
+		wp_send_json_success(
+			array(
+				'installed' => $is_installed,
+				'activated' => $is_active,
+			)
+		);
+	}
+
+	/**
+	 * Install a plugin based on a slug.
+	 */
+	public function ajax_install_plugin() {
+		// Let's get the nonce.
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		$path  = sanitize_text_field( urldecode( filter_input( INPUT_POST, 'path', FILTER_DEFAULT ) ) );
+		$slug  = dirname( $path );
+		if ( ! wp_verify_nonce( $nonce, 'install-plugin_' . $slug ) || ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce or permission verification failed.', 'wp-ajaxify-comments' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+		
+
+		// Include wp-admin/update.php.
+		require_once ABSPATH . 'wp-admin/update.php';
+		require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+
+		// Ping Plugin API for slug.
+		$api = plugins_api(
+			'plugin_information',
+			array(
+				'slug'   => $slug,
+				'fields' => array(
+					'sections' => false,
+				),
+			)
+		);
+
+		if ( is_wp_error( $api ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Could not find plugin to install.', 'wp-ajaxify-comments' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		// Build title and match variables.
+		$title  = 'Installing ' . $api->name . '...';
+		$url    = 'update.php?action=install-plugin&plugin=' . rawurlencode( $slug );
+		$plugin = $slug;
+
+		// Build the installer.
+		$upgrader        = new \Plugin_Upgrader( new \Plugin_Installer_Skin( compact( 'title', 'url', 'nonce', 'plugin', 'api' ) ) );
+		$install_results = $upgrader->install( esc_url_raw( $api->download_link ) );
+
+		if ( is_wp_error( $install_results ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Could not install plugin.', 'wp-ajaxify-comments' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		// A mix of HTML and JSON are output here. There's not a way to buffer from what I can tell. JSON is extracted out via RegEx in the JS.
+
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Plugin installed.', 'wp-ajaxify-comments' ),
+				'type'        => 'success',
+				'dismissable' => true,
+			)
+		);
+	}
+
+	/**
+	 * Activate a plugin based on a slug.
+	 */
+	public function ajax_activate_plugin() {
+		// Let's get the nonce.
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		$path  = sanitize_text_field( urldecode( filter_input( INPUT_POST, 'path', FILTER_DEFAULT ) ) );
+		$slug  = dirname( $path );
+		if ( ! wp_verify_nonce( $nonce, 'activate-plugin_' . $slug ) || ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce or permission verification failed.', 'wp-ajaxify-comments' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$result = activate_plugin( $path, '', false, true ); // null is successful.
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Could not activate plugin.', 'wp-ajaxify-comments' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Plugin activated.', 'wp-ajaxify-comments' ),
+				'type'        => 'success',
+				'dismissable' => true,
+			)
+		);
 	}
 
 	/**
