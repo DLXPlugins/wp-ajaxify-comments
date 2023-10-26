@@ -138,11 +138,9 @@ const Plugin = ( props ) => {
 											// Response is a mixture of HTML and JSON, let's extract json.
 											const jsonRegex = /({[^}]+}})/;
 											const responseData = response.data;
-											console.log( responseData );
 											const matches = responseData.match( jsonRegex );
 											if ( matches ) {
 												const { data, success } = JSON.parse( matches[ 0 ] );
-												console.log( data );
 												if ( success ) {
 													setInstalled( true );
 												}
