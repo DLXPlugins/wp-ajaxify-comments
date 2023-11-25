@@ -656,10 +656,15 @@ WPAC.AttachForm = function( options ) {
 
 			// Extract error message
 			const extractedBody = WPAC._ExtractBody( data );
+			console.log( extractedBody );
 			if ( extractedBody !== false ) {
 				let errorMessage = extractedBody.find(
 					WPAC._Options.selectorErrorContainer,
 				);
+				if ( ! errorMessage.length ) {
+					// Check if error message is die message and not paragraph selector.
+					errorMessage = extractedBody.find( '.wp-die-message' );
+				}
 				if ( errorMessage.length ) {
 					errorMessage = errorMessage.html();
 					WPAC._Debug(
