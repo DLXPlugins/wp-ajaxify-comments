@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.4
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -17,7 +17,7 @@ Skip page reloads and separate error screens when posting comments. Ajaxify Comm
 
 === TLDR ===
 
-<a href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/getting-started">Getting Started Guide</a> | <a href="https://github.com/sponsors/DLXPlugins">Sponsor us on GitHub</a> | <a href="https://dlxplugins.com/plugins/ajaxify-comments">Ajaxify Home</a>
+<a href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/getting-started">Getting Started</a> | <a href="https://github.com/sponsors/DLXPlugins">Sponsor Us</a> | <a href="https://app.instawp.io/launch?t=ajaxify-comments&d=v2">Launch an Instant Demo</a> | <a href="https://dlxplugins.com/plugins/ajaxify-comments">Ajaxify Home</a>
 
 Ajaxify Comments hooks into your theme and improves the usability of the comment form by validating and adding comments without the need of page reloads. Users can remain on the page and interact with new comments as they're posted. This plugin also supports lazy loading of comments, which can help speed up your page load time.
 
@@ -121,6 +121,11 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Changelog ==
 
+= 2.1.1 =
+* Released 2023-12-01
+* Fixing issue with Ajaxify loading on all pages.
+* Added better error messages for third-party plugins who use wp_die to display errors.
+
 = 2.1.0 =
 * Released 2023-10-25
 * New tabs: Added Integrations tab to showcase compatible plugins and a Lazy Load tab to control the lazy load options.
@@ -188,5 +193,5 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Upgrade Notice ==
 
-= 2.1.0 =
-Easier lazy loading is here. Choose from five separate triggers to lazy load your comments, and set a scroll offset for earlier or later comment loading.
+= 2.1.1 =
+Performance improvement to prevent Ajaxify from loading on all pages. Added better error messages for third-party plugins who use wp_die to display errors.
