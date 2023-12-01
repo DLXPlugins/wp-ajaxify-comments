@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Global Functions and Variables.
  *
@@ -55,11 +56,23 @@ function wpac_enqueue_scripts() {
 		return;
 	}
 
-	$version   = Functions::get_plugin_version();
-	$options   = Options::get_options();
-	$in_footer = (bool) $options['placeScriptsInFooter'] || (bool) $options['debug'] || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG );
+	$version       = Functions::get_plugin_version();
+	$options       = Options::get_options();
+	$in_footer     = (bool) $options['placeScriptsInFooter'] || (bool) $options['debug'] || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG );
+	$is_debug      = (bool) $options['debug'];
+	$is_singular   = is_singular() || is_page();
+	$force_scripts = false;
 
-	if ( (bool) $options['debug'] || (bool) $options['useUncompressedScripts'] ) {
+	/**
+	 * Filter: Load scripts on all pages.
+	 *
+	 * @param bool Whether to force scripts on all pages.
+	 *
+	 * @since 2.1.1
+	 */
+	$force_scripts = apply_filters( 'dlxplugins/ajaxify/scripts/load', $force_scripts );
+
+	if ( ( $is_debug || $is_singular || $force_scripts ) && (bool) $options['useUncompressedScripts'] ) {
 		wp_enqueue_script(
 			'jsuri',
 			Functions::get_plugin_url( 'dist/wpac-frontend-jsuri.js' ),
@@ -101,7 +114,7 @@ function wpac_enqueue_scripts() {
 			$version,
 			$in_footer
 		);
-	} else {
+	} elseif ( $is_debug || $is_singular || $force_scripts ) {
 		wp_enqueue_script(
 			'wpAjaxifyComments',
 			Functions::get_plugin_url( 'dist/wpac-frontend-js.js' ),
@@ -250,8 +263,8 @@ function wpac_initialize() {
 
 	// Options
 	echo 'WPAC._Options={';
-	$options = Options::get_options();
-	$options['lazyLoadEnabled'] = Functions::is_lazy_loading_enabled( false, false );
+	$options                        = Options::get_options();
+	$options['lazyLoadEnabled']     = Functions::is_lazy_loading_enabled( false, false );
 	$options['lazyLoadIntoElement'] = false;
 
 	// Determine where to load the lazy loading message (if not overlay).
@@ -276,9 +289,9 @@ function wpac_initialize() {
 		get_the_ID(),
 		get_post_type( get_the_ID() )
 	);
-	
+
 	foreach ( $options as $option_key => $option_value ) {
-		
+
 		switch ( $option_value ) {
 			case '0':
 			case '1':
@@ -469,11 +482,11 @@ function wpac_wp_die_handler( $handler ) {
 }
 
 function wpac_option_page_comments( $page_comments ) {
-	return( wpac_is_ajax_request() && isset( $_REQUEST['WPACAll'] ) && $_REQUEST['WPACAll'] ) ?
+	return ( wpac_is_ajax_request() && isset( $_REQUEST['WPACAll'] ) && $_REQUEST['WPACAll'] ) ?
 		false : $page_comments;
 }
 
 function wpac_option_comments_per_page( $comments_per_page ) {
-	return( wpac_is_ajax_request() && isset( $_REQUEST['WPACAll'] ) && $_REQUEST['WPACAll'] ) ?
+	return ( wpac_is_ajax_request() && isset( $_REQUEST['WPACAll'] ) && $_REQUEST['WPACAll'] ) ?
 		0 : $comments_per_page;
 }
