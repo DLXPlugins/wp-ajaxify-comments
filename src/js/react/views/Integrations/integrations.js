@@ -83,6 +83,33 @@ const IntegrationsScreen = ( props ) => {
 				{ getCommentEditingHeader() }
 				{ getPlugins() }
 			</div>
+			<div className="ajaxify-admin-panel-area">
+				<>
+					<h2>
+						{ __( 'Featured Pro Plugins', 'wp-ajaxify-comments' ) }
+					</h2>
+					<p className="description">
+						{ __(
+							'These pro/premium plugins are designed to work with Ajaxify Comments.',
+							'wp-ajaxify-comments',
+						) }
+					</p>
+				</>
+				<div className="ajaxify-plugin-integration">
+					<div className="ajaxify-plugin-integration-info">
+						<div className="ajaxify-plugin-integration-icon">
+							<img src={ CommentEditCoreImg } alt={ __( 'Comment Edit Pro', 'wp-ajaxify-comments' ) } />
+						</div>
+						<div className="ajaxify-plugin-integration-meta">
+							<h3>
+								<a href="https://dlxplugins.com/plugins/comment-edit-pro">{ __( 'Comment Edit Pro', 'wp-ajaxify-comments' ) }</a></h3>
+							<p className="description">
+								{ __( 'Comment Edit Pro extends basic comment editing with frontend moderation, webhooks, Slack integration, comment shortcuts, and much, much more.', 'wp-ajaxify-comments' ) }
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</>
 	);
 };
