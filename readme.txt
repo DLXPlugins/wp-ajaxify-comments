@@ -125,6 +125,8 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 * Released 2023-12-01
 * Fixing issue with Ajaxify loading on all pages.
 * Added better error messages for third-party plugins who use wp_die to display errors.
+* Added support for Comment Edit Pro.
+* <a href="https://dlxplugins.com/announcements/ajaxify-comments-and-comment-edit-pro-are-now-fully-compatible/">Please read the announcement post.</a>
 
 = 2.1.0 =
 * Released 2023-10-25
