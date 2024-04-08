@@ -124,7 +124,7 @@
 		},
 		{
 			"step": "runPHP",
-			"code": "<?php require_once 'wordpress/wp-load.php'; $locations = get_nav_menu_locations(); $locations['menu-header'] = 2; set_theme_mod( 'nav_menu_locations', $locations ); ?>"
+			"code": "<?php require_once 'wordpress/wp-load.php'; $locations = get_nav_menu_locations(); $locations['locations-menu_1'] = 2; set_theme_mod( 'nav_menu_locations', $locations ); ?>"
 		}
 
 		
