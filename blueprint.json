@@ -123,7 +123,7 @@
 		},
 		{
 			"step": "runPHP",
-			"code": "<?php require_once 'wordpress/wp-load.php'; add_action( 'init', function() { $page = get_page_by_path( 'ajaxify-comments'); update_option( 'page_on_front', $page->ID ); } );   ?>"
+			"code": "<?php require_once 'wordpress/wp-load.php'; add_action( 'init', function() { $page = get_page_by_path( 'ajaxify-comments'); update_option( 'page_on_front', $page['ID'] ); } );   ?>"
 		}
     ]
 }
