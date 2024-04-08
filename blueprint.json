@@ -124,7 +124,11 @@
 		},
 		{
 			"step": "runPHP",
-			"code": "<?php require_once 'wordpress/wp-load.php'; $locations = get_nav_menu_locations(); $locations['locations-menu_1'] = 2; set_theme_mod( 'nav_menu_locations', $locations ); ?>"
+			"code": "<?php require_once 'wordpress/wp-load.php'; update_option( 'generateblocks_dynamic_css_posts', array() ); ?>"
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require_once 'wordpress/wp-load.php'; $locations = array(); $locations['menu_1'] = 2; set_theme_mod( 'nav_menu_locations', $locations ); ?>"
 		}
 
 		
