@@ -332,7 +332,7 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 <!-- /wp:paragraph -->
 
 <!-- wp:generateblocks/button {"uniqueId":"df4299b8","hasUrl":true,"blockVersion":4,"display":"inline-flex","spacing":{"paddingTop":"15px","paddingRight":"20px","paddingBottom":"15px","paddingLeft":"20px"},"backgroundColor":"#0366d6","backgroundColorHover":"#222222","textColor":"#ffffff","textColorHover":"#ffffff"} -->
-<a class="gb-button gb-button-df4299b8 gb-button-text" href="/step-2/">Proceed to Step 2 of the demo</a>
+<a class="gb-button gb-button-df4299b8 gb-button-text" href="step-2/">Proceed to Step 2 of the demo</a>
 <!-- /wp:generateblocks/button -->
 <!-- /wp:generateblocks/container -->
 <!-- /wp:generateblocks/container -->]]></content:encoded>
@@ -600,7 +600,7 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 <!-- /wp:paragraph -->
 
 <!-- wp:generateblocks/button {"uniqueId":"df4299b8","hasUrl":true,"blockVersion":4,"display":"inline-flex","spacing":{"paddingTop":"15px","paddingRight":"20px","paddingBottom":"15px","paddingLeft":"20px"},"backgroundColor":"#0366d6","backgroundColorHover":"#222222","textColor":"#ffffff","textColorHover":"#ffffff"} -->
-<a class="gb-button gb-button-df4299b8 gb-button-text" href="/step-3/">Proceed to Step 3 of the demo</a>
+<a class="gb-button gb-button-df4299b8 gb-button-text" href="step-3/">Proceed to Step 3 of the demo</a>
 <!-- /wp:generateblocks/button -->
 <!-- /wp:generateblocks/container -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
