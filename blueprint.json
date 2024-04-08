@@ -1,0 +1,126 @@
+{
+    "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+    "preferredVersions": {
+        "php": "8.2",
+        "wp": "6.5"
+    },
+    "features": {
+        "networking": true
+    },
+    "phpExtensionBundles": [
+        "kitchen-sink"
+    ],
+    "landingPage": "/wp-admin/",
+    "steps": [
+        {
+            "step": "login",
+            "username": "admin",
+            "password": "password"
+        },
+        {
+            "step": "installTheme",
+            "themeZipFile": {
+                "resource": "wordpress.org/themes",
+                "slug": "blocksy"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "confetti"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+		{
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "generateblocks"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "simple-comment-editing"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "wp-ajaxify-comments"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "importFile",
+            "file": {
+                "resource": "url",
+                "url": "https://wpac.local/wp-json/blueprint-builder/v1/wxr-21ew9q6lfYmL.xml"
+            }
+        },
+        {
+            "step": "setSiteOptions",
+            "options": {
+                "blogname": "Ajaxify Comments Demo",
+                "users_can_register": "0",
+                "admin_email": "ronald@dlxplugins.local"
+            }
+        },
+        {
+            "step": "setSiteOptions",
+            "options": {
+                "permalink_structure": "/%postname%/"
+            }
+        },
+        {
+            "step": "setSiteOptions",
+            "options": {
+                "show_on_front": "page",
+                "page_on_front": "6"
+            }
+        },      
+        {
+			"step": "runPHP",
+			"code": "<?php require_once 'wordpress/wp-load.php'; update_option( 'theme_mods_blocksy', maybe_unserialize( 'a:18:{i:0;b:0;s:38:\"blocksy_woocommerce_thumbnail_cropping\";s:10:\"predefined\";s:23:\"woocommerce_filter_type\";s:6:\"type-1\";s:32:\"single_blog_post_share_box_title\";s:0:\"\";s:27:\"single_page_share_box_title\";s:0:\"\";s:18:\"nav_menu_locations\";a:1:{s:6:\"menu_1\";i:3;}s:18:\"custom_css_post_id\";i:-1;s:12:\"maxSiteWidth\";s:4:\"1290\";s:18:\"contentAreaSpacing\";a:3:{s:7:\"desktop\";s:4:\"24px\";s:6:\"tablet\";s:4:\"24px\";s:6:\"mobile\";s:4:\"24px\";}s:18:\"contentEdgeSpacing\";a:3:{s:7:\"desktop\";s:1:\"5\";s:6:\"tablet\";s:1:\"5\";s:6:\"mobile\";s:1:\"5\";}s:10:\"wideOffset\";s:2:\"20\";s:17:\"header_placements\";a:2:{s:15:\"current_section\";s:6:\"type-1\";s:8:\"sections\";a:1:{i:0;a:6:{s:2:\"id\";s:6:\"type-1\";s:4:\"mode\";s:10:\"placements\";s:5:\"items\";a:0:{}s:8:\"settings\";a:0:{}s:7:\"desktop\";a:4:{i:0;a:2:{s:2:\"id\";s:7:\"top-row\";s:10:\"placements\";a:5:{i:0;a:2:{s:2:\"id\";s:5:\"start\";s:5:\"items\";a:0:{}}i:1;a:2:{s:2:\"id\";s:6:\"middle\";s:5:\"items\";a:0:{}}i:2;a:2:{s:2:\"id\";s:3:\"end\";s:5:\"items\";a:0:{}}i:3;a:2:{s:2:\"id\";s:12:\"start-middle\";s:5:\"items\";a:0:{}}i:4;a:2:{s:2:\"id\";s:10:\"end-middle\";s:5:\"items\";a:0:{}}}}i:1;a:2:{s:2:\"id\";s:10:\"middle-row\";s:10:\"placements\";a:5:{i:0;a:2:{s:2:\"id\";s:5:\"start\";s:5:\"items\";a:1:{i:0;s:4:\"logo\";}}i:1;a:2:{s:2:\"id\";s:6:\"middle\";s:5:\"items\";a:0:{}}i:2;a:2:{s:2:\"id\";s:3:\"end\";s:5:\"items\";a:1:{i:0;s:4:\"menu\";}}i:3;a:2:{s:2:\"id\";s:12:\"start-middle\";s:5:\"items\";a:0:{}}i:4;a:2:{s:2:\"id\";s:10:\"end-middle\";s:5:\"items\";a:0:{}}}}i:2;a:2:{s:2:\"id\";s:10:\"bottom-row\";s:10:\"placements\";a:5:{i:0;a:2:{s:2:\"id\";s:5:\"start\";s:5:\"items\";a:0:{}}i:1;a:2:{s:2:\"id\";s:6:\"middle\";s:5:\"items\";a:0:{}}i:2;a:2:{s:2:\"id\";s:3:\"end\";s:5:\"items\";a:0:{}}i:3;a:2:{s:2:\"id\";s:12:\"start-middle\";s:5:\"items\";a:0:{}}i:4;a:2:{s:2:\"id\";s:10:\"end-middle\";s:5:\"items\";a:0:{}}}}i:3;a:2:{s:2:\"id\";s:9:\"offcanvas\";s:10:\"placements\";a:1:{i:0;a:2:{s:2:\"id\";s:5:\"start\";s:5:\"items\";a:0:{}}}}}s:6:\"mobile\";a:4:{i:0;a:2:{s:2:\"id\";s:7:\"top-row\";s:10:\"placements\";a:5:{i:0;a:2:{s:2:\"id\";s:5:\"start\";s:5:\"items\";a:0:{}}i:1;a:2:{s:2:\"id\";s:6:\"middle\";s:5:\"items\";a:0:{}}i:2;a:2:{s:2:\"id\";s:3:\"end\";s:5:\"items\";a:0:{}}i:3;a:2:{s:2:\"id\";s:12:\"start-middle\";s:5:\"items\";a:0:{}}i:4;a:2:{s:2:\"id\";s:10:\"end-middle\";s:5:\"items\";a:0:{}}}}i:1;a:2:{s:2:\"id\";s:10:\"middle-row\";s:10:\"placements\";a:5:{i:0;a:2:{s:2:\"id\";s:5:\"start\";s:5:\"items\";a:1:{i:0;s:4:\"logo\";}}i:1;a:2:{s:2:\"id\";s:6:\"middle\";s:5:\"items\";a:0:{}}i:2;a:2:{s:2:\"id\";s:3:\"end\";s:5:\"items\";a:1:{i:0;s:7:\"trigger\";}}i:3;a:2:{s:2:\"id\";s:12:\"start-middle\";s:5:\"items\";a:0:{}}i:4;a:2:{s:2:\"id\";s:10:\"end-middle\";s:5:\"items\";a:0:{}}}}i:2;a:2:{s:2:\"id\";s:10:\"bottom-row\";s:10:\"placements\";a:5:{i:0;a:2:{s:2:\"id\";s:5:\"start\";s:5:\"items\";a:0:{}}i:1;a:2:{s:2:\"id\";s:6:\"middle\";s:5:\"items\";a:0:{}}i:2;a:2:{s:2:\"id\";s:3:\"end\";s:5:\"items\";a:0:{}}i:3;a:2:{s:2:\"id\";s:12:\"start-middle\";s:5:\"items\";a:0:{}}i:4;a:2:{s:2:\"id\";s:10:\"end-middle\";s:5:\"items\";a:0:{}}}}i:3;a:2:{s:2:\"id\";s:9:\"offcanvas\";s:10:\"placements\";a:1:{i:0;a:2:{s:2:\"id\";s:5:\"start\";s:5:\"items\";a:1:{i:0;s:11:\"mobile-menu\";}}}}}}}}s:11:\"buttonColor\";a:2:{s:7:\"default\";a:1:{s:5:\"color\";s:7:\"#fa4728\";}s:5:\"hover\";a:1:{s:5:\"color\";s:28:\"var(--theme-palette-color-2)\";}}s:10:\"forms_type\";s:13:\"classic-forms\";s:14:\"rootTypography\";a:7:{s:6:\"family\";s:5:\"Arial\";s:9:\"variation\";s:2:\"n4\";s:4:\"size\";a:3:{s:7:\"desktop\";s:4:\"18px\";s:6:\"tablet\";s:4:\"18px\";s:6:\"mobile\";s:4:\"18px\";}s:11:\"line-height\";s:4:\"1.65\";s:14:\"letter-spacing\";s:3:\"0em\";s:14:\"text-transform\";s:4:\"none\";s:15:\"text-decoration\";s:4:\"none\";}s:14:\"contentSpacing\";s:8:\"spacious\";s:17:\"content_link_type\";s:6:\"type-4\";s:12:\"has_back_top\";s:3:\"yes\";}' ) ); ?>"
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require_once 'wordpress/wp-load.php'; update_option( 'nav_menu_options', maybe_unserialize( 'a:1:{s:8:\"auto_add\";a:0:{}}' ) ); ?>"
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require_once 'wordpress/wp-load.php'; update_option( 'nav_menu_options', maybe_unserialize( 'a:3:{i:6;b:1;i:23;b:1;i:31;b:1;}' ) ); ?>"
+		},
+        {
+            "step": "setSiteOptions",
+            "options": {
+                "elementor_disable_color_schemes": "yes",
+                "elementor_disable_typography_schemes": "yes",
+                "elementor_viewport_lg": "1000",
+                "elementor_viewport_md": "690",
+                "blocksy_db_version": "2.0.38",
+                "dismissed-blocksy_plugin_notice": "1"
+            }
+        },
+		{
+			"step": "runPHP",
+			"code": "<?php require_once 'wordpress/wp-load.php'; update_option( 'wpac', maybe_unserialize( 'a:65:{s:6:\"enable\";b:1;s:5:\"debug\";b:0;s:10:\"menuHelper\";b:1;s:19:\"selectorCommentForm\";s:12:\"#commentform\";s:25:\"selectorCommentsContainer\";s:9:\"#comments\";s:19:\"selectorCommentList\";s:16:\".ct-comment-list\";s:26:\"selectorCommentPagingLinks\";s:27:\"#comments [class^='nav-'] a\";s:20:\"selectorCommentLinks\";s:35:\"#comments a[href*=\"/comment-page-\"]\";s:24:\"selectorRespondContainer\";s:8:\"#respond\";s:22:\"selectorErrorContainer\";s:8:\"p:parent\";s:20:\"selectorSubmitButton\";s:7:\"#submit\";s:16:\"selectorTextarea\";s:8:\"#comment\";s:21:\"selectorPostContainer\";s:0:\"\";s:11:\"scrollSpeed\";s:3:\"500\";s:18:\"autoUpdateIdleTime\";s:1:\"0\";s:27:\"popupBackgroundColorLoading\";s:7:\"#000000\";s:21:\"popupTextColorLoading\";s:7:\"#ffffff\";s:27:\"popupBackgroundColorSuccess\";s:7:\"#008000\";s:21:\"popupTextColorSuccess\";s:7:\"#FFFFFF\";s:25:\"popupBackgroundColorError\";s:7:\"#FF0000\";s:19:\"popupTextColorError\";s:7:\"#FFFFFF\";s:12:\"popupOpacity\";s:2:\"70\";s:17:\"popupCornerRadius\";s:1:\"5\";s:14:\"popupMarginTop\";s:2:\"10\";s:10:\"popupWidth\";s:2:\"30\";s:12:\"popupPadding\";s:1:\"5\";s:11:\"popupFadeIn\";s:3:\"400\";s:12:\"popupFadeOut\";s:3:\"400\";s:12:\"popupTimeout\";s:4:\"3000\";s:14:\"popupTextAlign\";s:6:\"center\";s:17:\"popupTextFontSize\";s:4:\"14px\";s:11:\"popupZindex\";s:4:\"1000\";s:10:\"textPosted\";s:40:\"Your comment has been posted. Thank you!\";s:20:\"textPostedUnapproved\";s:67:\"Your comment has been posted and is awaiting moderation. Thank you!\";s:14:\"textReloadPage\";s:28:\"Reloading page. Please wait.\";s:15:\"textPostComment\";s:34:\"Posting your comment. Please wait.\";s:19:\"textRefreshComments\";s:30:\"Loading comments. Please wait.\";s:16:\"textUnknownError\";s:55:\"Something went wrong, your comment has not been posted.\";s:20:\"textErrorTypeComment\";s:30:\"Please type your comment text.\";s:23:\"textErrorCommentsClosed\";s:41:\"Sorry, comments are closed for this item.\";s:23:\"textErrorMustBeLoggedIn\";s:47:\"Sorry, you must be logged in to post a comment.\";s:27:\"textErrorFillRequiredFields\";s:46:\"Please fill the required fields (name, email).\";s:28:\"textErrorInvalidEmailAddress\";s:35:\"Please enter a valid email address.\";s:23:\"textErrorPostTooQuickly\";s:85:\"You are posting comments too quickly. Please wait a minute and resubmit your comment.\";s:25:\"textErrorDuplicateComment\";s:82:\"Duplicate comment detected. It looks like you have already submitted this comment.\";s:30:\"callbackOnBeforeSelectElements\";s:0:\"\";s:29:\"callbackOnBeforeSubmitComment\";s:0:\"\";s:26:\"callbackOnAfterPostComment\";s:0:\"\";s:30:\"callbackOnBeforeUpdateComments\";s:0:\"\";s:29:\"callbackOnAfterUpdateComments\";s:0:\"\";s:20:\"commentPagesUrlRegex\";s:0:\"\";s:16:\"disableUrlUpdate\";b:0;s:21:\"disableScrollToAnchor\";b:0;s:22:\"useUncompressedScripts\";b:0;s:20:\"placeScriptsInFooter\";b:1;s:20:\"optimizeAjaxResponse\";b:0;s:7:\"baseUrl\";s:0:\"\";s:12:\"disableCache\";b:0;s:13:\"enableByQuery\";b:0;s:15:\"lazyLoadEnabled\";b:1;s:15:\"lazyLoadDisplay\";s:7:\"overlay\";s:15:\"lazyLoadTrigger\";s:8:\"comments\";s:22:\"lazyLoadTriggerElement\";s:0:\"\";s:28:\"lazyLoadInlineDisplayElement\";s:9:\"#comments\";s:16:\"firstTimeInstall\";s:0:\"\";}' ) ); ?>"
+		}
+    ]
+}
