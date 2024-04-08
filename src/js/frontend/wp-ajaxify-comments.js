@@ -143,6 +143,9 @@ WPAC._DebugSelector = function( elementType, selector, optional ) {
 };
 
 WPAC._AddQueryParamStringToUrl = function( url, param, value ) {
+	if ( WPAC._Options.disableUrlUpdate ) {
+		return url;
+	}
 	// Get URL object.
 	const urlObject = new URL( url );
 
@@ -966,8 +969,13 @@ WPAC._InitIdleTimer = function() {
  * @return comments.
  */
 WPAC.RefreshComments = function( options ) {
-	const url = location.href;
-	if ( WPAC._TestFallbackUrl( location.href ) ) {
+	// IF playground.net, return options.
+	if ( location.href.indexOf( 'playground.wordpress.net' ) > 0 ) {
+		return WPAC.LoadComments( url, options );
+	}
+
+	// Skip playground.net.
+	if ( WPAC._TestFallbackUrl( location.href ) && ! // playground  ) {
 		WPAC._Debug(
 			'error',
 			"Fallback URL was detected (url: '%s'), cancel AJAX request",
