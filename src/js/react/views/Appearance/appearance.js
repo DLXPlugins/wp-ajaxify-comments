@@ -14,6 +14,7 @@ import {
 	RangeControl,
 	RadioControl,
 } from '@wordpress/components';
+import { Icon, desktop, mobile, tablet } from '@wordpress/icons';
 import { AlertCircle, Loader2, ClipboardCheck } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
@@ -34,7 +35,7 @@ const cssRegex = /^(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)
 
 const defaultPalette = wpacAdminAppearance.palette;
 
-const showPreview = ( formValues, type ) => {
+const showPreview = ( formValues, type, device ) => {
 	let backgroundColor = '';
 	let textColor = '';
 	let message = '';
@@ -58,7 +59,26 @@ const showPreview = ( formValues, type ) => {
 	if ( formValues.popupVerticalAlign === 'verticalCenter' ) {
 		topOffset = '45%';
 	}
-	jQuery.blockUI( {
+	let popupWidth = formValues.popupWidth;
+	let popupCornerRadius = formValues.popupCornerRadius;
+	let popupPadding = formValues.popupPadding;
+	let popupOpacity = formValues.popupOpacity / 100;
+	let popupTextFontSize = formValues.popupTextFontSize;
+	if ( 'mobile' === device ) {
+		popupWidth = formValues.popupWidthMobile;
+		popupCornerRadius = formValues.popupCornerRadiusMobile;
+		popupPadding = formValues.popupPaddingMobile;
+		popupOpacity = formValues.popupOpacityMobile / 100;
+		popupTextFontSize = formValues.popupTextFontSizeMobile;
+	}
+	if ( 'tablet' === device ) {
+		popupWidth = formValues.popupWidthTablet;
+		popupCornerRadius = formValues.popupCornerRadiusTablet;
+		popupPadding = formValues.popupPaddingTablet;
+		popupOpacity = formValues.popupOpacityTablet / 100;
+		popupTextFontSize = formValues.popupTextFontSizeTablet;
+	}
+	const args = {
 		message,
 		fadeIn: formValues.popupFadeIn,
 		fadeOut: formValues.popupFadeOut,
@@ -67,27 +87,31 @@ const showPreview = ( formValues, type ) => {
 		centerX: true,
 		showOverlay: true,
 		css: {
-			width: formValues.popupWidth + '%',
-			left: ( ( 100 - formValues.popupWidth ) / 2 ) + '%',
+			width: popupWidth + '%',
+			left: ( ( 100 - popupWidth ) / 2 ) + '%',
 			top: topOffset,
+			bottom: formValues.popupVerticalAlign === 'verticalEnd' ? top + 'px' : 'unset',
 			border: 'none',
-			padding: formValues.popupPadding + 'px',
+			padding: popupPadding + 'px',
 			backgroundColor,
-			'-webkit-border-radius': formValues.popupCornerRadius + 'px',
-			'-moz-border-radius': formValues.popupCornerRadius + 'px',
-			'border-radius': formValues.popupCornerRadius + 'px',
-			opacity: formValues.popupOpacity / 100,
+			'-webkit-border-radius': popupCornerRadius + 'px',
+			'-moz-border-radius': popupCornerRadius + 'px',
+			'border-radius': popupCornerRadius + 'px',
+			opacity: popupOpacity,
 			color: textColor,
 			textAlign: formValues.popupTextAlign,
 			cursor: ( type == 'loading' ) ? 'wait' : 'default',
-			'font-size': formValues.popupTextFontSize,
+			'font-size': popupTextFontSize,
+			'line-height': 1.25,
 		},
 		overlayCSS: {
 			backgroundColor: formValues.popupOverlayBackgroundColor,
 			opacity: formValues.popupOverlayBackgroundOpacity,
 		},
 		baseZ: formValues.popupZindex,
-	} );
+	};
+	console.log( args );
+	jQuery.blockUI( args );
 };
 
 const AppearanceScreen = ( props ) => {
@@ -226,6 +250,24 @@ const Interface = ( props ) => {
 		);
 	};
 
+	/**
+	 * Get the device icon.
+	 *
+	 * @return {Element} The device icon.
+	 */
+	const getDeviceIcon = () => {
+		if ( 'desktop' === device ) {
+			return <Icon icon={ desktop } />;
+		}
+		if ( 'tablet' === device ) {
+			return <Icon icon={ tablet } />;
+		}
+		if ( 'mobile' === device ) {
+			return <Icon icon={ mobile } />;
+		}
+		return null;
+	};
+
 	return (
 		<>
 			<div className="ajaxify-admin-panel-area">
@@ -236,8 +278,9 @@ const Interface = ( props ) => {
 							<Button
 								onClick={ ( e ) => {
 									e.preventDefault();
-									showPreview( formValues, 'loading' );
+									showPreview( formValues, 'loading', device );
 								} }
+								icon={ getDeviceIcon() }
 								className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
 								variant="secondary"
 							>
@@ -246,8 +289,9 @@ const Interface = ( props ) => {
 							<Button
 								onClick={ ( e ) => {
 									e.preventDefault();
-									showPreview( formValues, 'success' );
+									showPreview( formValues, 'success', device );
 								} }
+								icon={ getDeviceIcon() }
 								className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
 								variant="secondary"
 							>
@@ -256,8 +300,9 @@ const Interface = ( props ) => {
 							<Button
 								onClick={ ( e ) => {
 									e.preventDefault();
-									showPreview( formValues, 'error' );
+									showPreview( formValues, 'error', device );
 								} }
+								icon={ getDeviceIcon() }
 								className="ajaxify-button ajaxify__btn-info ajaxify-admin__preview-button"
 								variant="secondary"
 							>
