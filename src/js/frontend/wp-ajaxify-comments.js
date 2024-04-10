@@ -143,9 +143,6 @@ WPAC._DebugSelector = function( elementType, selector, optional ) {
 };
 
 WPAC._AddQueryParamStringToUrl = function( url, param, value ) {
-	if ( WPAC._Options.disableUrlUpdate ) {
-		return url;
-	}
 	// Get URL object.
 	const urlObject = new URL( url );
 
@@ -659,15 +656,10 @@ WPAC.AttachForm = function( options ) {
 
 			// Extract error message
 			const extractedBody = WPAC._ExtractBody( data );
-			console.log( extractedBody );
 			if ( extractedBody !== false ) {
 				let errorMessage = extractedBody.find(
 					WPAC._Options.selectorErrorContainer,
 				);
-				if ( ! errorMessage.length ) {
-					// Check if error message is die message and not paragraph selector.
-					errorMessage = extractedBody.find( '.wp-die-message' );
-				}
 				if ( errorMessage.length ) {
 					errorMessage = errorMessage.html();
 					WPAC._Debug(
@@ -969,13 +961,8 @@ WPAC._InitIdleTimer = function() {
  * @return comments.
  */
 WPAC.RefreshComments = function( options ) {
-	// IF playground.net, return options.
-	if ( location.href.indexOf( 'playground.wordpress.net' ) > 0 ) {
-		return WPAC.LoadComments( url, options );
-	}
-
-	// Skip playground.net.
-	if ( WPAC._TestFallbackUrl( location.href ) && ! // playground  ) {
+	const url = location.href;
+	if ( WPAC._TestFallbackUrl( location.href ) ) {
 		WPAC._Debug(
 			'error',
 			"Fallback URL was detected (url: '%s'), cancel AJAX request",
