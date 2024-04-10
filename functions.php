@@ -138,6 +138,20 @@ function wpac_enqueue_scripts() {
 	);
 
 	/**
+	 * Add frontend CSS.
+	 */
+	wp_enqueue_style(
+		'wpac-frontend',
+		Functions::get_plugin_url( 'dist/wpac-frontend-css.css' ),
+		array(),
+		Functions::get_plugin_version(),
+		'all'
+	);
+	?>
+
+	<?php
+
+	/**
 	 * Sunshine Confetti Plugin integration.
 	 *
 	 * @since 3.0.0
@@ -149,10 +163,30 @@ function wpac_enqueue_scripts() {
 		$wp_sunshine->enqueue_scripts( false );
 	}
 
+	add_action( 'wp_print_styles', 'wpac_print_styles' );
+
 	/**
 	 * Do action after scripts are enqueued.
 	 */
 	do_action( 'dlxplugins/ajaxify/comments/enqueue_scripts', $version, $in_footer );
+}
+
+/**
+ * Print inline styles for the frontend.
+ */
+function wpac_print_styles() {
+	?>
+	<style>
+		:root {
+			--wpac-overlay-opacity: <?php echo esc_html( wpac_get_option( 'overlayOpacity' ) ); ?>;
+			--wpac-overlay-corner-radius: <?php echo esc_html( wpac_get_option( 'overlayCornerRadius' ) ); ?>px;
+			--wpac-overlay-margin-top: <?php echo esc_html( wpac_get_option( 'overlayMarginTop' ) ); ?>px;
+			--wpac-overlay-width: <?php echo esc_html( wpac_get_option( 'overlayWidth' ) ); ?>px;
+			--wpac-overlay-padding: <?php echo esc_html( wpac_get_option( 'overlayPadding' ) ); ?>px;
+			--wpac-overlay-font-size: <?php echo esc_html( wpac_get_option( 'overlayFontSize' ) ); ?>px;
+		}
+	</style>
+	<?php
 }
 
 function wpac_get_version() {

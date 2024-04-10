@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { __, _x } from '@wordpress/i18n';
 
 import { BaseControl, Button, ButtonGroup } from '@wordpress/components';
+import { AlignCenter, AlignLeft, AlignRight } from 'lucide-react';
 
 import './editor.scss';
 
@@ -36,7 +37,7 @@ const AlignmentGroup = ( props ) => {
 						<Button
 							isPressed={ 'left' === alignment ? true : false }
 							isSecondary
-							icon="editor-alignleft"
+							icon={ <AlignLeft /> }
 							label={ alignLeftLabel }
 							onClick={ () => {
 								props.onClick( 'left' );
@@ -47,7 +48,7 @@ const AlignmentGroup = ( props ) => {
 						<Button
 							isPressed={ 'center' === alignment ? true : false }
 							isSecondary
-							icon="editor-aligncenter"
+							icon={ <AlignCenter /> }
 							label={ alignCenterLabel }
 							onClick={ () => {
 								props.onClick( 'center' );
@@ -58,7 +59,7 @@ const AlignmentGroup = ( props ) => {
 						<Button
 							isPressed={ 'right' === alignment ? true : false }
 							isSecondary
-							icon="editor-alignright"
+							icon={ <AlignRight /> }
 							label={ alignRightLabel }
 							onClick={ () => {
 								props.onClick( 'right' );

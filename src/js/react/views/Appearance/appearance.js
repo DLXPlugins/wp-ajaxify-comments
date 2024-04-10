@@ -20,7 +20,9 @@ import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import ColorPickerControl from '../../components/ColorPicker';
 import AlignmentGroup from '../../components/Alignment';
+import VerticalAlignmentGroup from '../../components/VerticalAlignment';
 import SaveResetButtons from '../../components/SaveResetButtons';
+import ResponsiveTabs from '../../components/ResponsiveTabs';
 
 const retrieveAppearanceOptions = () => {
 	return SendCommand( 'wpac_get_appearance_options', {
@@ -133,6 +135,7 @@ const Interface = ( props ) => {
 	const [ isSaved, setIsSaved ] = useState( false );
 	const [ resetting, setResetting ] = useState( false );
 	const [ isReset, setIsReset ] = useState( false );
+	const [ device, setDevice ] = useState( 'desktop' );
 
 	const getAdminBarHeight = () => {
 		const adminBar = document.getElementById( 'wpadminbar' );
@@ -161,15 +164,28 @@ const Interface = ( props ) => {
 			popupBackgroundColorError: data.popupBackgroundColorError,
 			popupTextColorError: data.popupTextColorError,
 			popupOpacity: data.popupOpacity,
+			popupOpacityTablet: data.popupOpacityTablet,
+			popupOpacityMobile: data.popupOpacityMobile,
 			popupCornerRadius: data.popupCornerRadius,
+			popupCornerRadiusTablet: data.popupCornerRadiusTablet,
+			popupCornerRadiusMobile: data.popupCornerRadiusMobile,
 			popupMarginTop: data.popupMarginTop,
+			popupMarginTopTablet: data.popupMarginTopTablet,
+			popupMarginTopMobile: data.popupMarginTopMobile,
 			popupWidth: data.popupWidth,
+			popupWidthTablet: data.popupWidthTablet,
+			popupWidthMobile: data.popupWidthMobile,
 			popupPadding: data.popupPadding,
+			popupPaddingTablet: data.popupPaddingTablet,
+			popupPaddingMobile: data.popupPaddingMobile,
 			popupFadeIn: data.popupFadeIn,
 			popupFadeOut: data.popupFadeOut,
 			popupTimeout: data.popupTimeout,
 			popupTextAlign: data.popupTextAlign,
+			popupVerticalAlign: data.popupVerticalAlign,
 			popupTextFontSize: data.popupTextFontSize,
+			popupTextFontSizeTablet: data.popupTextFontSizeTablet,
+			popupTextFontSizeMobile: data.popupTextFontSizeMobile,
 			popupZindex: data.popupZindex,
 			saveNonce: wpacAdminAppearance.saveNonce,
 			resetNonce: wpacAdminAppearance.resetNonce,
@@ -387,119 +403,395 @@ const Interface = ( props ) => {
 								<th scope="row">{ __( 'Spacing and Opacity', 'wp-ajaxify-comments' ) }</th>
 								<td>
 									<div className="ajaxify-admin__control-row">
-										<Controller
-											name="popupOpacity"
-											control={ control }
-											render={ ( { field: { onChange, value } } ) => (
-												<>
-													<RangeControl
-														label={ __( 'Overlay Opacity %', 'wp-ajaxify-comments' ) }
-														value={ value }
-														onChange={ onChange }
-														min={ 0 }
-														max={ 100 }
-														step={ 1 }
-														help={ __( 'Adjust the opacity of the overlay.', 'wp-ajaxify-comments' ) }
-														color="var(--ajaxify-admin--color-main)"
-														trackColor="var(--ajaxify-admin--color-main)"
-														resetFallbackValue={ 70 }
-														allowReset={ true }
-													/>
-												</>
-											) }
-										/>
+										<div className="ajaxify-admin__control-devices">
+											<ResponsiveTabs
+												onChange={ ( newDevice ) => {
+													setDevice( newDevice );
+												} }
+												device={ device }
+											/>
+										</div>
+										{ 'desktop' === device && (
+											<Controller
+												name="popupOpacity"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Overlay Opacity %', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the opacity of the overlay.', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 70 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
+										{ 'tablet' === device && (
+											<Controller
+												name="popupOpacityTablet"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Overlay Opacity %', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the opacity of the overlay.', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 70 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
+										{ 'mobile' === device && (
+											<Controller
+												name="popupOpacityMobile"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Overlay Opacity %', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the opacity of the overlay.', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 70 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
 									</div>
 									<div className="ajaxify-admin__control-row">
-										<Controller
-											name="popupCornerRadius"
-											control={ control }
-											render={ ( { field: { onChange, value } } ) => (
-												<>
-													<RangeControl
-														label={ __( 'Popup Corner Radius (px)', 'wp-ajaxify-comments' ) }
-														value={ value }
-														onChange={ onChange }
-														min={ 0 }
-														max={ 100 }
-														step={ 1 }
-														help={ __( 'Adjust the corner radius of the overlay (in pixels).', 'wp-ajaxify-comments' ) }
-														color="var(--ajaxify-admin--color-main)"
-														trackColor="var(--ajaxify-admin--color-main)"
-														resetFallbackValue={ 5 }
-														allowReset={ true }
-													/>
-												</>
-											) }
-										/>
+										<div className="ajaxify-admin__control-devices">
+											<ResponsiveTabs
+												onChange={ ( newDevice ) => {
+													setDevice( newDevice );
+												} }
+												device={ device }
+											/>
+										</div>
+										{ 'desktop' === device && (
+											<Controller
+												name="popupCornerRadius"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Corner Radius (px)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the corner radius of the overlay (in pixels).', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 5 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
+										{ 'tablet' === device && (
+											<Controller
+												name="popupCornerRadiusTablet"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Corner Radius (px)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the corner radius of the overlay (in pixels).', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 5 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
+										{ 'mobile' === device && (
+											<Controller
+												name="popupCornerRadiusMobile"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Corner Radius (px)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the corner radius of the overlay (in pixels).', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 5 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
 									</div>
 									<div className="ajaxify-admin__control-row">
-										<Controller
-											name="popupMarginTop"
-											control={ control }
-											render={ ( { field: { onChange, value } } ) => (
-												<>
-													<RangeControl
-														label={ __( 'Popup Margin Top (px)', 'wp-ajaxify-comments' ) }
-														value={ value }
-														onChange={ onChange }
-														min={ 0 }
-														max={ 100 }
-														step={ 1 }
-														help={ __( 'Adjust the margin top value of the overlay (in pixels).', 'wp-ajaxify-comments' ) }
-														color="var(--ajaxify-admin--color-main)"
-														trackColor="var(--ajaxify-admin--color-main)"
-														resetFallbackValue={ 10 }
-														allowReset={ true }
-													/>
-												</>
-											) }
-										/>
+										<div className="ajaxify-admin__control-devices">
+											<ResponsiveTabs
+												onChange={ ( newDevice ) => {
+													setDevice( newDevice );
+												} }
+												device={ device }
+											/>
+										</div>
+										{ 'desktop' === device && (
+											<Controller
+												name="popupMarginTop"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Margin Top (px)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the margin top value of the overlay (in pixels).', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 10 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
+										{ 'tablet' === device && (
+											<Controller
+												name="popupMarginTopTablet"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Margin Top (px)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the margin top value of the overlay (in pixels).', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 10 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
+										{ 'mobile' === device && (
+											<Controller
+												name="popupMarginTopMobile"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Margin Top (px)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the margin top value of the overlay (in pixels).', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 10 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
 									</div>
 									<div className="ajaxify-admin__control-row">
-										<Controller
-											name="popupWidth"
-											control={ control }
-											render={ ( { field: { onChange, value } } ) => (
-												<>
-													<RangeControl
-														label={ __( 'Popup Width (%)', 'wp-ajaxify-comments' ) }
-														value={ value }
-														onChange={ onChange }
-														min={ 0 }
-														max={ 100 }
-														step={ 1 }
-														help={ __( 'Adjust the width value as a percentage.', 'wp-ajaxify-comments' ) }
-														color="var(--ajaxify-admin--color-main)"
-														trackColor="var(--ajaxify-admin--color-main)"
-														resetFallbackValue={ 30 }
-														allowReset={ true }
-													/>
-												</>
-											) }
+										<ResponsiveTabs
+											onChange={ ( newDevice ) => {
+												setDevice( newDevice );
+											} }
+											device={ device }
 										/>
+										{ 'desktop' === device && (
+											<Controller
+												name="popupWidth"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Width (%)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the width value as a percentage.', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 30 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
+										{ 'tablet' === device && (
+											<Controller
+												name="popupWidthTablet"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Width (%)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the width value as a percentage.', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 30 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
+										{ 'mobile' === device && (
+											<Controller
+												name="popupWidthMobile"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Width (%)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the width value as a percentage.', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 30 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
 									</div>
 									<div className="ajaxify-admin__control-row">
-										<Controller
-											name="popupPadding"
-											control={ control }
-											render={ ( { field: { onChange, value } } ) => (
-												<>
-													<RangeControl
-														label={ __( 'Popup Padding (px)', 'wp-ajaxify-comments' ) }
-														value={ value }
-														onChange={ onChange }
-														min={ 0 }
-														max={ 100 }
-														step={ 1 }
-														help={ __( 'Adjust the padding value of the popup in pixels.', 'wp-ajaxify-comments' ) }
-														color="var(--ajaxify-admin--color-main)"
-														trackColor="var(--ajaxify-admin--color-main)"
-														resetFallbackValue={ 5 }
-														allowReset={ true }
-													/>
-												</>
-											) }
+										<ResponsiveTabs
+											onChange={ ( newDevice ) => {
+												setDevice( newDevice );
+											} }
+											device={ device }
 										/>
+										{ 'desktop' === device && (
+											<Controller
+												name="popupPadding"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Padding (px)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the padding value of the popup in pixels.', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 5 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
+										{ 'tablet' === device && (
+											<Controller
+												name="popupPaddingTablet"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Padding (px)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the padding value of the popup in pixels.', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 5 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
+										{ 'mobile' === device && (
+											<Controller
+												name="popupPaddingMobile"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<RangeControl
+															label={ __( 'Popup Padding (px)', 'wp-ajaxify-comments' ) }
+															value={ value }
+															onChange={ onChange }
+															min={ 0 }
+															max={ 100 }
+															step={ 1 }
+															help={ __( 'Adjust the padding value of the popup in pixels.', 'wp-ajaxify-comments' ) }
+															color="var(--ajaxify-admin--color-main)"
+															trackColor="var(--ajaxify-admin--color-main)"
+															resetFallbackValue={ 5 }
+															allowReset={ true }
+														/>
+													</>
+												) }
+											/>
+										) }
 									</div>
 								</td>
 							</tr>
@@ -507,40 +799,120 @@ const Interface = ( props ) => {
 								<th scope="row">{ __( 'Popover Text Styles', 'wp-ajaxify-comments' ) }</th>
 								<td>
 									<div className="ajaxify-admin__control-row">
-										<Controller
-											name="popupTextFontSize"
-											control={ control }
-											rules={ { required: true } }
-											render={ ( { field: { onChange, value } } ) => (
-												<>
-													<TextControl
-														label={ __( 'Font Size', 'wp-ajaxify-comments' ) }
-														type="text"
-														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.popupFadeIn?.type,
-															'has-error': 'pattern' === errors.popupFadeIn?.type,
-															'is-required': true,
-														} ) }
-														help={ __( 'Font size (e.g. "14px", "1.1em")', 'wp-ajaxify-comments' ) }
-														aria-required="true"
-														value={ value }
-														onChange={ onChange }
-													/>
-													{ 'required' === errors.popupTextFontSize?.type && (
-														<Notice
-															message={ __(
-																'This is a required field.',
-																'wp-ajaxify-comments',
-															) }
-															status="error"
-															politeness="assertive"
-															inline={ false }
-															icon={ () => ( <AlertCircle /> ) }
-														/>
-													) }
-												</>
-											) }
+										<ResponsiveTabs
+											onChange={ ( newDevice ) => {
+												setDevice( newDevice );
+											} }
+											device={ device }
 										/>
+										{ 'desktop' === device && (
+											<Controller
+												name="popupTextFontSize"
+												control={ control }
+												rules={ { required: true } }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<TextControl
+															label={ __( 'Font Size', 'wp-ajaxify-comments' ) }
+															type="text"
+															className={ classNames( 'ajaxify-admin__text-control', {
+																'has-error': 'required' === errors.popupFadeIn?.type,
+																'has-error': 'pattern' === errors.popupFadeIn?.type,
+																'is-required': true,
+															} ) }
+															help={ __( 'Font size (e.g. "14px", "1.1em")', 'wp-ajaxify-comments' ) }
+															aria-required="true"
+															value={ value }
+															onChange={ onChange }
+														/>
+														{ 'required' === errors.popupTextFontSize?.type && (
+															<Notice
+																message={ __(
+																	'This is a required field.',
+																	'wp-ajaxify-comments',
+																) }
+																status="error"
+																politeness="assertive"
+																inline={ false }
+																icon={ () => ( <AlertCircle /> ) }
+															/>
+														) }
+													</>
+												) }
+											/>
+										) }
+										{ 'tablet' === device && (
+											<Controller
+												name="popupTextFontSizeTablet"
+												control={ control }
+												rules={ { required: true } }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<TextControl
+															label={ __( 'Font Size', 'wp-ajaxify-comments' ) }
+															type="text"
+															className={ classNames( 'ajaxify-admin__text-control', {
+																'has-error': 'required' === errors.popupFadeIn?.type,
+																'has-error': 'pattern' === errors.popupFadeIn?.type,
+																'is-required': true,
+															} ) }
+															help={ __( 'Font size (e.g. "14px", "1.1em")', 'wp-ajaxify-comments' ) }
+															aria-required="true"
+															value={ value }
+															onChange={ onChange }
+														/>
+														{ 'required' === errors.popupTextFontSize?.type && (
+															<Notice
+																message={ __(
+																	'This is a required field.',
+																	'wp-ajaxify-comments',
+																) }
+																status="error"
+																politeness="assertive"
+																inline={ false }
+																icon={ () => ( <AlertCircle /> ) }
+															/>
+														) }
+													</>
+												) }
+											/>
+										) }
+										{ 'mobile' === device && (
+											<Controller
+												name="popupTextFontSizeMobile"
+												control={ control }
+												rules={ { required: true } }
+												render={ ( { field: { onChange, value } } ) => (
+													<>
+														<TextControl
+															label={ __( 'Font Size', 'wp-ajaxify-comments' ) }
+															type="text"
+															className={ classNames( 'ajaxify-admin__text-control', {
+																'has-error': 'required' === errors.popupFadeIn?.type,
+																'has-error': 'pattern' === errors.popupFadeIn?.type,
+																'is-required': true,
+															} ) }
+															help={ __( 'Font size (e.g. "14px", "1.1em")', 'wp-ajaxify-comments' ) }
+															aria-required="true"
+															value={ value }
+															onChange={ onChange }
+														/>
+														{ 'required' === errors.popupTextFontSize?.type && (
+															<Notice
+																message={ __(
+																	'This is a required field.',
+																	'wp-ajaxify-comments',
+																) }
+																status="error"
+																politeness="assertive"
+																inline={ false }
+																icon={ () => ( <AlertCircle /> ) }
+															/>
+														) }
+													</>
+												) }
+											/>
+										) }
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
@@ -558,6 +930,24 @@ const Interface = ( props ) => {
 														leftOn={ true }
 														centerOn={ true }
 														rightOn={ true }
+													/>
+												</>
+											) }
+										/>
+									</div>
+									<div className="ajaxify-admin__control-row">
+										<Controller
+											name="popupVerticalAlign"
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
+												<>
+													<VerticalAlignmentGroup
+														alignment={ value }
+														onClick={ onChange }
+														label={ __( 'Vertical Alignment', 'wp-ajaxify-comments' ) }
+														verticalStartOn={ true }
+														verticalCenterOn={ true }
+														verticalEndOn={ true }
 													/>
 												</>
 											) }

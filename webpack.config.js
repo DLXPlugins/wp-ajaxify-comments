@@ -15,6 +15,7 @@ module.exports = ( env ) => {
 				'wpac-admin-lazy-load-js': './src/js/react/views/LazyLoad/index.js',
 				'wpac-admin-support-js': './src/js/react/views/Support/index.js',
 				'wpac-admin-integrations-js': './src/js/react/views/Integrations/index.js',
+				'wpac-frontend-css': './src/scss/frontend.scss',
 				'wpac-frontend-js': './src/js/frontend/index.js',
 				'wpac-frontend-idle-timer': './src/js/frontend/idle-timer.js',
 				'wpac-frontend-jquery-blockUI': './src/js/frontend/jquery.blockUI.js',

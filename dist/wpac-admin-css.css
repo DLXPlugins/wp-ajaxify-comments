@@ -4741,4 +4741,10 @@ p.components-base-control__help {
   display: block;
 }
 
+/* Responsive tabs */
+.wpac-responsive-tabs__tabs .components-button-group {
+  display: flex;
+  justify-content: flex-end;
+}
+
 /*# sourceMappingURL=wpac-admin-css.css.map*/

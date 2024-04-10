@@ -969,17 +969,13 @@ WPAC._InitIdleTimer = function() {
  * @return comments.
  */
 WPAC.RefreshComments = function( options ) {
-	// IF playground.net, return options.
-	if ( location.href.indexOf( 'playground.wordpress.net' ) > 0 ) {
-		return WPAC.LoadComments( url, options );
-	}
 
 	// Skip playground.net.
-	if ( WPAC._TestFallbackUrl( location.href ) && ! // playground  ) {
+	if ( WPAC._TestFallbackUrl( location.href ) ) {
 		WPAC._Debug(
 			'error',
 			"Fallback URL was detected (url: '%s'), cancel AJAX request",
-			url,
+			location.href,
 		);
 		return false;
 	}
@@ -994,12 +990,12 @@ WPAC.RefreshComments = function( options ) {
 	options = wpacHooks.applyFilters(
 		'wpacJSOptions',
 		options,
-		url,
+		location.href,
 		'RefreshComments',
 	);
 
 	// Users can pass options as first parameter to override selectors.
-	return WPAC.LoadComments( url, options );
+	return WPAC.LoadComments( location.href, options );
 };
 
 WPAC.LoadComments = function( url, options ) {
