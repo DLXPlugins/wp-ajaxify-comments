@@ -70,11 +70,13 @@ class Appearance {
 	 * Include admin scripts for the home screen.
 	 */
 	public function admin_scripts() {
+		$deps                   = require_once Functions::get_plugin_dir( 'dist/wpac-admin-appearance-js.asset.php' );
+		$deps['dependencies'][] = 'wpac-jquery-block-ui'; // Add the jQuery Block UI script as a dependency.
 		wp_enqueue_script(
 			'wpac-admin-appearance',
 			Functions::get_plugin_url( 'dist/wpac-admin-appearance-js.js' ),
-			array( 'wpac-jquery-block-ui' ),
-			Functions::get_plugin_version(),
+			$deps['dependencies'],
+			$deps['version'],
 			true
 		);
 		wp_enqueue_script(

@@ -112,11 +112,12 @@ class Lazy_Load {
 	 */
 	public function admin_scripts() {
 		$options = Options::get_options();
+		$deps   = require_once Functions::get_plugin_dir( 'dist/wpac-admin-lazy-load-js.asset.php' );
 		wp_enqueue_script(
 			'wpac-admin-lazy-load',
 			Functions::get_plugin_url( 'dist/wpac-admin-lazy-load-js.js' ),
-			array(),
-			Functions::get_plugin_version(),
+			$deps['dependencies'],
+			$deps['version'],
 			true
 		);
 		add_filter( 'ajaxify/comments/theme_color_palette', array( $this, 'theme_color_palette' ), 2, 1 );

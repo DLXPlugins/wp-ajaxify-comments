@@ -33,11 +33,12 @@ class Support {
 	 * Include admin scripts for the home screen.
 	 */
 	public function admin_scripts() {
+		$deps = require_once Functions::get_plugin_dir( 'dist/wpac-admin-support-js.asset.php' );
 		wp_enqueue_script(
 			'wpac-admin-support',
 			Functions::get_plugin_url( 'dist/wpac-admin-support-js.js' ),
-			array(),
-			Functions::get_plugin_version(),
+			$deps['dependencies'],
+			$deps['version'],
 			true
 		);
 		wp_localize_script(
