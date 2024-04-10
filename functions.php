@@ -184,6 +184,7 @@ function wpac_print_styles() {
 			--wpac-popup-width: <?php echo esc_html( wpac_get_option( 'popupWidth' ) ); ?>%;
 			--wpac-popup-padding: <?php echo esc_html( wpac_get_option( 'popupPadding' ) ); ?>px;
 			--wpac-popup-font-size: <?php echo esc_html( wpac_get_option( 'popupTextFontSize' ) ); ?>;
+			--wpac-popup-line-height: 1.2;
 		}
 		/* tablet styles */
 		@media screen and (max-width: 1024px) {
@@ -214,6 +215,7 @@ function wpac_print_styles() {
 			margin-top: var(--wpac-popup-margin-top);
 			padding: var(--wpac-popup-padding) !important;
 			font-size: var(--wpac-popup-font-size) !important;
+			line-height: var(--wpac-popup-line-height);
 			margin: 0 auto;
 		}
 	</style>

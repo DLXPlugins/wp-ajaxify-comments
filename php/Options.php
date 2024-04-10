@@ -200,6 +200,8 @@ class Options {
 			'selectorPostContainer'          => '',
 			'scrollSpeed'                    => 500,
 			'autoUpdateIdleTime'             => 0,
+			'popupOverlayBackgroundColor'    => '#000000',
+			'popupOverlayBackgroundOpacity'  => 0,
 			'popupBackgroundColorLoading'    => '#000000',
 			'popupTextColorLoading'          => '#ffffff',
 			'popupBackgroundColorSuccess'    => '#008000',

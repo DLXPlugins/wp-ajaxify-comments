@@ -2713,7 +2713,7 @@ WPAC._ShowMessage = function (message, type) {
     timeout: type == "loading" ? 0 : WPAC._Options.popupTimeout,
     centerY: false,
     centerX: true,
-    showOverlay: type == 'loading' || type == 'loadingPreview',
+    showOverlay: true,
     css: {
       width: 'var(--wpac-popup-width)',
       left: 'calc(50% - var(--wpac-popup-width) / 2)',
@@ -2732,8 +2732,8 @@ WPAC._ShowMessage = function (message, type) {
       'font-size': WPAC._Options.popupTextFontSize
     },
     overlayCSS: {
-      backgroundColor: '#000',
-      opacity: 0
+      backgroundColor: WPAC._Options.popupOverlayBackgroundColor,
+      opacity: WPAC._Options.popupOverlayBackgroundColorOpacity
     },
     baseZ: WPAC._Options.popupZindex
   });

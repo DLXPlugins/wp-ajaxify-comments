@@ -54,6 +54,10 @@ const showPreview = ( formValues, type ) => {
 		textColor = formValues.popupTextColorError;
 		message = __( 'There was an error posting your comment.', 'wp-ajaxify-comments' );
 	}
+	let topOffset = formValues.popupVerticalAlign === 'verticalStart' ? top + 'px' : 'unset';
+	if ( formValues.popupVerticalAlign === 'verticalCenter' ) {
+		topOffset = '45%';
+	}
 	jQuery.blockUI( {
 		message,
 		fadeIn: formValues.popupFadeIn,
@@ -61,11 +65,11 @@ const showPreview = ( formValues, type ) => {
 		timeout: formValues.popupTimeout,
 		centerY: false,
 		centerX: true,
-		showOverlay: ( type == 'loading' ),
+		showOverlay: true,
 		css: {
 			width: formValues.popupWidth + '%',
 			left: ( ( 100 - formValues.popupWidth ) / 2 ) + '%',
-			top: top + 'px',
+			top: topOffset,
 			border: 'none',
 			padding: formValues.popupPadding + 'px',
 			backgroundColor,
@@ -79,8 +83,8 @@ const showPreview = ( formValues, type ) => {
 			'font-size': formValues.popupTextFontSize,
 		},
 		overlayCSS: {
-			backgroundColor: '#000',
-			opacity: 0,
+			backgroundColor: formValues.popupOverlayBackgroundColor,
+			opacity: formValues.popupOverlayBackgroundOpacity,
 		},
 		baseZ: formValues.popupZindex,
 	} );
@@ -163,6 +167,8 @@ const Interface = ( props ) => {
 			popupTextColorSuccess: data.popupTextColorSuccess,
 			popupBackgroundColorError: data.popupBackgroundColorError,
 			popupTextColorError: data.popupTextColorError,
+			popupOverlayBackgroundColor: data.popupOverlayBackgroundColor,
+			popupOverlayBackgroundOpacity: data.popupOverlayBackgroundOpacity,
 			popupOpacity: data.popupOpacity,
 			popupOpacityTablet: data.popupOpacityTablet,
 			popupOpacityMobile: data.popupOpacityMobile,
@@ -270,6 +276,32 @@ const Interface = ( props ) => {
 												'Adjust the colors of the popup and launch a preview below.', 'wp-ajaxify-comments',
 											) }
 										</p>
+									</div>
+									<div className="ajaxify-admin__control-row">
+										<Controller
+											name="popupOverlayBackgroundColor"
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
+												<>
+													<ColorPickerControl
+														value={ value }
+														key={ 'popup-overlay-background-color' }
+														onChange={ ( slug, newValue, hex ) => {
+															onChange( hex );
+														} }
+														opacity={ getValues( 'popupOverlayBackgroundOpacity' ) }
+														label={ __( 'Overlay Background Color', 'wp-ajaxify-comments' ) }
+														defaultColors={ defaultPalette }
+														defaultColor={ '#000000' }
+														onOpacityChange={ ( opacity ) => {
+															setValue( 'popupOverlayBackgroundOpacity', opacity );
+														} }
+														alpha={ true }
+														slug={ 'popup-overlay-background-color' }
+													/>
+												</>
+											) }
+										/>
 									</div>
 									<div className="ajaxify-admin__control-row">
 										<Controller
