@@ -138,6 +138,20 @@ function wpac_enqueue_scripts() {
 	);
 
 	/**
+	 * Add frontend CSS.
+	 */
+	wp_enqueue_style(
+		'wpac-frontend',
+		Functions::get_plugin_url( 'dist/wpac-frontend-css.css' ),
+		array(),
+		Functions::get_plugin_version(),
+		'all'
+	);
+	?>
+
+	<?php
+
+	/**
 	 * Sunshine Confetti Plugin integration.
 	 *
 	 * @since 3.0.0
@@ -149,10 +163,63 @@ function wpac_enqueue_scripts() {
 		$wp_sunshine->enqueue_scripts( false );
 	}
 
+	add_action( 'wp_print_styles', 'wpac_print_styles' );
+
 	/**
 	 * Do action after scripts are enqueued.
 	 */
 	do_action( 'dlxplugins/ajaxify/comments/enqueue_scripts', $version, $in_footer );
+}
+
+/**
+ * Print inline styles for the frontend.
+ */
+function wpac_print_styles() {
+	?>
+	<style>
+		:root {
+			--wpac-popup-opacity: <?php echo esc_html( round( wpac_get_option( 'popupOpacity' ) / 100, 2 ) ); ?>;
+			--wpac-popup-corner-radius: <?php echo esc_html( wpac_get_option( 'popupCornerRadius' ) ); ?>px;
+			--wpac-popup-margin-top: <?php echo esc_html( wpac_get_option( 'popupMarginTop' ) ); ?>px;
+			--wpac-popup-width: <?php echo esc_html( wpac_get_option( 'popupWidth' ) ); ?>%;
+			--wpac-popup-padding: <?php echo esc_html( wpac_get_option( 'popupPadding' ) ); ?>px;
+			--wpac-popup-font-size: <?php echo esc_html( wpac_get_option( 'popupTextFontSize' ) ); ?>;
+			--wpac-popup-line-height: 1.2;
+		}
+		/* tablet styles */
+		@media screen and (max-width: 1024px) {
+			.wpac-overlay {
+				--wpac-popup-opacity: <?php echo esc_html( round( wpac_get_option( 'popupOpacityTablet' ) / 100, 2 ) ); ?>;
+				--wpac-popup-corner-radius: <?php echo esc_html( wpac_get_option( 'popupCornerRadiusTablet' ) ); ?>px;
+				--wpac-popup-margin-top: <?php echo esc_html( wpac_get_option( 'popupMarginTopTablet' ) ); ?>px;
+				--wpac-popup-width: <?php echo esc_html( wpac_get_option( 'popupWidthTablet' ) ); ?>%;
+				--wpac-popup-padding: <?php echo esc_html( wpac_get_option( 'popupPaddingTablet' ) ); ?>px;
+				--wpac-popup-font-size: <?php echo esc_html( wpac_get_option( 'popupTextFontSizeTablet' ) ); ?>;
+			}
+		}
+		/* mobile styles */
+		@media screen and (max-width: 768px) {
+			.wpac-overlay {
+				--wpac-popup-opacity: <?php echo esc_html( round( wpac_get_option( 'popupOpacityMobile' ) / 100, 2 ) ); ?>;
+				--wpac-popup-corner-radius: <?php echo esc_html( wpac_get_option( 'popupCornerRadiusMobile' ) ); ?>px;
+				--wpac-popup-margin-top: <?php echo esc_html( wpac_get_option( 'popupMarginTopMobile' ) ); ?>px;
+				--wpac-popup-width: <?php echo esc_html( wpac_get_option( 'popupWidthMobile' ) ); ?>%;
+				--wpac-popup-padding: <?php echo esc_html( wpac_get_option( 'popupPaddingMobile' ) ); ?>px;
+				--wpac-popup-font-size: <?php echo esc_html( wpac_get_option( 'popupTextFontSizeMobile' ) ); ?>;
+			}
+		}
+		.wpac-overlay {
+			display: none;
+			opacity: var(--wpac-popup-opacity);
+			border-radius: var(--wpac-popup-corner-radius);
+			margin-top: var(--wpac-popup-margin-top);
+			padding: var(--wpac-popup-padding) !important;
+			font-size: var(--wpac-popup-font-size) !important;
+			line-height: var(--wpac-popup-line-height);
+			margin: 0 auto;
+		}
+	</style>
+	<?php
 }
 
 function wpac_get_version() {
@@ -267,7 +334,7 @@ function wpac_initialize() {
 	$options['lazyLoadEnabled']     = Functions::is_lazy_loading_enabled( false, false );
 	$options['lazyLoadIntoElement'] = false;
 
-	// Determine where to load the lazy loading message (if not overlay).
+	// Determine where to load the lazy loading message (if not popup).
 	if ( Functions::is_lazy_loading_enabled( true, false ) ) {
 		$is_lazy_load_inline = 'inline' === $options['lazyLoadDisplay'];
 		if ( $is_lazy_load_inline ) {

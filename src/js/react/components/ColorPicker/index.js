@@ -192,11 +192,11 @@ const ColorPickerControl = ( props ) => {
 							<BaseControl key={ colorKey }>
 								<ColorPicker
 									key={ colorKey }
-									color={ color }
+									color={ getColor( color, opacity ) }
 									onChangeComplete={ ( newColor ) => {
 										const maybeNewColor = getColor( newColor.hex, opacity );
 										setColor( maybeNewColor );
-										onChange( slug, maybeNewColor );
+										onChange( slug, maybeNewColor, newColor.hex );
 									} }
 									disableAlpha
 									defaultValue={ defaultColor }
@@ -215,7 +215,7 @@ const ColorPickerControl = ( props ) => {
 											const newColor = getColor( color, opacityValue );
 											setOpacity( opacityValue );
 											setColor( newColor );
-											onChange( slug, newColor );
+											onChange( slug, newColor, color );
 											onOpacityChange( opacityValue );
 										} }
 										min={ 0 }
@@ -231,7 +231,7 @@ const ColorPickerControl = ( props ) => {
 									value={ color }
 									onChange={ ( newColor ) => {
 										const maybeNewColor = getColor( newColor );
-										onChange( slug, maybeNewColor );
+										onChange( slug, maybeNewColor, newColor );
 										setColor( maybeNewColor );
 									} }
 									disableCustomColors={ true }
@@ -241,7 +241,7 @@ const ColorPickerControl = ( props ) => {
 							<div className="components-color-clear-color">
 								<Button
 									onClick={ () => {
-										onChange( slug, defaultColor );
+										onChange( slug, defaultColor, defaultColor );
 										setColor( defaultColor );
 									} }
 								>
