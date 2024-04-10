@@ -183,7 +183,7 @@ function wpac_print_styles() {
 			--wpac-popup-margin-top: <?php echo esc_html( wpac_get_option( 'popupMarginTop' ) ); ?>px;
 			--wpac-popup-width: <?php echo esc_html( wpac_get_option( 'popupWidth' ) ); ?>%;
 			--wpac-popup-padding: <?php echo esc_html( wpac_get_option( 'popupPadding' ) ); ?>px;
-			--wpac-popup-font-size: <?php echo esc_html( wpac_get_option( 'popupTextFontSize' ) ); ?>px;
+			--wpac-popup-font-size: <?php echo esc_html( wpac_get_option( 'popupTextFontSize' ) ); ?>;
 		}
 		/* tablet styles */
 		@media screen and (max-width: 1024px) {
@@ -193,7 +193,7 @@ function wpac_print_styles() {
 				--wpac-popup-margin-top: <?php echo esc_html( wpac_get_option( 'popupMarginTopTablet' ) ); ?>px;
 				--wpac-popup-width: <?php echo esc_html( wpac_get_option( 'popupWidthTablet' ) ); ?>%;
 				--wpac-popup-padding: <?php echo esc_html( wpac_get_option( 'popupPaddingTablet' ) ); ?>px;
-				--wpac-popup-font-size: <?php echo esc_html( wpac_get_option( 'popupTextFontSizeTablet' ) ); ?>px;
+				--wpac-popup-font-size: <?php echo esc_html( wpac_get_option( 'popupTextFontSizeTablet' ) ); ?>;
 			}
 		}
 		/* mobile styles */
@@ -204,7 +204,7 @@ function wpac_print_styles() {
 				--wpac-popup-margin-top: <?php echo esc_html( wpac_get_option( 'popupMarginTopMobile' ) ); ?>px;
 				--wpac-popup-width: <?php echo esc_html( wpac_get_option( 'popupWidthMobile' ) ); ?>%;
 				--wpac-popup-padding: <?php echo esc_html( wpac_get_option( 'popupPaddingMobile' ) ); ?>px;
-				--wpac-popup-font-size: <?php echo esc_html( wpac_get_option( 'popupTextFontSizeMobile' ) ); ?>px;
+				--wpac-popup-font-size: <?php echo esc_html( wpac_get_option( 'popupTextFontSizeMobile' ) ); ?>;
 			}
 		}
 		.wpac-overlay {
