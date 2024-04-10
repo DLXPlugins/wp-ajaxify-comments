@@ -34,7 +34,7 @@ Moreover this plugin includes an option to automatically refresh the comments on
 
 === Quick Resource Links ===
 
-Here are some helpful links to help you get started with Ajaxify Comments (doc links):
+Here are some helpful links to help you get started with Ajaxify Comments (docs):
 
 1. <a href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/getting-started">Getting Started Guide</a>
 2. <a href="https://docs.dlxplugins.com/v/ajaxify-comments/advanced-topics/lazy-loading-comments">Lazy Loading Comments</a>
@@ -73,7 +73,7 @@ Ajaxify Comments is community supported. If you would like to add or change anyt
 
 * Post comments without a page reload.
 * Show error messages without a page reload.
-* Lazy load comments.
+* Lazy load comments, compatible with most themes, including block themes.
 * Automatically refresh comments.
 * Comment form validation.
 * Support for pages with multiple comment forms.
@@ -92,7 +92,7 @@ Please use the <a href="https://wordpress.org/support/plugin/wp-ajaxify-comments
 
 === Credits ===
 
-This plugin was initially developed by Jan Jonas starting in 2012. Company <a href="https://weweave.net/">weweave</a> maintained the plugin from 2014-2022.
+This plugin was initially developed by Jan Jonas starting in 2012. Company <a href="https://weweave.net/">weweave</a> maintained the plugin from 2014-2022. The plugin is currently supported by Ronald Huereca of <a href="https://dlxplugins.com">DLX Plugins</a>.
 
 == Installation ==
 
