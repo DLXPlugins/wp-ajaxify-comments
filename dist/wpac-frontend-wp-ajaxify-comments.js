@@ -803,6 +803,10 @@ WPAC._ShowMessage = function (message, type) {
     backgroundColor = WPAC._Options.popupBackgroundColorSuccess;
     textColor = WPAC._Options.popupTextColorSuccess;
   }
+  var topOffset = WPAC._Options.popupVerticalAlign === 'verticalStart' ? top + 'px' : 'unset';
+  if (WPAC._Options.popupVerticalAlign === 'verticalCenter') {
+    topOffset = '45%';
+  }
   jQuery.blockUI({
     blockMsgClass: "wpac-overlay",
     message: message,
@@ -813,9 +817,10 @@ WPAC._ShowMessage = function (message, type) {
     centerX: true,
     showOverlay: type == 'loading' || type == 'loadingPreview',
     css: {
-      width: WPAC._Options.popupWidth + '%',
-      left: (100 - WPAC._Options.popupWidth) / 2 + '%',
-      top: top + 'px',
+      width: 'var(--wpac-popup-width)',
+      left: 'calc(50% - var(--wpac-popup-width) / 2)',
+      top: topOffset,
+      bottom: WPAC._Options.popupVerticalAlign === 'verticalEnd' ? top + 'px' : 'unset',
       border: 'none',
       padding: WPAC._Options.popupPadding + 'px',
       backgroundColor: backgroundColor,
