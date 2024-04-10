@@ -699,10 +699,6 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 <h2 class="gb-headline gb-headline-2390ffd8 gb-headline-text">This last step demonstrates the admin panel settings</h2>
 <!-- /wp:generateblocks/headline -->
 
-<!-- wp:generateblocks/image {"uniqueId":"a1cee376","mediaId":34,"sizeSlug":"full","blockVersion":2} -->
-<figure class="gb-block-image gb-block-image-a1cee376"><img class="gb-image gb-image-a1cee376" src="https://wpac.local/wp-content/uploads/2024/04/dlx-000364@2x.png" alt="" title="dlx-000364@2x"/></figure>
-<!-- /wp:generateblocks/image -->
-
 <!-- wp:generateblocks/headline {"uniqueId":"86a02ce7","element":"p","blockVersion":3} -->
 <p class="gb-headline gb-headline-86a02ce7 gb-headline-text">Within the admin settings, you can configure lazy loading, the popover appearance, and the labels. </p>
 <!-- /wp:generateblocks/headline -->
