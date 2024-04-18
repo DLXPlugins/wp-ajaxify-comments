@@ -110,16 +110,18 @@ function wpac_enqueue_scripts() {
 				'jsuri',
 				'jQueryIdleTimer',
 				'waypoints',
+				'wp-hooks',
 			),
 			$version,
 			$in_footer
 		);
 	} elseif ( $is_debug || $is_singular || $force_scripts ) {
+		$deps = require_once Functions::get_plugin_dir( 'dist/wpac-frontend-js.asset.php' );
 		wp_enqueue_script(
 			'wpAjaxifyComments',
 			Functions::get_plugin_url( 'dist/wpac-frontend-js.js' ),
-			array( 'jquery' ),
-			$version,
+			$deps['dependencies'],
+			$deps['version'],
 			$in_footer
 		);
 	}
