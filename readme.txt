@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.5
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -123,6 +123,10 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Changelog ==
 
+= 2.2.2 =
+* Released 2024-04-21
+* Removing WP Hooks dependency to prevent extra JS from loading.
+
 = 2.2.1 =
 * Released 2024-04-17
 * Bug fix: Fixing JS error with missing wp hooks dependency.
@@ -211,5 +215,5 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Upgrade Notice ==
 
-= 2.2.1 =
-Bug fix: Fixing JS error with missing wp hooks dependency.
+= 2.2.2 =
+Removing WP Hooks dependency to prevent extra JS from loading.

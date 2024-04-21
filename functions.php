@@ -110,7 +110,6 @@ function wpac_enqueue_scripts() {
 				'jsuri',
 				'jQueryIdleTimer',
 				'waypoints',
-				'wp-hooks',
 			),
 			$version,
 			$in_footer

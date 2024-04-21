@@ -1,7 +1,3 @@
-import { createHooks } from '@wordpress/hooks';
-
-const wpacHooks = createHooks();
-
 WPAC._Options = WPAC._Options || {};
 
 WPAC._BodyRegex = new RegExp( '<body[^>]*>((.|\n|\r)*)</body>', 'i' );
@@ -493,15 +489,6 @@ WPAC.AttachForm = function( options ) {
 		options || {},
 	);
 
-	/**
-	 * Filter the options for Ajaxify Comments.
-	 *
-	 * @param { Object } options Options for Ajaxify Comments.
-	 * @param { string } url     The URL to load.
-	 * @param { string } caller  What function called the filter.
-	 */
-	options = wpacHooks.applyFilters( 'wpacJSOptions', options, '', 'AttachForm' );
-
 	if ( WPAC._Options.debug && WPAC._Options.commentsEnabled ) {
 		WPAC._Debug( 'info', 'Attach form...' );
 		WPAC._DebugSelector( 'comment form', options.selectorCommentForm );
@@ -977,20 +964,6 @@ WPAC.RefreshComments = function( options ) {
 		return false;
 	}
 
-	/**
-	 * Filter the options for Ajaxify Comments.
-	 *
-	 * @param { Object } options Options for Ajaxify Comments.
-	 * @param { string } url     The URL to load.
-	 * @param { string } caller  What function called the filter.
-	 */
-	options = wpacHooks.applyFilters(
-		'wpacJSOptions',
-		options,
-		location.href,
-		'RefreshComments',
-	);
-
 	// Users can pass options as first parameter to override selectors.
 	return WPAC.LoadComments( location.href, options );
 };
@@ -1027,20 +1000,6 @@ WPAC.LoadComments = function( url, options ) {
 			afterUpdateComments: WPACCallbacks.afterUpdateComments,
 		},
 		options || {},
-	);
-
-	/**
-	 * Filter the options for Ajaxify Comments.
-	 *
-	 * @param { Object } options Options for Ajaxify Comments.
-	 * @param { string } url     The URL to load.
-	 * @param { string } caller  What function called the filter.
-	 */
-	options = wpacHooks.applyFilters(
-		'wpacJSOptions',
-		options,
-		url,
-		'LoadComments',
 	);
 
 	// Save form data and focus
@@ -1250,24 +1209,6 @@ jQuery( function() {
 				}
 			}
 		}
-
-		/**
-		 * Filter the offset for lazy loading.
-		 *
-		 * @see: http://imakewebthings.com/waypoints/api/offset-option/
-		 *
-		 * @param { string } lazyLoadOffset       Offset for lazy loading.
-		 * @param { string } lazyLoadTrigger      The trigger type for lazy loading.
-		 * @param { number } lazyLoadScrollOffset The scroll offset for lazy loading.
-		 * @param { string } lazyLoadElement      The element for lazy loading.
-		 */
-		lazyLoadOffset = wpacHooks.applyFilters(
-			'wpacLazyLoadOffset',
-			lazyLoadOffset,
-			lazyLoadTrigger,
-			lazyLoadScrollOffset,
-			lazyLoadElement,
-		);
 
 		WPAC._Debug(
 			'info',
