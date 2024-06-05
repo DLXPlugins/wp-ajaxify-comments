@@ -1183,9 +1183,11 @@ h3.ajaxify-admin-content-subheading {
 .ajaxify-comments-spinner__preview-label {
 	display: inline-block;
 	position: absolute;
-	top: 10px;
-	left: 10px;
-	color: var( --ajaxify-comments-spinner-label-color, #FFFFFF );
+	top: 0;
+	left: 0;
+	padding: 8px 12px;
+	color: #FFF;
+	background: #333;
 	letter-spacing: 0.1em;
 }
 

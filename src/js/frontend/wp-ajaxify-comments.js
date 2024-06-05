@@ -1158,10 +1158,6 @@ jQuery( function() {
 				const lazyLoadContentClone = jQuery.clone( lazyLoadContent );
 				lazyLoadContentClone.id = 'wpac-lazy-load-content-clone';
 
-				// Add display block and opacity 1.
-				lazyLoadContentClone.style.display = 'block';
-				lazyLoadContentClone.style.opacity = '1';
-				lazyLoadContentClone.style.visibility = 'visible';
 
 				// Determine trigger if button.
 				if ( 'button' === lazyLoadInlineType ) {

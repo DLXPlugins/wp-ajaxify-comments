@@ -24,7 +24,6 @@ class Lazy_Load {
 	 * Class runner.
 	 */
 	public function run() {
-		//add_action( 'comment_form_before', array( $this, 'output_spinner_html' ) );
 		add_action( 'wp_footer', array( $this, 'output_spinner_html' ) );
 		add_action( 'wp_footer', array( $this, 'output_skeleton_html' ) );
 		add_action( 'wp_footer', array( $this, 'output_shortcode_html' ) );
@@ -220,6 +219,7 @@ class Lazy_Load {
 
 		// Build CSS classes for wrapper.
 		$spinner_wrapper_classes = array(
+			'ajaxify-comments-spinner__wrapper-frontend',
 			'ajaxify-comments-spinner__wrapper',
 			'ajaxify-comments-spinner__layout--' . $options['lazyLoadInlineSpinnerLayoutType'],
 			'ajaxify-comments-spinner__alignment--' . $options['lazyLoadInlineSpinnerLayoutAlignment'],
