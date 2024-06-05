@@ -148,9 +148,16 @@ function wpac_enqueue_scripts() {
 		Functions::get_plugin_version(),
 		'all'
 	);
-	?>
-
-	<?php
+	// Load lazy loading styles.
+	if ( Functions::is_lazy_loading_enabled( true, false ) ) {
+		wp_enqueue_style(
+			'wpac-admin-lazy-load',
+			Functions::get_plugin_url( 'dist/wpac-lazy-load-css.css' ),
+			array(),
+			Functions::get_plugin_version(),
+			'all'
+		);
+	}
 
 	/**
 	 * Sunshine Confetti Plugin integration.
