@@ -335,7 +335,7 @@ function wpac_initialize() {
 	$options['lazyLoadEnabled']     = Functions::is_lazy_loading_enabled( false, false );
 	$options['lazyLoadIntoElement'] = false;
 
-	// Determine where to load the lazy loading message (if not popup).
+	// Determine where to load the lazy loading message (if not overlay).
 	if ( Functions::is_lazy_loading_enabled( true, false ) ) {
 		$is_lazy_load_inline = 'inline' === $options['lazyLoadDisplay'];
 		if ( $is_lazy_load_inline ) {
