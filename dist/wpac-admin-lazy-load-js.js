@@ -3300,7 +3300,7 @@ var Interface = function Interface(props) {
         value = _ref6$field.value;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Inline Display Location', 'wp-ajaxify-comments'),
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Choose where you would like the loading message to appear on the page. Load in the comments section, or choose a custom element.', 'wp-ajaxify-comments'),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Choose where you would like the loading message to appear on the page. Load in the comments section, or choose a custom element. If element is chosen, the comments will load within the element.', 'wp-ajaxify-comments'),
         value: value,
         onChange: onChange,
         options: [{

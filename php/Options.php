@@ -327,7 +327,7 @@ class Options {
 			'lazyLoadInlineButtonLineHeight'               => 1.5,
 			'lazyLoadInlineButtonFontWeight'               => 600,
 			'lazyLoadInlineButtonFontFamily'               => 'inherit',
-			'lazyLoadInlineButtonAlign' 			  => 'center',
+			'lazyLoadInlineButtonAlign'                    => 'center',
 			/*
 			--ajaxify-comments-loading-button-background-color: #333;
 		--ajaxify-comments-loading-button-background-color-hover: #444;

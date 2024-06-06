@@ -1,3 +1,4 @@
+@import 'breakpoints-mixin.scss';
 @keyframes ajaxify-lazy-rotate {
 	100% {
 		transform: rotate(360deg);
@@ -221,6 +222,10 @@
 	--ajaxify-comments-loading-button-font-weight: 600;
 	--ajaxify-comments-loading-button-font-family: inherit;
 	--ajaxify-comments-loading-button-align: center;
+	--ajaxify-comments-loading-button-margin-top: 16px;
+	--ajaxify-comments-loading-button-margin-right: 0;
+	--ajaxify-comments-loading-button-margin-bottom: 16px;
+	--ajaxify-comments-loading-button-margin-left: 0;
  }
 .ajaxify-comments-loading-button,
 .ajaxify-comments-loading-button-wrapper {
@@ -250,10 +255,8 @@
 	font-weight: var( --ajaxify-comments-loading-button-font-weight );
 	line-height: var( --ajaxify-comments-loading-button-line-height );
 	font-family: var( --ajaxify-comments-loading-button-font-family );
+	margin: var( --ajaxify-comments-loading-button-margin-top ) var( --ajaxify-comments-loading-button-margin-right ) var( --ajaxify-comments-loading-button-margin-bottom ) var( --ajaxify-comments-loading-button-margin-left );
 	transition: all 0.3s ease-in-out;
-}
-.ajaxify-comments-loading-button.ajaxify-btn-reset {
-	
 }
 .ajaxify-comments-loading-button:not(.ajaxify-has-no-styles):hover {
 	background-color: var( --ajaxify-comments-loading-button-background-color-hover );
@@ -264,6 +267,14 @@
 .ajaxify-comments-loading-button.ajaxify-is-transparent {
 	background-color: transparent;
 }
+.ajaxify-comments-loading-button.ajaxify-is-transparent:focus,
 .ajaxify-comments-loading-button.ajaxify-is-transparent:hover {
 	background-color: transparent;
+}
+/* Make Button full-width for small devices */
+.ajaxify-comments-loading-button:not(.ajaxify-has-no-styles) {
+	width: 100%;
+	@include respond-to(small) {
+		width: inherit;
+	}
 }

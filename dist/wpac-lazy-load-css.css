@@ -1,6 +1,9 @@
 /*!**************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/scss/lazy-load.scss ***!
   \**************************************************************************************************************************************************************************/
+/* Responsive styles - In hindsight, should've used mobile-first */
+/* Mixin from: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/ */
+/* It's only used here, so no external file for mixin? */
 @keyframes ajaxify-lazy-rotate {
   100% {
     transform: rotate(360deg);
@@ -225,6 +228,10 @@
   --ajaxify-comments-loading-button-font-weight: 600;
   --ajaxify-comments-loading-button-font-family: inherit;
   --ajaxify-comments-loading-button-align: center;
+  --ajaxify-comments-loading-button-margin-top: 16px;
+  --ajaxify-comments-loading-button-margin-right: 0;
+  --ajaxify-comments-loading-button-margin-bottom: 16px;
+  --ajaxify-comments-loading-button-margin-left: 0;
 }
 
 .ajaxify-comments-loading-button,
@@ -257,6 +264,7 @@
   font-weight: var(--ajaxify-comments-loading-button-font-weight);
   line-height: var(--ajaxify-comments-loading-button-line-height);
   font-family: var(--ajaxify-comments-loading-button-font-family);
+  margin: var(--ajaxify-comments-loading-button-margin-top) var(--ajaxify-comments-loading-button-margin-right) var(--ajaxify-comments-loading-button-margin-bottom) var(--ajaxify-comments-loading-button-margin-left);
   transition: all 0.3s ease-in-out;
 }
 
@@ -271,8 +279,19 @@
   background-color: transparent;
 }
 
+.ajaxify-comments-loading-button.ajaxify-is-transparent:focus,
 .ajaxify-comments-loading-button.ajaxify-is-transparent:hover {
   background-color: transparent;
+}
+
+/* Make Button full-width for small devices */
+.ajaxify-comments-loading-button:not(.ajaxify-has-no-styles) {
+  width: 100%;
+}
+@media (min-width: 30em) {
+  .ajaxify-comments-loading-button:not(.ajaxify-has-no-styles) {
+    width: inherit;
+  }
 }
 
 /*# sourceMappingURL=wpac-lazy-load-css.css.map*/

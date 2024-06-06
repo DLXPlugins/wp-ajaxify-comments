@@ -406,7 +406,7 @@ const Interface = ( props ) => {
 														<>
 															<SelectControl
 																label={ __( 'Inline Display Location', 'wp-ajaxify-comments' ) }
-																help={ __( 'Choose where you would like the loading message to appear on the page. Load in the comments section, or choose a custom element.', 'wp-ajaxify-comments' ) }
+																help={ __( 'Choose where you would like the loading message to appear on the page. Load in the comments section, or choose a custom element. If element is chosen, the comments will load within the element.', 'wp-ajaxify-comments' ) }
 																value={ value }
 																onChange={ onChange }
 																options={ [

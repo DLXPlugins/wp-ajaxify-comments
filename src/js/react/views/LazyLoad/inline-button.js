@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, RangeControl, ToggleControl, TextControl, BaseControl, PanelBody, Popover } from '@wordpress/components';
+import { Button, ButtonGroup, RangeControl, ToggleControl, TextControl, BaseControl, PanelBody, Popover, SelectControl } from '@wordpress/components';
 import { AlertCircle, Eye } from 'lucide-react';
 import { __ } from '@wordpress/i18n';
 import { Controller } from 'react-hook-form';
@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import AlignmentGroup from '../../components/Alignment';
 import ColorPickerControl from '../../components/ColorPicker';
 import Notice from '../../components/Notice';
+import { on } from 'process';
 
 const defaultPalette = wpacAdminLazyLoad.palette;
 
@@ -79,9 +80,9 @@ const InlineButtonOptions = ( props ) => {
 							},
 						)
 					}
-					label={ __( 'Load Comments', 'wp-ajaxify-comments' ) }
+					label={ lazyLoadInlineButtonLabel }
 				>
-					{ __( 'Load Comments', 'wp-ajaxify-comments' ) }
+					{ lazyLoadInlineButtonLabel }
 				</Button>
 			</>
 		);
@@ -189,7 +190,7 @@ const InlineButtonOptions = ( props ) => {
 						<div className="ajaxify-button-designer__sidebar-body">
 							<PanelBody
 								title={ __( 'Appearance', 'wp-ajaxify-comments' ) }
-								initialOpen={ true }
+								initialOpen={ false }
 							>
 								<div className="ajaxify-admin__control-row">
 									<BaseControl
@@ -239,7 +240,7 @@ const InlineButtonOptions = ( props ) => {
 								</div>
 								<div className="ajaxify-admin__control-row">
 									<Controller
-										name="lazyLoadInlineborderWidth"
+										name="lazyLoadInlineButtonBorderWidth"
 										control={ control }
 										render={ ( { field: { onChange, value } } ) => (
 											<>
@@ -259,10 +260,84 @@ const InlineButtonOptions = ( props ) => {
 										) }
 									/>
 								</div>
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineButtonBorderRadius"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<RangeControl
+													label={ __( 'Border Radius', 'wp-ajaxify-comments' ) }
+													value={ value }
+													onChange={ onChange }
+													min={ 0 }
+													max={ 60 }
+													step={ 1 }
+													help={ __( 'Set the radius of the border.', 'wp-ajaxify-comments' ) }
+													color="var(--ajaxify-admin--color-main)"
+													trackColor="var(--ajaxify-admin--color-main)"
+													resetFallbackValue={ 0 }
+												/>
+											</>
+										) }
+									/>
+									<div className="ajaxify-admin__control-row">
+										<Controller
+											name="lazyLoadInlineButtonPaddingTop"
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
+												<>
+													<RangeControl
+														label={ __( 'Vertical Padding', 'wp-ajaxify-comments' ) }
+														value={ value }
+														onChange={ ( newValue ) => {
+															setValue( 'lazyLoadInlineButtonPaddingTop', newValue );
+															setValue( 'lazyLoadInlineButtonPaddingBottom', newValue );
+															onChange( newValue );
+														} }
+														min={ 0 }
+														max={ 60 }
+														step={ 1 }
+														help={ __( 'Set the padding of the top and bottom of the button.', 'wp-ajaxify-comments' ) }
+														color="var(--ajaxify-admin--color-main)"
+														trackColor="var(--ajaxify-admin--color-main)"
+														resetFallbackValue={ 0 }
+													/>
+												</>
+											) }
+										/>
+									</div>
+									<div className="ajaxify-admin__control-row">
+										<Controller
+											name="lazyLoadInlineButtonPaddingRight"
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
+												<>
+													<RangeControl
+														label={ __( 'Horizontal Padding', 'wp-ajaxify-comments' ) }
+														value={ value }
+														onChange={ ( newValue ) => {
+															setValue( 'lazyLoadInlineButtonPaddingRight', newValue );
+															setValue( 'lazyLoadInlineButtonPaddingLeft', newValue );
+															onChange( newValue );
+														} }
+														min={ 0 }
+														max={ 60 }
+														step={ 1 }
+														help={ __( 'Set the padding of the left and right of the button.', 'wp-ajaxify-comments' ) }
+														color="var(--ajaxify-admin--color-main)"
+														trackColor="var(--ajaxify-admin--color-main)"
+														resetFallbackValue={ 0 }
+													/>
+												</>
+											) }
+										/>
+									</div>
+								</div>
 							</PanelBody>
 							<PanelBody
 								title={ __( 'Colors', 'wp-ajaxify-comments' ) }
-								initialOpen={ true }
+								initialOpen={ false }
 							>
 								<div className="ajaxify-admin__control-row">
 									<Controller
@@ -392,48 +467,110 @@ const InlineButtonOptions = ( props ) => {
 								</div>
 							</PanelBody>
 							<PanelBody
-								title={ __( 'Spacing', 'wp-ajaxify-comments' ) }
-								initialOpen={ false }
-							>
-								Spacing
-							</PanelBody>
-							<PanelBody
-								title={ __( 'Colors', 'wp-ajaxify-comments' ) }
+								title={ __( 'Typography', 'wp-ajaxify-comments' ) }
 								initialOpen={ false }
 							>
 								<div className="ajaxify-admin__control-row">
 									<Controller
-										name="lazyLoadInlineButtonBackgroundColor"
+										name="lazyLoadInlineButtonFontSize"
 										control={ control }
 										render={ ( { field: { onChange, value } } ) => (
 											<>
-												<ColorPickerControl
+												<RangeControl
+													label={ __( 'Font Size', 'wp-ajaxify-comments' ) }
 													value={ value }
-													key={ 'inline-button-background-color' }
-													onChange={ ( slug, newValue ) => {
-														onChange( newValue );
-													} }
-													label={ __( 'Background Color', 'wp-ajaxify-comments' ) }
-													defaultColors={ defaultPalette }
-													defaultColor={ '#000000' }
-													slug={ 'inline-button-background-color' }
-													alpha={ true }
+													onChange={ onChange }
+													min={ 10 }
+													max={ 60 }
+													step={ 1 }
+													help={ __( 'Set the font size of the button.', 'wp-ajaxify-comments' ) }
+													color="var(--ajaxify-admin--color-main)"
+													trackColor="var(--ajaxify-admin--color-main)"
+													resetFallbackValue={ 16 }
+												/>
+											</>
+										) }
+									/>
+								</div>
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineButtonLineHeight"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<RangeControl
+													label={ __( 'Line Height', 'wp-ajaxify-comments' ) }
+													value={ value }
+													onChange={ onChange }
+													min={ 1 }
+													max={ 3 }
+													step={ 0.1 }
+													help={ __( 'Set the line height of the button.', 'wp-ajaxify-comments' ) }
+													color="var(--ajaxify-admin--color-main)"
+													trackColor="var(--ajaxify-admin--color-main)"
+													resetFallbackValue={ 1.5 }
+												/>
+											</>
+										) }
+									/>
+								</div>
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineButtonFontWeight"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<SelectControl
+													label={ __( 'Font Weight', 'wp-ajaxify-comments' ) }
+													value={ value }
+													onChange={ onChange }
+													options={ [
+														{
+															label: '100',
+															value: 100,
+														},
+														{
+															label: '200',
+															value: 200,
+														},
+														{
+															label: '300',
+															value: 300,
+														},
+														{
+															label: '400',
+															value: 400,
+														},
+														{
+															label: '500',
+															value: 500,
+														},
+														{
+															label: '600',
+															value: 600,
+														},
+														{
+															label: '700',
+															value: 700,
+														},
+														{
+															label: '800',
+															value: 800,
+														},
+														{
+															label: '900',
+															value: 900,
+														},
+													] }
 												/>
 											</>
 										) }
 									/>
 								</div>
 							</PanelBody>
-							<PanelBody
-								title={ __( 'Spacing', 'wp-ajaxify-comments' ) }
-								initialOpen={ false }
-							>
-								Spacing
-							</PanelBody>
 						</div>
 					</div>
 				</div>
-				
 			</div>
 		</>
 	);

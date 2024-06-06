@@ -54,13 +54,13 @@ class Lazy_Load {
 			$button_classes[] = 'ajaxify-has-no-styles';
 		} else {
 			$button_classes[] = 'ajaxify-btn-reset';
-		}
-		if ( 'transparent' === $options['lazyLoadInlineButtonAppearance'] ) {
-			$button_classes[] = 'ajaxify-is-transparent';
-		} elseif ( 'solid' === $options['lazyLoadInlineButtonAppearance'] ) {
-			$button_classes[] = 'ajaxify-is-solid';
-		}
 
+			if ( 'transparent' === $options['lazyLoadInlineButtonAppearance'] ) {
+				$button_classes[] = 'ajaxify-is-transparent';
+			} elseif ( 'solid' === $options['lazyLoadInlineButtonAppearance'] ) {
+				$button_classes[] = 'ajaxify-is-solid';
+			}
+		}
 		?>
 		<div id="wpac-lazy-load-content" aria-hidden="true">
 			<style>
