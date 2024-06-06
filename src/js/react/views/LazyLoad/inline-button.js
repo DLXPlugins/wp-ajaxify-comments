@@ -41,7 +41,7 @@ const InlineButtonOptions = ( props ) => {
 		lazyLoadInlineButtonLineHeight,
 		lazyLoadInlineButtonFontWeight,
 		lazyLoadInlineButtonFontFamily,
-		lazyLoadInlineButtonAlignment,
+		lazyLoadInlineButtonAlign,
 	} = getValues();
 
 	const getInlineButton = () => {
@@ -73,7 +73,10 @@ const InlineButtonOptions = ( props ) => {
 					className={
 						classNames(
 							'ajaxify-btn-reset ajaxify-comments-loading-button',
-							{}
+							{
+								'ajaxify-is-solid': 'solid' === lazyLoadInlineButtonAppearance,
+								'ajaxify-is-transparent': 'transparent' === lazyLoadInlineButtonAppearance,
+							},
 						)
 					}
 					label={ __( 'Load Comments', 'wp-ajaxify-comments' ) }
@@ -163,6 +166,13 @@ const InlineButtonOptions = ( props ) => {
 		</>
 	);
 
+	// Get button preview wrapper classes.
+	const buttonWrapperClasses = classNames( 'ajaxify-button-designer__preview', {
+		'ajaxify-align-left': 'left' === lazyLoadInlineButtonAlign,
+		'ajaxify-align-center': 'center' === lazyLoadInlineButtonAlign,
+		'ajaxify-align-right': 'right' === lazyLoadInlineButtonAlign,
+	} );
+
 	const getButtonDesigner = () => (
 		<>
 			<div className="ajaxify-button-designer">
@@ -172,38 +182,192 @@ const InlineButtonOptions = ( props ) => {
 					</h3>
 				</div>
 				<div className="ajaxify-button-designer__body">
-					<div className="ajaxify-button-designer__preview">
+					<div className={ buttonWrapperClasses }>
 						{ getInlineButton() }
 					</div>
 					<div className="ajaxify-button-designer__sidebar">
 						<div className="ajaxify-button-designer__sidebar-body">
 							<PanelBody
-								title={ __( 'Button Options', 'wp-ajaxify-comments' ) }
+								title={ __( 'Appearance', 'wp-ajaxify-comments' ) }
 								initialOpen={ true }
 							>
-								<BaseControl
-									label={ __( 'Button Style', 'wp-ajaxify-comments' ) }
-									id="ajaxify-button-designer__button-style"
-								>
-									<ButtonGroup className="ajaxify-button-designer__button-group">
-										<Button
-											variant="primary" isPressed={ true }
-										>
-											{ __( 'Rounded', 'wp-ajaxify-comments' ) }
-										</Button>
-										<Button
-											variant="primary" isPressed={ false }
-										>
-											{ __( 'Rectangular', 'wp-ajaxify-comments' ) }
-										</Button>
-									</ButtonGroup>
-								</BaseControl>
+								<div className="ajaxify-admin__control-row">
+									<BaseControl
+										label={ __( 'Button Style', 'wp-ajaxify-comments' ) }
+										id="ajaxify-button-designer__button-style"
+									>
+										<ButtonGroup className="ajaxify-button-designer__button-group">
+											<Button
+												variant="secondary" isPressed={ 'solid' === lazyLoadInlineButtonAppearance }
+												onClick={ () => {
+													setValue( 'lazyLoadInlineButtonAppearance', 'solid' );
+												} }
+											>
+												{ __( 'Solid', 'wp-ajaxify-comments' ) }
+											</Button>
+											<Button
+												variant="secondary" isPressed={ 'transparent' === lazyLoadInlineButtonAppearance }
+												onClick={ () => {
+													setValue( 'lazyLoadInlineButtonAppearance', 'transparent' );
+												} }
+											>
+												{ __( 'Transparent', 'wp-ajaxify-comments' ) }
+											</Button>
+										</ButtonGroup>
+									</BaseControl>
+								</div>
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineButtonAlign"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<AlignmentGroup
+													alignment={ value }
+													onClick={ onChange }
+													label={ __( 'Layout Alignment', 'wp-ajaxify-comments' ) }
+													alignLeftLabel={ __( 'Left', 'wp-ajaxify-comments' ) }
+													alignCenterLabel={ __( 'Center', 'wp-ajaxify-comments' ) }
+													alignRightLabel={ __( 'Right', 'wp-ajaxify-comments' ) }
+													leftOn={ true }
+													centerOn={ true }
+													rightOn={ true }
+												/>
+											</>
+										) }
+									/>
+								</div>
 							</PanelBody>
 							<PanelBody
 								title={ __( 'Colors', 'wp-ajaxify-comments' ) }
-								initialOpen={ false }
+								initialOpen={ true }
 							>
-								Colors
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineButtonBackgroundColor"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<ColorPickerControl
+													value={ value }
+													key={ 'inline-button-background-color' }
+													onChange={ ( slug, newValue ) => {
+														onChange( newValue );
+													} }
+													label={ __( 'Background Color', 'wp-ajaxify-comments' ) }
+													defaultColors={ defaultPalette }
+													defaultColor={ '#000000' }
+													slug={ 'inline-button-background-color' }
+												/>
+											</>
+										) }
+									/>
+								</div>
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineButtonBackgroundColorHover"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<ColorPickerControl
+													value={ value }
+													key={ 'inline-button-background-color-hover' }
+													onChange={ ( slug, newValue ) => {
+														onChange( newValue );
+													} }
+													label={ __( 'Background Color on Hover', 'wp-ajaxify-comments' ) }
+													defaultColors={ defaultPalette }
+													defaultColor={ '#000000' }
+													slug={ 'inline-button-background-color-hover' }
+												/>
+											</>
+										) }
+									/>
+								</div>
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineButtonTextColor"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<ColorPickerControl
+													value={ value }
+													key={ 'inline-button-text-color' }
+													onChange={ ( slug, newValue ) => {
+														onChange( newValue );
+													} }
+													label={ __( 'Text Color', 'wp-ajaxify-comments' ) }
+													defaultColors={ defaultPalette }
+													defaultColor={ '#000000' }
+													slug={ 'inline-button-text-color' }
+												/>
+											</>
+										) }
+									/>
+								</div>
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineButtonTextColorHover"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<ColorPickerControl
+													value={ value }
+													key={ 'inline-button-text-color-hover' }
+													onChange={ ( slug, newValue ) => {
+														onChange( newValue );
+													} }
+													label={ __( 'Text Color on Hover', 'wp-ajaxify-comments' ) }
+													defaultColors={ defaultPalette }
+													defaultColor={ '#000000' }
+													slug={ 'inline-button-text-color-hover' }
+												/>
+											</>
+										) }
+									/>
+								</div>
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineButtonBorderColor"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<ColorPickerControl
+													value={ value }
+													key={ 'inline-button-border-color' }
+													onChange={ ( slug, newValue ) => {
+														onChange( newValue );
+													} }
+													label={ __( 'Border Color', 'wp-ajaxify-comments' ) }
+													defaultColors={ defaultPalette }
+													defaultColor={ '#000000' }
+													slug={ 'inline-button-border-color' }
+												/>
+											</>
+										) }
+									/>
+								</div>
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineButtonBorderColorHover"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<ColorPickerControl
+													value={ value }
+													key={ 'inline-button-border-color-hover' }
+													onChange={ ( slug, newValue ) => {
+														onChange( newValue );
+													} }
+													label={ __( 'Border Color on Hover', 'wp-ajaxify-comments' ) }
+													defaultColors={ defaultPalette }
+													defaultColor={ '#000000' }
+													slug={ 'inline-button-border-color-hover' }
+												/>
+											</>
+										) }
+									/>
+								</div>
 							</PanelBody>
 							<PanelBody
 								title={ __( 'Spacing', 'wp-ajaxify-comments' ) }

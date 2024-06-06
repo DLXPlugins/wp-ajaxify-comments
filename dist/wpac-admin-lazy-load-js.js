@@ -3077,7 +3077,7 @@ var Interface = function Interface(props) {
         lazyLoadInlineButtonLineHeight: data.lazyLoadInlineButtonLineHeight,
         lazyLoadInlineButtonFontWeight: data.lazyLoadInlineButtonFontWeight,
         lazyLoadInlineButtonFontFamily: data.lazyLoadInlineButtonFontFamily,
-        lazyLoadInlineButtonAlignment: data.lazyLoadInlineButtonAlignment
+        lazyLoadInlineButtonAlign: data.lazyLoadInlineButtonAlign
       }
     }),
     register = _useForm.register,

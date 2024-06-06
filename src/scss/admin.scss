@@ -1375,9 +1375,9 @@ p.components-base-control__help {
 
 	.ajaxify-button-designer__sidebar-body {
 		position: relative;
-		min-height: 300px;
-		max-height: 300px;
-		overflow: hidden scroll;
+		min-height: 450px;
+		max-height: 450px;
+		overflow-y: auto;
 		z-index: 1000;
 	}
 	

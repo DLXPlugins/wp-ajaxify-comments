@@ -55,6 +55,11 @@ class Lazy_Load {
 		} else {
 			$button_classes[] = 'ajaxify-btn-reset';
 		}
+		if ( 'transparent' === $options['lazyLoadInlineButtonAppearance'] ) {
+			$button_classes[] = 'ajaxify-is-transparent';
+		} elseif ( 'solid' === $options['lazyLoadInlineButtonAppearance'] ) {
+			$button_classes[] = 'ajaxify-is-solid';
+		}
 
 		?>
 		<div id="wpac-lazy-load-content" aria-hidden="true">
@@ -79,7 +84,13 @@ class Lazy_Load {
 					--ajaxify-comments-loading-button-align: <?php echo esc_html( $options['lazyLoadInlineButtonAlign'] ); ?>;
 				}
 			</style>
-			<div class="ajaxify-comments-loading-button-wrapper">
+			<?php
+			$wrapper_classes = array(
+				'ajaxify-comments-loading-button-wrapper',
+				'ajaxify-align-' . $options['lazyLoadInlineButtonAlign'],
+			);
+			?>
+			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>">
 				<?php
 				$button_text = sanitize_text_field( $options['lazyLoadInlineLoadingButtonLabel'] );
 				if ( ! empty( $button_text ) ) :

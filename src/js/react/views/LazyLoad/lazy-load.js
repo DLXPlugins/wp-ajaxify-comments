@@ -154,7 +154,7 @@ const Interface = ( props ) => {
 			lazyLoadInlineButtonLineHeight: data.lazyLoadInlineButtonLineHeight,
 			lazyLoadInlineButtonFontWeight: data.lazyLoadInlineButtonFontWeight,
 			lazyLoadInlineButtonFontFamily: data.lazyLoadInlineButtonFontFamily,
-			lazyLoadInlineButtonAlignment: data.lazyLoadInlineButtonAlignment,
+			lazyLoadInlineButtonAlign: data.lazyLoadInlineButtonAlign,
 		},
 	} );
 	const formValues = useWatch( { control } );

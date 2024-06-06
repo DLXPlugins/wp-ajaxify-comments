@@ -226,7 +226,19 @@
 .ajaxify-comments-loading-button-wrapper {
 	display: flex;
 	justify-content: center;
-	align-items: var( --ajaxify-comments-loading-button-align );
+	align-items: center;
+}
+.ajaxify-button-designer__preview,
+.ajaxify-comments-loading-button-wrapper {
+	&.ajaxify-align-left {
+		justify-content: flex-start;
+	}
+	&.ajaxify-align-right {
+		justify-content: flex-end;
+	}
+	&.ajaxify-align-center {
+		justify-content: center;
+	}
 }
 .ajaxify-comments-loading-button:not(.ajaxify-has-no-styles) {
 	background-color: var( --ajaxify-comments-loading-button-background-color );
@@ -248,4 +260,10 @@
 	color: var( --ajaxify-comments-loading-button-text-color-hover );
 	border-color: var( --ajaxify-comments-loading-button-border-color-hover );
 	transition: all 0.3s ease-in-out;
+}
+.ajaxify-comments-loading-button.ajaxify-is-transparent {
+	background-color: transparent;
+}
+.ajaxify-comments-loading-button.ajaxify-is-transparent:hover {
+	background-color: transparent;
 }
