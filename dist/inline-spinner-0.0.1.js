@@ -1685,6 +1685,8 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
     errors = props.errors,
     setValue = props.setValue,
     getValues = props.getValues;
+  var _getValues = getValues(),
+    lazyLoadInlineSpinnerContainerBackgroundColorOpacity = _getValues.lazyLoadInlineSpinnerContainerBackgroundColorOpacity;
 
   /**
    * Returns a button group with all the available loading spinners.
@@ -2079,7 +2081,11 @@ var InlineSpinnerOptions = function InlineSpinnerOptions(props) {
           defaultColors: defaultPalette,
           defaultColor: '#000000',
           slug: 'spinner-container-background-color',
-          alpha: true
+          alpha: true,
+          opacity: lazyLoadInlineSpinnerContainerBackgroundColorOpacity,
+          onOpacityChange: function onOpacityChange(opacity) {
+            setValue('lazyLoadInlineSpinnerContainerBackgroundColorOpacity', opacity);
+          }
         }));
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

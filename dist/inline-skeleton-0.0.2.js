@@ -42,14 +42,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var defaultPalette = wpacAdminLazyLoad.palette;
 var InlineSkeleton = function InlineSkeleton(props) {
   var rows = props.rows,
     showHeading = props.showHeading,
-    heading = props.heading;
+    heading = props.heading,
+    getValues = props.getValues;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     showFancybox = _useState2[0],
     setShowFancybox = _useState2[1];
+  var _getValues = getValues(),
+    lazyLoadInlineSkeletonBackgroundColor = _getValues.lazyLoadInlineSkeletonBackgroundColor,
+    lazyLoadInlineSkeletonHighlightColor = _getValues.lazyLoadInlineSkeletonHighlightColor,
+    lazyLoadInlineSkeletonHeadingColor = _getValues.lazyLoadInlineSkeletonHeadingColor,
+    lazyLoadInlineSkeletonHeadingFontSize = _getValues.lazyLoadInlineSkeletonHeadingFontSize,
+    lazyLoadInlineSkeletonHeadingLineHeight = _getValues.lazyLoadInlineSkeletonHeadingLineHeight;
   var getRow = function getRow(key) {
     var row = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-loading-skeleton",
@@ -73,9 +81,12 @@ var InlineSkeleton = function InlineSkeleton(props) {
     }
     return loadingRows;
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, showHeading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+  var styles = "\n\t\t.ajaxify-loading-skeleton-wrapper {\n\t\t\t--ajaxify-skeleton-loader-background-color: ".concat(lazyLoadInlineSkeletonBackgroundColor, ";\n\t\t\t--ajaxify-skeleton-loader-highlight-color: ").concat(lazyLoadInlineSkeletonHighlightColor, ";\n\t\t\t--ajaxify-skeleton-loader-heading-color: ").concat(lazyLoadInlineSkeletonHeadingColor, ";\n\t\t\t--ajaxify-skeleton-loader-heading-font-size: ").concat(lazyLoadInlineSkeletonHeadingFontSize, "px;\n\t\t\t--ajaxify-skeleton-loader-heading-line-height: ").concat(lazyLoadInlineSkeletonHeadingLineHeight, ";\n\t\t\t--ajaxify-skeleton-gradient: linear-gradient(90deg, var(--ajaxify-skeleton-loader-background-color) 25%, var(--ajaxify-skeleton-loader-highlight-color) 50%, var(--ajaxify-skeleton-loader-background-color) 75%);\n\t\t}\n\t");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", null, styles), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "ajaxify-loading-skeleton-wrapper"
+  }, showHeading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
     className: "ajaxify-skeleton-heading"
-  }, heading), getRows());
+  }, heading), getRows()));
 };
 var InlineSkeletonOptions = function InlineSkeletonOptions(props) {
   var control = props.control,
@@ -158,6 +169,48 @@ var InlineSkeletonOptions = function InlineSkeletonOptions(props) {
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "ajaxify-admin__control-row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+      name: "lazyLoadInlineSkeletonBackgroundColor",
+      control: control,
+      render: function render(_ref4) {
+        var _ref4$field = _ref4.field,
+          _onChange2 = _ref4$field.onChange,
+          value = _ref4$field.value;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          value: value,
+          key: 'skeleton-background-color',
+          onChange: function onChange(slug, newValue) {
+            _onChange2(newValue);
+          },
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Skeleton Background Color', 'wp-ajaxify-comments'),
+          defaultColors: defaultPalette,
+          defaultColor: '#EEEEEE',
+          slug: 'skeleton-background-color'
+        }));
+      }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-admin__control-row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+      name: "lazyLoadInlineSkeletonHighlightColor",
+      control: control,
+      render: function render(_ref5) {
+        var _ref5$field = _ref5.field,
+          _onChange3 = _ref5$field.onChange,
+          value = _ref5$field.value;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          value: value,
+          key: 'skeleton-highlight-color',
+          onChange: function onChange(slug, newValue) {
+            _onChange3(newValue);
+          },
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Skeleton Highlight Color', 'wp-ajaxify-comments'),
+          defaultColors: defaultPalette,
+          defaultColor: '#dedede',
+          slug: 'skeleton-highlight-color'
+        }));
+      }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-admin__control-row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Preview Loading Skeleton', 'wp-ajaxify-comments'),
       className: "ajaxify-button ajaxify__btn-secondary has-text has-icon",
@@ -182,7 +235,8 @@ var InlineSkeletonOptions = function InlineSkeletonOptions(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(InlineSkeleton, {
       rows: getValues('lazyLoadInlineSkeletonItemsShow'),
       showHeading: getValues('lazyLoadInlineSkeletonLoadingLabelEnabled'),
-      heading: getValues('lazyLoadInlineSkeletonLoadingLabel')
+      heading: getValues('lazyLoadInlineSkeletonLoadingLabel'),
+      getValues: getValues
     })))));
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, getLoadingSkeletonOptions());

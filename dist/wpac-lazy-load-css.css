@@ -156,7 +156,7 @@
   --ajaxify-skeleton-loader-background-color: #EEEEEE;
   --ajaxify-skeleton-loader-highlight-color: #dededede;
   --ajaxify-skeleton-loader-heading-color: #333;
-  --ajaxify-skeleton-loader-heading-font-size: 1.5rem;
+  --ajaxify-skeleton-loader-heading-font-size: 24px;
   --ajaxify-skeleton-loader-heading-line-height: 1.45;
   --ajaxify-skeleton-gradient: linear-gradient(90deg, var(--ajaxify-skeleton-loader-background-color) 25%, var(--ajaxify-skeleton-loader-highlight-color) 50%, var(--ajaxify-skeleton-loader-background-color) 75%);
 }
