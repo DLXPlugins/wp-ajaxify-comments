@@ -835,6 +835,10 @@ jQuery(function () {
           // This will make it so that a button must be clicked to load comments.
           lazyLoadTrigger = 'external';
         }
+        if ('skeleton' === lazyLoadInlineType) {
+          // Show the loading skeleton to the user.
+          //alert( 'yo' );
+        }
 
         // Display the loader.
         if ('comments' === lazyloadInlineDisplayLocation) {
@@ -862,7 +866,7 @@ jQuery(function () {
         if (null !== lazyLoadButton) {
           lazyLoadButton.addEventListener('click', function (e) {
             e.preventDefault();
-            lazyLoadButton.innerHTML = WPAC._Options.lazyLoadInlineLoadingButtonLabelLoading;
+            lazyLoadButton.innerHTML = WPAC._Options.lazyLoadInlineButtonLabelLoading;
             WPAC.RefreshComments();
           });
         }

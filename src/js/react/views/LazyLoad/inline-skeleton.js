@@ -37,7 +37,7 @@ const InlineSkeleton = ( props ) => {
 	return (
 		<>
 			{ showHeading && (
-				<h2>{ heading }</h2>
+				<h2 className="ajaxify-skeleton-heading">{ heading }</h2>
 			) }
 			{ getRows() }
 		</>

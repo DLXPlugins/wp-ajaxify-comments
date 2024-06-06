@@ -16,6 +16,7 @@
   cursor: pointer;
   outline: inherit;
   text-transform: unset;
+  height: unset;
 }
 
 .ajaxify-btn-reset.show-cursor {
@@ -44,6 +45,7 @@
     opacity: 1;
     max-height: 1000px;
     height: 100%;
+    visibility: visible;
   }
 }
 #wpac-lazy-load-content {
@@ -150,11 +152,20 @@
 :root {
   --ajaxify-skeleton-loader-background-color: #EEEEEE;
   --ajaxify-skeleton-loader-highlight-color: #dededede;
+  --ajaxify-skeleton-loader-heading-color: #333;
+  --ajaxify-skeleton-loader-heading-font-size: 1.5rem;
+  --ajaxify-skeleton-loader-heading-line-height: 1.45;
   --ajaxify-skeleton-gradient: linear-gradient(90deg, var(--ajaxify-skeleton-loader-background-color) 25%, var(--ajaxify-skeleton-loader-highlight-color) 50%, var(--ajaxify-skeleton-loader-background-color) 75%);
 }
 
 .ajaxify-loading-skeleton {
   padding: 20px 25px;
+}
+
+.ajaxify-skeleton-heading {
+  font-size: var(--ajaxify-skeleton-loader-heading-font-size);
+  color: var(--ajaxify-skeleton-loader-heading-color);
+  line-height: var(--ajaxify-skeleton-loader-heading-line-height);
 }
 
 .ajaxify-skeleton-comment-header {
@@ -191,6 +202,56 @@
   background-size: 200% 100%;
   animation: ajaxifyLoadingSkeleton 4s infinite ease-in-out;
   border-radius: 5px;
+}
+
+/**
+ * Loading Button.
+ */
+:root {
+  --ajaxify-comments-loading-button-background-color: #333;
+  --ajaxify-comments-loading-button-background-color-hover: #444;
+  --ajaxify-comments-loading-button-text-color: #FFF;
+  --ajaxify-comments-loading-button-text-color-hover: #FFF;
+  --ajaxify-comments-loading-button-border-color: #333;
+  --ajaxify-comments-loading-button-border-color-hover: #444;
+  --ajaxify-comments-loading-button-border-width: 1px;
+  --ajaxify-comments-loading-button-border-radius: 5px;
+  --ajaxify-comments-loading-button-padding-top: 12px;
+  --ajaxify-comments-loading-button-padding-right: 24px;
+  --ajaxify-comments-loading-button-padding-bottom: 12px;
+  --ajaxify-comments-loading-button-padding-left: 24px;
+  --ajaxify-comments-loading-button-font-size: 16px;
+  --ajaxify-comments-loading-button-line-height: 1.5;
+  --ajaxify-comments-loading-button-font-weight: 600;
+  --ajaxify-comments-loading-button-font-family: inherit;
+  --ajaxify-comments-loading-button-align: center;
+}
+
+.ajaxify-comments-loading-button,
+.ajaxify-comments-loading-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: var(--ajaxify-comments-loading-button-align);
+}
+
+.ajaxify-comments-loading-button:not(.ajaxify-has-no-styles) {
+  background-color: var(--ajaxify-comments-loading-button-background-color);
+  color: var(--ajaxify-comments-loading-button-text-color);
+  border: var(--ajaxify-comments-loading-button-border-width) solid var(--ajaxify-comments-loading-button-border-color);
+  border-radius: var(--ajaxify-comments-loading-button-border-radius);
+  padding: var(--ajaxify-comments-loading-button-padding-top) var(--ajaxify-comments-loading-button-padding-right) var(--ajaxify-comments-loading-button-padding-bottom) var(--ajaxify-comments-loading-button-padding-left);
+  font-size: var(--ajaxify-comments-loading-button-font-size);
+  font-weight: var(--ajaxify-comments-loading-button-font-weight);
+  line-height: var(--ajaxify-comments-loading-button-line-height);
+  font-family: var(--ajaxify-comments-loading-button-font-family);
+  transition: all 0.3s ease-in-out;
+}
+
+.ajaxify-comments-loading-button:not(.ajaxify-has-no-styles):hover {
+  background-color: var(--ajaxify-comments-loading-button-background-color-hover);
+  color: var(--ajaxify-comments-loading-button-text-color-hover);
+  border-color: var(--ajaxify-comments-loading-button-border-color-hover);
+  transition: all 0.3s ease-in-out;
 }
 
 /*# sourceMappingURL=wpac-lazy-load-css.css.map*/

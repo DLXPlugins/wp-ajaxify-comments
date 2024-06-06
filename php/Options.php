@@ -305,12 +305,43 @@ class Options {
 			'lazyLoadInlineShortcode'                      => '',
 			'lazyLoadInlineLoadingButtonLabel'             => __( 'Load Comments', 'wp-ajaxify-comments' ),
 			'lazyLoadInlineLoadingButtonLabelLoading'      => __( 'Loading Comments...', 'wp-ajaxify-comments' ),
+			/* Button options */
+			'lazyLoadInlineButtonSpinner'                  => 'LoadingGray1',
 			'lazyLoadInlineButtonLabel'                    => __( 'Load Comments', 'wp-ajaxify-comments' ),
 			'lazyLoadInlineButtonLabelLoading'             => __( 'Loading Comments...', 'wp-ajaxify-comments' ),
-			'lazyLoadInlineButtonSpinner'                  => 'LoadingGray1',
-			'lazyLoadInlineButtonAppearance'               => 'rounded', /* can be rounded, rectangle, link.*/
+			'lazyLoadInlineButtonAppearance'               => 'solid', /* can be transparent, solid .*/
+			'lazyLoadInlineButtonUseThemeStyles'           => true,
 			'lazyLoadInlineButtonBackgroundColor'          => '#333333',
+			'lazyLoadInlineButtonBackgroundColorHover'     => '#444444',
 			'lazyLoadInlineButtonTextColor'                => '#FFFFFF',
+			'lazyLoadInlineButtonTextColorHover'           => '#FFFFFF',
+			'lazyLoadInlineButtonBorderColor'              => '#333333',
+			'lazyLoadInlineButtonBorderColorHover'         => '#444444',
+			'lazyLoadInlineButtonBorderWidth'              => '1px',
+			'lazyLoadInlineButtonBorderRadius'             => '5px',
+			'lazyLoadInlineButtonPaddingTop'               => '12px',
+			'lazyLoadInlineButtonPaddingRight'             => '24px',
+			'lazyLoadInlineButtonPaddingBottom'            => '12px',
+			'lazyLoadInlineButtonPaddingLeft'              => '24px',
+			'lazyLoadInlineButtonFontSize'                 => '16px',
+			'lazyLoadInlineButtonLineHeight'               => 1.5,
+			'lazyLoadInlineButtonFontWeight'               => 600,
+			'lazyLoadInlineButtonFontFamily'               => 'inherit',
+			'lazyLoadInlineButtonAlign' 			  => 'center',
+			/*
+			--ajaxify-comments-loading-button-background-color: #333;
+		--ajaxify-comments-loading-button-background-color-hover: #444;
+		--ajaxify-comments-loading-button-text-color: #FFF;
+		--ajaxify-comments-loading-button-text-color-hover: #FFF;
+		--ajaxify-comments-loading-button-border-color: #333;
+		--ajaxify-comments-loading-button-border-color-hover: #444;
+		--ajaxify-comments-loading-button-border-width: 1px;
+		--ajaxify-comments-loading-button-border-radius: 5px;
+		--ajaxify-comments-loading-button-padding-top: 12px;
+		--ajaxify-comments-loading-button-padding-right: 24px;
+		--ajaxify-comments-loading-button-padding-bottom: 12px;
+		--ajaxify-comments-loading-button-padding-left: 24px;
+		*/
 		);
 		return $defaults;
 	}

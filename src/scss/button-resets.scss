@@ -1,0 +1,31 @@
+button, a {
+	&.button-reset,
+	&.button-reset:focus,
+	&.button-reset:hover {
+		background: none;
+		color: inherit;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		outline: inherit;
+		text-transform: unset;
+		text-decoration: none;
+	}
+	&.button-reset.show-cursor {
+		cursor: pointer;
+	}
+}
+.button-reset,
+.button-reset:focus,
+.button-reset:hover {
+	button, a {
+		background: none;
+		color: inherit;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		outline: inherit;
+		text-transform: unset;
+		text-decoration: none;
+	}
+}

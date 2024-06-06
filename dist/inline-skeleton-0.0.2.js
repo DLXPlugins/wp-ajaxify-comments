@@ -73,7 +73,9 @@ var InlineSkeleton = function InlineSkeleton(props) {
     }
     return loadingRows;
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, showHeading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, heading), getRows());
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, showHeading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+    className: "ajaxify-skeleton-heading"
+  }, heading), getRows());
 };
 var InlineSkeletonOptions = function InlineSkeletonOptions(props) {
   var control = props.control,

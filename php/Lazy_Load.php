@@ -46,12 +46,37 @@ class Lazy_Load {
 			return;
 		}
 
+		// Get button classes.
+		$button_classes = array(
+			'ajaxify-comments-loading-button',
+		);
+		if ( (bool) $options['lazyLoadInlineButtonUseThemeStyles'] ) {
+			$button_classes[] = 'ajaxify-has-no-styles';
+		} else {
+			$button_classes[] = 'ajaxify-btn-reset';
+		}
+
 		?>
-		<div id="wpac-lazy-load-content" style="visibility: hidden; opacity: 0;" aria-hidden="true">
+		<div id="wpac-lazy-load-content" aria-hidden="true">
 			<style>
-				:root {
-					--ajaxify-comments-loading-button-font-size: 18px;
-					--ajaxify-comments-loading-button-line-height: 1.5;
+				.ajaxify-comments-loading-button:not(.ajaxify-has-no-styles)  {
+					--ajaxify-comments-loading-button-background-color: <?php echo esc_html( $options['lazyLoadInlineButtonBackgroundColor'] ); ?>;
+					--ajaxify-comments-loading-button-background-color-hover: <?php echo esc_html( $options['lazyLoadInlineButtonBackgroundColorHover'] ); ?>;
+					--ajaxify-comments-loading-button-text-color: <?php echo esc_html( $options['lazyLoadInlineButtonTextColor'] ); ?>;
+					--ajaxify-comments-loading-button-text-color-hover: <?php echo esc_html( $options['lazyLoadInlineButtonTextColorHover'] ); ?>;
+					--ajaxify-comments-loading-button-border-color: <?php echo esc_html( $options['lazyLoadInlineButtonBorderColor'] ); ?>;
+					--ajaxify-comments-loading-button-border-color-hover: <?php echo esc_html( $options['lazyLoadInlineButtonBorderColorHover'] ); ?>;
+					--ajaxify-comments-loading-button-border-width: <?php echo esc_html( $options['lazyLoadInlineButtonBorderWidth'] ); ?>;
+					--ajaxify-comments-loading-button-border-radius: <?php echo esc_html( $options['lazyLoadInlineButtonBorderRadius'] ); ?>;
+					--ajaxify-comments-loading-button-padding-top: <?php echo esc_html( $options['lazyLoadInlineButtonPaddingTop'] ); ?>;
+					--ajaxify-comments-loading-button-padding-right: <?php echo esc_html( $options['lazyLoadInlineButtonPaddingRight'] ); ?>;
+					--ajaxify-comments-loading-button-padding-bottom: <?php echo esc_html( $options['lazyLoadInlineButtonPaddingBottom'] ); ?>;
+					--ajaxify-comments-loading-button-padding-left: <?php echo esc_html( $options['lazyLoadInlineButtonPaddingLeft'] ); ?>;
+					--ajaxify-comments-loading-button-font-size: <?php echo esc_html( $options['lazyLoadInlineButtonFontSize'] ); ?>;
+					--ajaxify-comments-loading-button-line-height: <?php echo esc_html( $options['lazyLoadInlineButtonLineHeight'] ); ?>;
+					--ajaxify-comments-loading-button-font-weight: <?php echo esc_html( $options['lazyLoadInlineButtonFontWeight'] ); ?>;
+					--ajaxify-comments-loading-button-font-family: <?php echo esc_html( $options['lazyLoadInlineButtonFontFamily'] ); ?>;
+					--ajaxify-comments-loading-button-align: <?php echo esc_html( $options['lazyLoadInlineButtonAlign'] ); ?>;
 				}
 			</style>
 			<div class="ajaxify-comments-loading-button-wrapper">
@@ -59,7 +84,7 @@ class Lazy_Load {
 				$button_text = sanitize_text_field( $options['lazyLoadInlineLoadingButtonLabel'] );
 				if ( ! empty( $button_text ) ) :
 					?>
-					<button class="ajaxify-comments-loading-button">
+					<button class="<?php echo esc_attr( implode( ' ', $button_classes ) ); ?>">
 						<?php echo esc_html( $button_text ); ?>
 					</button>
 					<?php
@@ -125,7 +150,7 @@ class Lazy_Load {
 			return;
 		}
 		?>
-		<div id="wpac-lazy-load-content" style="visibility: hidden; opacity: 0;" aria-hidden="true">
+		<div id="wpac-lazy-load-content" aria-hidden="true">
 			<?php
 			$can_show_heading = (bool) $options['lazyLoadInlineSkeletonLoadingLabelEnabled'];
 			$skeleton_heading = sanitize_text_field( $options['lazyLoadInlineSkeletonLoadingLabel'] );
@@ -175,7 +200,7 @@ class Lazy_Load {
 		if ( 'comments' === $options['lazyLoadInlineDisplayLocation'] ) {
 			remove_action( 'wp_footer', array( $this, 'output_spinner_html' ) );
 		} else {
-			$styles = 'visibility: hidden; opacity: 0;';
+			$styles = ''; // 'visibility: hidden; opacity: 0;';
 		}
 
 		// Get spinner arguments.

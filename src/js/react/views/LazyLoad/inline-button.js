@@ -20,21 +20,148 @@ const InlineButtonOptions = ( props ) => {
 		clearErrors,
 	} = props;
 
+	const {
+		lazyLoadInlineButtonLabel,
+		lazyLoadInlineButtonLabelLoading,
+		lazyLoadInlineButtonAppearance,
+		lazyLoadInlineButtonUseThemeStyles,
+		lazyLoadInlineButtonBackgroundColor,
+		lazyLoadInlineButtonBackgroundColorHover,
+		lazyLoadInlineButtonTextColor,
+		lazyLoadInlineButtonTextColorHover,
+		lazyLoadInlineButtonBorderColor,
+		lazyLoadInlineButtonBorderColorHover,
+		lazyLoadInlineButtonBorderWidth,
+		lazyLoadInlineButtonBorderRadius,
+		lazyLoadInlineButtonPaddingTop,
+		lazyLoadInlineButtonPaddingRight,
+		lazyLoadInlineButtonPaddingBottom,
+		lazyLoadInlineButtonPaddingLeft,
+		lazyLoadInlineButtonFontSize,
+		lazyLoadInlineButtonLineHeight,
+		lazyLoadInlineButtonFontWeight,
+		lazyLoadInlineButtonFontFamily,
+		lazyLoadInlineButtonAlignment,
+	} = getValues();
+
 	const getInlineButton = () => {
+		const styles = `
+			.ajaxify-btn-reset.ajaxify-comments-loading-button {
+				--ajaxify-comments-loading-button-background-color: ${ lazyLoadInlineButtonBackgroundColor };
+				--ajaxify-comments-loading-button-background-color-hover: ${ lazyLoadInlineButtonBackgroundColorHover };
+				--ajaxify-comments-loading-button-text-color: ${ lazyLoadInlineButtonTextColor };
+				--ajaxify-comments-loading-button-text-color-hover: ${ lazyLoadInlineButtonTextColorHover };
+				--ajaxify-comments-loading-button-border-color: ${ lazyLoadInlineButtonBorderColor };
+				--ajaxify-comments-loading-button-border-color-hover: ${ lazyLoadInlineButtonBorderColorHover };
+				--ajaxify-comments-loading-button-border-width: ${ lazyLoadInlineButtonBorderWidth };
+				--ajaxify-comments-loading-button-border-radius: ${ lazyLoadInlineButtonBorderRadius };
+				--ajaxify-comments-loading-button-padding-top: ${ lazyLoadInlineButtonPaddingTop };
+				--ajaxify-comments-loading-button-padding-right: ${ lazyLoadInlineButtonPaddingRight };
+				--ajaxify-comments-loading-button-padding-bottom: ${ lazyLoadInlineButtonPaddingBottom };
+				--ajaxify-comments-loading-button-padding-left: ${ lazyLoadInlineButtonPaddingLeft };
+				--ajaxify-comments-loading-button-font-size: ${ lazyLoadInlineButtonFontSize }px;
+				--ajaxify-comments-loading-button-line-height: ${ lazyLoadInlineButtonLineHeight };
+				--ajaxify-comments-loading-button-font-weight: ${ lazyLoadInlineButtonFontWeight };
+				--ajaxify-comments-loading-button-font-family: ${ lazyLoadInlineButtonFontFamily };
+			}`;
 		return (
-			<Button
-				className={
-					classNames(
-						'ajaxify-btn-reset ajaxify-lazy-load-btn',
-						{}
-					)
-				}
-				label={ __( 'Load Comments', 'wp-ajaxify-comments' ) }
-			>
-				{ __( 'Load Comments', 'wp-ajaxify-comments' ) }
-			</Button>
+			<>
+				<style>
+					{ styles }
+				</style>
+				<Button
+					className={
+						classNames(
+							'ajaxify-btn-reset ajaxify-comments-loading-button',
+							{}
+						)
+					}
+					label={ __( 'Load Comments', 'wp-ajaxify-comments' ) }
+				>
+					{ __( 'Load Comments', 'wp-ajaxify-comments' ) }
+				</Button>
+			</>
 		);
 	};
+
+	/**
+	 * Retrieve the button options.
+	 */
+	const getButtonOptions = () => (
+		<>
+			<table className="form-table form-table-row-sections">
+				<tbody>
+					<tr>
+						<th scope="row">
+							{ __( 'Button Options', 'wp-ajaxify-comments' ) }
+						</th>
+						<td>
+							<div className="ajaxify-admin__control-row">
+								<Controller
+									name="lazyLoadInlineButtonLabel"
+									control={ control }
+									rules={ {
+										required: true,
+									} }
+									render={ ( { field: { onChange, value } } ) => (
+										<>
+											<TextControl
+												label={ __( 'Button Label', 'wp-ajaxify-comments' ) }
+												help={ __( 'The label of the button.', 'wp-ajaxify-comments' ) }
+												value={ value }
+												onChange={ ( e ) => {
+													clearErrors( 'lazyLoadInlineButtonLabel' );
+													onChange( e );
+												} }
+											/>
+											{ errors.lazyLoadInlineButtonLabel && (
+												<Notice
+													status="error"
+													text={ errors.lazyLoadInlineButtonLabel.message }
+												/>
+											) }
+										</>
+									) }
+								/>
+							</div>
+							<div className="ajaxify-admin__control-row">
+								<Controller
+									name="lazyLoadInlineButtonLabelLoading"
+									control={ control }
+									render={ ( { field: { onChange, value } } ) => (
+										<>
+											<TextControl
+												label={ __( 'Loading Label', 'wp-ajaxify-comments' ) }
+												help={ __( 'The label of the button when loading.', 'wp-ajaxify-comments' ) }
+												value={ value }
+												onChange={ onChange }
+											/>
+										</>
+									) }
+								/>
+							</div>
+							<div className="ajaxify-admin__control-row">
+								<Controller
+									name="lazyLoadInlineButtonUseThemeStyles"
+									control={ control }
+									render={ ( { field: { onChange, value } } ) => (
+										<>
+											<ToggleControl
+												label={ __( 'Use Theme Styles', 'wp-ajaxify-comments' ) }
+												help={ __( 'Use the theme styles for the button. Switch off to use the button designer.', 'wp-ajaxify-comments' ) }
+												checked={ value }
+												onChange={ onChange }
+											/>
+										</>
+									) }
+								/>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</>
+	);
 
 	const getButtonDesigner = () => (
 		<>
@@ -127,7 +254,12 @@ const InlineButtonOptions = ( props ) => {
 
 	return (
 		<>
-			{ getButtonDesigner() }
+			{ getButtonOptions() }
+			{ ! getValues( 'lazyLoadInlineButtonUseThemeStyles' ) && (
+				<>
+					{ getButtonDesigner() }
+				</>
+			) }
 		</>
 	);
 };
