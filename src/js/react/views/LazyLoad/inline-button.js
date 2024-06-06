@@ -53,12 +53,12 @@ const InlineButtonOptions = ( props ) => {
 				--ajaxify-comments-loading-button-text-color-hover: ${ lazyLoadInlineButtonTextColorHover };
 				--ajaxify-comments-loading-button-border-color: ${ lazyLoadInlineButtonBorderColor };
 				--ajaxify-comments-loading-button-border-color-hover: ${ lazyLoadInlineButtonBorderColorHover };
-				--ajaxify-comments-loading-button-border-width: ${ lazyLoadInlineButtonBorderWidth };
-				--ajaxify-comments-loading-button-border-radius: ${ lazyLoadInlineButtonBorderRadius };
-				--ajaxify-comments-loading-button-padding-top: ${ lazyLoadInlineButtonPaddingTop };
-				--ajaxify-comments-loading-button-padding-right: ${ lazyLoadInlineButtonPaddingRight };
-				--ajaxify-comments-loading-button-padding-bottom: ${ lazyLoadInlineButtonPaddingBottom };
-				--ajaxify-comments-loading-button-padding-left: ${ lazyLoadInlineButtonPaddingLeft };
+				--ajaxify-comments-loading-button-border-width: ${ lazyLoadInlineButtonBorderWidth }px;
+				--ajaxify-comments-loading-button-border-radius: ${ lazyLoadInlineButtonBorderRadius }px;
+				--ajaxify-comments-loading-button-padding-top: ${ lazyLoadInlineButtonPaddingTop }px;
+				--ajaxify-comments-loading-button-padding-right: ${ lazyLoadInlineButtonPaddingRight }px;
+				--ajaxify-comments-loading-button-padding-bottom: ${ lazyLoadInlineButtonPaddingBottom }px;
+				--ajaxify-comments-loading-button-padding-left: ${ lazyLoadInlineButtonPaddingLeft }px;
 				--ajaxify-comments-loading-button-font-size: ${ lazyLoadInlineButtonFontSize }px;
 				--ajaxify-comments-loading-button-line-height: ${ lazyLoadInlineButtonLineHeight };
 				--ajaxify-comments-loading-button-font-weight: ${ lazyLoadInlineButtonFontWeight };
@@ -232,6 +232,28 @@ const InlineButtonOptions = ( props ) => {
 													leftOn={ true }
 													centerOn={ true }
 													rightOn={ true }
+												/>
+											</>
+										) }
+									/>
+								</div>
+								<div className="ajaxify-admin__control-row">
+									<Controller
+										name="lazyLoadInlineborderWidth"
+										control={ control }
+										render={ ( { field: { onChange, value } } ) => (
+											<>
+												<RangeControl
+													label={ __( 'Border Width', 'wp-ajaxify-comments' ) }
+													value={ value }
+													onChange={ onChange }
+													min={ 0 }
+													max={ 10 }
+													step={ 1 }
+													help={ __( 'Set the width of the border.', 'wp-ajaxify-comments' ) }
+													color="var(--ajaxify-admin--color-main)"
+													trackColor="var(--ajaxify-admin--color-main)"
+													resetFallbackValue={ 0 }
 												/>
 											</>
 										) }

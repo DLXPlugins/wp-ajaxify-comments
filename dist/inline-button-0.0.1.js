@@ -64,7 +64,7 @@ var InlineButtonOptions = function InlineButtonOptions(props) {
     lazyLoadInlineButtonFontFamily = _getValues.lazyLoadInlineButtonFontFamily,
     lazyLoadInlineButtonAlign = _getValues.lazyLoadInlineButtonAlign;
   var getInlineButton = function getInlineButton() {
-    var styles = "\n\t\t\t.ajaxify-btn-reset.ajaxify-comments-loading-button {\n\t\t\t\t--ajaxify-comments-loading-button-background-color: ".concat(lazyLoadInlineButtonBackgroundColor, ";\n\t\t\t\t--ajaxify-comments-loading-button-background-color-hover: ").concat(lazyLoadInlineButtonBackgroundColorHover, ";\n\t\t\t\t--ajaxify-comments-loading-button-text-color: ").concat(lazyLoadInlineButtonTextColor, ";\n\t\t\t\t--ajaxify-comments-loading-button-text-color-hover: ").concat(lazyLoadInlineButtonTextColorHover, ";\n\t\t\t\t--ajaxify-comments-loading-button-border-color: ").concat(lazyLoadInlineButtonBorderColor, ";\n\t\t\t\t--ajaxify-comments-loading-button-border-color-hover: ").concat(lazyLoadInlineButtonBorderColorHover, ";\n\t\t\t\t--ajaxify-comments-loading-button-border-width: ").concat(lazyLoadInlineButtonBorderWidth, ";\n\t\t\t\t--ajaxify-comments-loading-button-border-radius: ").concat(lazyLoadInlineButtonBorderRadius, ";\n\t\t\t\t--ajaxify-comments-loading-button-padding-top: ").concat(lazyLoadInlineButtonPaddingTop, ";\n\t\t\t\t--ajaxify-comments-loading-button-padding-right: ").concat(lazyLoadInlineButtonPaddingRight, ";\n\t\t\t\t--ajaxify-comments-loading-button-padding-bottom: ").concat(lazyLoadInlineButtonPaddingBottom, ";\n\t\t\t\t--ajaxify-comments-loading-button-padding-left: ").concat(lazyLoadInlineButtonPaddingLeft, ";\n\t\t\t\t--ajaxify-comments-loading-button-font-size: ").concat(lazyLoadInlineButtonFontSize, "px;\n\t\t\t\t--ajaxify-comments-loading-button-line-height: ").concat(lazyLoadInlineButtonLineHeight, ";\n\t\t\t\t--ajaxify-comments-loading-button-font-weight: ").concat(lazyLoadInlineButtonFontWeight, ";\n\t\t\t\t--ajaxify-comments-loading-button-font-family: ").concat(lazyLoadInlineButtonFontFamily, ";\n\t\t\t}");
+    var styles = "\n\t\t\t.ajaxify-btn-reset.ajaxify-comments-loading-button {\n\t\t\t\t--ajaxify-comments-loading-button-background-color: ".concat(lazyLoadInlineButtonBackgroundColor, ";\n\t\t\t\t--ajaxify-comments-loading-button-background-color-hover: ").concat(lazyLoadInlineButtonBackgroundColorHover, ";\n\t\t\t\t--ajaxify-comments-loading-button-text-color: ").concat(lazyLoadInlineButtonTextColor, ";\n\t\t\t\t--ajaxify-comments-loading-button-text-color-hover: ").concat(lazyLoadInlineButtonTextColorHover, ";\n\t\t\t\t--ajaxify-comments-loading-button-border-color: ").concat(lazyLoadInlineButtonBorderColor, ";\n\t\t\t\t--ajaxify-comments-loading-button-border-color-hover: ").concat(lazyLoadInlineButtonBorderColorHover, ";\n\t\t\t\t--ajaxify-comments-loading-button-border-width: ").concat(lazyLoadInlineButtonBorderWidth, "px;\n\t\t\t\t--ajaxify-comments-loading-button-border-radius: ").concat(lazyLoadInlineButtonBorderRadius, "px;\n\t\t\t\t--ajaxify-comments-loading-button-padding-top: ").concat(lazyLoadInlineButtonPaddingTop, "px;\n\t\t\t\t--ajaxify-comments-loading-button-padding-right: ").concat(lazyLoadInlineButtonPaddingRight, "px;\n\t\t\t\t--ajaxify-comments-loading-button-padding-bottom: ").concat(lazyLoadInlineButtonPaddingBottom, "px;\n\t\t\t\t--ajaxify-comments-loading-button-padding-left: ").concat(lazyLoadInlineButtonPaddingLeft, "px;\n\t\t\t\t--ajaxify-comments-loading-button-font-size: ").concat(lazyLoadInlineButtonFontSize, "px;\n\t\t\t\t--ajaxify-comments-loading-button-line-height: ").concat(lazyLoadInlineButtonLineHeight, ";\n\t\t\t\t--ajaxify-comments-loading-button-font-weight: ").concat(lazyLoadInlineButtonFontWeight, ";\n\t\t\t\t--ajaxify-comments-loading-button-font-family: ").concat(lazyLoadInlineButtonFontFamily, ";\n\t\t\t}");
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", null, styles), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
       className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ajaxify-btn-reset ajaxify-comments-loading-button', {
         'ajaxify-is-solid': 'solid' === lazyLoadInlineButtonAppearance,
@@ -204,6 +204,28 @@ var InlineButtonOptions = function InlineButtonOptions(props) {
           rightOn: true
         }));
       }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "ajaxify-admin__control-row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+      name: "lazyLoadInlineborderWidth",
+      control: control,
+      render: function render(_ref5) {
+        var _ref5$field = _ref5.field,
+          onChange = _ref5$field.onChange,
+          value = _ref5$field.value;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Border Width', 'wp-ajaxify-comments'),
+          value: value,
+          onChange: onChange,
+          min: 0,
+          max: 10,
+          step: 1,
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Set the width of the border.', 'wp-ajaxify-comments'),
+          color: "var(--ajaxify-admin--color-main)",
+          trackColor: "var(--ajaxify-admin--color-main)",
+          resetFallbackValue: 0
+        }));
+      }
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Colors', 'wp-ajaxify-comments'),
       initialOpen: true
@@ -212,10 +234,10 @@ var InlineButtonOptions = function InlineButtonOptions(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
       name: "lazyLoadInlineButtonBackgroundColor",
       control: control,
-      render: function render(_ref5) {
-        var _ref5$field = _ref5.field,
-          _onChange2 = _ref5$field.onChange,
-          value = _ref5$field.value;
+      render: function render(_ref6) {
+        var _ref6$field = _ref6.field,
+          _onChange2 = _ref6$field.onChange,
+          value = _ref6$field.value;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
           value: value,
           key: 'inline-button-background-color',
@@ -233,10 +255,10 @@ var InlineButtonOptions = function InlineButtonOptions(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
       name: "lazyLoadInlineButtonBackgroundColorHover",
       control: control,
-      render: function render(_ref6) {
-        var _ref6$field = _ref6.field,
-          _onChange3 = _ref6$field.onChange,
-          value = _ref6$field.value;
+      render: function render(_ref7) {
+        var _ref7$field = _ref7.field,
+          _onChange3 = _ref7$field.onChange,
+          value = _ref7$field.value;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
           value: value,
           key: 'inline-button-background-color-hover',
@@ -254,10 +276,10 @@ var InlineButtonOptions = function InlineButtonOptions(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
       name: "lazyLoadInlineButtonTextColor",
       control: control,
-      render: function render(_ref7) {
-        var _ref7$field = _ref7.field,
-          _onChange4 = _ref7$field.onChange,
-          value = _ref7$field.value;
+      render: function render(_ref8) {
+        var _ref8$field = _ref8.field,
+          _onChange4 = _ref8$field.onChange,
+          value = _ref8$field.value;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
           value: value,
           key: 'inline-button-text-color',
@@ -275,10 +297,10 @@ var InlineButtonOptions = function InlineButtonOptions(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
       name: "lazyLoadInlineButtonTextColorHover",
       control: control,
-      render: function render(_ref8) {
-        var _ref8$field = _ref8.field,
-          _onChange5 = _ref8$field.onChange,
-          value = _ref8$field.value;
+      render: function render(_ref9) {
+        var _ref9$field = _ref9.field,
+          _onChange5 = _ref9$field.onChange,
+          value = _ref9$field.value;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
           value: value,
           key: 'inline-button-text-color-hover',
@@ -296,10 +318,10 @@ var InlineButtonOptions = function InlineButtonOptions(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
       name: "lazyLoadInlineButtonBorderColor",
       control: control,
-      render: function render(_ref9) {
-        var _ref9$field = _ref9.field,
-          _onChange6 = _ref9$field.onChange,
-          value = _ref9$field.value;
+      render: function render(_ref10) {
+        var _ref10$field = _ref10.field,
+          _onChange6 = _ref10$field.onChange,
+          value = _ref10$field.value;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
           value: value,
           key: 'inline-button-border-color',
@@ -317,10 +339,10 @@ var InlineButtonOptions = function InlineButtonOptions(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
       name: "lazyLoadInlineButtonBorderColorHover",
       control: control,
-      render: function render(_ref10) {
-        var _ref10$field = _ref10.field,
-          _onChange7 = _ref10$field.onChange,
-          value = _ref10$field.value;
+      render: function render(_ref11) {
+        var _ref11$field = _ref11.field,
+          _onChange7 = _ref11$field.onChange,
+          value = _ref11$field.value;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
           value: value,
           key: 'inline-button-border-color-hover',
@@ -344,10 +366,10 @@ var InlineButtonOptions = function InlineButtonOptions(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
       name: "lazyLoadInlineButtonBackgroundColor",
       control: control,
-      render: function render(_ref11) {
-        var _ref11$field = _ref11.field,
-          _onChange8 = _ref11$field.onChange,
-          value = _ref11$field.value;
+      render: function render(_ref12) {
+        var _ref12$field = _ref12.field,
+          _onChange8 = _ref12$field.onChange,
+          value = _ref12$field.value;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ColorPicker__WEBPACK_IMPORTED_MODULE_6__["default"], {
           value: value,
           key: 'inline-button-background-color',
