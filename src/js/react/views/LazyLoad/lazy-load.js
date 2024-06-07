@@ -635,7 +635,7 @@ const Interface = ( props ) => {
 							) }
 						</tbody>
 					</table>
-					{ 'button' === getValues( 'lazyLoadInlineLoadingType' ) && (
+					{ ( 'button' === getValues( 'lazyLoadInlineLoadingType' ) && 'inline' === getValues( 'lazyLoadDisplay' ) ) && (
 						<>
 							<Suspense
 								fallback={

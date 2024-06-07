@@ -22,12 +22,13 @@ WPAC._ExtractTitle = function (html) {
   }
 };
 WPAC._ShowMessage = function (message, type) {
+  var force = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   // Determine how to display the loading message.
   var lazyLoadDisplay = WPAC._Options.lazyLoadDisplay;
   var lazyLoadEnabled = WPAC._Options.lazyLoadEnabled;
 
   // Check if lazy load enabled or not.
-  if (lazyLoadEnabled && 'overlay' !== lazyLoadDisplay) {
+  if (lazyLoadEnabled && 'overlay' !== lazyLoadDisplay && !force) {
     return;
   }
   var top = WPAC._Options.popupMarginTop + (jQuery('#wpadminbar').outerHeight() || 0);
@@ -488,7 +489,7 @@ WPAC.AttachForm = function (options) {
     form.data('WPAC_SUBMITTING', true);
 
     // Show loading info
-    WPAC._ShowMessage(WPAC._Options.textPostComment, 'loading');
+    WPAC._ShowMessage(WPAC._Options.textPostComment, 'loading', true);
     var handleErrorResponse = function handleErrorResponse(data) {
       WPAC._Debug('info', 'Comment has not been posted');
       WPAC._Debug('info', "Try to extract error message (selector: '%s')...", WPAC._Options.selectorErrorContainer);
@@ -500,12 +501,12 @@ WPAC.AttachForm = function (options) {
         if (errorMessage.length) {
           errorMessage = errorMessage.html();
           WPAC._Debug('info', "Error message '%s' successfully extracted", errorMessage);
-          WPAC._ShowMessage(errorMessage, 'error');
+          WPAC._ShowMessage(errorMessage, 'error', true);
           return;
         }
       }
       WPAC._Debug('error', "Error message could not be extracted, use error message '%s'.", WPAC._Options.textUnknownError);
-      WPAC._ShowMessage(WPAC._Options.textUnknownError, 'error');
+      WPAC._ShowMessage(WPAC._Options.textUnknownError, 'error', true);
     };
     var request = jQuery.ajax({
       url: submitUrl,
@@ -548,7 +549,7 @@ WPAC.AttachForm = function (options) {
         }
 
         // Show success message
-        WPAC._ShowMessage(unapproved == '1' ? WPAC._Options.textPostedUnapproved : WPAC._Options.textPosted, 'success');
+        WPAC._ShowMessage(unapproved == '1' ? WPAC._Options.textPostedUnapproved : WPAC._Options.textPosted, 'success', true);
 
         /**
          * Sunshine Confetti Plugin integration.
@@ -651,19 +652,19 @@ WPAC.Init = function () {
   // Set up loading preview handlers.
   jQuery('#wp-admin-bar-wpac-menu-helper-preview-overlay-loading a').on('click', function (e) {
     e.preventDefault();
-    WPAC._ShowMessage('This is the loading preview...', 'loadingPreview');
+    WPAC._ShowMessage('This is the loading preview...', 'loadingPreview', true);
   });
 
   // Set up success preview handlers.
   jQuery('#wp-admin-bar-wpac-menu-helper-preview-overlay-success a').on('click', function (e) {
     e.preventDefault();
-    WPAC._ShowMessage('This is a success message', 'success');
+    WPAC._ShowMessage('This is a success message', 'success', true);
   });
 
   // Set up error preview handlers.
   jQuery('#wp-admin-bar-wpac-menu-helper-preview-overlay-error a').on('click', function (e) {
     e.preventDefault();
-    WPAC._ShowMessage('This is an error message', 'error');
+    WPAC._ShowMessage('This is an error message', 'error', true);
   });
 
   // Set up idle timer
@@ -819,7 +820,7 @@ jQuery(function () {
     var lazyloadInlineDisplayLocation = WPAC._Options.lazyLoadInlineDisplayLocation; /* can be comments, element */
 
     // If inline, let's move the loader.
-    if (WPAC._Options.lazyLoadIntoElement) {
+    if (isLazyLoadInline && WPAC._Options.lazyLoadIntoElement) {
       var lazyloadInlineDisplayElement = WPAC._Options.lazyLoadInlineDisplayElement;
       if ('comments' === lazyloadInlineDisplayLocation) {
         lazyloadInlineDisplayElement = WPAC._Options.selectorCommentsContainer;
@@ -837,7 +838,6 @@ jQuery(function () {
         }
         if ('skeleton' === lazyLoadInlineType) {
           // Show the loading skeleton to the user.
-          //alert( 'yo' );
         }
 
         // Display the loader.
@@ -845,7 +845,7 @@ jQuery(function () {
           var commentsContainer = jQuery(lazyloadInlineDisplayElement);
           if (commentsContainer) {
             // Test for block theme comment container title.
-            var maybeBlockCommentstitle = commentsContainer.find('.wp-block-comments-title');
+            var maybeBlockCommentstitle = commentsContainer.find('.wp-block-comments-title, .comments-title');
             if (maybeBlockCommentstitle.length > 0) {
               // Insert after title.
               jQuery(maybeBlockCommentstitle).after(lazyLoadContentClone);
@@ -912,8 +912,10 @@ jQuery(function () {
           WPAC._Debug('info', 'Lazy loading: Waiting on element to scroll into view for lazy loading.', window.location.hash);
           jQuery(_domElement).waypoint(function (direction) {
             this.destroy();
-            WPAC._ShowMessage(WPAC._Options.textRefreshComments, 'loading');
-            WPAC.RefreshComments();
+            if ('button' !== lazyLoadInlineType && isLazyLoadInline) {
+              WPAC._ShowMessage(WPAC._Options.textRefreshComments, 'loading');
+              WPAC.RefreshComments();
+            }
           }, {
             offset: lazyLoadScrollOffset ? lazyLoadScrollOffset : '100%'
           });
@@ -922,11 +924,15 @@ jQuery(function () {
         }
         break;
       case 'domready':
-        WPAC._Debug('info', 'Lazy loading: Waiting on Dom to be ready for lazy loading.', window.location.hash);
-        WPAC._ShowMessage(WPAC._Options.textRefreshComments, 'loading');
-        WPAC.RefreshComments({
-          scrollToAnchor: true
-        }); // force scroll to anchor.
+        // Only refresh comments if not inline button.
+        if ('button' !== lazyLoadInlineType && isLazyLoadInline) {
+          WPAC._Debug('info', 'Lazy loading: Waiting on Dom to be ready for lazy loading.', window.location.hash);
+          WPAC._ShowMessage(WPAC._Options.textRefreshComments, 'loading');
+          WPAC.RefreshComments({
+            scrollToAnchor: true
+          }); // force scroll to anchor.
+        }
+
         break;
       case 'scroll':
         WPAC._Debug('info', 'Lazy loading: Waiting on Scroll Into View.', window.location.hash);
@@ -935,8 +941,10 @@ jQuery(function () {
         var body = document.querySelector('body');
         jQuery(body).waypoint(function (direction) {
           this.destroy();
-          WPAC._ShowMessage(WPAC._Options.textRefreshComments, 'loading');
-          WPAC.RefreshComments();
+          if ('button' !== lazyLoadInlineType && 'inline' === lazyLoadInlineType) {
+            WPAC._ShowMessage(WPAC._Options.textRefreshComments, 'loading');
+            WPAC.RefreshComments();
+          }
         }, {
           offset: lazyLoadScrollOffset * -1
         });

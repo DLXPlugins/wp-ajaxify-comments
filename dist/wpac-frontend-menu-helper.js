@@ -4842,7 +4842,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var selectorList = [];
 
         // Find the comments container. todo - make filterable.
-        var commentContainerSelectors = ['.wp-block-comments', '#comments', '.comments-wrapper', '.comments', '.comments-area'];
+        var commentContainerSelectors = ['.wp-block-comments', /* Block themes */
+        '#comments', '.comments-wrapper', '.comments', '.comments-area', '#comment-wrap' /* Divi */];
 
         // Loop through each of the comment selectors.
         // Find children and make sure its a comment.
@@ -4914,7 +4915,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Now check to see if we can find the comment list.
         var foundCommentList = false;
-        var commentListSelectors = ['.comment-list', '.comment-list-wrapper', '.comment-list-container', '.ast-comment-list', '.wp-block-comment-template', '#comments ul', '#comments ol'];
+        var commentListSelectors = ['.commentlist', /* Divi */
+        '.comment-list', '.comment-list-wrapper', '.comment-list-container', '.ast-comment-list', /* Astra */
+        '.wp-block-comment-template', /* Block themes */
+        '#comments ul', '#comments ol'];
         commentListSelectors.forEach(function (commentListSelector) {
           if (foundCommentList) {
             return;
