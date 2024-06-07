@@ -1174,7 +1174,15 @@ jQuery( function() {
 				if ( 'comments' === lazyloadInlineDisplayLocation ) {
 					const commentsContainer = jQuery( lazyloadInlineDisplayElement );
 					if ( commentsContainer ) {
-						commentsContainer.prepend( lazyLoadContentClone );
+
+						// Test for block theme comment container title.
+						const maybeBlockCommentstitle = commentsContainer.find( '.wp-block-comments-title' );
+						if ( maybeBlockCommentstitle.length > 0 ) {
+							// Insert after title.
+							jQuery( maybeBlockCommentstitle ).after( lazyLoadContentClone );
+						} else {
+							commentsContainer.prepend( lazyLoadContentClone );
+						}
 					} else {
 						WPAC._Debug(
 							'error',

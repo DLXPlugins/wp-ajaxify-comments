@@ -935,7 +935,16 @@ h3.ajaxify-admin-content-subheading {
 			border-left-color: var(--ajaxify-admin--color-notice--warning-alt);
 		}
 
-		svg path {
+		.ajaxify-admin__notice-icon {
+			svg:not(.lucide) path {
+				fill: var(--ajaxify-admin--color-notice--warning-alt);
+			}
+			svg.lucide {
+				color: var(--ajaxify-admin--color-notice--warning-alt);
+			}
+		}
+
+		svg:not(.lucide) path {
 			fill: var(--ajaxify-admin--color-notice--warning-alt);
 		}
 	}

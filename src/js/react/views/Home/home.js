@@ -11,10 +11,12 @@ import {
 	Button,
 	ToggleControl,
 } from '@wordpress/components';
-import { AlertCircle, Info, FileCode2, ExternalLink } from 'lucide-react';
+import { AlertCircle, Info, FileCode2, ExternalLink, TriangleAlert } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
+
+const hasThemeChanged = wpacAdminHome.hasThemeChanged;
 
 const retrieveHomeOptions = () => {
 	return SendCommand( 'wpac_get_home_options', {
@@ -171,9 +173,60 @@ const Interface = ( props ) => {
 		);
 	};
 
+	/**
+	 * Warnin about a theme change.
+	 */
+	const getChangedThemesWarning = () => {
+		if ( ! hasThemeChanged ) {
+			return null;
+		}
+		return (
+			<div className="ajaxify-admin-panel-area">
+				<h2>
+					{ __( 'It appears your theme has changed.', 'wp-ajaxify-comments' ) }
+				</h2>
+				<p className="description">
+					{ __(
+						'You may need to run Menu Helper again.',
+						'wp-ajaxify-comments',
+					) }
+				</p>
+				<Notice
+					message={ __(
+						'With theme changes, the selectors offen change. Please re-test your comments and enable Menu Helper if you need to set your selectors again.', 'wp-ajaxify-comments' ) }
+					status="warning"
+					politeness="assertive"
+					inline={ false }
+					icon={ () => <TriangleAlert /> }
+				>
+					<div className="ajaxify-admin-component-row ajaxify-admin-component-row-button" style={ { marginTop: '15px' } }>
+						<Button
+							href={ wpacAdminHome.selectorsUrl }
+							className="ajaxify-button ajaxify__btn-secondary"
+							icon={ <FileCode2 style={ { color: 'currentColor' } } /> }
+						>
+							{ __( 'Set Selectors', 'wp-ajaxify-comments' ) }
+						</Button>
+						<Button
+							href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/menu-helper"
+							className="ajaxify-button ajaxify__btn-secondary"
+							icon={ <ExternalLink style={ { color: 'currentColor' } } /> }
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{ __( 'Menu Helper Guide', 'wp-ajaxify-comments' ) }
+						</Button>
+					</div>
+
+				</Notice>
+			</div>
+		);
+	};
+
 	return (
 		<>
 			{ getFirstTimeInstallNotification() }
+			{ getChangedThemesWarning() }
 			<div className="ajaxify-admin-panel-area">
 				{ getCommentEditingHeader() }
 				<form onSubmit={ handleSubmit( onSubmit ) }>
@@ -245,6 +298,17 @@ const Interface = ( props ) => {
 												/>
 											) }
 										/>
+										<div className="ajaxify-admin-component-row ajaxify-admin-component-row-button" style={ { marginTop: '15px' } }>
+											<Button
+												href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/menu-helper"
+												className="ajaxify-button ajaxify__btn-secondary"
+												icon={ <ExternalLink style={ { color: 'currentColor' } } /> }
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												{ __( 'Menu Helper Overview', 'wp-ajaxify-comments' ) }
+											</Button>
+										</div>
 									</td>
 								</tr>
 								<tr>

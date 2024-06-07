@@ -844,7 +844,14 @@ jQuery(function () {
         if ('comments' === lazyloadInlineDisplayLocation) {
           var commentsContainer = jQuery(lazyloadInlineDisplayElement);
           if (commentsContainer) {
-            commentsContainer.prepend(lazyLoadContentClone);
+            // Test for block theme comment container title.
+            var maybeBlockCommentstitle = commentsContainer.find('.wp-block-comments-title');
+            if (maybeBlockCommentstitle.length > 0) {
+              // Insert after title.
+              jQuery(maybeBlockCommentstitle).after(lazyLoadContentClone);
+            } else {
+              commentsContainer.prepend(lazyLoadContentClone);
+            }
           } else {
             WPAC._Debug('error', 'Comments container not found for lazy loading when reaching the comments section.');
           }

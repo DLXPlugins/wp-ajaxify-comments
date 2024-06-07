@@ -4308,7 +4308,13 @@ h3.ajaxify-admin-content-subheading:after {
 .ajaxify-admin__notice.ajaxify-admin__notice-type--warning .components-notice {
   border-left-color: var(--ajaxify-admin--color-notice--warning-alt);
 }
-.ajaxify-admin__notice.ajaxify-admin__notice-type--warning svg path {
+.ajaxify-admin__notice.ajaxify-admin__notice-type--warning .ajaxify-admin__notice-icon svg:not(.lucide) path {
+  fill: var(--ajaxify-admin--color-notice--warning-alt);
+}
+.ajaxify-admin__notice.ajaxify-admin__notice-type--warning .ajaxify-admin__notice-icon svg.lucide {
+  color: var(--ajaxify-admin--color-notice--warning-alt);
+}
+.ajaxify-admin__notice.ajaxify-admin__notice-type--warning svg:not(.lucide) path {
   fill: var(--ajaxify-admin--color-notice--warning-alt);
 }
 

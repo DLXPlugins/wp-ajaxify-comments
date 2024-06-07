@@ -62,8 +62,20 @@ function plugins_loaded() {
 
 	// Load die handler. This should only affect if `HTTP_X_WPAC_REQUEST` server var is set.
 	add_filter( 'wp_die_handler', 'wpac_wp_die_handler' );
+
+	// For checking when a theme has changed.
+	add_action( 'switch_theme', __NAMESPACE__ . '\wpac_has_switched_theme' );
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\plugins_loaded' );
+
+/**
+ * Run when the theme has been switched.
+ *
+ * We'll use this to alert the user to re-save settings.
+ */
+function wpac_has_switched_theme() {
+	update_option( 'wpac_theme_has_changed', true );
+}
 
 /**
  * Run when WP has finished loading in.

@@ -48,7 +48,7 @@
 		"grunt-contrib-compress": "^2.0.0",
 		"hex-to-rgba": "^2.0.1",
 		"jquery": "^3.7.1",
-		"lucide-react": "^0.268.0",
+		"lucide-react": "^0.390.0",
 		"mini-css-extract-plugin": "^2.6.1",
 		"prettier": "^2.8.8",
 		"prettier-eslint": "^13.0.0",

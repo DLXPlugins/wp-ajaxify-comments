@@ -9,6 +9,15 @@
     transform: rotate(360deg);
   }
 }
+#wpac-lazy-load-content {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  max-height: 0;
+  border: 0;
+}
+
 .ajaxify-btn-reset,
 .ajaxify-btn-reset:focus,
 .ajaxify-btn-reset:hover {

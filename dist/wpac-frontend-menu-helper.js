@@ -4914,7 +4914,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Now check to see if we can find the comment list.
         var foundCommentList = false;
-        var commentListSelectors = ['.comment-list', '.comment-list-wrapper', '.comment-list-container', '.ast-comment-list', '.wp-block-comment-template'];
+        var commentListSelectors = ['.comment-list', '.comment-list-wrapper', '.comment-list-container', '.ast-comment-list', '.wp-block-comment-template', '#comments ul', '#comments ol'];
         commentListSelectors.forEach(function (commentListSelector) {
           if (foundCommentList) {
             return;

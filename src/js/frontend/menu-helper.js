@@ -198,6 +198,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
 					'.comment-list-container',
 					'.ast-comment-list',
 					'.wp-block-comment-template',
+					'#comments ul',
+					'#comments ol',
 				];
 				commentListSelectors.forEach( ( commentListSelector ) => {
 					if ( foundCommentList ) {

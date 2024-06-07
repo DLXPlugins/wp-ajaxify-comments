@@ -55,6 +55,7 @@ class Main {
 				'saveNonce'    => wp_create_nonce( 'wpac-admin-home-save-options' ),
 				'resetNonce'   => wp_create_nonce( 'wpac-admin-home-reset-options' ),
 				'selectorsUrl' => esc_url( add_query_arg( array( 'first_time_install' => '1' ), Functions::get_settings_url( 'selectors' ) ) ),
+				'hasThemeChanged' => (bool) get_option( 'wpac_theme_has_changed', false ),
 			)
 		);
 	}
@@ -75,6 +76,11 @@ class Main {
 
 		$options = Options::get_options();
 		$options = Functions::sanitize_array_recursive( $options );
+
+		// Remove has theme changed option as we don't want to show it twice.
+		delete_option( 'wpac_theme_has_changed' );
+
+		// Send response.
 		wp_send_json_success( $options );
 	}
 
