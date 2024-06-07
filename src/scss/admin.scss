@@ -37,7 +37,7 @@ html {
 
 	#ajaxify-admin-header {
 		margin: 0 !important;
-		padding: 0.6875rem 40px 0.6875rem 40px;
+		padding: 1.5rem 40px 1.5rem 40px;
 
 		#ajaxify-admin-header-content {
 			display: grid;
@@ -45,7 +45,7 @@ html {
 			grid-template-columns: 1fr;
 
 			@include respond-to(medium) {
-				grid-template-columns: 400px 1fr;
+				grid-template-columns: 475px 1fr;
 			}
 
 			margin: 0 auto;
@@ -697,8 +697,9 @@ h3.ajaxify-admin-content-subheading {
 	}
 }
 .ajaxify-info-text {
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 1.3;
+	letter-spacing: 0.08em;
 }
 .ajaxify-admin-panel-area > h2 ~ p {
 	font-size: 16px;

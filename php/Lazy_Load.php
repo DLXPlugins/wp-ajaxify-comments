@@ -160,30 +160,56 @@ class Lazy_Load {
 		if ( 'inline' !== $options['lazyLoadDisplay'] || 'skeleton' !== $options['lazyLoadInlineLoadingType'] ) {
 			return;
 		}
+		/*
+		--ajaxify-skeleton-loader-background-color: #EEEEEE;
+    --ajaxify-skeleton-loader-highlight-color: #dededede;
+	--ajaxify-skeleton-loader-heading-color: #333;
+	--ajaxify-skeleton-loader-heading-font-size: 24px;
+	--ajaxify-skeleton-loader-heading-line-height: 1.45;
+	--ajaxify-skeleton-gradient: linear-gradient(90deg, var(--ajaxify-skeleton-loader-background-color) 25%, var(--ajaxify-skeleton-loader-highlight-color) 50%, var(--ajaxify-skeleton-loader-background-color) 75%);
+}
+	'lazyLoadInlineSkeletonBackgroundColor'        => '#EEEEEE',
+			'lazyLoadInlineSkeletonHighlightColor'         => '#dedede',
+			'lazyLoadInlineSkeletonHeadingColor'           => '#333333',
+			'lazyLoadInlineSkeletonHeadingFontSize'        => 24,
+			'lazyLoadInlineSkeletonHeadingLineHeight'      => 1.5,
+	*/
 		?>
 		<div id="wpac-lazy-load-content" aria-hidden="true">
-			<?php
-			$can_show_heading = (bool) $options['lazyLoadInlineSkeletonLoadingLabelEnabled'];
-			$skeleton_heading = sanitize_text_field( $options['lazyLoadInlineSkeletonLoadingLabel'] );
-			if ( $can_show_heading && ! empty( $skeleton_heading ) ) :
-				?>
-				<h2 class="ajaxify-skeleton-heading"><?php echo esc_html( $skeleton_heading ); ?></h2>
+		<style>
+				.ajaxify-comments-loading-skeleton-wrapper  {
+					--ajaxify-skeleton-loader-background-color: <?php echo esc_html( $options['lazyLoadInlineSkeletonBackgroundColor'] ); ?>;
+					--ajaxify-skeleton-loader-highlight-color: <?php echo esc_html( $options['lazyLoadInlineSkeletonHighlightColor'] ); ?>;
+					--ajaxify-skeleton-loader-heading-color: <?php echo esc_html( $options['lazyLoadInlineSkeletonHeadingColor'] ); ?>;
+					--ajaxify-skeleton-loader-heading-font-size: <?php echo esc_html( $options['lazyLoadInlineSkeletonHeadingFontSize'] ); ?>px;
+					--ajaxify-skeleton-loader-heading-line-height: <?php echo esc_html( $options['lazyLoadInlineSkeletonHeadingLineHeight'] ); ?>;
+					--ajaxify-skeleton-gradient: linear-gradient(90deg, var(--ajaxify-skeleton-loader-background-color) 25%, var(--ajaxify-skeleton-loader-highlight-color) 50%, var(--ajaxify-skeleton-loader-background-color) 75%);
+				}
+			</style>
+			<div class="ajaxify-comments-loading-skeleton-wrapper">
 				<?php
-			endif;
-			// Get how many rows to show.
-			$number_of_rows = (int) $options['lazyLoadInlineSkeletonItemsShow'];
-			for ( $i = 0; $i < $number_of_rows; $i++ ) :
-				?>
-				<div class="ajaxify-loading-skeleton">
-					<div class="ajaxify-skeleton-comment-header">
-						<div class="ajaxify-skeleton-avatar"></div>
-						<div class="ajaxify-skeleton-comment-meta"></div>
+				$can_show_heading = (bool) $options['lazyLoadInlineSkeletonLoadingLabelEnabled'];
+				$skeleton_heading = sanitize_text_field( $options['lazyLoadInlineSkeletonLoadingLabel'] );
+				if ( $can_show_heading && ! empty( $skeleton_heading ) ) :
+					?>
+					<h2 class="ajaxify-skeleton-heading"><?php echo esc_html( $skeleton_heading ); ?></h2>
+					<?php
+				endif;
+				// Get how many rows to show.
+				$number_of_rows = (int) $options['lazyLoadInlineSkeletonItemsShow'];
+				for ( $i = 0; $i < $number_of_rows; $i++ ) :
+					?>
+					<div class="ajaxify-loading-skeleton">
+						<div class="ajaxify-skeleton-comment-header">
+							<div class="ajaxify-skeleton-avatar"></div>
+							<div class="ajaxify-skeleton-comment-meta"></div>
+						</div>
+						<div class="ajaxify-skeleton-comment-body"></div>
 					</div>
-					<div class="ajaxify-skeleton-comment-body"></div>
-				</div>
-				<?php
-			endfor;
-			?>
+					<?php
+				endfor;
+				?>
+			</div>
 		</div>
 		<?php
 	}
