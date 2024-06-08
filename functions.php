@@ -56,12 +56,20 @@ function wpac_enqueue_scripts() {
 		return;
 	}
 
-	$version       = Functions::get_plugin_version();
-	$options       = Options::get_options();
-	$in_footer     = (bool) $options['placeScriptsInFooter'] || (bool) $options['debug'] || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG );
-	$is_debug      = (bool) $options['debug'];
-	$is_singular   = is_singular() || is_page();
-	$force_scripts = false;
+	$version                 = Functions::get_plugin_version();
+	$options                 = Options::get_options();
+	$in_footer               = (bool) $options['placeScriptsInFooter'] || (bool) $options['debug'] || ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG );
+	$is_debug                = (bool) $options['debug'];
+	$force_scripts           = false;
+	$is_lazy_loading_enabled = Functions::is_lazy_loading_enabled( true, false );
+	$is_comments_enabled     = wpac_comments_enabled();
+
+	// Determine if comments are present on the page.
+	$has_comments = false;
+	if ( is_page() || is_single() || is_a( get_queried_object(), 'WP_POST' ) ) {
+		global $post;
+		$has_comments = get_comments_number( $post->ID ) > 0;
+	}
 
 	/**
 	 * Filter: Load scripts on all pages.
@@ -72,7 +80,7 @@ function wpac_enqueue_scripts() {
 	 */
 	$force_scripts = apply_filters( 'dlxplugins/ajaxify/scripts/load', $force_scripts );
 
-	if ( ( $is_debug || $is_singular || $force_scripts ) && (bool) $options['useUncompressedScripts'] ) {
+	if ( ( $is_debug || $is_comments_enabled || $force_scripts || ( $is_lazy_loading_enabled && $has_comments ) ) && (bool) $options['useUncompressedScripts'] ) {
 		wp_enqueue_script(
 			'jsuri',
 			Functions::get_plugin_url( 'dist/wpac-frontend-jsuri.js' ),
@@ -114,7 +122,7 @@ function wpac_enqueue_scripts() {
 			$version,
 			$in_footer
 		);
-	} elseif ( $is_debug || $is_singular || $force_scripts ) {
+	} elseif ( $is_debug || $is_comments_enabled || $force_scripts || ( $is_lazy_loading_enabled && $has_comments ) ) {
 		$deps = require_once Functions::get_plugin_dir( 'dist/wpac-frontend-js.asset.php' );
 		wp_enqueue_script(
 			'wpAjaxifyComments',
@@ -137,19 +145,21 @@ function wpac_enqueue_scripts() {
 			'afterPostComment'     => wpac_get_option( 'callbackOnAfterPostComment' ),
 		)
 	);
+	if ( $is_debug || $is_comments_enabled || $force_scripts || ( $is_lazy_loading_enabled && $has_comments ) ) {
+		/**
+		 * Add frontend CSS.
+		 */
+		wp_enqueue_style(
+			'wpac-frontend',
+			Functions::get_plugin_url( 'dist/wpac-frontend-css.css' ),
+			array(),
+			Functions::get_plugin_version(),
+			'all'
+		);
+	}
 
-	/**
-	 * Add frontend CSS.
-	 */
-	wp_enqueue_style(
-		'wpac-frontend',
-		Functions::get_plugin_url( 'dist/wpac-frontend-css.css' ),
-		array(),
-		Functions::get_plugin_version(),
-		'all'
-	);
 	// Load lazy loading styles.
-	if ( Functions::is_lazy_loading_enabled( true, false ) ) {
+	if ( $is_lazy_loading_enabled && ( $has_comments || $is_comments_enabled ) ) {
 		wp_enqueue_style(
 			'wpac-admin-lazy-load',
 			Functions::get_plugin_url( 'dist/wpac-lazy-load-css.css' ),
