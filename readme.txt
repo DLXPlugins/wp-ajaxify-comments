@@ -59,7 +59,8 @@ The following themes are supported out of the box:
 4. Genesis
 5. <a href="https://wordpress.org/themes/ollie/">Ollie</a>
 6. <a href="https://wordpress.org/themes/generatepress/">GeneratePress</a>
-7. Twenty Ten - Twenty Twenty Three
+7. <a href="https://wordpress.org/themes/neve/">Neve</a>
+8. Twenty Ten - Twenty Twenty Three
 
 Ajaxify Comments should be compatible with most block themes. If <a href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/menu-helper">Menu Helper</a> can't find the selectors, please leave a support request.
 

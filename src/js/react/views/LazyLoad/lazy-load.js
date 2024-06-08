@@ -249,7 +249,7 @@ const Interface = ( props ) => {
 														onChange={ onChange }
 														options={ [
 															{ value: 'external', label: __( 'External Trigger', 'wp-ajaxify-comments' ) },
-															{ value: 'comments', label: __( 'Comments Scrolled Into Viewport', 'wp-ajaxify-comments' ) },
+															{ value: 'comments', label: __( 'Comments Scrolled Into Viewport (Recommended)', 'wp-ajaxify-comments' ) },
 															{ value: 'domready', label: __( 'Dom Ready', 'wp-ajaxify-comments' ) },
 															{ value: 'element', label: __( 'Dom Element Reached', 'wp-ajaxify-comments' ) },
 															{ value: 'scroll', label: __( 'Page Scroll Length', 'wp-ajaxify-comments' ) },
@@ -422,7 +422,7 @@ const Interface = ( props ) => {
 																	},
 																	{
 																		value: 'element',
-																		label: __( 'Custom HTML Element', 'wp-ajaxify-comments' ),
+																		label: __( 'Custom HTML Element (Experimental)', 'wp-ajaxify-comments' ),
 																	}
 																] }
 															/>

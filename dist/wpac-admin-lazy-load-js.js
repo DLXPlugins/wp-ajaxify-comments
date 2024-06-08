@@ -3167,7 +3167,7 @@ var Interface = function Interface(props) {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('External Trigger', 'wp-ajaxify-comments')
         }, {
           value: 'comments',
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comments Scrolled Into Viewport', 'wp-ajaxify-comments')
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comments Scrolled Into Viewport (Recommended)', 'wp-ajaxify-comments')
         }, {
           value: 'domready',
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Dom Ready', 'wp-ajaxify-comments')
@@ -3314,7 +3314,7 @@ var Interface = function Interface(props) {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comment Section', 'wp-ajaxify-comments')
         }, {
           value: 'element',
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Custom HTML Element', 'wp-ajaxify-comments')
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Custom HTML Element (Experimental)', 'wp-ajaxify-comments')
         }]
       }));
     }
