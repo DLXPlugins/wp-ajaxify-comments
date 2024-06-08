@@ -676,7 +676,9 @@ WPAC.AttachForm = function( options ) {
 		var request = jQuery.ajax( {
 			url: submitUrl,
 			type: 'POST',
-			data: form.serialize(),
+			data: new FormData( this ),
+			processData: false,
+            contentType: false,
 			beforeSend( xhr ) {
 				xhr.setRequestHeader( 'X-WPAC-REQUEST', '1' );
 			},

@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.5
-Stable tag: 2.2.2
+Stable tag: 2.3.0
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -54,13 +54,10 @@ The plugin has integrations with:
 The following themes are supported out of the box:
 
 1. <a href="https://wordpress.org/themes/astra/">Astra</a>
-2. <a href="https://wordpress.org/themes/blocksy/">Blocksy</a>
-3. Divi
-4. Genesis
-5. <a href="https://wordpress.org/themes/ollie/">Ollie</a>
-6. <a href="https://wordpress.org/themes/generatepress/">GeneratePress</a>
-7. <a href="https://wordpress.org/themes/neve/">Neve</a>
-8. Twenty Ten - Twenty Twenty Three
+2. Genesis
+3. <a href="https://wordpress.org/themes/ollie/">Ollie</a>
+4. <a href="<a href="https://wordpress.org/themes/blocksy/">Blocksy</a>
+4. Twenty Ten - Twenty Twenty Three
 
 Ajaxify Comments should be compatible with most block themes. If <a href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/menu-helper">Menu Helper</a> can't find the selectors, please leave a support request.
 
