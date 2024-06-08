@@ -23,6 +23,10 @@ const InlineSpinnerOptions = ( props ) => {
 		getValues,
 	} = props;
 
+	const {
+		lazyLoadInlineSpinnerContainerBackgroundColorOpacity
+	} = getValues();
+
 	/**
 	 * Returns a button group with all the available loading spinners.
 	 *
@@ -503,6 +507,10 @@ const InlineSpinnerOptions = ( props ) => {
 										defaultColor={ '#000000' }
 										slug={ 'spinner-container-background-color' }
 										alpha={ true }
+										opacity={ lazyLoadInlineSpinnerContainerBackgroundColorOpacity }
+										onOpacityChange={ ( opacity ) => {
+											setValue( 'lazyLoadInlineSpinnerContainerBackgroundColorOpacity', opacity );
+										} }
 									/>
 								</>
 							) }

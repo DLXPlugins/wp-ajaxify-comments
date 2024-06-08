@@ -185,85 +185,169 @@ class Options {
 	 */
 	public static function get_defaults() {
 		$defaults = array(
-			'enable'                         => false,
-			'debug'                          => false,
-			'menuHelper'                     => false,
-			'selectorCommentForm'            => '#commentform,.ast-commentform,.comment-form',
-			'selectorCommentsContainer'      => '#comments,.comments-wrapper,.comments-area,.wp-block-comments',
-			'selectorCommentList'            => '.comment-list,.ast-comment-list,.wp-block-comment-template',
-			'selectorCommentPagingLinks'     => '#comments [class^=\'nav-\'] a',
-			'selectorCommentLinks'           => '#comments a[href*="/comment-page-"]',
-			'selectorRespondContainer'       => '#respond',
-			'selectorErrorContainer'         => 'p:parent',
-			'selectorSubmitButton'           => '#submit',
-			'selectorTextarea'               => '#comment',
-			'selectorPostContainer'          => '',
-			'scrollSpeed'                    => 500,
-			'autoUpdateIdleTime'             => 0,
-			'popupOverlayBackgroundColor'    => '#000000',
-			'popupOverlayBackgroundOpacity'  => 0,
-			'popupBackgroundColorLoading'    => '#000000',
-			'popupTextColorLoading'          => '#ffffff',
-			'popupBackgroundColorSuccess'    => '#008000',
-			'popupTextColorSuccess'          => '#FFFFFF',
-			'popupBackgroundColorError'      => '#FF0000',
-			'popupTextColorError'            => '#FFFFFF',
-			'popupOpacity'                   => 85,
-			'popupOpacityTablet'             => 85,
-			'popupOpacityMobile'             => 85,
-			'popupCornerRadius'              => 5,
-			'popupCornerRadiusTablet'        => 5,
-			'popupCornerRadiusMobile'        => 5,
-			'popupMarginTop'                 => 10,
-			'popupMarginTopTablet'           => 10,
-			'popupMarginTopMobile'           => 10,
-			'popupWidth'                     => 30,
-			'popupWidthTablet'               => 45,
-			'popupWidthMobile'               => 75,
-			'popupPadding'                   => 20,
-			'popupPaddingTablet'             => 20,
-			'popupPaddingMobile'             => 20,
-			'popupFadeIn'                    => 400,
-			'popupFadeOut'                   => 400,
-			'popupTimeout'                   => 3000,
-			'popupTextAlign'                 => 'center', /* can be left|center|right */
-			'popupVerticalAlign'             => 'verticalStart', /* can be verticalStart|verticalCenter|verticalEnd */
-			'popupTextFontSize'              => '20px',
-			'popupTextFontSizeTablet'        => '20px',
-			'popupTextFontSizeMobile'        => '20px',
-			'popupZindex'                    => 1000,
-			'textPosted'                     => __( 'Your comment has been posted. Thank you!', 'wp-ajaxify-comments' ),
-			'textPostedUnapproved'           => __( 'Your comment has been posted and is awaiting moderation. Thank you!', 'wp-ajaxify-comments' ),
-			'textReloadPage'                 => __( 'Reloading page. Please wait.', 'wp-ajaxify-comments' ),
-			'textPostComment'                => __( 'Posting your comment. Please wait.', 'wp-ajaxify-comments' ),
-			'textRefreshComments'            => __( 'Loading comments. Please wait.', 'wp-ajaxify-comments' ),
-			'textUnknownError'               => __( 'Something went wrong, your comment has not been posted.', 'wp-ajaxify-comments' ),
-			'textErrorTypeComment'           => __( 'Please type your comment text.', 'wp-ajaxify-comments' ),
-			'textErrorCommentsClosed'        => __( 'Sorry, comments are closed for this item.', 'wp-ajaxify-comments' ),
-			'textErrorMustBeLoggedIn'        => __( 'Sorry, you must be logged in to post a comment.', 'wp-ajaxify-comments' ),
-			'textErrorFillRequiredFields'    => __( 'Please fill the required fields (name, email).', 'wp-ajaxify-comments' ),
-			'textErrorInvalidEmailAddress'   => __( 'Please enter a valid email address.', 'wp-ajaxify-comments' ),
-			'textErrorPostTooQuickly'        => __( 'You are posting comments too quickly. Please wait a minute and resubmit your comment.', 'wp-ajaxify-comments' ),
-			'textErrorDuplicateComment'      => __( 'Duplicate comment detected. It looks like you have already submitted this comment.', 'wp-ajaxify-comments' ),
-			'callbackOnBeforeSelectElements' => '',
-			'callbackOnBeforeSubmitComment'  => '',
-			'callbackOnAfterPostComment'     => '',
-			'callbackOnBeforeUpdateComments' => '',
-			'callbackOnAfterUpdateComments'  => '',
-			'commentPagesUrlRegex'           => '',
-			'disableUrlUpdate'               => false,
-			'disableScrollToAnchor'          => false,
-			'useUncompressedScripts'         => false,
-			'placeScriptsInFooter'           => true,
-			'optimizeAjaxResponse'           => false,
-			'baseUrl'                        => '',
-			'disableCache'                   => false,
-			'enableByQuery'                  => false,
-			'lazyLoadEnabled'                => false,
-			'lazyLoadDisplay'                => 'overlay', /* can be overlay, inline, none */
-			'lazyLoadTrigger'                => 'domready', /* can be external, comments, domready, scroll, element */
-			'lazyLoadTriggerElement'         => '',
-			'lazyLoadInlineDisplayElement'   => '#comments',
+			'enable'                                       => false,
+			'debug'                                        => false,
+			'menuHelper'                                   => false,
+			'selectorCommentForm'                          => '#commentform,.ast-commentform,.comment-form',
+			'selectorCommentsContainer'                    => '#comments,.comments-wrapper,.comments-area,.wp-block-comments',
+			'selectorCommentList'                          => '.comment-list,.ast-comment-list,.wp-block-comment-template',
+			'selectorCommentPagingLinks'                   => '#comments [class^=\'nav-\'] a',
+			'selectorCommentLinks'                         => '#comments a[href*="/comment-page-"]',
+			'selectorRespondContainer'                     => '#respond',
+			'selectorErrorContainer'                       => 'p:parent',
+			'selectorSubmitButton'                         => '#submit',
+			'selectorTextarea'                             => '#comment',
+			'selectorPostContainer'                        => '',
+			'scrollSpeed'                                  => 500,
+			'autoUpdateIdleTime'                           => 0,
+			'popupOverlayBackgroundColor'                  => '#000000',
+			'popupOverlayBackgroundOpacity'                => 0,
+			'popupBackgroundColorLoading'                  => '#000000',
+			'popupTextColorLoading'                        => '#ffffff',
+			'popupBackgroundColorSuccess'                  => '#008000',
+			'popupTextColorSuccess'                        => '#FFFFFF',
+			'popupBackgroundColorError'                    => '#FF0000',
+			'popupTextColorError'                          => '#FFFFFF',
+			'popupOpacity'                                 => 85,
+			'popupOpacityTablet'                           => 85,
+			'popupOpacityMobile'                           => 85,
+			'popupCornerRadius'                            => 5,
+			'popupCornerRadiusTablet'                      => 5,
+			'popupCornerRadiusMobile'                      => 5,
+			'popupMarginTop'                               => 10,
+			'popupMarginTopTablet'                         => 10,
+			'popupMarginTopMobile'                         => 10,
+			'popupWidth'                                   => 30,
+			'popupWidthTablet'                             => 45,
+			'popupWidthMobile'                             => 75,
+			'popupPadding'                                 => 20,
+			'popupPaddingTablet'                           => 20,
+			'popupPaddingMobile'                           => 20,
+			'popupFadeIn'                                  => 400,
+			'popupFadeOut'                                 => 400,
+			'popupTimeout'                                 => 3000,
+			'popupTextAlign'                               => 'center', /* can be left|center|right */
+			'popupVerticalAlign'                           => 'verticalStart', /* can be verticalStart|verticalCenter|verticalEnd */
+			'popupTextFontSize'                            => '20px',
+			'popupTextFontSizeTablet'                      => '20px',
+			'popupTextFontSizeMobile'                      => '20px',
+			'popupZindex'                                  => 1000,
+			'textPosted'                                   => __( 'Your comment has been posted. Thank you!', 'wp-ajaxify-comments' ),
+			'textPostedUnapproved'                         => __( 'Your comment has been posted and is awaiting moderation. Thank you!', 'wp-ajaxify-comments' ),
+			'textReloadPage'                               => __( 'Reloading page. Please wait.', 'wp-ajaxify-comments' ),
+			'textPostComment'                              => __( 'Posting your comment. Please wait.', 'wp-ajaxify-comments' ),
+			'textRefreshComments'                          => __( 'Loading comments. Please wait.', 'wp-ajaxify-comments' ),
+			'textUnknownError'                             => __( 'Something went wrong, your comment has not been posted.', 'wp-ajaxify-comments' ),
+			'textErrorTypeComment'                         => __( 'Please type your comment text.', 'wp-ajaxify-comments' ),
+			'textErrorCommentsClosed'                      => __( 'Sorry, comments are closed for this item.', 'wp-ajaxify-comments' ),
+			'textErrorMustBeLoggedIn'                      => __( 'Sorry, you must be logged in to post a comment.', 'wp-ajaxify-comments' ),
+			'textErrorFillRequiredFields'                  => __( 'Please fill the required fields (name, email).', 'wp-ajaxify-comments' ),
+			'textErrorInvalidEmailAddress'                 => __( 'Please enter a valid email address.', 'wp-ajaxify-comments' ),
+			'textErrorPostTooQuickly'                      => __( 'You are posting comments too quickly. Please wait a minute and resubmit your comment.', 'wp-ajaxify-comments' ),
+			'textErrorDuplicateComment'                    => __( 'Duplicate comment detected. It looks like you have already submitted this comment.', 'wp-ajaxify-comments' ),
+			'callbackOnBeforeSelectElements'               => '',
+			'callbackOnBeforeSubmitComment'                => '',
+			'callbackOnAfterPostComment'                   => '',
+			'callbackOnBeforeUpdateComments'               => '',
+			'callbackOnAfterUpdateComments'                => '',
+			'commentPagesUrlRegex'                         => '',
+			'disableUrlUpdate'                             => false,
+			'disableScrollToAnchor'                        => false,
+			'useUncompressedScripts'                       => false,
+			'placeScriptsInFooter'                         => true,
+			'optimizeAjaxResponse'                         => false,
+			'baseUrl'                                      => '',
+			'disableCache'                                 => false,
+			'enableByQuery'                                => false,
+			'lazyLoadEnabled'                              => false,
+			'lazyLoadDisplay'                              => 'overlay', /* can be overlay, inline, none */
+			'lazyLoadInlineDisplayLocation'                => 'comments', /* can be comments, element */
+			'lazyLoadInlineDisplayElement'                 => '#comments',
+			'lazyLoadInlineLoadingType'                    => 'spinner', /* can be spinner, skeleton, button, shortcode */
+			'lazyLoadInlineSpinner'                        => 'LoadingGray1',
+			'lazyLoadInlineSpinnerLabelEnabled'            => true,
+			'lazyLoadInlineSpinnerContainerBackgroundColor' => '#333333',
+			'lazyLoadInlineSpinnerContainerBackgroundColorOpacity' => 1,
+			'lazyLoadInlineSpinnerLabel'                   => __( 'Loading comments...', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineSpinnerLabelColor'              => '#FFFFFF',
+
+			'lazyLoadInlineSpinnerIconColor'               => '#FFFFFF',
+			'lazyLoadInlineSpinnerLayoutType'              => 'horizontal', /* can be horizontal, vertical */
+			'lazyLoadInlineSpinnerLayoutAlignment'         => 'left', /* can be left, center, right */
+			'lazyLoadInlineSpinnerLayoutRTL'               => false,
+			'lazyLoadTrigger'                              => 'domready', /* can be external, comments, domready, scroll, element */
+			'lazyLoadTriggerElement'                       => '',
+			'lazyLoadInlineSpinnerSpeed'                   => 1.25,
+			'lazyLoadTriggerScrollOffset'                  => 0,
+			'lazyLoadPaginationEnabled'                    => false,
+			'lazyLoadCommentsPerPage'                      => 30,
+			'lazyLoadUseThemePagination'                   => true,
+			'lazyLoadPaginationStyle'                      => 'nextPrev', /* can be nextPrev, numbers, numbersRounded */
+			'lazyLoadPaginationLocation'                   => 'bottom', /* can be top, bottom, both */
+			'lazyLoadingPaginationScrollToTop'             => true,
+			'lazyLoadInlineSpinnerLabelFontSizeDesktop'    => 42, /* pixels */
+			'lazyLoadInlineSpinnerSizeDesktop'             => 72, /* pixels */
+			'lazyLoadInlineSpinnerLabelLineHeightDesktop'  => 54, /* px */
+			'lazyLoadInlineSpinnerContainerPaddingDesktop' => 35, /* pixels */
+			'lazyLoadInlineSpinnerGapDesktop'              => 20, /* pixels */
+			'lazyLoadInlineSpinnerLabelFontSizeTablet'     => 36, /* pixels */
+			'lazyLoadInlineSpinnerSizeTablet'              => 65, /* pixels */
+			'lazyLoadInlineSpinnerLabelLineHeightTablet'   => 42, /* px */
+			'lazyLoadInlineSpinnerContainerPaddingTablet'  => 25, /* pixels */
+			'lazyLoadInlineSpinnerGapTablet'               => 15, /* pixels */
+			'lazyLoadInlineSpinnerLabelFontSizeMobile'     => 28, /* pixels */
+			'lazyLoadInlineSpinnerSizeMobile'              => 48, /* pixels */
+			'lazyLoadInlineSpinnerLabelLineHeightMobile'   => 34, /* px */
+			'lazyLoadInlineSpinnerContainerPaddingMobile'  => 20, /* pixels */
+			'lazyLoadInlineSpinnerGapMobile'               => 15, /* pixels */
+			'lazyLoadInlineSkeletonLoadingLabelEnabled'    => false,
+			'lazyLoadInlineSkeletonLoadingLabel'           => __( 'Loading comments...', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineSkeletonItemsShow'              => 2,
+			'lazyLoadInlineSkeletonBackgroundColor'        => '#EEEEEE',
+			'lazyLoadInlineSkeletonHighlightColor'         => '#dedede',
+			'lazyLoadInlineSkeletonHeadingColor'           => '#333333',
+			'lazyLoadInlineSkeletonHeadingFontSize'        => 24,
+			'lazyLoadInlineSkeletonHeadingLineHeight'      => 1.5,
+			'lazyLoadInlineShortcode'                      => '',
+			'lazyLoadInlineLoadingButtonLabel'             => __( 'Load Comments', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineLoadingButtonLabelLoading'      => __( 'Loading Comments...', 'wp-ajaxify-comments' ),
+			/* Button options */
+			'lazyLoadInlineButtonSpinner'                  => 'LoadingGray1',
+			'lazyLoadInlineButtonLabel'                    => __( 'Load Comments', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineButtonLabelLoading'             => __( 'Loading Comments...', 'wp-ajaxify-comments' ),
+			'lazyLoadInlineButtonAppearance'               => 'solid', /* can be transparent, solid .*/
+			'lazyLoadInlineButtonUseThemeStyles'           => true,
+			'lazyLoadInlineButtonBackgroundColor'          => '#333333',
+			'lazyLoadInlineButtonBackgroundColorHover'     => '#444444',
+			'lazyLoadInlineButtonTextColor'                => '#FFFFFF',
+			'lazyLoadInlineButtonTextColorHover'           => '#FFFFFF',
+			'lazyLoadInlineButtonBorderColor'              => '#333333',
+			'lazyLoadInlineButtonBorderColorHover'         => '#444444',
+			'lazyLoadInlineButtonBorderWidth'              => 1,
+			'lazyLoadInlineButtonBorderRadius'             => 5,
+			'lazyLoadInlineButtonPaddingTop'               => 12,
+			'lazyLoadInlineButtonPaddingRight'             => 24,
+			'lazyLoadInlineButtonPaddingBottom'            => 12,
+			'lazyLoadInlineButtonPaddingLeft'              => 24,
+			'lazyLoadInlineButtonFontSize'                 => 16,
+			'lazyLoadInlineButtonLineHeight'               => 1.5,
+			'lazyLoadInlineButtonFontWeight'               => 600,
+			'lazyLoadInlineButtonFontFamily'               => 'inherit',
+			'lazyLoadInlineButtonAlign'                    => 'center',
+			/*
+			--ajaxify-comments-loading-button-background-color: #333;
+		--ajaxify-comments-loading-button-background-color-hover: #444;
+		--ajaxify-comments-loading-button-text-color: #FFF;
+		--ajaxify-comments-loading-button-text-color-hover: #FFF;
+		--ajaxify-comments-loading-button-border-color: #333;
+		--ajaxify-comments-loading-button-border-color-hover: #444;
+		--ajaxify-comments-loading-button-border-width: 1px;
+		--ajaxify-comments-loading-button-border-radius: 5px;
+		--ajaxify-comments-loading-button-padding-top: 12px;
+		--ajaxify-comments-loading-button-padding-right: 24px;
+		--ajaxify-comments-loading-button-padding-bottom: 12px;
+		--ajaxify-comments-loading-button-padding-left: 24px;
+		*/
 		);
 		return $defaults;
 	}

@@ -1,0 +1,306 @@
+/*!**************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/scss/lazy-load.scss ***!
+  \**************************************************************************************************************************************************************************/
+/* Responsive styles - In hindsight, should've used mobile-first */
+/* Mixin from: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/ */
+/* It's only used here, so no external file for mixin? */
+@keyframes ajaxify-lazy-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+#wpac-lazy-load-content {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  max-height: 0;
+  border: 0;
+}
+
+.ajaxify-btn-reset,
+.ajaxify-btn-reset:focus,
+.ajaxify-btn-reset:hover {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+  text-transform: unset;
+  height: unset;
+}
+
+.ajaxify-btn-reset.show-cursor {
+  cursor: pointer;
+}
+
+.ajaxify-btn-reset button,
+.ajaxify-btn-reset:focus button,
+.ajaxify-btn-reset:hover button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+  text-transform: unset;
+}
+
+@keyframes ajaxify-comments-spinner-reveal {
+  from {
+    opacity: 0;
+    max-height: 0;
+    height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+    height: 100%;
+    visibility: visible;
+  }
+}
+#wpac-lazy-load-content {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  max-height: 0;
+  border: 0;
+}
+
+#wpac-lazy-load-content-clone {
+  transition: all 1s ease-in-out;
+  animation-name: ajaxify-comments-spinner-reveal;
+  animation-duration: 0.35s;
+  animation-timing-function: linear;
+}
+
+.ajaxify-comments-spinner__wrapper {
+  position: relative;
+  background-color: var(--ajaxify-comments-spinner-container-background-color, #333);
+  padding: var(--ajaxify-comments-spinner-container-padding, 30px);
+}
+.ajaxify-comments-spinner__wrapper .ajaxify-admin__preview-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #FFF;
+}
+.ajaxify-comments-spinner__wrapper .ajaxify-comments-spinner__label {
+  color: var(--ajaxify-comments-spinner-label-color, #FFFFFF);
+}
+
+.form-table .ajaxify-comments-spinner__wrapper {
+  border: 1px solid #E5E5E5;
+}
+
+/**
+ * Layout
+ */
+.ajaxify-comments-spinner__wrapper.ajaxify-comments-spinner__layout--vertical .ajaxify-comments-spinner__inner {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ajaxify-comments-spinner__wrapper.ajaxify-comments-spinner__layout--horizontal .ajaxify-comments-spinner__inner {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.ajaxify-comments-spinner__wrapper.ajaxify-comments-spinner__alignment--left.ajaxify-comments-spinner__layout--horizontal .ajaxify-comments-spinner__inner {
+  justify-content: flex-start;
+}
+.ajaxify-comments-spinner__wrapper.ajaxify-comments-spinner__alignment--center.ajaxify-comments-spinner__layout--horizontal .ajaxify-comments-spinner__inner {
+  justify-content: center;
+}
+.ajaxify-comments-spinner__wrapper.ajaxify-comments-spinner__alignment--right.ajaxify-comments-spinner__layout--horizontal .ajaxify-comments-spinner__inner {
+  justify-content: flex-end;
+}
+.ajaxify-comments-spinner__wrapper.ajaxify-comments-spinner__alignment--left.ajaxify-comments-spinner__layout--vertical .ajaxify-comments-spinner__inner {
+  align-items: flex-start;
+}
+.ajaxify-comments-spinner__wrapper.ajaxify-comments-spinner__alignment--center.ajaxify-comments-spinner__layout--vertical .ajaxify-comments-spinner__inner {
+  align-items: center;
+}
+.ajaxify-comments-spinner__wrapper.ajaxify-comments-spinner__alignment--right.ajaxify-comments-spinner__layout--vertical .ajaxify-comments-spinner__inner {
+  align-items: flex-end;
+}
+.ajaxify-comments-spinner__wrapper.ajaxify-comments-spinner__rtl.ajaxify-comments-spinner__layout--horizontal .ajaxify-comments-spinner__inner {
+  flex-direction: row-reverse;
+}
+.ajaxify-comments-spinner__wrapper.ajaxify-comments-spinner__rtl.ajaxify-comments-spinner__layout--vertical .ajaxify-comments-spinner__inner {
+  flex-direction: column-reverse;
+}
+
+.ajaxify-comments-spinner__inner {
+  display: flex;
+  align-items: center;
+  font-size: var(--ajaxify-comments-spinner-container-font-size, 32px);
+  line-height: var(--ajaxify-comments-spinner-container-line-height, 48px);
+  color: var(--ajaxify-comments-spinner-container-label-color, #FFFFFF);
+  row-gap: var(--ajaxify-comments-spinner-icon-gap, 20px);
+  column-gap: var(--ajaxify-comments-spinner-icon-gap, 20px);
+}
+
+.ajaxify-comments-spinner__icon svg {
+  display: block;
+  animation: ajaxify-lazy-rotate var(--ajaxify-comments-spinner-icon-animation-speed, 1.25s) linear infinite;
+  color: var(--ajaxify-comments-spinner-icon-color, #FFFFFF);
+  fill: var(--ajaxify-comments-spinner-icon-color, #FFFFFF);
+  width: var(--ajaxify-comments-spinner-icon-size, 72px);
+  height: var(--ajaxify-comments-spinner-icon-size, 72px);
+}
+
+/* Loading Skeleton */
+@keyframes ajaxifyLoadingSkeleton {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+:root {
+  --ajaxify-skeleton-loader-background-color: #EEEEEE;
+  --ajaxify-skeleton-loader-highlight-color: #dededede;
+  --ajaxify-skeleton-loader-heading-color: #333;
+  --ajaxify-skeleton-loader-heading-font-size: 24px;
+  --ajaxify-skeleton-loader-heading-line-height: 1.45;
+  --ajaxify-skeleton-gradient: linear-gradient(90deg, var(--ajaxify-skeleton-loader-background-color) 25%, var(--ajaxify-skeleton-loader-highlight-color) 50%, var(--ajaxify-skeleton-loader-background-color) 75%);
+}
+
+.ajaxify-loading-skeleton {
+  padding: 20px 25px;
+}
+
+.ajaxify-skeleton-heading {
+  font-size: var(--ajaxify-skeleton-loader-heading-font-size);
+  color: var(--ajaxify-skeleton-loader-heading-color);
+  line-height: var(--ajaxify-skeleton-loader-heading-line-height);
+}
+
+.ajaxify-skeleton-comment-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  column-gap: 32px;
+  margin-bottom: 24px;
+}
+
+.ajaxify-skeleton-avatar {
+  width: 64px;
+  height: 64px;
+  background: #FFF;
+  background-image: var(--ajaxify-skeleton-gradient);
+  background-size: 200% 100%;
+  animation: ajaxifyLoadingSkeleton 4s infinite ease-in-out;
+  border-radius: 50%;
+}
+
+.ajaxify-skeleton-comment-meta {
+  flex: 1;
+  height: 64px;
+  background-image: var(--ajaxify-skeleton-gradient);
+  background-size: 200% 100%;
+  animation: ajaxifyLoadingSkeleton 4s infinite ease-in-out;
+  border-radius: 5px;
+}
+
+.ajaxify-skeleton-comment-body {
+  height: 250px;
+  width: 100%;
+  background-image: var(--ajaxify-skeleton-gradient);
+  background-size: 200% 100%;
+  animation: ajaxifyLoadingSkeleton 4s infinite ease-in-out;
+  border-radius: 5px;
+}
+
+/**
+ * Loading Button.
+ */
+:root {
+  --ajaxify-comments-loading-button-background-color: #333;
+  --ajaxify-comments-loading-button-background-color-hover: #444;
+  --ajaxify-comments-loading-button-text-color: #FFF;
+  --ajaxify-comments-loading-button-text-color-hover: #FFF;
+  --ajaxify-comments-loading-button-border-color: #333;
+  --ajaxify-comments-loading-button-border-color-hover: #444;
+  --ajaxify-comments-loading-button-border-width: 1px;
+  --ajaxify-comments-loading-button-border-radius: 5px;
+  --ajaxify-comments-loading-button-padding-top: 12px;
+  --ajaxify-comments-loading-button-padding-right: 24px;
+  --ajaxify-comments-loading-button-padding-bottom: 12px;
+  --ajaxify-comments-loading-button-padding-left: 24px;
+  --ajaxify-comments-loading-button-font-size: 16px;
+  --ajaxify-comments-loading-button-line-height: 1.5;
+  --ajaxify-comments-loading-button-font-weight: 600;
+  --ajaxify-comments-loading-button-font-family: inherit;
+  --ajaxify-comments-loading-button-align: center;
+  --ajaxify-comments-loading-button-margin-top: 16px;
+  --ajaxify-comments-loading-button-margin-right: 0;
+  --ajaxify-comments-loading-button-margin-bottom: 16px;
+  --ajaxify-comments-loading-button-margin-left: 0;
+}
+
+.ajaxify-comments-loading-button,
+.ajaxify-comments-loading-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ajaxify-button-designer__preview.ajaxify-align-left,
+.ajaxify-comments-loading-button-wrapper.ajaxify-align-left {
+  justify-content: flex-start;
+}
+.ajaxify-button-designer__preview.ajaxify-align-right,
+.ajaxify-comments-loading-button-wrapper.ajaxify-align-right {
+  justify-content: flex-end;
+}
+.ajaxify-button-designer__preview.ajaxify-align-center,
+.ajaxify-comments-loading-button-wrapper.ajaxify-align-center {
+  justify-content: center;
+}
+
+.ajaxify-comments-loading-button:not(.ajaxify-has-no-styles) {
+  background-color: var(--ajaxify-comments-loading-button-background-color);
+  color: var(--ajaxify-comments-loading-button-text-color);
+  border: var(--ajaxify-comments-loading-button-border-width) solid var(--ajaxify-comments-loading-button-border-color);
+  border-radius: var(--ajaxify-comments-loading-button-border-radius);
+  padding: var(--ajaxify-comments-loading-button-padding-top) var(--ajaxify-comments-loading-button-padding-right) var(--ajaxify-comments-loading-button-padding-bottom) var(--ajaxify-comments-loading-button-padding-left);
+  font-size: var(--ajaxify-comments-loading-button-font-size);
+  font-weight: var(--ajaxify-comments-loading-button-font-weight);
+  line-height: var(--ajaxify-comments-loading-button-line-height);
+  font-family: var(--ajaxify-comments-loading-button-font-family);
+  margin: var(--ajaxify-comments-loading-button-margin-top) var(--ajaxify-comments-loading-button-margin-right) var(--ajaxify-comments-loading-button-margin-bottom) var(--ajaxify-comments-loading-button-margin-left);
+  transition: all 0.3s ease-in-out;
+}
+
+.ajaxify-comments-loading-button:not(.ajaxify-has-no-styles):hover {
+  background-color: var(--ajaxify-comments-loading-button-background-color-hover);
+  color: var(--ajaxify-comments-loading-button-text-color-hover);
+  border-color: var(--ajaxify-comments-loading-button-border-color-hover);
+  transition: all 0.3s ease-in-out;
+}
+
+.ajaxify-comments-loading-button.ajaxify-is-transparent {
+  background-color: transparent;
+}
+
+.ajaxify-comments-loading-button.ajaxify-is-transparent:focus,
+.ajaxify-comments-loading-button.ajaxify-is-transparent:hover {
+  background-color: transparent;
+}
+
+/* Make Button full-width for small devices */
+.ajaxify-comments-loading-button:not(.ajaxify-has-no-styles) {
+  width: 100%;
+}
+@media (min-width: 30em) {
+  .ajaxify-comments-loading-button:not(.ajaxify-has-no-styles) {
+    width: inherit;
+  }
+}
+
+/*# sourceMappingURL=wpac-lazy-load-css.css.map*/

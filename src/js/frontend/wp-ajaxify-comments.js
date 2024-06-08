@@ -18,13 +18,13 @@ WPAC._ExtractTitle = function( html ) {
 	}
 };
 
-WPAC._ShowMessage = function( message, type ) {
+WPAC._ShowMessage = function( message, type, force = false ) {
 	// Determine how to display the loading message.
 	const lazyLoadDisplay = WPAC._Options.lazyLoadDisplay;
 	const lazyLoadEnabled = WPAC._Options.lazyLoadEnabled;
 
 	// Check if lazy load enabled or not.
-	if ( lazyLoadEnabled && 'overlay' !== lazyLoadDisplay ) {
+	if ( lazyLoadEnabled && 'overlay' !== lazyLoadDisplay && ! force ) {
 		return;
 	}
 	const top =
@@ -637,7 +637,7 @@ WPAC.AttachForm = function( options ) {
 		form.data( 'WPAC_SUBMITTING', true );
 
 		// Show loading info
-		WPAC._ShowMessage( WPAC._Options.textPostComment, 'loading' );
+		WPAC._ShowMessage( WPAC._Options.textPostComment, 'loading', true );
 
 		const handleErrorResponse = function( data ) {
 			WPAC._Debug( 'info', 'Comment has not been posted' );
@@ -660,7 +660,7 @@ WPAC.AttachForm = function( options ) {
 						"Error message '%s' successfully extracted",
 						errorMessage,
 					);
-					WPAC._ShowMessage( errorMessage, 'error' );
+					WPAC._ShowMessage( errorMessage, 'error', true );
 					return;
 				}
 			}
@@ -670,7 +670,7 @@ WPAC.AttachForm = function( options ) {
 				"Error message could not be extracted, use error message '%s'.",
 				WPAC._Options.textUnknownError,
 			);
-			WPAC._ShowMessage( WPAC._Options.textUnknownError, 'error' );
+			WPAC._ShowMessage( WPAC._Options.textUnknownError, 'error', true );
 		};
 
 		var request = jQuery.ajax( {
@@ -729,6 +729,7 @@ WPAC.AttachForm = function( options ) {
 						? WPAC._Options.textPostedUnapproved
 						: WPAC._Options.textPosted,
 					'success',
+					true
 				);
 
 				/**
@@ -892,7 +893,7 @@ WPAC.Init = function() {
 		'click',
 		function( e ) {
 			e.preventDefault();
-			WPAC._ShowMessage( 'This is the loading preview...', 'loadingPreview' );
+			WPAC._ShowMessage( 'This is the loading preview...', 'loadingPreview', true );
 		},
 	);
 
@@ -901,7 +902,7 @@ WPAC.Init = function() {
 		'click',
 		function( e ) {
 			e.preventDefault();
-			WPAC._ShowMessage( 'This is a success message', 'success' );
+			WPAC._ShowMessage( 'This is a success message', 'success', true );
 		},
 	);
 
@@ -910,7 +911,7 @@ WPAC.Init = function() {
 		'click',
 		function( e ) {
 			e.preventDefault();
-			WPAC._ShowMessage( 'This is an error message', 'error' );
+			WPAC._ShowMessage( 'This is an error message', 'error', true );
 		},
 	);
 
@@ -1146,7 +1147,7 @@ jQuery( function() {
 		
 
 		// If inline, let's move the loader.
-		if ( WPAC._Options.lazyLoadIntoElement ) {
+		if ( isLazyLoadInline && WPAC._Options.lazyLoadIntoElement ) {
 			let lazyloadInlineDisplayElement = WPAC._Options.lazyLoadInlineDisplayElement;
 			if ( 'comments' === lazyloadInlineDisplayLocation ) {
 				lazyloadInlineDisplayElement = WPAC._Options.selectorCommentsContainer;
@@ -1158,23 +1159,30 @@ jQuery( function() {
 				const lazyLoadContentClone = jQuery.clone( lazyLoadContent );
 				lazyLoadContentClone.id = 'wpac-lazy-load-content-clone';
 
-				// Add display block and opacity 1.
-				lazyLoadContentClone.style.display = 'block';
-				lazyLoadContentClone.style.opacity = '1';
-				lazyLoadContentClone.style.visibility = 'visible';
 
 				// Determine trigger if button.
 				if ( 'button' === lazyLoadInlineType ) {
 					// This will make it so that a button must be clicked to load comments.
 					lazyLoadTrigger = 'external';
-					
+				}
+
+				if ( 'skeleton' === lazyLoadInlineType ) {
+					// Show the loading skeleton to the user.
 				}
 
 				// Display the loader.
 				if ( 'comments' === lazyloadInlineDisplayLocation ) {
 					const commentsContainer = jQuery( lazyloadInlineDisplayElement );
 					if ( commentsContainer ) {
-						commentsContainer.prepend( lazyLoadContentClone );
+
+						// Test for block theme comment container title.
+						const maybeBlockCommentstitle = commentsContainer.find( '.wp-block-comments-title, .comments-title' );
+						if ( maybeBlockCommentstitle.length > 0 ) {
+							// Insert after title.
+							jQuery( maybeBlockCommentstitle ).after( lazyLoadContentClone );
+						} else {
+							commentsContainer.prepend( lazyLoadContentClone );
+						}
 					} else {
 						WPAC._Debug(
 							'error',
@@ -1203,7 +1211,7 @@ jQuery( function() {
 				if ( null !== lazyLoadButton ) {
 					lazyLoadButton.addEventListener( 'click', function( e ) {
 						e.preventDefault();
-						lazyLoadButton.innerHTML = WPAC._Options.lazyLoadInlineLoadingButtonLabelLoading;
+						lazyLoadButton.innerHTML = WPAC._Options.lazyLoadInlineButtonLabelLoading;
 						WPAC.RefreshComments();
 					} );
 				}
@@ -1271,8 +1279,11 @@ jQuery( function() {
 					jQuery( domElement ).waypoint(
 						function( direction ) {
 							this.destroy();
-							WPAC._ShowMessage( WPAC._Options.textRefreshComments, 'loading' );
-							WPAC.RefreshComments();
+							if ( 'button' !== lazyLoadInlineType && isLazyLoadInline ) {
+								WPAC._ShowMessage( WPAC._Options.textRefreshComments, 'loading' );
+								WPAC.RefreshComments();
+							}
+							
 						},
 						{ offset: lazyLoadScrollOffset ? lazyLoadScrollOffset : '100%' },
 					);
@@ -1284,13 +1295,16 @@ jQuery( function() {
 				}
 				break;
 			case 'domready':
-				WPAC._Debug(
-					'info',
-					'Lazy loading: Waiting on Dom to be ready for lazy loading.',
-					window.location.hash,
-				);
-				WPAC._ShowMessage( WPAC._Options.textRefreshComments, 'loading' );
-				WPAC.RefreshComments( { scrollToAnchor: true } ); // force scroll to anchor.
+				// Only refresh comments if not inline button.
+				if ( 'button' !== lazyLoadInlineType && isLazyLoadInline ) {
+					WPAC._Debug(
+						'info',
+						'Lazy loading: Waiting on Dom to be ready for lazy loading.',
+						window.location.hash,
+					);
+					WPAC._ShowMessage( WPAC._Options.textRefreshComments, 'loading' );
+					WPAC.RefreshComments( { scrollToAnchor: true } ); // force scroll to anchor.
+				}
 				break;
 			case 'scroll':
 				WPAC._Debug(
@@ -1305,8 +1319,11 @@ jQuery( function() {
 				jQuery( body ).waypoint(
 					function( direction ) {
 						this.destroy();
-						WPAC._ShowMessage( WPAC._Options.textRefreshComments, 'loading' );
-						WPAC.RefreshComments();
+						if ( 'button' !== lazyLoadInlineType && 'inline' === lazyLoadInlineType ) {
+							WPAC._ShowMessage( WPAC._Options.textRefreshComments, 'loading' );
+							WPAC.RefreshComments();
+						}
+						
 					},
 					{ offset: lazyLoadScrollOffset * -1 },
 				);

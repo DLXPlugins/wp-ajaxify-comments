@@ -5,14 +5,14 @@ Plugin URI: https://dlxplugins.com/plugins/ajaxify-comments/
 Description: Ajaxify Comments hooks into your current theme and adds AJAX functionality to the comment form.
 Author: DLX Plugins
 Author URI: https://dlxplugins.com/plugins/ajaxify-comments/
-Version: 2.2.2
+Version: 2.3.1
 License: GPLv2
 Text Domain: wp-ajaxify-comments
 */
 
 namespace DLXPlugins\WPAC;
 
-define( 'WPAC_VERSION', '2.2.2' );
+define( 'WPAC_VERSION', '2.3.1' );
 define( 'WPAC_PLUGIN_NAME', 'WP Ajaxify Comments' );
 define( 'WPAC_SETTINGS_URL', 'admin.php?page=wp-ajaxify-comments' );
 define( 'WPAC_DOMAIN', 'wpac' );
@@ -56,10 +56,26 @@ function plugins_loaded() {
 	$menu_helper = new Menu_Helper();
 	$menu_helper->run();
 
+	// Init lazy load.
+	$lazy_load = new Lazy_Load();
+	$lazy_load->run();
+
 	// Load die handler. This should only affect if `HTTP_X_WPAC_REQUEST` server var is set.
 	add_filter( 'wp_die_handler', 'wpac_wp_die_handler' );
+
+	// For checking when a theme has changed.
+	add_action( 'switch_theme', __NAMESPACE__ . '\wpac_has_switched_theme' );
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\plugins_loaded' );
+
+/**
+ * Run when the theme has been switched.
+ *
+ * We'll use this to alert the user to re-save settings.
+ */
+function wpac_has_switched_theme() {
+	update_option( 'wpac_theme_has_changed', true );
+}
 
 /**
  * Run when WP has finished loading in.

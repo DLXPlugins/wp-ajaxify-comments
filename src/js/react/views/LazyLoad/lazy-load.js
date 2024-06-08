@@ -16,6 +16,11 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import SaveResetButtons from '../../components/SaveResetButtons';
+// Lazy import the spinner.
+
+const InlineSpinner = React.lazy( () => import( /* webpackChunkName: "inline-spinner-0.0.1" */ './inline-spinner' ) );
+const InlineSkeleton = React.lazy( () => import( /* webpackChunkName: "inline-skeleton-0.0.2" */ './inline-skeleton' ) );
+const InlineButton = React.lazy( () => import( /* webpackChunkName: "inline-button-0.0.1" */ './inline-button' ) );
 
 const retrieveLazyLoadOptions = () => {
 	return SendCommand( 'wpac_get_lazy_load_options', {
@@ -87,11 +92,75 @@ const Interface = ( props ) => {
 			lazyLoadEnabled: data.lazyLoadEnabled,
 			lazyLoadDisplay: data.lazyLoadDisplay,
 			lazyLoadInlineLoadingType: data.lazyLoadInlineLoadingType,
+			lazyLoadInlineSpinnerLabel: data.lazyLoadInlineSpinnerLabel,
+			lazyLoadInlineSpinnerLabelEnabled: data.lazyLoadInlineSpinnerLabelEnabled,
+			lazyLoadInlineSpinnerSpeed: data.lazyLoadInlineSpinnerSpeed,
 			lazyLoadTrigger: data.lazyLoadTrigger,
 			lazyLoadTriggerElement: data.lazyLoadTriggerElement,
+			lazyLoadPaginationEnabled: data.lazyLoadPaginationEnabled,
+			lazyLoadCommentsPerPage: data.lazyLoadCommentsPerPage,
+			lazyLoadUseThemePagination: data.lazyLoadUseThemePagination,
+			lazyLoadPaginationStyle: data.lazyLoadPaginationStyle,
+			lazyLoadPaginationLocation: data.lazyLoadPaginationLocation,
+			lazyLoadingPaginationScrollToTop: data.lazyLoadingPaginationScrollToTop,
 			lazyLoadTriggerScrollOffset: data.lazyLoadTriggerScrollOffset,
+			lazyLoadInlineSpinner: data.lazyLoadInlineSpinner,
 			saveNonce: wpacAdminLazyLoad.saveNonce,
 			resetNonce: wpacAdminLazyLoad.resetNonce,
+			lazyLoadInlineDisplayLocation: data.lazyLoadInlineDisplayLocation,
+			lazyLoadInlineDisplayElement: data.lazyLoadInlineDisplayElement,
+			lazyLoadInlineSpinnerContainerBackgroundColor: data.lazyLoadInlineSpinnerContainerBackgroundColor,
+			lazyLoadInlineSpinnerContainerBackgroundColorOpacity: data.lazyLoadInlineSpinnerContainerBackgroundColorOpacity,
+			lazyLoadInlineSpinnerIconColor: data.lazyLoadInlineSpinnerIconColor,
+			lazyLoadInlineSpinnerLabelColor: data.lazyLoadInlineSpinnerLabelColor,
+			lazyLoadInlineSpinnerLayoutType: data.lazyLoadInlineSpinnerLayoutType,
+			lazyLoadInlineSpinnerLayoutAlignment: data.lazyLoadInlineSpinnerLayoutAlignment,
+			lazyLoadInlineSpinnerLayoutRTL: data.lazyLoadInlineSpinnerLayoutRTL,
+			lazyLoadInlineSpinnerLabelFontSizeDesktop: data.lazyLoadInlineSpinnerLabelFontSizeDesktop,
+			lazyLoadInlineSpinnerSizeDesktop: data.lazyLoadInlineSpinnerSizeDesktop,
+			lazyLoadInlineSpinnerLabelLineHeightDesktop: data.lazyLoadInlineSpinnerLabelLineHeightDesktop,
+			lazyLoadInlineSpinnerGapDesktop: data.lazyLoadInlineSpinnerGapDesktop,
+			lazyLoadInlineSpinnerContainerPaddingDesktop: data.lazyLoadInlineSpinnerContainerPaddingDesktop,
+			lazyLoadInlineSpinnerLabelFontSizeTablet: data.lazyLoadInlineSpinnerLabelFontSizeTablet,
+			lazyLoadInlineSpinnerSizeTablet: data.lazyLoadInlineSpinnerSizeTablet,
+			lazyLoadInlineSpinnerLabelLineHeightTablet: data.lazyLoadInlineSpinnerLabelLineHeightTablet,
+			lazyLoadInlineSpinnerGapTablet: data.lazyLoadInlineSpinnerGapTablet,
+			lazyLoadInlineSpinnerContainerPaddingTablet: data.lazyLoadInlineSpinnerContainerPaddingTablet,
+			lazyLoadInlineSpinnerLabelFontSizeMobile: data.lazyLoadInlineSpinnerLabelFontSizeMobile,
+			lazyLoadInlineSpinnerSizeMobile: data.lazyLoadInlineSpinnerSizeMobile,
+			lazyLoadInlineSpinnerLabelLineHeightMobile: data.lazyLoadInlineSpinnerLabelLineHeightMobile,
+			lazyLoadInlineSpinnerGapMobile: data.lazyLoadInlineSpinnerGapMobile,
+			lazyLoadInlineSpinnerContainerPaddingMobile: data.lazyLoadInlineSpinnerContainerPaddingMobile,
+			lazyLoadInlineSkeletonLoadingLabelEnabled: data.lazyLoadInlineSkeletonLoadingLabelEnabled,
+			lazyLoadInlineSkeletonLoadingLabel: data.lazyLoadInlineSkeletonLoadingLabel,
+			lazyLoadInlineSkeletonItemsShow: data.lazyLoadInlineSkeletonItemsShow,
+			lazyLoadInlineSkeletonBackgroundColor: data.lazyLoadInlineSkeletonBackgroundColor,
+			lazyLoadInlineSkeletonHighlightColor: data.lazyLoadInlineSkeletonHighlightColor,
+			lazyLoadInlineSkeletonHeadingColor: data.lazyLoadInlineSkeletonHeadingColor,
+			lazyLoadInlineSkeletonHeadingFontSize: data.lazyLoadInlineSkeletonHeadingFontSize,
+			lazyLoadInlineSkeletonHeadingLineHeight: data.lazyLoadInlineSkeletonHeadingLineHeight,
+			lazyLoadInlineShortcode: data.lazyLoadInlineShortcode,
+			lazyLoadInlineButtonLabel: data.lazyLoadInlineButtonLabel,
+			lazyLoadInlineButtonLabelLoading: data.lazyLoadInlineButtonLabelLoading,
+			lazyLoadInlineButtonAppearance: data.lazyLoadInlineButtonAppearance,
+			lazyLoadInlineButtonUseThemeStyles: data.lazyLoadInlineButtonUseThemeStyles,
+			lazyLoadInlineButtonBackgroundColor: data.lazyLoadInlineButtonBackgroundColor,
+			lazyLoadInlineButtonBackgroundColorHover: data.lazyLoadInlineButtonBackgroundColorHover,
+			lazyLoadInlineButtonTextColor: data.lazyLoadInlineButtonTextColor,
+			lazyLoadInlineButtonTextColorHover: data.lazyLoadInlineButtonTextColorHover,
+			lazyLoadInlineButtonBorderColor: data.lazyLoadInlineButtonBorderColor,
+			lazyLoadInlineButtonBorderColorHover: data.lazyLoadInlineButtonBorderColorHover,
+			lazyLoadInlineButtonBorderWidth: data.lazyLoadInlineButtonBorderWidth,
+			lazyLoadInlineButtonBorderRadius: data.lazyLoadInlineButtonBorderRadius,
+			lazyLoadInlineButtonPaddingTop: data.lazyLoadInlineButtonPaddingTop,
+			lazyLoadInlineButtonPaddingRight: data.lazyLoadInlineButtonPaddingRight,
+			lazyLoadInlineButtonPaddingBottom: data.lazyLoadInlineButtonPaddingBottom,
+			lazyLoadInlineButtonPaddingLeft: data.lazyLoadInlineButtonPaddingLeft,
+			lazyLoadInlineButtonFontSize: data.lazyLoadInlineButtonFontSize,
+			lazyLoadInlineButtonLineHeight: data.lazyLoadInlineButtonLineHeight,
+			lazyLoadInlineButtonFontWeight: data.lazyLoadInlineButtonFontWeight,
+			lazyLoadInlineButtonFontFamily: data.lazyLoadInlineButtonFontFamily,
+			lazyLoadInlineButtonAlign: data.lazyLoadInlineButtonAlign,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -180,7 +249,7 @@ const Interface = ( props ) => {
 														onChange={ onChange }
 														options={ [
 															{ value: 'external', label: __( 'External Trigger', 'wp-ajaxify-comments' ) },
-															{ value: 'comments', label: __( 'Comments Scrolled Into Viewport', 'wp-ajaxify-comments' ) },
+															{ value: 'comments', label: __( 'Comments Scrolled Into Viewport (Recommended)', 'wp-ajaxify-comments' ) },
 															{ value: 'domready', label: __( 'Dom Ready', 'wp-ajaxify-comments' ) },
 															{ value: 'element', label: __( 'Dom Element Reached', 'wp-ajaxify-comments' ) },
 															{ value: 'scroll', label: __( 'Page Scroll Length', 'wp-ajaxify-comments' ) },
@@ -325,6 +394,7 @@ const Interface = ( props ) => {
 														onChange={ onChange }
 														options={ [
 															{ value: 'overlay', label: __( 'Overlay (default)', 'wp-ajaxify-comments' ) },
+															{ value: 'inline', label: __( 'Inline', 'wp-ajaxify-comments' ) },
 															{ value: 'none', label: __( 'None', 'wp-ajaxify-comments' ) },
 														] }
 													/>
@@ -342,7 +412,7 @@ const Interface = ( props ) => {
 														<>
 															<SelectControl
 																label={ __( 'Inline Display Location', 'wp-ajaxify-comments' ) }
-																help={ __( 'Choose where you would like the loading message to appear on the page. Load in the comments section, or choose a custom element.', 'wp-ajaxify-comments' ) }
+																help={ __( 'Choose where you would like the loading message to appear on the page. Load in the comments section, or choose a custom element. If element is chosen, the comments will load within the element.', 'wp-ajaxify-comments' ) }
 																value={ value }
 																onChange={ onChange }
 																options={ [
@@ -352,7 +422,7 @@ const Interface = ( props ) => {
 																	},
 																	{
 																		value: 'element',
-																		label: __( 'Custom HTML Element', 'wp-ajaxify-comments' ),
+																		label: __( 'Custom HTML Element (Experimental)', 'wp-ajaxify-comments' ),
 																	}
 																] }
 															/>
@@ -413,8 +483,186 @@ const Interface = ( props ) => {
 									}
 								</td>
 							</tr>
+							{ 'inline' === getValues( 'lazyLoadDisplay' ) && (
+								<>
+									<tr>
+										<th scope="row">{ __( 'Inline Loading', 'wp-ajaxify-comments' ) }</th>
+										<td>
+											<div className="ajaxify-admin__control-row">
+												<p className="description">
+													{ __(
+														'If you choose to display the loading message inline, how would you like to display it?', 'wp-ajaxify-comments',
+													) }
+												</p>
+											</div>
+											<div className="ajaxify-admin__control-row">
+												<Controller
+													name="lazyLoadInlineLoadingType"
+													control={ control }
+													render={ ( { field: { onChange, value } } ) => (
+														<>
+															<SelectControl
+																label={ __( 'Inline Loading Type', 'wp-ajaxify-comments' ) }
+																help={ __( 'Choose how you would like to display the loading message.', 'wp-ajaxify-comments' ) }
+																value={ value }
+																onChange={ onChange }
+																options={ [
+																	{ value: 'spinner', label: __( 'Spinner (default)', 'wp-ajaxify-comments' ) },
+																	{ value: 'skeleton', label: __( 'Loading Skeleton', 'wp-ajaxify-comments' ) },
+																	{
+																		value: 'button',
+																		label: __( 'Loading Button', 'wp-ajaxify-comments' ),
+																	},
+																	{
+																		value: 'shortcode',
+																		label: __( 'Shortcode', 'wp-ajaxify-comments' ),
+																	},
+																] }
+															/>
+														</>
+													) }
+												/>
+											</div>
+										</td>
+									</tr>
+									{ 'spinner' === getValues( 'lazyLoadInlineLoadingType' ) && (
+										<>
+											<Suspense
+												fallback={
+													<>
+														<tr>
+															<th>{ __( 'Inline Spinner', 'wp-ajaxify-comments' ) }</th>
+															<td>
+																<h2>{ __( 'Loading Inline Options', 'wp-ajaxify-comments' ) }</h2>
+																<BeatLoader
+																	color={ '#873F49' }
+																	loading={ true }
+																	cssOverride={ true }
+																	size={ 25 }
+																	speedMultiplier={ 0.65 }
+																/>
+															</td>
+														</tr>
+													</>
+												}
+											>
+												<InlineSpinner
+													control={ control }
+													errors={ errors }
+													setValue={ setValue }
+													getValues={ getValues }
+													clearErrors={ clearErrors }
+												/>
+											</Suspense>
+										</>
+									) }
+									{ 'skeleton' === getValues( 'lazyLoadInlineLoadingType' ) && (
+										<>
+											<Suspense
+												fallback={
+													<>
+														<tr>
+															<th>{ __( 'Loading Skeleton', 'wp-ajaxify-comments' ) }</th>
+															<td>
+																<h2>{ __( 'Loading Skeleton Options', 'wp-ajaxify-comments' ) }</h2>
+																<BeatLoader
+																	color={ '#873F49' }
+																	loading={ true }
+																	cssOverride={ true }
+																	size={ 25 }
+																	speedMultiplier={ 0.65 }
+																/>
+															</td>
+														</tr>
+													</>
+												}
+											>
+												<InlineSkeleton
+													control={ control }
+													errors={ errors }
+													setValue={ setValue }
+													getValues={ getValues }
+													clearErrors={ clearErrors }
+												/>
+											</Suspense>
+										</>
+									) }
+									{ 'shortcode' === getValues( 'lazyLoadInlineLoadingType' ) && (
+										<>
+											<tr>
+												<th scope="row">
+													{ __( 'Shortcode', 'wp-ajaxify-comments' ) }
+												</th>
+												<td>
+													<div className="ajaxify-admin__control-row">
+														<Controller
+															name="lazyLoadInlineShortcode"
+															control={ control }
+															rules={ { required: true } }
+															render={ ( { field: { onChange, value } } ) => (
+																<>
+																	<TextControl
+																		label={ __( 'Shortcode', 'wp-ajaxify-comments' ) }
+																		help={ __( 'Enter a shortcode to display while comments are loading.', 'wp-ajaxify-comments' ) }
+																		value={ value }
+																		onChange={ onChange }
+																		className={ classNames( 'ajaxify-admin__text-control', {
+																			'has-error': 'required' === errors.lazyLoadInlineShortcode?.type,
+																			'is-required': true,
+																		} ) }
+																	/>
+																	{ 'required' === errors.lazyLoadInlineShortcode?.type && (
+																		<Notice
+																			message={ __(
+																				'This is a required field.',
+																				'wp-ajaxify-comments',
+																			) }
+																			status="error"
+																			politeness="assertive"
+																			inline={ false }
+																			icon={ () => ( <AlertCircle /> ) }
+																		/>
+																	) }
+																</>
+															) }
+														/>
+													</div>
+												</td>
+											</tr>
+										</>
+									) }
+								</>
+							) }
 						</tbody>
 					</table>
+					{ ( 'button' === getValues( 'lazyLoadInlineLoadingType' ) && 'inline' === getValues( 'lazyLoadDisplay' ) ) && (
+						<>
+							<Suspense
+								fallback={
+									<>
+										<div>
+											<h2>{ __( 'Loading Button Options', 'wp-ajaxify-comments' ) }</h2>
+											<BeatLoader
+												color={ '#873F49' }
+												loading={ true }
+												cssOverride={ true }
+												size={ 25 }
+												speedMultiplier={ 0.65 }
+											/>
+										</div>
+									</>
+								}
+							>
+								<InlineButton
+									control={ control }
+									errors={ errors }
+									setValue={ setValue }
+									getValues={ getValues }
+									clearErrors={ clearErrors }
+								/>
+							</Suspense>
+						</>
+					) }
 					<SaveResetButtons
 						formValues={ formValues }
 						setError={ setError }

@@ -71,7 +71,6 @@ class Settings {
 					<h1>
 						<a href="<?php echo esc_url( Functions::get_settings_url() ); ?>" class="ajaxify-admin-logo"><img src="<?php echo esc_url( Functions::get_plugin_url( 'assets/img/ajaxify-logo-horizontal.png' ) ); ?>" alt="Ajaxify Comments" /></a>
 					</h1>
-					<p class="ajaxify-info-text"><?php esc_html_e( 'Ajaxify your comment section.', 'wp-ajaxify-comments' ); ?></p>
 				</div>
 				<div class="ajaxify-admin-header-links">
 					<a href="https://docs.dlxplugins.com/v/ajaxify-comments/" target="_blank" class="ajaxify-admin-link" rel="noopener noreferrer"><?php esc_html_e( 'Documentation', 'wp-ajaxify-comments' ); ?></a>

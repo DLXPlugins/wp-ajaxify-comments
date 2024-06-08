@@ -148,9 +148,16 @@ function wpac_enqueue_scripts() {
 		Functions::get_plugin_version(),
 		'all'
 	);
-	?>
-
-	<?php
+	// Load lazy loading styles.
+	if ( Functions::is_lazy_loading_enabled( true, false ) ) {
+		wp_enqueue_style(
+			'wpac-admin-lazy-load',
+			Functions::get_plugin_url( 'dist/wpac-lazy-load-css.css' ),
+			array(),
+			Functions::get_plugin_version(),
+			'all'
+		);
+	}
 
 	/**
 	 * Sunshine Confetti Plugin integration.
@@ -335,7 +342,7 @@ function wpac_initialize() {
 	$options['lazyLoadEnabled']     = Functions::is_lazy_loading_enabled( false, false );
 	$options['lazyLoadIntoElement'] = false;
 
-	// Determine where to load the lazy loading message (if not popup).
+	// Determine where to load the lazy loading message (if not overlay).
 	if ( Functions::is_lazy_loading_enabled( true, false ) ) {
 		$is_lazy_load_inline = 'inline' === $options['lazyLoadDisplay'];
 		if ( $is_lazy_load_inline ) {
