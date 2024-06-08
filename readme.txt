@@ -1,4 +1,4 @@
-﻿=== Ajaxify Comments - Lazy Load Your Comment Section ===
+﻿=== Ajaxify Comments - Ajax and Lazy Loading Comments ===
 Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
