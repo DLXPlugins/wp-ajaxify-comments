@@ -149,24 +149,6 @@
 			<wp:comment_parent>0</wp:comment_parent>
 			<wp:comment_user_id>1</wp:comment_user_id>
 							</wp:comment>
-					<wp:comment>
-			<wp:comment_id>8</wp:comment_id>
-			<wp:comment_author><![CDATA[ronalfy]]></wp:comment_author>
-			<wp:comment_author_email><![CDATA[ronald@mediaron.com]]></wp:comment_author_email>
-			<wp:comment_author_url>https://wpac.local</wp:comment_author_url>
-			<wp:comment_author_IP><![CDATA[::1]]></wp:comment_author_IP>
-			<wp:comment_date><![CDATA[2024-06-11 19:46:56]]></wp:comment_date>
-			<wp:comment_date_gmt><![CDATA[2024-06-11 19:46:56]]></wp:comment_date_gmt>
-			<wp:comment_content><![CDATA[asd fadf]]></wp:comment_content>
-			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
-			<wp:comment_type><![CDATA[comment]]></wp:comment_type>
-			<wp:comment_parent>0</wp:comment_parent>
-			<wp:comment_user_id>1</wp:comment_user_id>
-						<wp:commentmeta>
-	<wp:meta_key><![CDATA[_sce]]></wp:meta_key>
-			<wp:meta_value><![CDATA[_wpAjax07733189b8afaaa8d0df8148947ed35996a96d08826670263b3d5afcb879070d-1718135216]]></wp:meta_value>
-			</wp:commentmeta>
-							</wp:comment>
 					</item>
 				</channel>
 </rss>
