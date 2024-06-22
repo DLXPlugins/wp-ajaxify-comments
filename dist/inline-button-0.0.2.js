@@ -1,4 +1,4 @@
-(self["webpackChunkwp_ajaxify_comments"] = self["webpackChunkwp_ajaxify_comments"] || []).push([["inline-button-0.0.1"],{
+(self["webpackChunkwp_ajaxify_comments"] = self["webpackChunkwp_ajaxify_comments"] || []).push([["inline-button-0.0.2"],{
 
 /***/ "./src/js/react/views/LazyLoad/inline-button.js":
 /*!******************************************************!*\
@@ -46,9 +46,7 @@ var InlineButtonOptions = function InlineButtonOptions(props) {
     clearErrors = props.clearErrors;
   var _getValues = getValues(),
     lazyLoadInlineButtonLabel = _getValues.lazyLoadInlineButtonLabel,
-    lazyLoadInlineButtonLabelLoading = _getValues.lazyLoadInlineButtonLabelLoading,
     lazyLoadInlineButtonAppearance = _getValues.lazyLoadInlineButtonAppearance,
-    lazyLoadInlineButtonUseThemeStyles = _getValues.lazyLoadInlineButtonUseThemeStyles,
     lazyLoadInlineButtonBackgroundColor = _getValues.lazyLoadInlineButtonBackgroundColor,
     lazyLoadInlineButtonBackgroundColorHover = _getValues.lazyLoadInlineButtonBackgroundColorHover,
     lazyLoadInlineButtonTextColor = _getValues.lazyLoadInlineButtonTextColor,
@@ -725,4 +723,4 @@ process.umask = function() { return 0; };
 /***/ })
 
 }]);
-//# sourceMappingURL=inline-button-0.0.1.js.map
+//# sourceMappingURL=inline-button-0.0.2.js.map

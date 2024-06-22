@@ -92,7 +92,7 @@ class Lazy_Load {
 			?>
 			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>">
 				<?php
-				$button_text = sanitize_text_field( $options['lazyLoadInlineLoadingButtonLabel'] );
+				$button_text = sanitize_text_field( $options['lazyLoadInlineButtonLabel'] );
 				if ( ! empty( $button_text ) ) :
 					?>
 					<button class="<?php echo esc_attr( implode( ' ', $button_classes ) ); ?>">

@@ -23,9 +23,7 @@ const InlineButtonOptions = ( props ) => {
 
 	const {
 		lazyLoadInlineButtonLabel,
-		lazyLoadInlineButtonLabelLoading,
 		lazyLoadInlineButtonAppearance,
-		lazyLoadInlineButtonUseThemeStyles,
 		lazyLoadInlineButtonBackgroundColor,
 		lazyLoadInlineButtonBackgroundColorHover,
 		lazyLoadInlineButtonTextColor,

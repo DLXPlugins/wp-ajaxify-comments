@@ -18,9 +18,9 @@ import Notice from '../../components/Notice';
 import SaveResetButtons from '../../components/SaveResetButtons';
 // Lazy import the spinner.
 
-const InlineSpinner = React.lazy( () => import( /* webpackChunkName: "inline-spinner-0.0.1" */ './inline-spinner' ) );
-const InlineSkeleton = React.lazy( () => import( /* webpackChunkName: "inline-skeleton-0.0.2" */ './inline-skeleton' ) );
-const InlineButton = React.lazy( () => import( /* webpackChunkName: "inline-button-0.0.1" */ './inline-button' ) );
+const InlineSpinner = React.lazy( () => import( /* webpackChunkName: "inline-spinner-0.0.2" */ './inline-spinner' ) );
+const InlineSkeleton = React.lazy( () => import( /* webpackChunkName: "inline-skeleton-0.0.3" */ './inline-skeleton' ) );
+const InlineButton = React.lazy( () => import( /* webpackChunkName: "inline-button-0.0.2" */ './inline-button' ) );
 
 const retrieveLazyLoadOptions = () => {
 	return SendCommand( 'wpac_get_lazy_load_options', {

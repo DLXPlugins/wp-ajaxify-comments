@@ -2966,13 +2966,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 // Lazy import the spinner.
 
 var InlineSpinner = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().lazy(function () {
-  return Promise.all(/*! import() | inline-spinner-0.0.1 */[__webpack_require__.e("src_js_react_components_Alignment_index_js-src_js_react_components_ColorPicker_index_js"), __webpack_require__.e("inline-spinner-0.0.1")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-spinner */ "./src/js/react/views/LazyLoad/inline-spinner.js"));
+  return Promise.all(/*! import() | inline-spinner-0.0.2 */[__webpack_require__.e("src_js_react_components_Alignment_index_js-src_js_react_components_ColorPicker_index_js"), __webpack_require__.e("inline-spinner-0.0.2")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-spinner */ "./src/js/react/views/LazyLoad/inline-spinner.js"));
 });
 var InlineSkeleton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().lazy(function () {
-  return Promise.all(/*! import() | inline-skeleton-0.0.2 */[__webpack_require__.e("vendors-node_modules_fancyapps_ui_dist_index_esm_js-node_modules_hex-to-rgba_build_index_js-n-39f13c"), __webpack_require__.e("src_js_react_components_Alignment_index_js-src_js_react_components_ColorPicker_index_js"), __webpack_require__.e("inline-skeleton-0.0.2")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-skeleton */ "./src/js/react/views/LazyLoad/inline-skeleton.js"));
+  return Promise.all(/*! import() | inline-skeleton-0.0.3 */[__webpack_require__.e("vendors-node_modules_fancyapps_ui_dist_index_esm_js-node_modules_hex-to-rgba_build_index_js-n-39f13c"), __webpack_require__.e("src_js_react_components_Alignment_index_js-src_js_react_components_ColorPicker_index_js"), __webpack_require__.e("inline-skeleton-0.0.3")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-skeleton */ "./src/js/react/views/LazyLoad/inline-skeleton.js"));
 });
 var InlineButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().lazy(function () {
-  return Promise.all(/*! import() | inline-button-0.0.1 */[__webpack_require__.e("vendors-node_modules_fancyapps_ui_dist_index_esm_js-node_modules_hex-to-rgba_build_index_js-n-39f13c"), __webpack_require__.e("src_js_react_components_Alignment_index_js-src_js_react_components_ColorPicker_index_js"), __webpack_require__.e("inline-button-0.0.1")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-button */ "./src/js/react/views/LazyLoad/inline-button.js"));
+  return Promise.all(/*! import() | inline-button-0.0.2 */[__webpack_require__.e("vendors-node_modules_fancyapps_ui_dist_index_esm_js-node_modules_hex-to-rgba_build_index_js-n-39f13c"), __webpack_require__.e("src_js_react_components_Alignment_index_js-src_js_react_components_ColorPicker_index_js"), __webpack_require__.e("inline-button-0.0.2")]).then(__webpack_require__.bind(__webpack_require__, /*! ./inline-button */ "./src/js/react/views/LazyLoad/inline-button.js"));
 });
 var retrieveLazyLoadOptions = function retrieveLazyLoadOptions() {
   return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_6__["default"])('wpac_get_lazy_load_options', {
@@ -10568,7 +10568,7 @@ function useForm(props = {}) {
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.miniCss = (chunkId, promises) => {
-/******/ 			var cssChunks = {"inline-spinner-0.0.1":1,"inline-skeleton-0.0.2":1,"inline-button-0.0.1":1};
+/******/ 			var cssChunks = {"inline-spinner-0.0.2":1,"inline-skeleton-0.0.3":1,"inline-button-0.0.2":1};
 /******/ 			if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 			else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 				promises.push(installedCssChunks[chunkId] = loadStylesheet(chunkId).then(() => {

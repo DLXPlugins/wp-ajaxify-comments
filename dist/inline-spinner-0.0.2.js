@@ -1,4 +1,4 @@
-(self["webpackChunkwp_ajaxify_comments"] = self["webpackChunkwp_ajaxify_comments"] || []).push([["inline-spinner-0.0.1"],{
+(self["webpackChunkwp_ajaxify_comments"] = self["webpackChunkwp_ajaxify_comments"] || []).push([["inline-spinner-0.0.2"],{
 
 /***/ "./src/js/react/icons/loading/LoadingGray1.js":
 /*!****************************************************!*\
@@ -2552,4 +2552,4 @@ var rgb2hex = module.exports = function rgb2hex(color) {
 /***/ })
 
 }]);
-//# sourceMappingURL=inline-spinner-0.0.1.js.map
+//# sourceMappingURL=inline-spinner-0.0.2.js.map

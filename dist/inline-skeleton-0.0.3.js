@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkwp_ajaxify_comments"] = self["webpackChunkwp_ajaxify_comments"] || []).push([["inline-skeleton-0.0.2"],{
+(self["webpackChunkwp_ajaxify_comments"] = self["webpackChunkwp_ajaxify_comments"] || []).push([["inline-skeleton-0.0.3"],{
 
 /***/ "./src/js/react/views/LazyLoad/inline-skeleton.js":
 /*!********************************************************!*\
@@ -277,4 +277,4 @@ const Eye = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Ey
 /***/ })
 
 }]);
-//# sourceMappingURL=inline-skeleton-0.0.2.js.map
+//# sourceMappingURL=inline-skeleton-0.0.3.js.map
