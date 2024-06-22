@@ -2,8 +2,8 @@
 Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
-Tested up to: 6.5
-Stable tag: 3.0.0
+Tested up to: 6.6
+Stable tag: 3.0.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -126,6 +126,11 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Changelog ==
 
+= 3.0.1 =
+* Released 2024-06-22
+* Bug fix: Comments would not lazy load if set to non-inline mode with DomReady as the trigger.
+* Bug fix: Inline lazy loading button did not honor its saved label.
+
 = 3.0.0 =
 * Released 2024-06-07
 * New feature: Added inline lazy loading option. Inline lazy loading supports a loading spinner, a loading skeleton, and a loading button. Alternatively, you can use a shortcode as a loading indicator for custom output.
@@ -226,5 +231,5 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Upgrade Notice ==
 
-= 3.0.0 =
-Inline lazy loading has arrived. You can now load comments inline with a loading spinner, loading skeleton, or loading button. Alternatively, you can use a shortcode to output your own custom loading indicator.
+= 3.0.1 =
+A few bug fixes, with the most notable being the lazy loading not working when set to non-inline mode with DomReady as the trigger. The inline lazy loading button now remembers its label correctly.
