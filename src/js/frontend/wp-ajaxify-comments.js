@@ -1298,7 +1298,7 @@ jQuery( function() {
 				break;
 			case 'domready':
 				// Only refresh comments if not inline button.
-				if ( 'button' !== lazyLoadInlineType && isLazyLoadInline ) {
+				if ( 'button' !== lazyLoadInlineType && isLazyLoadInline || ! isLazyLoadInline ) {
 					WPAC._Debug(
 						'info',
 						'Lazy loading: Waiting on Dom to be ready for lazy loading.',
