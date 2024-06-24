@@ -123,7 +123,7 @@ function wpac_enqueue_scripts() {
 			$in_footer
 		);
 	} elseif ( $is_debug || $is_comments_enabled || $force_scripts || ( $is_lazy_loading_enabled && $has_comments ) ) {
-		$deps = require_once Functions::get_plugin_dir( 'dist/wpac-frontend-js.asset.php' );
+		$deps = require Functions::get_plugin_dir( 'dist/wpac-frontend-js.asset.php' );
 		wp_enqueue_script(
 			'wpAjaxifyComments',
 			Functions::get_plugin_url( 'dist/wpac-frontend-js.js' ),
