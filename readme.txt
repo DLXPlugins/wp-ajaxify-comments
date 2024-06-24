@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -126,6 +126,10 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Changelog ==
 
+= 3.0.2 =
+* Released 2024-06-24
+* Bug fix: resolving PHP warnings if scripts are being enqueued twice (conflict with TOC Plus plugin).
+
 = 3.0.1 =
 * Released 2024-06-22
 * Bug fix: Comments would not lazy load if set to non-inline mode with DomReady as the trigger.
@@ -231,5 +235,5 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Upgrade Notice ==
 
-= 3.0.1 =
-A few bug fixes, with the most notable being the lazy loading not working when set to non-inline mode with DomReady as the trigger. The inline lazy loading button now remembers its label correctly.
+= 3.0.2 =
+A bug fix for a few PHP warnings when TOC Plus is installed.
