@@ -2,7 +2,7 @@
 Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
-Tested up to: 6.6
+Tested up to: 6.7
 Stable tag: 3.0.2
 Requires PHP: 7.2
 License: GPLv2 or later
