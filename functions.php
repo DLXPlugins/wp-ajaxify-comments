@@ -245,8 +245,7 @@ function wpac_get_version() {
 }
 
 function wpac_plugins_loaded() {
-	$dir = dirname( plugin_basename( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR;
-	load_plugin_textdomain( 'wp-ajaxify-comments', false, $dir );
+	// do nothing for now.
 }
 add_action( 'plugins_loaded', 'wpac_plugins_loaded' );
 
@@ -416,6 +415,8 @@ function wpac_init() {
 	if ( isset( $_GET['WPACUrl'] ) ) {
 		header( 'X-WPAC-URL: ' . $_GET['WPACUrl'] );
 	}
+	$dir = dirname( plugin_basename( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR;
+	load_plugin_textdomain( 'wp-ajaxify-comments', false, $dir );
 }
 add_action( 'init', 'wpac_init' );
 

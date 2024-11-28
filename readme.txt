@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.7
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -126,6 +126,10 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Changelog ==
 
+= 3.0.3 =
+* Released 2024-11-28
+* Bug fix: resolving translation errors when loading too soon.
+
 = 3.0.2 =
 * Released 2024-06-24
 * Bug fix: resolving PHP warnings if scripts are being enqueued twice (conflict with TOC Plus plugin).
@@ -235,5 +239,5 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Upgrade Notice ==
 
-= 3.0.2 =
-A bug fix for a few PHP warnings when TOC Plus is installed.
+= 3.0.3 =
+Bug fix: resolving translation errors when loading too soon.
