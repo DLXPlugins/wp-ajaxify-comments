@@ -83,7 +83,7 @@ const InlineSkeletonOptions = ( props ) => {
 		<>
 			<tr className="ajaxify-admin__loading-spinner-row">
 				<th scope="row">
-					{ __( 'Loading Spinner', 'wp-ajaxify-comments' ) }
+					{ __( 'Loading Skeleton', 'wp-ajaxify-comments' ) }
 				</th>
 				<td>
 					<div className="ajaxify-admin__control-row">

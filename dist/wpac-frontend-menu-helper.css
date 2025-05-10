@@ -1,3 +1,6 @@
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/@sweetalert2/themes/dark/dark.css ***!
+  \******************************************************************************************************************************/
 /*
 * @sweetalert2/themes v5.0.15
 * Released under the MIT License.
@@ -1150,4 +1153,51 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
   left: auto;
 }
 
+/*!****************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/scss/menu-helper.scss ***!
+  \****************************************************************************************************************************************************************************/
+.ajaxify .swal2-html-container {
+  color: #fff;
+}
 
+.ajaxify table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.ajaxify .swal2-html-container ul {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.ajaxify td {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.ajaxify table {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+.ajaxify table th {
+  border: 0;
+  border-bottom: 1px solid #fff;
+  padding: 5px;
+  padding: 5px;
+}
+.ajaxify table th:last-child {
+  border-right: none;
+}
+.ajaxify table td {
+  padding: 5px;
+  border: 0;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  padding: 5px;
+}
+.ajaxify table td:last-child {
+  border-right: none;
+}
+
+/*# sourceMappingURL=wpac-frontend-menu-helper.css.map*/
