@@ -132,6 +132,7 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 * Bug fix: Selector Helper has updated styling for dark backgrounds.
 * Bug fix: Plugin installer on Integrations tab wasn't working due to a fatal error.
 * Bug fix: Skeleton Loader was mis-labeled in the admin.
+* Bug fix: z-index for overlay has been increased for compatibility with the Divi theme.
 * New: Setting Menu Helper is enabled by default. It's very useful for first-time setups and continued testing.
 * New: Added Comment shortcuts to Menu Helper for viewing comments in the admin.A
 
