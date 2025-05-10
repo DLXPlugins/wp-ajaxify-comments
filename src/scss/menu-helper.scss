@@ -1,1 +1,41 @@
 @import '@sweetalert2/themes/dark/dark.css';
+
+.ajaxify .swal2-html-container {
+	color: #fff;
+}
+.ajaxify table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+.ajaxify .swal2-html-container ul {
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+}
+.ajaxify td {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+.ajaxify table {
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	th {
+		border: 0;
+		border-bottom: 1px solid #fff;
+		padding: 5px;
+		&:last-child {
+			border-right: none;
+		}
+		padding: 5px;
+	}
+	td {
+		padding: 5px;
+		border: 0;
+		border-right: 1px solid #fff;
+		border-bottom: 1px solid #fff;
+		padding: 5px;
+		&:last-child {
+			border-right: none;
+		}
+	}
+}
