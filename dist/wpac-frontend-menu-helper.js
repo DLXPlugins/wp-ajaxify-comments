@@ -4842,362 +4842,383 @@ document.addEventListener('DOMContentLoaded', function () {
    * Launch the selector helper.
    */
   var launchSelectorHelper = function launchSelectorHelper() {
-    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-      titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Ajaxify Selector Helper', 'wp-ajaxify-comments'),
-      text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Finding your comment selectors…', 'wp-ajaxify-comments'),
-      icon: 'success',
-      allowOutsideClick: false,
-      showCloseButton: true,
-      customClass: {
-        container: 'ajaxify'
-      },
-      iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 49.6 21.3 95.1 56.9 130.8L16 480l150.4-45.1c27.9 8.5 58.1 13.1 89.6 13.1z"/></svg>',
-      didOpen: function didOpen() {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().showLoading();
-        var selectorList = [];
+    try {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+        titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Ajaxify Selector Helper', 'wp-ajaxify-comments'),
+        text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Finding your comment selectors…', 'wp-ajaxify-comments'),
+        icon: 'success',
+        allowOutsideClick: false,
+        showCloseButton: true,
+        customClass: {
+          container: 'ajaxify'
+        },
+        iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 49.6 21.3 95.1 56.9 130.8L16 480l150.4-45.1c27.9 8.5 58.1 13.1 89.6 13.1z"/></svg>',
+        didOpen: function didOpen() {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().showLoading();
+          var selectorList = [];
 
-        // Find the comments container. todo - make filterable.
-        var commentContainerSelectors = ['.wp-block-comments', /* Block themes */
-        '#comments', '.comments-wrapper', '.comments', '.comments-area', '#comment-wrap', /* Divi */
-        '.et_pb_comments_module' /* Divi */];
+          // Find the comments container. todo - make filterable.
+          var commentContainerSelectors = ['.wp-block-comments', /* Block themes */
+          '#comments', '.comments-wrapper', '.comments', '.comments-area', '#comment-wrap', /* Divi */
+          '.et_pb_comments_module' /* Divi */];
 
-        // Loop through each of the comment selectors.
-        // Find children and make sure its a comment.
-        // Make sure selected element is a comment list.
-        var foundCommentContainer = false;
-        commentContainerSelectors.forEach(function (commentSelector) {
-          if (foundCommentContainer) {
-            return;
-          }
-          var commentElement = document.querySelector(commentSelector);
-          if (commentElement) {
-            var commentElementTagName = commentElement.tagName.toLowerCase();
-
-            // Check to see if container has children. If not, skip.
-            if (commentElement.children.length <= 0) {
+          // Loop through each of the comment selectors.
+          // Find children and make sure its a comment.
+          // Make sure selected element is a comment list.
+          var foundCommentContainer = false;
+          commentContainerSelectors.forEach(function (commentSelector) {
+            if (foundCommentContainer) {
               return;
             }
+            var commentElement = document.querySelector(commentSelector);
+            if (commentElement) {
+              var commentElementTagName = commentElement.tagName.toLowerCase();
 
-            // If element is a heading, bail.
-            if (headingsArr.includes(commentElementTagName)) {
-              return;
-            }
+              // Check to see if container has children. If not, skip.
+              if (commentElement.children.length <= 0) {
+                return;
+              }
 
-            // If the element is UL or OL, bail.
-            if ('ul' === commentElementTagName || 'ol' === commentElementTagName) {
-              return;
-            }
+              // If element is a heading, bail.
+              if (headingsArr.includes(commentElementTagName)) {
+                return;
+              }
 
-            // Check to see if children contain UL or OL. If so, we've found the container.
-            var ULs = commentElement.querySelector('ul');
-            var OLs = commentElement.querySelector('ol');
-            if (null === ULs && null === OLs) {
-              return;
-            }
-            if (null !== ULs || null !== OLs) {
-              foundCommentContainer = true;
-            }
+              // If the element is UL or OL, bail.
+              if ('ul' === commentElementTagName || 'ol' === commentElementTagName) {
+                return;
+              }
 
-            // If we still haven't found the comment container, check that is has #respond or a form element.
-            if (!foundCommentContainer) {
-              var respondOrForm = commentElement.querySelectorAll('#respond, form, .comment-respond');
-              if (null !== respondOrForm && respondOrForm.length > 0) {
+              // Check to see if children contain UL or OL. If so, we've found the container.
+              var ULs = commentElement.querySelector('ul');
+              var OLs = commentElement.querySelector('ol');
+              if (null === ULs && null === OLs) {
+                return;
+              }
+              if (null !== ULs || null !== OLs) {
                 foundCommentContainer = true;
               }
-            }
-            // If we still haven't found it... search for .comment, which is usually on the comment list item.
-            if (!foundCommentContainer) {
-              // Search for .comment.
-              var commentElementComment = commentElement.querySelector('.comment');
-              if (commentElementComment) {
-                // Find closest parent that matches the comment selector.
-                var commentElementCommentParent = commentElementComment.closest(commentSelector);
-                if (commentElementCommentParent) {
+
+              // If we still haven't found the comment container, check that is has #respond or a form element.
+              if (!foundCommentContainer) {
+                var respondOrForm = commentElement.querySelectorAll('#respond, form, .comment-respond');
+                if (null !== respondOrForm && respondOrForm.length > 0) {
                   foundCommentContainer = true;
                 }
               }
+              // If we still haven't found it... search for .comment, which is usually on the comment list item.
+              if (!foundCommentContainer) {
+                // Search for .comment.
+                var commentElementComment = commentElement.querySelector('.comment');
+                if (commentElementComment) {
+                  // Find closest parent that matches the comment selector.
+                  var commentElementCommentParent = commentElementComment.closest(commentSelector);
+                  if (commentElementCommentParent) {
+                    foundCommentContainer = true;
+                  }
+                }
+              }
+              if (!foundCommentContainer) {
+                return;
+              }
+
+              // We've likely found the comment list. This is a valid container.
+              foundCommentContainer = true;
+              selectorList.push({
+                selector: commentSelector,
+                tagName: commentElementTagName,
+                selectorOptionName: 'selectorCommentsContainer',
+                selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comments Container', 'wp-ajaxify-comments')
+              });
             }
-            if (!foundCommentContainer) {
+          });
+
+          // Now check to see if we can find the comment list.
+          var foundCommentList = false;
+          var commentListSelectors = ['.commentlist', /* Divi */
+          '.comment-list', '.comment-list-wrapper', '.comment-list-container', '.ast-comment-list', /* Astra */
+          '.wp-block-comment-template', /* Block themes */
+          '#comments ul', '#comments ol'];
+          commentListSelectors.forEach(function (commentListSelector) {
+            if (foundCommentList) {
               return;
             }
+            var commentListElement = document.querySelector(commentListSelector);
+            if (commentListElement) {
+              var commentListElementTagName = commentListElement.tagName.toLowerCase();
 
-            // We've likely found the comment list. This is a valid container.
-            foundCommentContainer = true;
-            selectorList.push({
-              selector: commentSelector,
-              tagName: commentElementTagName,
-              selectorOptionName: 'selectorCommentsContainer',
-              selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comments Container', 'wp-ajaxify-comments')
-            });
-          }
-        });
-
-        // Now check to see if we can find the comment list.
-        var foundCommentList = false;
-        var commentListSelectors = ['.commentlist', /* Divi */
-        '.comment-list', '.comment-list-wrapper', '.comment-list-container', '.ast-comment-list', /* Astra */
-        '.wp-block-comment-template', /* Block themes */
-        '#comments ul', '#comments ol'];
-        commentListSelectors.forEach(function (commentListSelector) {
-          if (foundCommentList) {
-            return;
-          }
-          var commentListElement = document.querySelector(commentListSelector);
-          if (commentListElement) {
-            var commentListElementTagName = commentListElement.tagName.toLowerCase();
-
-            // If child contains LI, or `.comment`, then we've found the comment list.
-            var commentListItems = commentListElement.querySelectorAll('li, .comment');
-            if (null !== commentListItems && commentListItems.length > 0) {
-              foundCommentList = true;
-            }
-            if ('ul' === commentListElementTagName || 'ol' === commentListElementTagName) {
-              foundCommentList = true;
-            }
-            if (foundCommentList) {
-              selectorList.push({
-                selector: commentListSelector,
-                tagName: commentListElementTagName,
-                selectorOptionName: 'selectorCommentList',
-                selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comment List', 'wp-ajaxify-comments')
-              });
-            }
-          }
-        });
-
-        // Now let's get the comment form.
-        var foundCommentForm = false;
-        var commentFormSelectors = ['#commentform', '.comment-form', '#ast-commentform', '.commentform', '#respond form'];
-        commentFormSelectors.forEach(function (commentFormSelector) {
-          if (foundCommentForm) {
-            return;
-          }
-          var commentFormElement = document.querySelector(commentFormSelector);
-          if (commentFormElement) {
-            var commentFormElementTagName = commentFormElement.tagName.toLowerCase();
-            if ('form' === commentFormElementTagName) {
-              foundCommentForm = true;
-              selectorList.push({
-                selector: commentFormSelector,
-                tagName: commentFormElementTagName,
-                selectorOptionName: 'selectorCommentForm',
-                selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comment Form', 'wp-ajaxify-comments')
-              });
-            }
-          }
-        });
-
-        // Get the respond textarea.
-        var foundRespondContainer = false;
-        var respondContainerSelectors = ['#respond', '.comment-respond', '.wp-block-post-comments-form'];
-        respondContainerSelectors.forEach(function (respondContainerSelector) {
-          if (foundRespondContainer) {
-            return;
-          }
-          var respondContainerElement = document.querySelector(respondContainerSelector);
-          if (respondContainerElement) {
-            selectorList.push({
-              selector: respondContainerSelector,
-              tagName: respondContainerElement.tagName.toLowerCase(),
-              selectorOptionName: 'selectorRespondContainer',
-              selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Respond Container', 'wp-ajaxify-comments')
-            });
-            foundRespondContainer = true;
-          }
-        });
-
-        // Get the comment text textarea.
-        var foundCommentTextarea = false;
-        var commentTextareaSelectors = ['#comment', '#respond textarea', 'textarea[name="comment"]'];
-        commentTextareaSelectors.forEach(function (commentTextareaSelector) {
-          if (foundCommentTextarea) {
-            return;
-          }
-          var commentTextareaElement = document.querySelector(commentTextareaSelector);
-          if (commentTextareaElement) {
-            // Make sure it's a textarea.
-            if ('textarea' === commentTextareaElement.tagName.toLowerCase()) {
-              selectorList.push({
-                selector: commentTextareaSelector,
-                tagName: commentTextareaElement.tagName.toLowerCase(),
-                selectorOptionName: 'selectorTextarea',
-                selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comment Textarea', 'wp-ajaxify-comments')
-              });
-              foundCommentTextarea = true;
-            }
-          }
-        });
-
-        // Get the comment submit button.
-        var foundCommentSubmit = false;
-        var commentSubmitSelectors = ['#submit', '#et_pb_submit',
-        // Divi
-        '#respond button[type="submit"]', '#respond input[type="submit"]', '.form-submit input[type="submit"]', '.wp-block-post-comments-form input[type="submit"]'];
-        commentSubmitSelectors.forEach(function (commentSubmitSelector) {
-          if (foundCommentSubmit) {
-            return;
-          }
-          var commentSubmitElement = document.querySelector(commentSubmitSelector);
-          // Make sure input is a button or input button.
-          if (commentSubmitElement) {
-            var commentSubmitElementTagName = commentSubmitElement.tagName.toLowerCase();
-            if ('button' === commentSubmitElementTagName || 'input' === commentSubmitElementTagName) {
-              selectorList.push({
-                selector: commentSubmitSelector,
-                tagName: commentSubmitElementTagName,
-                selectorOptionName: 'selectorSubmitButton',
-                selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Submit Button', 'wp-ajaxify-comments')
-              });
-              foundCommentSubmit = true;
-            }
-          }
-        });
-
-        // Check to see if we found all the selectors.
-        if (selectorList.length < 6) {
-          WPAC._Debug("error", "We didn't find all the selectors. Selector List: ", selectorList);
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-            titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Unable to Find All Selectors', 'wp-ajaxify-comments'),
-            html: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('We were unable to find all the required selectors. Please contact support and tell them what theme you are using.', 'wp-ajaxify-comments'),
-            icon: 'error',
-            showCancelButton: true,
-            cancelButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close', 'wp-ajaxify-comments'),
-            confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Contact Support', 'wp-ajaxify-comments'),
-            allowOutsideClick: false,
-            showCloseButton: true,
-            iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>',
-            customClass: {
-              container: 'ajaxify'
-            }
-          }).then(function (result) {
-            if (result !== null && result !== void 0 && result.isConfirmed) {
-              window.open('https://dlxplugins.com/support/?product=Ajaxify Comments', '_blank');
+              // If child contains LI, or `.comment`, then we've found the comment list.
+              var commentListItems = commentListElement.querySelectorAll('li, .comment');
+              if (null !== commentListItems && commentListItems.length > 0) {
+                foundCommentList = true;
+              }
+              if ('ul' === commentListElementTagName || 'ol' === commentListElementTagName) {
+                foundCommentList = true;
+              }
+              if (foundCommentList) {
+                selectorList.push({
+                  selector: commentListSelector,
+                  tagName: commentListElementTagName,
+                  selectorOptionName: 'selectorCommentList',
+                  selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comment List', 'wp-ajaxify-comments')
+                });
+              }
             }
           });
-        } else {
-          // Set up confirmation screen for saving selectors.
-          var selectorListHtml = '';
-          selectorListHtml += '<table style="text-align: left;"><tr><th style="color: #FFF;"><strong>' + (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Label', 'wp-ajaxify-comments') + '</strong></th><th style="color: #FFF;">' + (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Selector', 'wp-ajaxify-comments') + '</th></tr>';
-          selectorList.forEach(function (selector) {
-            // Add the selector.
-            selectorListHtml += '<tr><td style="color: #DDD;">' + selector.selectorLabel + '</td><td style="color: #DDD;">' + selector.selector + '</td></tr>';
+
+          // Now let's get the comment form.
+          var foundCommentForm = false;
+          var commentFormSelectors = ['#commentform', '.comment-form', '#ast-commentform', '.commentform', '#respond form'];
+          commentFormSelectors.forEach(function (commentFormSelector) {
+            if (foundCommentForm) {
+              return;
+            }
+            var commentFormElement = document.querySelector(commentFormSelector);
+            if (commentFormElement) {
+              var commentFormElementTagName = commentFormElement.tagName.toLowerCase();
+              if ('form' === commentFormElementTagName) {
+                foundCommentForm = true;
+                selectorList.push({
+                  selector: commentFormSelector,
+                  tagName: commentFormElementTagName,
+                  selectorOptionName: 'selectorCommentForm',
+                  selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comment Form', 'wp-ajaxify-comments')
+                });
+              }
+            }
           });
-          selectorListHtml += '</table>';
-          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-            titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Ajaxify Selector Helper', 'wp-ajaxify-comments'),
-            html: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('We found all the selectors. Please confirm the following selectors are correct before saving.', 'wp-ajaxify-comments') + '<ul>' + selectorListHtml + '</ul>',
-            icon: 'success',
-            confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Save Selectors', 'wp-ajaxify-comments'),
-            allowOutsideClick: false,
-            showCloseButton: true,
-            customClass: {
-              container: 'ajaxify'
-            },
-            showCancelButton: true,
-            cancelButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cancel', 'wp-ajaxify-comments'),
-            iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 49.6 21.3 95.1 56.9 130.8L16 480l150.4-45.1c27.9 8.5 58.1 13.1 89.6 13.1z"/></svg>'
-          }).then(function (result) {
-            if (result !== null && result !== void 0 && result.isConfirmed) {
-              // Fire the main helper.
-              sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-                titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving Selectors', 'wp-ajaxify-comments'),
-                text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving the Selectors.', 'wp-ajaxify-comments'),
-                icon: 'success',
-                allowOutsideClick: false,
-                customClass: {
-                  container: 'ajaxify'
-                },
-                showCloseButton: true,
-                iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 49.6 21.3 95.1 56.9 130.8L16 480l150.4-45.1c27.9 8.5 58.1 13.1 89.6 13.1z"/></svg>',
-                didOpen: function didOpen() {
-                  sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().showLoading();
-                  var doAjax = /*#__PURE__*/function () {
-                    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-                      var response;
-                      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-                        while (1) switch (_context2.prev = _context2.next) {
-                          case 0:
-                            _context2.next = 2;
-                            return fetch(wpacMenuHelper.ajaxUrl, {
-                              method: 'POST',
-                              headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded'
+
+          // Get the respond textarea.
+          var foundRespondContainer = false;
+          var respondContainerSelectors = ['#respond', '.comment-respond', '.wp-block-post-comments-form'];
+          respondContainerSelectors.forEach(function (respondContainerSelector) {
+            if (foundRespondContainer) {
+              return;
+            }
+            var respondContainerElement = document.querySelector(respondContainerSelector);
+            if (respondContainerElement) {
+              selectorList.push({
+                selector: respondContainerSelector,
+                tagName: respondContainerElement.tagName.toLowerCase(),
+                selectorOptionName: 'selectorRespondContainer',
+                selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Respond Container', 'wp-ajaxify-comments')
+              });
+              foundRespondContainer = true;
+            }
+          });
+
+          // Get the comment text textarea.
+          var foundCommentTextarea = false;
+          var commentTextareaSelectors = ['#comment', '#respond textarea', 'textarea[name="comment"]'];
+          commentTextareaSelectors.forEach(function (commentTextareaSelector) {
+            if (foundCommentTextarea) {
+              return;
+            }
+            var commentTextareaElement = document.querySelector(commentTextareaSelector);
+            if (commentTextareaElement) {
+              // Make sure it's a textarea.
+              if ('textarea' === commentTextareaElement.tagName.toLowerCase()) {
+                selectorList.push({
+                  selector: commentTextareaSelector,
+                  tagName: commentTextareaElement.tagName.toLowerCase(),
+                  selectorOptionName: 'selectorTextarea',
+                  selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Comment Textarea', 'wp-ajaxify-comments')
+                });
+                foundCommentTextarea = true;
+              }
+            }
+          });
+
+          // Get the comment submit button.
+          var foundCommentSubmit = false;
+          var commentSubmitSelectors = ['#submit', '#et_pb_submit',
+          // Divi
+          '#respond button[type="submit"]', '#respond input[type="submit"]', '.form-submit input[type="submit"]', '.wp-block-post-comments-form input[type="submit"]'];
+          commentSubmitSelectors.forEach(function (commentSubmitSelector) {
+            if (foundCommentSubmit) {
+              return;
+            }
+            var commentSubmitElement = document.querySelector(commentSubmitSelector);
+            // Make sure input is a button or input button.
+            if (commentSubmitElement) {
+              var commentSubmitElementTagName = commentSubmitElement.tagName.toLowerCase();
+              if ('button' === commentSubmitElementTagName || 'input' === commentSubmitElementTagName) {
+                selectorList.push({
+                  selector: commentSubmitSelector,
+                  tagName: commentSubmitElementTagName,
+                  selectorOptionName: 'selectorSubmitButton',
+                  selectorLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Submit Button', 'wp-ajaxify-comments')
+                });
+                foundCommentSubmit = true;
+              }
+            }
+          });
+
+          // Check to see if we found all the selectors.
+          if (selectorList.length < 6) {
+            WPAC._Debug("error", "We didn't find all the selectors. Selector List: ", selectorList);
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+              titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Unable to Find All Selectors', 'wp-ajaxify-comments'),
+              html: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('We were unable to find all the required selectors. Please contact support and tell them what theme you are using. Make sure Lazy Loading is disabled.', 'wp-ajaxify-comments'),
+              icon: 'error',
+              showCancelButton: true,
+              cancelButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close', 'wp-ajaxify-comments'),
+              confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Contact Support', 'wp-ajaxify-comments'),
+              allowOutsideClick: false,
+              showCloseButton: true,
+              iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>',
+              customClass: {
+                container: 'ajaxify'
+              }
+            }).then(function (result) {
+              if (result !== null && result !== void 0 && result.isConfirmed) {
+                window.open('https://dlxplugins.com/support/?product=Ajaxify Comments', '_blank');
+              }
+            });
+          } else {
+            // Set up confirmation screen for saving selectors.
+            var selectorListHtml = '';
+            selectorListHtml += '<table style="text-align: left;"><tr><th style="color: #FFF;"><strong>' + (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Label', 'wp-ajaxify-comments') + '</strong></th><th style="color: #FFF;">' + (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Selector', 'wp-ajaxify-comments') + '</th></tr>';
+            selectorList.forEach(function (selector) {
+              // Add the selector.
+              selectorListHtml += '<tr><td style="color: #DDD;">' + selector.selectorLabel + '</td><td style="color: #DDD;">' + selector.selector + '</td></tr>';
+            });
+            selectorListHtml += '</table>';
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+              titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Ajaxify Selector Helper', 'wp-ajaxify-comments'),
+              html: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('We found all the selectors. Please confirm the following selectors are correct before saving.', 'wp-ajaxify-comments') + '<ul>' + selectorListHtml + '</ul>',
+              icon: 'success',
+              confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Save Selectors', 'wp-ajaxify-comments'),
+              allowOutsideClick: false,
+              showCloseButton: true,
+              customClass: {
+                container: 'ajaxify'
+              },
+              showCancelButton: true,
+              cancelButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cancel', 'wp-ajaxify-comments'),
+              iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 49.6 21.3 95.1 56.9 130.8L16 480l150.4-45.1c27.9 8.5 58.1 13.1 89.6 13.1z"/></svg>'
+            }).then(function (result) {
+              if (result !== null && result !== void 0 && result.isConfirmed) {
+                // Fire the main helper.
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                  titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving Selectors', 'wp-ajaxify-comments'),
+                  text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving the Selectors.', 'wp-ajaxify-comments'),
+                  icon: 'success',
+                  allowOutsideClick: false,
+                  customClass: {
+                    container: 'ajaxify'
+                  },
+                  showCloseButton: true,
+                  iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 49.6 21.3 95.1 56.9 130.8L16 480l150.4-45.1c27.9 8.5 58.1 13.1 89.6 13.1z"/></svg>',
+                  didOpen: function didOpen() {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().showLoading();
+                    var doAjax = /*#__PURE__*/function () {
+                      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+                        var response;
+                        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+                          while (1) switch (_context2.prev = _context2.next) {
+                            case 0:
+                              _context2.next = 2;
+                              return fetch(wpacMenuHelper.ajaxUrl, {
+                                method: 'POST',
+                                headers: {
+                                  'Content-Type': 'application/x-www-form-urlencoded'
+                                },
+                                body: 'action=wpac_save_selectors&nonce=' + wpacMenuHelper.saveNonce + '&selectors=' + JSON.stringify(selectorList)
+                              })["catch"](function (error) {
+                                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().showValidationMessage("Request failed: ".concat(error));
+                              });
+                            case 2:
+                              response = _context2.sent;
+                              return _context2.abrupt("return", response);
+                            case 4:
+                            case "end":
+                              return _context2.stop();
+                          }
+                        }, _callee2);
+                      }));
+                      return function doAjax() {
+                        return _ref2.apply(this, arguments);
+                      };
+                    }();
+                    var ajaxPromise = doAjax();
+                    ajaxPromise.then(function (response) {
+                      // Show success message.
+                      if (response.ok) {
+                        response.json().then(function (data) {
+                          var dataResponse = data.data;
+                          if (data.success) {
+                            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                              titleText: dataResponse.title,
+                              text: dataResponse.message,
+                              icon: 'success',
+                              confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('OK', 'wp-ajaxify-comments'),
+                              allowOutsideClick: false,
+                              showCloseButton: true,
+                              customClass: {
+                                container: 'ajaxify'
                               },
-                              body: 'action=wpac_save_selectors&nonce=' + wpacMenuHelper.saveNonce + '&selectors=' + JSON.stringify(selectorList)
-                            })["catch"](function (error) {
-                              sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().showValidationMessage("Request failed: ".concat(error));
+                              iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM369 193L241 321c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 159c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>'
                             });
-                          case 2:
-                            response = _context2.sent;
-                            return _context2.abrupt("return", response);
-                          case 4:
-                          case "end":
-                            return _context2.stop();
-                        }
-                      }, _callee2);
-                    }));
-                    return function doAjax() {
-                      return _ref2.apply(this, arguments);
-                    };
-                  }();
-                  var ajaxPromise = doAjax();
-                  ajaxPromise.then(function (response) {
-                    // Show success message.
-                    if (response.ok) {
-                      response.json().then(function (data) {
-                        var dataResponse = data.data;
-                        if (data.success) {
-                          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-                            titleText: dataResponse.title,
-                            text: dataResponse.message,
-                            icon: 'success',
-                            confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('OK', 'wp-ajaxify-comments'),
-                            allowOutsideClick: false,
-                            showCloseButton: true,
-                            customClass: {
-                              container: 'ajaxify'
-                            },
-                            iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM369 193L241 321c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 159c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>'
-                          });
-                        } else {
-                          sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-                            titleText: dataResponse.title,
-                            text: dataResponse.message,
-                            icon: 'error',
-                            confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('OK', 'wp-ajaxify-comments'),
-                            allowOutsideClick: false,
-                            showCloseButton: true,
-                            customClass: {
-                              container: 'ajaxify'
-                            },
-                            iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>'
-                          });
-                        }
-                      });
-                    } else {
-                      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-                        titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('An unknown error occurred.', 'wp-ajaxify-comments'),
-                        text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Something unexpected happened. Please try again.', 'wp-ajaxify-comments'),
-                        icon: 'error',
-                        showConfirmButton: false,
-                        showCancelButton: true,
-                        customClass: {
-                          container: 'ajaxify'
-                        },
-                        cancelButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close', 'wp-ajaxify-comments'),
-                        allowOutsideClick: true,
-                        showCloseButton: true,
-                        iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><path fill="currentColor" d="M144 480H0V336c0-62.7 40.1-116 96-135.8V192c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96v36c55.2 14.2 96 64.3 96 124V480H512 144zM344 160H296v24V296v24h48V296 184 160zM296 352v48h48V352H296z"/></svg>'
-                      });
-                    }
-                  });
-                }
-              });
-            }
-          });
+                          } else {
+                            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                              titleText: dataResponse.title,
+                              text: dataResponse.message,
+                              icon: 'error',
+                              confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('OK', 'wp-ajaxify-comments'),
+                              allowOutsideClick: false,
+                              showCloseButton: true,
+                              customClass: {
+                                container: 'ajaxify'
+                              },
+                              iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>'
+                            });
+                          }
+                        });
+                      } else {
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                          titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('An unknown error occurred.', 'wp-ajaxify-comments'),
+                          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Something unexpected happened. Please try again.', 'wp-ajaxify-comments'),
+                          icon: 'error',
+                          showConfirmButton: false,
+                          showCancelButton: true,
+                          customClass: {
+                            container: 'ajaxify'
+                          },
+                          cancelButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close', 'wp-ajaxify-comments'),
+                          allowOutsideClick: true,
+                          showCloseButton: true,
+                          iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><path fill="currentColor" d="M144 480H0V336c0-62.7 40.1-116 96-135.8V192c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96v36c55.2 14.2 96 64.3 96 124V480H512 144zM344 160H296v24V296v24h48V296 184 160zM296 352v48h48V352H296z"/></svg>'
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
         }
-      }
-    });
+      });
+    } catch (error) {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+        titleText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Unable to Find All Selectors', 'wp-ajaxify-comments'),
+        html: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('We were unable to find all the required selectors. Please contact support and tell them what theme you are using. Make sure Lazy Loading is disabled.', 'wp-ajaxify-comments'),
+        icon: 'error',
+        showCancelButton: true,
+        cancelButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Close', 'wp-ajaxify-comments'),
+        confirmButtonText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Contact Support', 'wp-ajaxify-comments'),
+        allowOutsideClick: false,
+        showCloseButton: true,
+        iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>',
+        customClass: {
+          container: 'ajaxify'
+        }
+      }).then(function (result) {
+        if (result !== null && result !== void 0 && result.isConfirmed) {
+          window.open('https://dlxplugins.com/support/?product=Ajaxify Comments', '_blank');
+        }
+      });
+    }
   };
 
   // Open comments.
