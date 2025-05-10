@@ -125,11 +125,12 @@ class Init {
 				)
 			);
 		}
-		
 
-		// Include wp-admin/update.php.
-		require_once ABSPATH . 'wp-admin/update.php';
+		// Include plugin installation dependencies.
 		require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		require_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 		// Ping Plugin API for slug.
 		$api = plugins_api(
