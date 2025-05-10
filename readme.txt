@@ -133,7 +133,7 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 * Bug fix: Plugin installer on Integrations tab wasn't working due to a fatal error.
 * Bug fix: Skeleton Loader was mis-labeled in the admin.
 * New: Setting Menu Helper is enabled by default. It's very useful for first-time setups and continued testing.
-* New: Added Comment shortcuts to Menu Helper for viewing comments in the admin.
+* New: Added Comment shortcuts to Menu Helper for viewing comments in the admin.A
 
 = 3.0.3 =
 * Released 2024-11-28
@@ -248,5 +248,5 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Upgrade Notice ==
 
-= 3.0.3 =
-Bug fix: resolving translation errors when loading too soon.
+= 3.1.0 =
+Selector Helper now works properly with newer Divi themes and has updated styling for dark backgrounds. The plugin installer on Integrations tab was fixed to resolve a fatal error. Skeleton Loader label was corrected in the admin. Setting Menu Helper is now enabled by default to help with first-time setups and testing. Added comment shortcuts to Menu Helper for viewing comments in the admin.
