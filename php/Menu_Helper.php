@@ -582,6 +582,27 @@ class Menu_Helper {
 				'href'   => esc_url( Functions::get_settings_url( 'selectors' ) ),
 			)
 		);
+
+		// If the post has comments, provide a shortlink to the post's comment page.
+		$comments_num = wp_count_comments( $post_id );
+		if ( $comments_num->approved > 0 ) {
+			$admin_bar->add_node(
+				array(
+					'id'     => 'wpac-admin-comments-shortlink',
+					'parent' => 'wpac-menu-helper',
+					'title'  => __( 'View Post Comments', 'wp-ajaxify-comments' ),
+					'href'   => esc_url( admin_url( 'edit-comments.php?p=' . $post_id ) ),
+				)
+			);
+		}
+		$admin_bar->add_node(
+			array(
+				'id'     => 'wpac-admin-comments-all',
+				'parent' => 'wpac-menu-helper',
+				'title'  => __( 'View All Comments', 'wp-ajaxify-comments' ),
+				'href'   => esc_url( admin_url( 'edit-comments.php' ) ),
+			)
+		);
 	}
 
 	/**
