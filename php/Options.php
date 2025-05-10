@@ -187,7 +187,7 @@ class Options {
 		$defaults = array(
 			'enable'                                       => false,
 			'debug'                                        => false,
-			'menuHelper'                                   => false,
+			'menuHelper'                                   => true,
 			'selectorCommentForm'                          => '#commentform,.ast-commentform,.comment-form',
 			'selectorCommentsContainer'                    => '#comments,.comments-wrapper,.comments-area,.wp-block-comments',
 			'selectorCommentList'                          => '.comment-list,.ast-comment-list,.wp-block-comment-template',
@@ -231,7 +231,7 @@ class Options {
 			'popupTextFontSize'                            => '20px',
 			'popupTextFontSizeTablet'                      => '20px',
 			'popupTextFontSizeMobile'                      => '20px',
-			'popupZindex'                                  => 1000,
+			'popupZindex'                                  => 10000,
 			'textPosted'                                   => __( 'Your comment has been posted. Thank you!', 'wp-ajaxify-comments' ),
 			'textPostedUnapproved'                         => __( 'Your comment has been posted and is awaiting moderation. Thank you!', 'wp-ajaxify-comments' ),
 			'textReloadPage'                               => __( 'Reloading page. Please wait.', 'wp-ajaxify-comments' ),
