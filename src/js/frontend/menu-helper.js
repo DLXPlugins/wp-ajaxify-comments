@@ -19,6 +19,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 			titleText: __( 'Ajaxify Selector Helper', 'wp-ajaxify-comments' ),
 			text: __( 'Checking the comment status.', 'wp-ajaxify-comments' ),
 			icon: 'success',
+			customClass: {
+				container: 'ajaxify',
+			},
 			confirmButtonText: 'Cool',
 			allowOutsideClick: false,
 			showCloseButton: true,
@@ -55,6 +58,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 									showCloseButton: true,
 									showCancelButton: true,
 									iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 49.6 21.3 95.1 56.9 130.8L16 480l150.4-45.1c27.9 8.5 58.1 13.1 89.6 13.1z"/></svg>',
+									customClass: {
+										container: 'ajaxify',
+									},
 								} ).then( ( result ) => {
 									if ( result?.isConfirmed ) {
 										// Fire the main helper.
@@ -71,6 +77,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 									allowOutsideClick: false,
 									showCloseButton: true,
 									iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>',
+									customClass: {
+										container: 'ajaxify',
+									},
 								} );
 							}
 						} );
@@ -85,6 +94,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 							allowOutsideClick: true,
 							showCloseButton: true,
 							iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><path fill="currentColor" d="M144 480H0V336c0-62.7 40.1-116 96-135.8V192c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96v36c55.2 14.2 96 64.3 96 124V480H512 144zM344 160H296v24V296v24h48V296 184 160zM296 352v48h48V352H296z"/></svg>',
+							customClass: {
+								container: 'ajaxify',
+							},
 						} );
 					}
 				} );
@@ -105,6 +117,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 			icon: 'success',
 			allowOutsideClick: false,
 			showCloseButton: true,
+			customClass: {
+				container: 'ajaxify',
+			},
 			iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 49.6 21.3 95.1 56.9 130.8L16 480l150.4-45.1c27.9 8.5 58.1 13.1 89.6 13.1z"/></svg>',
 			didOpen: () => {
 				Swal.showLoading();
@@ -119,6 +134,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 					'.comments',
 					'.comments-area',
 					'#comment-wrap', /* Divi */
+					'.et_pb_comments_module', /* Divi */
 				];
 
 				// Loop through each of the comment selectors.
@@ -149,16 +165,19 @@ document.addEventListener( 'DOMContentLoaded', function() {
 						}
 
 						// Check to see if children contain UL or OL. If so, we've found the container.
-						const ULs = commentElement.querySelectorAll( 'ul' );
-						const OLs = commentElement.querySelectorAll( 'ol' );
+						const ULs = commentElement.querySelector( 'ul' );
+						const OLs = commentElement.querySelector( 'ol' );
+						if ( null === ULs && null === OLs ) {
+							return;
+						}
 
-						if ( ( null !== ULs && 1 === ULs.length && null === OLs ) || ( null !== OLs && 1 === OLs.length && null === ULs ) ) {
+						if ( null !== ULs || null !== OLs ) {
 							foundCommentContainer = true;
 						}
 
 						// If we still haven't found the comment container, check that is has #respond or a form element.
 						if ( ! foundCommentContainer ) {
-							const respondOrForm = commentElement.querySelectorAll( '#respond, form' );
+							const respondOrForm = commentElement.querySelectorAll( '#respond, form, .comment-respond' );
 							if ( null !== respondOrForm && respondOrForm.length > 0 ) {
 								foundCommentContainer = true;
 							}
@@ -312,6 +331,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
 				let foundCommentSubmit = false;
 				const commentSubmitSelectors = [
 					'#submit',
+					'#et_pb_submit', // Divi
+					'#respond button[type="submit"]',
 					'#respond input[type="submit"]',
 					'.form-submit input[type="submit"]',
 					'.wp-block-post-comments-form input[type="submit"]',
@@ -342,12 +363,21 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
 					Swal.fire( {
 						titleText: __( 'Unable to Find All Selectors', 'wp-ajaxify-comments' ),
-						html: __( 'We were unable to find all the required selectors. Please contact support at <a style="color: #FFF;" href="https://dlxplugins.com/support/">dlxplugins.com/support/</a>.', 'wp-ajaxify-comments' ),
+						html: __( 'We were unable to find all the required selectors. Please contact support and tell them what theme you are using.', 'wp-ajaxify-comments' ),
 						icon: 'error',
-						confirmButtonText: __( 'OK', 'wp-ajaxify-comments' ),
+						showCancelButton: true,
+						cancelButtonText: __( 'Close', 'wp-ajaxify-comments' ),
+						confirmButtonText: __( 'Contact Support', 'wp-ajaxify-comments' ),
 						allowOutsideClick: false,
 						showCloseButton: true,
 						iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>',
+						customClass: {
+							container: 'ajaxify',
+						},
+					} ).then( ( result ) => {
+						if ( result?.isConfirmed ) {
+							window.open( 'https://dlxplugins.com/support/?product=Ajaxify Comments', '_blank' );
+						}
 					} );
 				} else {
 					// Set up confirmation screen for saving selectors.
@@ -365,6 +395,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 						confirmButtonText: __( 'Save Selectors', 'wp-ajaxify-comments' ),
 						allowOutsideClick: false,
 						showCloseButton: true,
+						customClass: {
+							container: 'ajaxify',
+						},
 						showCancelButton: true,
 						cancelButtonText: __( 'Cancel', 'wp-ajaxify-comments' ),
 						iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 49.6 21.3 95.1 56.9 130.8L16 480l150.4-45.1c27.9 8.5 58.1 13.1 89.6 13.1z"/></svg>',
@@ -376,6 +409,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 								text: __( 'Saving the Selectors.', 'wp-ajaxify-comments' ),
 								icon: 'success',
 								allowOutsideClick: false,
+								customClass: {
+									container: 'ajaxify',
+								},
 								showCloseButton: true,
 								iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 49.6 21.3 95.1 56.9 130.8L16 480l150.4-45.1c27.9 8.5 58.1 13.1 89.6 13.1z"/></svg>',
 								didOpen: () => {
@@ -407,6 +443,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 														confirmButtonText: __( 'OK', 'wp-ajaxify-comments' ),
 														allowOutsideClick: false,
 														showCloseButton: true,
+														customClass: {
+															container: 'ajaxify',
+														},
 														iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM369 193L241 321c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 159c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>',
 													} );
 												} else {
@@ -417,6 +456,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 														confirmButtonText: __( 'OK', 'wp-ajaxify-comments' ),
 														allowOutsideClick: false,
 														showCloseButton: true,
+														customClass: {
+															container: 'ajaxify',
+														},
 														iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>',
 													} );
 												}
@@ -428,6 +470,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 												icon: 'error',
 												showConfirmButton: false,
 												showCancelButton: true,
+												customClass: {
+													container: 'ajaxify',
+												},
 												cancelButtonText: __( 'Close', 'wp-ajaxify-comments' ),
 												allowOutsideClick: true,
 												showCloseButton: true,
@@ -463,6 +508,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 				allowOutsideClick: false,
 				showCloseButton: true,
 				showConfirmButton: true,
+				customClass: {
+					container: 'ajaxify',
+				},
 				iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-31.5 0-61.7-4.6-89.6-13.1L16 480 56.9 370.8C21.3 335.1 0 289.6 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208zM304.8 144l-29.1 29.1L323 220.4l29.1-29.1L304.8 144zm-51.7 51.7l-85.2 85.2L160 336.1l55.3-7.9L300.4 243l-47.3-47.3z"/></svg>',
 			} );
 			isConfirm.then( ( result ) => {
@@ -475,6 +523,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 						iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M512 240c0 114.9-114.6 208-256 208c-31.5 0-61.7-4.6-89.6-13.1L16 480 56.9 370.8C21.3 335.1 0 289.6 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208zM304.8 144l-29.1 29.1L323 220.4l29.1-29.1L304.8 144zm-51.7 51.7l-85.2 85.2L160 336.1l55.3-7.9L300.4 243l-47.3-47.3z"/></svg>',
 						allowOutsideClick: false,
 						showCloseButton: true,
+						customClass: {
+							container: 'ajaxify',
+						},
 						didOpen: () => {
 							Swal.showLoading();
 							const doAjax = async () => {
@@ -506,6 +557,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 												showCancelButton: true,
 												showConfirmButton: true,
 												timer: 4500,
+												customClass: {
+													container: 'ajaxify',
+												},
 												timerProgressBar: true,
 												cancelButtonText: __( 'Cancel', 'wp-ajaxify-comments' ),
 												confirmButtonText: __( 'Refresh Post', 'wp-ajaxify-comments' ),
@@ -523,6 +577,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 												confirmButtonText: __( 'OK', 'wp-ajaxify-comments' ),
 												allowOutsideClick: false,
 												showCloseButton: true,
+												customClass: {
+													container: 'ajaxify',
+												},
 												iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>',
 											} );
 										}
@@ -537,6 +594,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 										cancelButtonText: __( 'Close', 'wp-ajaxify-comments' ),
 										allowOutsideClick: true,
 										showCloseButton: true,
+										customClass: {
+											container: 'ajaxify',
+										},
 										iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><path fill="currentColor" d="M144 480H0V336c0-62.7 40.1-116 96-135.8V192c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96v36c55.2 14.2 96 64.3 96 124V480H512 144zM344 160H296v24V296v24h48V296 184 160zM296 352v48h48V352H296z"/></svg>',
 									} );
 								}
@@ -567,6 +627,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 				allowOutsideClick: false,
 				showCloseButton: true,
 				showConfirmButton: true,
+				customClass: {
+					container: 'ajaxify',
+				},
 				iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM175 159c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>',
 			} );
 			isConfirm.then( ( result ) => {
@@ -579,6 +642,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 						iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM175 159c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>',
 						allowOutsideClick: false,
 						showCloseButton: true,
+						customClass: {
+							container: 'ajaxify',
+						},
 						didOpen: () => {
 							Swal.showLoading();
 							const doAjax = async () => {
@@ -611,6 +677,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 												showConfirmButton: true,
 												timer: 4500,
 												timerProgressBar: true,
+												customClass: {
+													container: 'ajaxify',
+												},
 												cancelButtonText: __( 'Cancel', 'wp-ajaxify-comments' ),
 												confirmButtonText: __( 'Refresh Post', 'wp-ajaxify-comments' ),
 												iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zM369 193L241 321c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 159c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>',
@@ -627,6 +696,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 												confirmButtonText: __( 'OK', 'wp-ajaxify-comments' ),
 												allowOutsideClick: false,
 												showCloseButton: true,
+												customClass: {
+													container: 'ajaxify',
+												},
 												iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M256 448c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9c-5.5 9.2-11.1 16.6-15.2 21.6c-2.1 2.5-3.7 4.4-4.9 5.7c-.6 .6-1 1.1-1.3 1.4l-.3 .3 0 0 0 0 0 0 0 0c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c28.7 0 57.6-8.9 81.6-19.3c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9zm0-336c13.3 0 24 10.7 24 24V248c0 13.3-10.7 24-24 24s-24-10.7-24-24V136c0-13.3 10.7-24 24-24zM224 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>',
 											} );
 										}
@@ -641,6 +713,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 										cancelButtonText: __( 'Close', 'wp-ajaxify-comments' ),
 										allowOutsideClick: true,
 										showCloseButton: true,
+										customClass: {
+											container: 'ajaxify',
+										},
 										iconHtml: '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><path fill="currentColor" d="M144 480H0V336c0-62.7 40.1-116 96-135.8V192c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96v36c55.2 14.2 96 64.3 96 124V480H512 144zM344 160H296v24V296v24h48V296 184 160zM296 352v48h48V352H296z"/></svg>',
 									} );
 								}
