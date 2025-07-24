@@ -47,18 +47,25 @@ require_once Functions::get_plugin_dir( 'functions.php' );
  */
 function plugins_loaded() {
 
+	// load admin options.
 	if ( is_admin() ) {
 		$admin = new Admin\Init();
-		$admin->init();
 	}
 
-	// Init menu helper.
-	$menu_helper = new Menu_Helper();
-	$menu_helper->run();
+	// Make sure all helpers load after init.
+	add_action(
+		'init',
+		function () {
 
-	// Init lazy load.
-	$lazy_load = new Lazy_Load();
-	$lazy_load->run();
+			// Init menu helper.
+			$menu_helper = new Menu_Helper();
+			$menu_helper->run();
+
+			// Init lazy load.
+			$lazy_load = new Lazy_Load();
+			$lazy_load->run();
+		}
+	);
 
 	// Load die handler. This should only affect if `HTTP_X_WPAC_REQUEST` server var is set.
 	add_filter( 'wp_die_handler', 'wpac_wp_die_handler' );
@@ -87,7 +94,7 @@ function wp() {
 	 * Fires before the main WPAC actions/filters. Useful for hooking in early.
 	 */
 	do_action( 'dlxplugins/ajaxify/comments/wp' );
-	
+
 	// If Ajaxify enabled, run the plugin.
 	if ( Functions::is_ajaxify_enabled() ) {
 		add_filter( 'the_comments', 'wpac_comments_template_query_args_filter' );

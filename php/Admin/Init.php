@@ -41,7 +41,7 @@ class Init {
 	 * Main constructor.
 	 */
 	public function __construct() {
-		add_action( 'admin_init', array( $this, 'init' ) );
+		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
 		// Ajax option for saving options.
