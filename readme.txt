@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 3.1.1
+Stable tag: 3.1.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -125,6 +125,11 @@ More than likely you need to set up your selectors. <a href="https://docs.dlxplu
 Lazy Loading is an advanced topic, but we've put together <a href="https://docs.dlxplugins.com/v/ajaxify-comments/advanced-topics/lazy-loading-comments">a guide to help you understand how to enable lazy loading</a>.
 
 == Changelog ==
+
+= 3.1.2 =
+* Released 2025-07-24
+* Bug fix: Resolving translation error log messages when loading translations too soon.
+* Bug fix: Fixing some admin style issues with labels and required markings.
 
 = 3.1.1 =
 * Released 2025-05-10
@@ -249,5 +254,5 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Upgrade Notice ==
 
-= 3.1.1 =
-Selector Helper now works properly with newer Divi themes and has updated styling for dark backgrounds. The plugin installer on Integrations tab was fixed to resolve a fatal error. Skeleton Loader label was corrected in the admin. Setting Menu Helper is now enabled by default to help with first-time setups and testing. Added comment shortcuts to Menu Helper for viewing comments in the admin.
+= 3.1.2 =
+Fixing translations loading too early. Resolving admin CSS issues with labels.
