@@ -540,7 +540,11 @@ WPAC.AttachForm = function( options ) {
 
 	// Handle paging link clicks
 	const pagingClickHandler = function( event ) {
-		const href = jQuery( this ).attr( 'href' );
+		let href = jQuery( this ).attr( 'href' );
+		if ( ! href ) {
+			href = event.target.href;
+		}
+		console.log( 'href', href );
 		if ( href ) {
 			event.preventDefault();
 			WPAC.LoadComments( href, {
@@ -553,7 +557,21 @@ WPAC.AttachForm = function( options ) {
 			} );
 		}
 	};
-	addHandler( 'click', options.selectorCommentPagingLinks, pagingClickHandler );
+	let maybeSelectorCommentPagingEl = jQuery( options.selectorCommentPagingLinks );
+	if ( maybeSelectorCommentPagingEl.length > 0 ) {
+		addHandler( 'click', maybeSelectorCommentPagingEl, pagingClickHandler );
+	} else {
+		// Let's try the nav selector.
+		const navSelector = '#comments nav a';
+		const navEl = jQuery( navSelector );
+		if ( navEl.length > 0 ) {
+			addHandler( 'click', navEl, pagingClickHandler );
+		} else {
+			if ( WPAC._Options.debug ) {
+				WPAC._Debug( 'error', 'Selector for paging links not found: %s', options.selectorCommentPagingLinks );
+			}
+		}
+	}
 
 	// Handle comment link clicks
 	const linkClickHandler = function( event ) {
