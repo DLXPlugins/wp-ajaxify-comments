@@ -524,16 +524,25 @@ WPAC.AttachForm = function( options ) {
 	if ( jQuery( document ).on ) {
 		// jQuery 1.7+
 		var addHandler = function( event, selector, handler ) {
+			if ( typeof selector !== 'string' || ! selector ) {
+				return;
+			}
 			jQuery( document ).on( event, selector, handler );
 		};
 	} else if ( jQuery( document ).delegate ) {
 		// jQuery 1.4.3+
 		var addHandler = function( event, selector, handler ) {
+			if ( typeof selector !== 'string' || ! selector ) {
+				return;
+			}
 			jQuery( document ).delegate( selector, event, handler );
 		};
 	} else {
 		// jQuery 1.3+
 		var addHandler = function( event, selector, handler ) {
+			if ( typeof selector !== 'string' || ! selector ) {
+				return;
+			}
 			jQuery( selector ).live( event, handler );
 		};
 	}
@@ -559,13 +568,13 @@ WPAC.AttachForm = function( options ) {
 	};
 	let maybeSelectorCommentPagingEl = jQuery( options.selectorCommentPagingLinks );
 	if ( maybeSelectorCommentPagingEl.length > 0 ) {
-		addHandler( 'click', maybeSelectorCommentPagingEl, pagingClickHandler );
+		addHandler( 'click', options.selectorCommentPagingLinks, pagingClickHandler );
 	} else {
 		// Let's try the nav selector.
 		const navSelector = '#comments nav a';
 		const navEl = jQuery( navSelector );
 		if ( navEl.length > 0 ) {
-			addHandler( 'click', navEl, pagingClickHandler );
+			addHandler( 'click', navSelector, pagingClickHandler );
 		} else {
 			if ( WPAC._Options.debug ) {
 				WPAC._Debug( 'error', 'Selector for paging links not found: %s', options.selectorCommentPagingLinks );
