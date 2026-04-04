@@ -2,8 +2,8 @@
 Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 3.2.0
+Tested up to: 7.0
+Stable tag: 3.2.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -125,6 +125,10 @@ More than likely you need to set up your selectors. <a href="https://docs.dlxplu
 Lazy Loading is an advanced topic, but we've put together <a href="https://docs.dlxplugins.com/v/ajaxify-comments/advanced-topics/lazy-loading-comments">a guide to help you understand how to enable lazy loading</a>.
 
 == Changelog ==
+
+= 3.2.1 =
+* Released 2026-04-03
+* Fixing bug a bug where selectors could render as data, attaching a click event to document links, rendering them unclickable. Props to paul@mentionlink for finding this bug.
 
 = 3.2.0 =
 * Released 2026-02-19
@@ -258,5 +262,5 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Upgrade Notice ==
 
-= 3.2.0 =
-Security fix: Resolved header injection security issue, as well as doing some hardening to prevent future issues.
+= 3.2.1 =
+Fix for potential link overrides (rendering certain links unclickable) if certain selectors are rendered as data. Props to paul@mentionlink for pointing out the bug.
