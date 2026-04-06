@@ -3,7 +3,7 @@ Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
 Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 3.2.1
+Stable tag: 3.2.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -126,7 +126,7 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 
 == Changelog ==
 
-= 3.2.1 =
+= 3.2.2 =
 * Released 2026-04-05
 * Fixing bug a bug where selectors could render as data, attaching a click event to document links, rendering them unclickable. Props to <a href="https://mentionlink.com/">paul@mentionlink</a> for finding this bug.
 
