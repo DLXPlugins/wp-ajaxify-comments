@@ -89,7 +89,7 @@ Ajaxify Comments is community supported. If you would like to add or change anyt
 
 === Questions/Help? ===
 
-Please use the <a href="https://wordpress.org/support/plugin/wp-ajaxify-comments">support forum</a> to ask questions or to report issues.
+Please use the <a href="https://wordpress.org/support/plugin/wp-ajaxify-comments">support forum</a> to ask questions or to report issues. If you don't want to create an account to leave a support request, please use <a href="https://dlxplugins.com/support/">my support form</a>.
 
 > Most questions can be resolved by checking out our docs site. <a href="https://docs.dlxplugins.com/v/ajaxify-comments">https://docs.dlxplugins.com/v/ajaxify-comments</a> - the Search is AI, so it should be able to find what you're looking for.
 
@@ -127,8 +127,8 @@ Lazy Loading is an advanced topic, but we've put together <a href="https://docs.
 == Changelog ==
 
 = 3.2.1 =
-* Released 2026-04-03
-* Fixing bug a bug where selectors could render as data, attaching a click event to document links, rendering them unclickable. Props to paul@mentionlink for finding this bug.
+* Released 2026-04-05
+* Fixing bug a bug where selectors could render as data, attaching a click event to document links, rendering them unclickable. Props to <a href="https://mentionlink.com/">paul@mentionlink</a> for finding this bug.
 
 = 3.2.0 =
 * Released 2026-02-19
