@@ -1,7 +1,7 @@
 ﻿=== Ajaxify Comments - Ajax and Lazy Loading Comments ===
 Contributors: ronalfy
 Tags: AJAX, comments, lazy load, errors, refresh
-Requires at least: 5.0
+Requires at least: 6.5
 Tested up to: 7.0
 Stable tag: 3.2.1
 Requires PHP: 7.2
@@ -9,11 +9,11 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://github.com/sponsors/DLXPlugins
 
-Ajaxify Comments hooks into native WordPress comments and allows comment posting without reloading the page.
+Ajaxify Comments speeds up your comment section, allowing for lazy loading comments, instant comment posting, and seamless success and error messages.
 
 == Description ==
 
-Skip page reloads and separate error screens when posting comments. Ajaxify Comments hooks into your native WordPress comment system and allows comment posting without a page reload. Lazy loading is also supported, which can help speed up your page load time.
+Skip page reloads and separate error screens when posting comments. Ajaxify Comments hooks into your native WordPress comment system and allows comment posting without a page reload. Lazy loading comments is also supported, which can help speed up your page load time.
 
 === TLDR ===
 
