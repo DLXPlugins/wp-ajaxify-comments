@@ -725,11 +725,6 @@ WPAC.AttachForm = function( options ) {
 	};
 	addHandler( 'click', options.selectorCommentLinks, linkClickHandler );
 
-	// Submit AJAX is skipped when PHP reports comments disabled (see commentsEnabled in inline options).
-	if ( ! WPAC._Options.commentsEnabled ) {
-		return;
-	}
-
 	// Handle form submit
 	const formSubmitHandler = function( event ) {
 		const form = jQuery( this );
