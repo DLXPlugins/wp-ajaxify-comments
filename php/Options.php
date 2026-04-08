@@ -55,6 +55,7 @@ class Options {
 				case 'lazyLoadPaginationEnabled':
 				case 'lazyLoadUseThemePagination':
 				case 'lazyLoadingPaginationScrollToTop':
+				case 'useCurrentPageForCommentRefresh':
 					$option = filter_var( $options[ $key ], FILTER_VALIDATE_BOOLEAN );
 					break;
 				default:
@@ -198,6 +199,7 @@ class Options {
 			'selectorSubmitButton'                         => '#submit',
 			'selectorTextarea'                             => '#comment',
 			'selectorPostContainer'                        => '',
+			'useCurrentPageForCommentRefresh'              => false,
 			'scrollSpeed'                                  => 500,
 			'autoUpdateIdleTime'                           => 0,
 			'popupOverlayBackgroundColor'                  => '#000000',

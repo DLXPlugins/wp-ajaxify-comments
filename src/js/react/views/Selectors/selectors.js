@@ -89,6 +89,7 @@ const Interface = ( props ) => {
 			selectorSubmitButton: data.selectorSubmitButton,
 			selectorTextarea: data.selectorTextarea,
 			selectorPostContainer: data.selectorPostContainer,
+			useCurrentPageForCommentRefresh: data.useCurrentPageForCommentRefresh,
 			saveNonce: wpacAdminSelectors.saveNonce,
 			resetNonce: wpacAdminSelectors.resetNonce,
 			caller: 'selectors',
@@ -663,6 +664,26 @@ const Interface = ( props ) => {
 														/>
 													) }
 												</>
+											) }
+										/>
+									</div>
+									<div className="ajaxify-admin__control-row">
+										<Controller
+											name="useCurrentPageForCommentRefresh"
+											control={ control }
+											render={ ( { field: { onChange, value } } ) => (
+												<ToggleControl
+													label={ __(
+														'Use current page URL for comment refresh',
+														'wp-ajaxify-comments',
+													) }
+													help={ __(
+														'After posting a comment, use the browser’s current page URL for scroll and address-bar updates instead of only the X-WPAC-URL header from the redirect. Enable when several posts with comment forms share one page (set Post Container Selector above) or when comment_post_redirect sends visitors back to a list or custom page so the plugin should treat this URL as the canonical view.',
+														'wp-ajaxify-comments',
+													) }
+													checked={ !! value }
+													onChange={ onChange }
+												/>
 											) }
 										/>
 									</div>

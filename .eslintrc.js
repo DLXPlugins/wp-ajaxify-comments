@@ -4,6 +4,8 @@ module.exports = {
 		es2021: true,
 	},
 	globals: {
+		WPAC: 'readonly',
+		jQuery: 'readonly',
 		ajaxurl: 'readonly',
 		wpacAdminAdvanced: 'readonly',
 		wpacAdminCallbacks: 'readonly',
@@ -41,5 +43,6 @@ module.exports = {
 		'react',
 	],
 	rules: {
+		'linebreak-style': [ 'error', 'windows' ],
 	},
 };

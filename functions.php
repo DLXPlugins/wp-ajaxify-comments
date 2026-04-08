@@ -443,6 +443,43 @@ function wpac_is_login_page() {
 	return isset( $GLOBALS['pagenow'] ) && in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ) );
 }
 
+/**
+ * Turn WPACUrl query values into an absolute URL safe for the X-WPAC-URL header and window.URL() in JS.
+ *
+ * Relative redirects (path only) are resolved with home_url(). Scheme-relative URLs get the site scheme.
+ * Anchor-only values are rejected.
+ *
+ * @param string $url Raw URL from WPACUrl request parameter.
+ * @return string Absolute URL, or empty string if invalid.
+ */
+function wpac_normalize_x_wpac_url( $url ) {
+	$url = str_replace( array( "\r", "\n", "\0" ), '', (string) $url );
+	$url = trim( $url );
+	if ( '' === $url ) {
+		return '';
+	}
+	if ( '#' === $url[0] ) {
+		return '';
+	}
+	if ( preg_match( '#^[a-z][a-z0-9+\-.]*://#i', $url ) ) {
+		$candidate = $url;
+	} elseif ( 0 === strpos( $url, '//' ) ) {
+		$scheme    = wp_parse_url( home_url(), PHP_URL_SCHEME );
+		$candidate = ( is_string( $scheme ) ? $scheme : 'https' ) . ':' . $url;
+	} else {
+		$candidate = home_url( $url );
+	}
+	$candidate = esc_url_raw( $candidate );
+	if ( '' === $candidate ) {
+		return '';
+	}
+	$validated = wp_validate_redirect( $candidate, false );
+	if ( false === $validated ) {
+		return '';
+	}
+	return esc_url_raw( $validated );
+}
+
 function wpac_init() {
 	if ( isset( $_GET['WPACUnapproved'] ) ) {
 		$wpac_unapproved = sanitize_text_field( wp_unslash( $_GET['WPACUnapproved'] ) );
@@ -451,9 +488,11 @@ function wpac_init() {
 		}
 	}
 	if ( isset( $_GET['WPACUrl'] ) ) {
-		$wpac_url = sanitize_text_field( wp_unslash( $_GET['WPACUrl'] ) );
-		$wpac_url = str_replace( array( "\r", "\n", "\0" ), '', $wpac_url );
-		$wpac_url = esc_url_raw( $wpac_url );
+		$wpac_raw = wp_unslash( $_GET['WPACUrl'] );
+		$wpac_raw = is_string( $wpac_raw ) ? $wpac_raw : '';
+		$wpac_url = wpac_normalize_x_wpac_url( sanitize_text_field( $wpac_raw ) );
+		$wpac_url = apply_filters( 'dlxplugins/ajaxify/comments/x_wpac_url', $wpac_url, $wpac_raw );
+		$wpac_url = is_string( $wpac_url ) ? esc_url_raw( $wpac_url ) : '';
 		if ( '' !== $wpac_url && wp_validate_redirect( $wpac_url, false ) !== false ) {
 			header( 'X-WPAC-URL: ' . $wpac_url );
 		}

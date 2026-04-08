@@ -1,0 +1,1 @@
+{"version":3,"file":"wpac-frontend-css.css","mappings":";;;AAAA;EACC;AACD,C","sources":["webpack://wp-ajaxify-comments/./src/scss/frontend.scss"],"sourcesContent":["#wpac-lazy-load-content {\n\tdisplay: none;\n}"],"names":[],"sourceRoot":""}
