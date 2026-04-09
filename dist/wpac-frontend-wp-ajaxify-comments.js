@@ -77,6 +77,10 @@ WPAC._ShowMessage = function (message, type) {
     baseZ: WPAC._Options.popupZindex
   });
 };
+WPAC._hasPostContainer = function () {
+  var $postContainers = jQuery(WPAC._Options.selectorPostContainer);
+  return $postContainers.length > 0;
+};
 WPAC._DebugErrorShown = false;
 WPAC._Debug = function (level, message) {
   if (!WPAC._Options.debug) {
@@ -205,7 +209,7 @@ WPAC._LoadFallbackUrl = function (fallbackUrl) {
     reload();
   } else {
     WPAC._Debug('info', 'Sleep for 5s to enable analyzing debug messages...');
-    window.setTimeout(reload, 20000);
+    window.setTimeout(reload, 10000);
   }
 };
 WPAC._ScrollToAnchor = function (anchor, updateHash, scrollComplete) {
@@ -726,6 +730,13 @@ WPAC.AttachForm = function (options) {
           if (options.updateUrl) {
             WPAC._UpdateUrl(commentUrl);
           }
+
+          // Single-page comment forms detected, but single-page refresh if disabled, so reloading the page.
+          if (WPAC._hasPostContainer() && options.updateUrl && !WPAC._Options.useCurrentPageForCommentRefresh) {
+            WPAC._Debug('info', 'Single-page comment forms detected, but single-page refresh if disabled, so reloading the page.');
+            window.location.reload();
+            return;
+          }
           if (options.scrollToAnchor) {
             var _anchor = commentUrl.indexOf('#') >= 0 ? commentUrl.substr(commentUrl.indexOf('#')) : null;
             if (_anchor) {
@@ -786,7 +797,7 @@ WPAC.Init = function () {
     }
     WPAC._Debug('info', 'Found jQuery Idle Timer plugin');
   }
-  if (WPAC._Options.selectorPostContainer) {
+  if (WPAC._hasPostContainer()) {
     WPAC._Debug('info', "Multiple comment form support enabled (selector: '%s')", WPAC._Options.selectorPostContainer);
     var $postContainers = jQuery(WPAC._Options.selectorPostContainer);
     var attachedCount = 0;

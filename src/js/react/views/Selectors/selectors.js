@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import classNames from 'classnames';
 import { useAsyncResource } from 'use-async-resource';
@@ -22,10 +22,10 @@ const retrieveSelectorOptions = () => {
 	} );
 };
 
-const cssRegex = /^(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)(?:=[\'"]?(.*?)[\'"]?)?\]|#[a-z0-9_-]+|\.(?:[a-z0-9_-]+))+(?:\s*,\s*(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)(?:=[\'"]?(.*?)[\'"]?)?\]|#[a-z0-9_-]+|\.(?:[a-z0-9_-]+))+)*/i;
+const cssRegex = /^(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)(?:=["']?(.*?)["']?)?\]|#[a-z0-9_-]+|\.(?:[a-z0-9_-]+))+(?:\s*,\s*(?:(?:\*|(?:[a-z0-9_-]+(?:\|[a-z0-9_-]+)?))|\[(?:[a-z0-9_-]+)(?:=["']?(.*?)["']?)?\]|#[a-z0-9_-]+|\.(?:[a-z0-9_-]+))+)*/i;
 
 const SelectorsScreen = ( props ) => {
-	const [ defaults, getDefaults ] = useAsyncResource(
+	const [ defaults ] = useAsyncResource(
 		retrieveSelectorOptions,
 		[],
 	);
@@ -68,7 +68,7 @@ const SelectorsScreen = ( props ) => {
 const Interface = ( props ) => {
 	const { defaults } = props;
 	const response = defaults();
-	const { data, success } = response.data;
+	const { data } = response.data;
 
 	const {
 		control,
@@ -101,7 +101,7 @@ const Interface = ( props ) => {
 	} );
 
 	// Placeholder.
-	const onSubmit = ( formData ) => {
+	const onSubmit = () => {
 	};
 
 	const getFirstTimeInstallNotification = () => {
@@ -233,8 +233,7 @@ const Interface = ( props ) => {
 														label={ __( 'Comments Container', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.selectorCommentsContainer?.type,
-															'has-error': 'pattern' === errors.selectorCommentsContainer?.type,
+															'has-error': 'required' === errors.selectorCommentsContainer?.type || 'pattern' === errors.selectorCommentsContainer?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The CSS selector for Comments container.', 'wp-ajaxify-comments' ) }
@@ -327,8 +326,7 @@ const Interface = ( props ) => {
 														label={ __( 'Comment Form', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.selectorCommentForm?.type,
-															'has-error': 'pattern' === errors.selectorCommentForm?.type,
+															'has-error': 'required' === errors.selectorCommentForm?.type || 'pattern' === errors.selectorCommentForm?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The CSS selector for the comment form. Can be comma separated.', 'wp-ajaxify-comments' ) }
@@ -375,8 +373,7 @@ const Interface = ( props ) => {
 														label={ __( 'Respond Textarea Selector', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.selectorRespondContainer?.type,
-															'has-error': 'pattern' === errors.selectorRespondContainer?.type,
+															'has-error': 'required' === errors.selectorRespondContainer?.type || 'pattern' === errors.selectorRespondContainer?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The CSS selector for the Respond textarea.', 'wp-ajaxify-comments' ) }
@@ -423,8 +420,7 @@ const Interface = ( props ) => {
 														label={ __( 'Comment Textarea Selector', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.selectorTextarea?.type,
-															'has-error': 'pattern' === errors.selectorTextarea?.type,
+															'has-error': 'required' === errors.selectorTextarea?.type || 'pattern' === errors.selectorTextarea?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The CSS selector for the main comment textarea.', 'wp-ajaxify-comments' ) }
@@ -471,8 +467,7 @@ const Interface = ( props ) => {
 														label={ __( 'Comment Submit Button Selector', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.selectorSubmitButton?.type,
-															'has-error': 'pattern' === errors.selectorSubmitButton?.type,
+															'has-error': 'required' === errors.selectorSubmitButton?.type || 'pattern' === errors.selectorSubmitButton?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'The CSS selector for the comment submit button.', 'wp-ajaxify-comments' ) }
@@ -535,8 +530,7 @@ const Interface = ( props ) => {
 														label={ __( 'Paging Links Selector', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.selectorCommentPagingLinks?.type,
-															'has-error': 'pattern' === errors.selectorCommentPagingLinks?.type,
+															'has-error': 'required' === errors.selectorCommentPagingLinks?.type || 'pattern' === errors.selectorCommentPagingLinks?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'Comment paging links selector for Ajax pagination.', 'wp-ajaxify-comments' ) }
@@ -571,8 +565,7 @@ const Interface = ( props ) => {
 														label={ __( 'Comment Links Selector', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.selectorCommentLinks?.type,
-															'has-error': 'pattern' === errors.selectorCommentLinks?.type,
+															'has-error': 'required' === errors.selectorCommentLinks?.type || 'pattern' === errors.selectorCommentLinks?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'Selector for the comment links.', 'wp-ajaxify-comments' ) }
@@ -607,8 +600,7 @@ const Interface = ( props ) => {
 														label={ __( 'Error Container Selector', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.selectorErrorContainer?.type,
-															'has-error': 'pattern' === errors.selectorErrorContainer?.type,
+															'has-error': 'required' === errors.selectorErrorContainer?.type || 'pattern' === errors.selectorErrorContainer?.type,
 															'is-required': true,
 														} ) }
 														help={ __( 'This is where any error messages will be shown.', 'wp-ajaxify-comments' ) }
@@ -642,11 +634,10 @@ const Interface = ( props ) => {
 														label={ __( 'Post Container Selector', 'wp-ajaxify-comments' ) }
 														type="text"
 														className={ classNames( 'ajaxify-admin__text-control', {
-															'has-error': 'required' === errors.selectorPostContainer?.type,
-															'has-error': 'pattern' === errors.selectorPostContainer?.type,
+															'has-error': 'pattern' === errors.selectorPostContainer?.type || 'required' === errors.selectorPostContainer?.type,
 															'is-required': true,
 														} ) }
-														help={ __( 'Selector that matches post containers to enable support for multiple comment forms per page; leave empty to disable multiple comment form per page support. Please note: Each post container needs to have the ID attribute defined. If this option is set, all other selectors cannot select the elements by ID, but have to select the elements inside the post container for example by element and/or class.', 'wp-ajaxify-comments' ) }
+														help={ __( 'Selector that matches post containers to enable support for multiple comment forms per page; leave empty to disable multiple comment form per page support. Please note: each article container must contain the selector you enter here.', 'wp-ajaxify-comments' ) }
 														aria-required="true"
 														value={ value }
 														onChange={ onChange }
@@ -678,7 +669,7 @@ const Interface = ( props ) => {
 														'wp-ajaxify-comments',
 													) }
 													help={ __(
-														'After posting a comment, use the browser’s current page URL for scroll and address-bar updates instead of only the X-WPAC-URL header from the redirect. Enable when several posts with comment forms share one page (set Post Container Selector above) or when comment_post_redirect sends visitors back to a list or custom page so the plugin should treat this URL as the canonical view.',
+														'After posting a comment, the normal behavior is to post the comment to the original page. If this is enabled, no reload will occur, and the comments will be posted to the current page.',
 														'wp-ajaxify-comments',
 													) }
 													checked={ !! value }
