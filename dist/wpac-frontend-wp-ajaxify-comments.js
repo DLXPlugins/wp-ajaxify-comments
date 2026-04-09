@@ -355,6 +355,8 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
     // Decode HTML entities (see http://stackoverflow.com/a/5796744)
     document.title = jQuery('<textarea />').html(extractedTitle).text();
   }
+  console.log(oldCommentsContainer);
+  console.log(newCommentsContainer);
 
   // Empty old container, replace with innards of new container.
   oldCommentsContainer.empty();
@@ -446,12 +448,12 @@ WPAC._TestFallbackUrl = function (url) {
  * Prefix every comma-separated selector segment with a post container id.
  * Avoids `#post-1 #a,.b` parsing as global `.b`. Does not split commas inside parentheses (e.g. :not()).
  *
- * @param {string} postId         Container element id (no leading #).
+ * @param {string} selector       Container element selector.
  * @param {string} selectorString User-defined selector, may contain commas.
  * @return {string} Combined selector string.
  */
-WPAC._scopeSelectorToPostContainer = function (postId, selectorString) {
-  if (!postId || typeof selectorString !== 'string') {
+WPAC._scopeSelectorToPostContainer = function (selector, selectorString) {
+  if (!selector || typeof selectorString !== 'string') {
     return selectorString;
   }
   var trimmed = selectorString.trim();
@@ -463,7 +465,7 @@ WPAC._scopeSelectorToPostContainer = function (postId, selectorString) {
   for (var i = 0; i < parts.length; i++) {
     var part = parts[i].trim();
     if (part !== '') {
-      scoped.push('#' + postId + ' ' + part);
+      scoped.push(selector + ' ' + part);
     }
   }
   return scoped.join(', ');
@@ -802,17 +804,29 @@ WPAC.Init = function () {
     var $postContainers = jQuery(WPAC._Options.selectorPostContainer);
     var attachedCount = 0;
     $postContainers.each(function (i, e) {
-      var id = jQuery(e).attr('id');
-      if (!id) {
+      var postSelector = jQuery(e).attr('id');
+      if (!postSelector) {
         WPAC._Debug('info', 'Skip post container element %o (ID not defined)', e);
-        return;
+      } else {
+        postSelector = '#' + postSelector;
+      }
+      if (!postSelector) {
+        var _jQuery$children$firs, _jQuery$children;
+        // Grab the element's first class.
+        postSelector = (_jQuery$children$firs = (_jQuery$children = jQuery(e).children()) === null || _jQuery$children === void 0 || (_jQuery$children = _jQuery$children.first()) === null || _jQuery$children === void 0 ? void 0 : _jQuery$children.attr('class')) !== null && _jQuery$children$firs !== void 0 ? _jQuery$children$firs : null;
+        if (!postSelector) {
+          WPAC._Debug('info', 'Skip post container element %o (Class not defined)', e);
+          return;
+        }
+        // Grab first class.
+        postSelector = '.' + postSelector.split(' ')[0];
       }
       attachedCount++;
       WPAC.AttachForm({
-        selectorCommentForm: WPAC._scopeSelectorToPostContainer(id, WPAC._Options.selectorCommentForm),
-        selectorCommentPagingLinks: WPAC._scopeSelectorToPostContainer(id, WPAC._Options.selectorCommentPagingLinks),
-        selectorCommentsContainer: WPAC._scopeSelectorToPostContainer(id, WPAC._Options.selectorCommentsContainer),
-        selectorRespondContainer: WPAC._scopeSelectorToPostContainer(id, WPAC._Options.selectorRespondContainer),
+        selectorCommentForm: WPAC._scopeSelectorToPostContainer(postSelector, WPAC._Options.selectorCommentForm),
+        selectorCommentPagingLinks: WPAC._scopeSelectorToPostContainer(postSelector, WPAC._Options.selectorCommentPagingLinks),
+        selectorCommentsContainer: WPAC._scopeSelectorToPostContainer(postSelector, WPAC._Options.selectorCommentsContainer),
+        selectorRespondContainer: WPAC._scopeSelectorToPostContainer(postSelector, WPAC._Options.selectorRespondContainer),
         selectorCommentsContainerRaw: WPAC._Options.selectorCommentsContainer,
         selectorCommentFormRaw: WPAC._Options.selectorCommentForm,
         selectorRespondContainerRaw: WPAC._Options.selectorRespondContainer

@@ -499,6 +499,9 @@ WPAC._ReplaceComments = function(
 		document.title = jQuery( '<textarea />' ).html( extractedTitle ).text();
 	}
 
+	console.log( oldCommentsContainer );
+	console.log( newCommentsContainer );
+
 	// Empty old container, replace with innards of new container.
 	oldCommentsContainer.empty();
 	oldCommentsContainer.append( newCommentsContainer.children() );
@@ -633,12 +636,12 @@ WPAC._TestFallbackUrl = function( url ) {
  * Prefix every comma-separated selector segment with a post container id.
  * Avoids `#post-1 #a,.b` parsing as global `.b`. Does not split commas inside parentheses (e.g. :not()).
  *
- * @param {string} postId         Container element id (no leading #).
+ * @param {string} selector       Container element selector.
  * @param {string} selectorString User-defined selector, may contain commas.
  * @return {string} Combined selector string.
  */
-WPAC._scopeSelectorToPostContainer = function( postId, selectorString ) {
-	if ( ! postId || typeof selectorString !== 'string' ) {
+WPAC._scopeSelectorToPostContainer = function( selector, selectorString ) {
+	if ( ! selector || typeof selectorString !== 'string' ) {
 		return selectorString;
 	}
 	const trimmed = selectorString.trim();
@@ -650,7 +653,7 @@ WPAC._scopeSelectorToPostContainer = function( postId, selectorString ) {
 	for ( let i = 0; i < parts.length; i++ ) {
 		const part = parts[ i ].trim();
 		if ( part !== '' ) {
-			scoped.push( '#' + postId + ' ' + part );
+			scoped.push( selector + ' ' + part );
 		}
 	}
 	return scoped.join( ', ' );
@@ -1015,7 +1018,11 @@ WPAC.AttachForm = function( options ) {
 					}
 
 					// Single-page comment forms detected, but single-page refresh if disabled, so reloading the page.
-					if ( WPAC._hasPostContainer() && options.updateUrl && ! WPAC._Options.useCurrentPageForCommentRefresh ) {
+					if (
+						WPAC._hasPostContainer() &&
+						options.updateUrl &&
+						! WPAC._Options.useCurrentPageForCommentRefresh
+					) {
 						WPAC._Debug(
 							'info',
 							'Single-page comment forms detected, but single-page refresh if disabled, so reloading the page.',
@@ -1126,31 +1133,46 @@ WPAC.Init = function() {
 		const $postContainers = jQuery( WPAC._Options.selectorPostContainer );
 		let attachedCount = 0;
 		$postContainers.each( function( i, e ) {
-			const id = jQuery( e ).attr( 'id' );
-			if ( ! id ) {
+			let postSelector = jQuery( e ).attr( 'id' );
+			if ( ! postSelector ) {
 				WPAC._Debug(
 					'info',
 					'Skip post container element %o (ID not defined)',
 					e,
 				);
-				return;
+			} else {
+				postSelector = '#' + postSelector;
+			}
+			if ( ! postSelector ) {
+				// Grab the element's first class.
+				postSelector = jQuery( e ).children()?.first()?.attr( 'class' ) ?? null;
+				if ( ! postSelector ) {
+					WPAC._Debug(
+						'info',
+						'Skip post container element %o (Class not defined)',
+						e,
+					);
+					return;
+				}
+				// Grab first class.
+				postSelector = '.' + postSelector.split( ' ' )[ 0 ];
 			}
 			attachedCount++;
 			WPAC.AttachForm( {
 				selectorCommentForm: WPAC._scopeSelectorToPostContainer(
-					id,
+					postSelector,
 					WPAC._Options.selectorCommentForm,
 				),
 				selectorCommentPagingLinks: WPAC._scopeSelectorToPostContainer(
-					id,
+					postSelector,
 					WPAC._Options.selectorCommentPagingLinks,
 				),
 				selectorCommentsContainer: WPAC._scopeSelectorToPostContainer(
-					id,
+					postSelector,
 					WPAC._Options.selectorCommentsContainer,
 				),
 				selectorRespondContainer: WPAC._scopeSelectorToPostContainer(
-					id,
+					postSelector,
 					WPAC._Options.selectorRespondContainer,
 				),
 				selectorCommentsContainerRaw: WPAC._Options.selectorCommentsContainer,
