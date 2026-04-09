@@ -16,6 +16,7 @@ module.exports = {
 		wpacMenuHelper: 'readonly',
 		wpacAdminLazyLoad: 'readonly',
 		wpacAdminIntegrations: 'readonly',
+		WPACCallbacks: 'readonly',
 	},
 	extends: [
 		'eslint:recommended',
@@ -27,9 +28,7 @@ module.exports = {
 			env: {
 				node: true,
 			},
-			files: [
-				'.eslintrc.{js,cjs}',
-			],
+			files: [ '.eslintrc.{js,cjs}' ],
 			parserOptions: {
 				sourceType: 'script',
 			},
@@ -39,10 +38,9 @@ module.exports = {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	},
-	plugins: [
-		'react',
-	],
+	plugins: [ 'react' ],
 	rules: {
-		'linebreak-style': [ 'error', 'windows' ],
+		// Use unix (LF) so ESLint matches macOS/Linux and typical git defaults; 'windows' flags every line on LF-only checkouts.
+		'linebreak-style': [ 'error', 'unix' ],
 	},
 };

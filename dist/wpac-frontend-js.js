@@ -1952,7 +1952,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 WPAC._Options = WPAC._Options || {};
-WPAC._BodyRegex = new RegExp('<body[^>]*>((.|\n|\r)*)</body>', 'i');
+WPAC._BodyRegex = new RegExp('<body[^>]*>([\\s\\S]*)</body>', 'i');
 WPAC._ExtractBody = function (html) {
   try {
     return jQuery('<div>' + WPAC._BodyRegex.exec(html)[1] + '</div>');
@@ -2121,7 +2121,15 @@ WPAC._AddQueryParamStringToUrl = function (url, param, value) {
   urlObject.search = queryParams.toString();
   return urlObject.toString();
 };
+
+/**
+ * Full page reload fallback after an AJAX or DOM update failure.
+ *
+ * @param {string} fallbackUrl   URL to load (typically with WPACFallback).
+ * @param {string} callerContext (Optional) Short label for debug logs (which code path triggered reload).
+ */
 WPAC._LoadFallbackUrl = function (fallbackUrl) {
+  var callerContext = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
   jQuery.unblockUI();
   WPAC._ShowMessage(WPAC._Options.textReloadPage, 'loading');
   var url;
@@ -2137,7 +2145,7 @@ WPAC._LoadFallbackUrl = function (fallbackUrl) {
       return;
     }
   }
-  WPAC._Debug('info', "Something went wrong. Reloading page (URL: '%s')...", url);
+  WPAC._Debug('info', "Something went wrong. Reloading page (caller: '%s', URL: '%s')...", callerContext || '(unspecified)', url);
   var reload = function reload() {
     window.location.href = url;
   };
@@ -2145,7 +2153,7 @@ WPAC._LoadFallbackUrl = function (fallbackUrl) {
     reload();
   } else {
     WPAC._Debug('info', 'Sleep for 5s to enable analyzing debug messages...');
-    window.setTimeout(reload, 5000);
+    window.setTimeout(reload, 20000);
   }
 };
 WPAC._ScrollToAnchor = function (anchor, updateHash, scrollComplete) {
@@ -2185,7 +2193,31 @@ WPAC._UpdateUrl = function (url) {
     WPAC._Debug('info', 'Browser does not support window.history.replaceState() to update the URL without reloading the page', anchor);
   }
 };
-WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, formFocus, selectorCommentsContainer, selectorCommentForm, selectorRespondContainer, beforeSelectElements, beforeUpdateComments, afterUpdateComments) {
+
+/**
+ * Search within fetched markup: try raw (settings) selector first, then prefixed (live-page) selector.
+ *
+ * @param {jQuery} root             Root to call .find() on (e.g. extractedBody or a comments container).
+ * @param {string} rawSelector      Unprefixed selector; empty or missing uses prefixed only.
+ * @param {string} prefixedSelector Selector used on the current document (may include #post-N).
+ * @return {jQuery} Matched elements (may be empty).
+ */
+WPAC._findInExtractedBody = function (root, rawSelector, prefixedSelector) {
+  var raw = rawSelector !== null && typeof rawSelector === 'string' && rawSelector.trim() !== '' ? rawSelector : prefixedSelector;
+  if (raw === prefixedSelector) {
+    return root.find(prefixedSelector);
+  }
+  var $match = root.find(raw);
+  if ($match.length) {
+    return $match;
+  }
+  $match = root.find(prefixedSelector);
+  if ($match.length) {
+    WPAC._Debug('info', 'Fetched markup: raw selector matched nothing; using prefixed selector as fallback.');
+  }
+  return $match;
+};
+WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, formFocus, selectorCommentsContainer, selectorCommentForm, selectorRespondContainer, beforeSelectElements, beforeUpdateComments, afterUpdateComments, selectorCommentsContainerRaw, selectorCommentFormRaw, selectorRespondContainerRaw) {
   // Remove any lazy loading messages.
   jQuery('#wpac-lazy-load-content-clone').remove();
   var fallbackUrl = useFallbackUrl ? WPAC._AddQueryParamStringToUrl(commentUrl, 'WPACFallback', '1') : commentUrl;
@@ -2195,7 +2227,7 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
   }
   if (!oldCommentsContainer.length) {
     WPAC._Debug('error', "Comment container on current page not found (selector: '%s')", selectorCommentsContainer);
-    WPAC._LoadFallbackUrl(fallbackUrl);
+    WPAC._LoadFallbackUrl(fallbackUrl, 'WPAC._ReplaceComments: comment container missing on current page');
     return false;
   }
   // If length is greater than one, there may be greedy selectors.
@@ -2208,7 +2240,7 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
   var extractedBody = WPAC._ExtractBody(data);
   if (extractedBody === false) {
     WPAC._Debug('error', "Unsupported server response, unable to extract body (data: '%s')", data);
-    WPAC._LoadFallbackUrl(fallbackUrl);
+    WPAC._LoadFallbackUrl(fallbackUrl, 'WPAC._ReplaceComments: unsupported server response (extract body)');
     return false;
   }
 
@@ -2225,10 +2257,10 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
     }
   });
   document.dispatchEvent(beforeSelectEvent);
-  var newCommentsContainer = extractedBody.find(selectorCommentsContainer);
+  var newCommentsContainer = WPAC._findInExtractedBody(extractedBody, selectorCommentsContainerRaw, selectorCommentsContainer);
   if (!newCommentsContainer.length) {
     WPAC._Debug('error', "Comment container on requested page not found (selector: '%s')", selectorCommentsContainer);
-    WPAC._LoadFallbackUrl(fallbackUrl);
+    WPAC._LoadFallbackUrl(fallbackUrl, 'WPAC._ReplaceComments: comment container missing on requested page');
     return false;
   }
   if (newCommentsContainer.length > 1) {
@@ -2240,7 +2272,7 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
     });
 
     // Find respond selector and remove.
-    var respondContainer = newCommentsContainer.find(selectorRespondContainer);
+    var respondContainer = WPAC._findInExtractedBody(newCommentsContainer, selectorRespondContainerRaw, selectorRespondContainer);
     if (respondContainer.length) {
       respondContainer.remove();
     }
@@ -2278,10 +2310,10 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
       // If comment form is nested in comments container comment form has already been replaced
       if (!form.parents(selectorCommentsContainer).length) {
         WPAC._Debug('info', 'Replace comment form...');
-        var newCommentForm = extractedBody.find(selectorCommentForm);
+        var newCommentForm = WPAC._findInExtractedBody(extractedBody, selectorCommentFormRaw, selectorCommentForm);
         if (newCommentForm.length == 0) {
           WPAC._Debug('error', "Comment form on requested page not found (selector: '%s')", selectorCommentForm);
-          WPAC._LoadFallbackUrl(fallbackUrl);
+          WPAC._LoadFallbackUrl(fallbackUrl, 'WPAC._ReplaceComments: comment form missing on requested page');
           return false;
         }
         form.replaceWith(newCommentForm);
@@ -2295,13 +2327,13 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
       var wpTempFormDiv = jQuery('#wp-temp-form-div');
       if (!wpTempFormDiv.length) {
         WPAC._Debug('error', "WordPress' #wp-temp-form-div container not found", selectorRespondContainer);
-        WPAC._LoadFallbackUrl(fallbackUrl);
+        WPAC._LoadFallbackUrl(fallbackUrl, 'WPAC._ReplaceComments: #wp-temp-form-div missing');
         return false;
       }
-      var newRespondContainer = extractedBody.find(selectorRespondContainer);
+      var newRespondContainer = WPAC._findInExtractedBody(extractedBody, selectorRespondContainerRaw, selectorRespondContainer);
       if (!newRespondContainer.length) {
         WPAC._Debug('error', "Respond container on requested page not found (selector: '%s')", selectorRespondContainer);
-        WPAC._LoadFallbackUrl(fallbackUrl);
+        WPAC._LoadFallbackUrl(fallbackUrl, 'WPAC._ReplaceComments: respond container missing on requested page');
         return false;
       }
       wpTempFormDiv.replaceWith(newRespondContainer);
@@ -2390,6 +2422,9 @@ WPAC.AttachForm = function (options) {
     afterPostComment: WPACCallbacks.afterPostComment,
     selectorCommentsContainer: WPAC._Options.selectorCommentsContainer,
     selectorRespondContainer: WPAC._Options.selectorRespondContainer,
+    selectorCommentsContainerRaw: '',
+    selectorCommentFormRaw: '',
+    selectorRespondContainerRaw: '',
     beforeUpdateComments: WPACCallbacks.beforeUpdateComments,
     afterUpdateComments: WPACCallbacks.afterUpdateComments,
     scrollToAnchor: !WPAC._Options.disableScrollToAnchor,
@@ -2506,11 +2541,6 @@ WPAC.AttachForm = function (options) {
   };
   addHandler('click', options.selectorCommentLinks, linkClickHandler);
 
-  // Submit AJAX is skipped when PHP reports comments disabled (see commentsEnabled in inline options).
-  if (!WPAC._Options.commentsEnabled) {
-    return;
-  }
-
   // Handle form submit
   var formSubmitHandler = function formSubmitHandler(event) {
     var form = jQuery(this);
@@ -2622,7 +2652,7 @@ WPAC.AttachForm = function (options) {
         }
 
         // Replace comments while the posting overlay is still visible; then unblock and show success.
-        if (!WPAC._ReplaceComments(data, commentUrl, false, {}, '', options.selectorCommentsContainer, options.selectorCommentForm, options.selectorRespondContainer, options.beforeSelectElements, options.beforeUpdateComments, options.afterUpdateComments)) {
+        if (!WPAC._ReplaceComments(data, commentUrl, false, {}, '', options.selectorCommentsContainer, options.selectorCommentForm, options.selectorRespondContainer, options.beforeSelectElements, options.beforeUpdateComments, options.afterUpdateComments, options.selectorCommentsContainerRaw, options.selectorCommentFormRaw, options.selectorRespondContainerRaw)) {
           return;
         }
         jQuery.unblockUI();
@@ -2657,7 +2687,7 @@ WPAC.AttachForm = function (options) {
         // Test if loading comment url failed (due to cross site scripting error)
         if (jqXhr.status === 0 && jqXhr.responseText === '') {
           WPAC._Debug('error', 'Comment seems to be posted, but loading comment update failed.');
-          WPAC._LoadFallbackUrl(WPAC._AddQueryParamStringToUrl(window.location.href, 'WPACFallback', '1'));
+          WPAC._LoadFallbackUrl(WPAC._AddQueryParamStringToUrl(window.location.href, 'WPACFallback', '1'), 'WPAC.AttachForm: comment POST follow-up GET failed (status 0)');
           return;
         }
         handleErrorResponse(jqXhr.responseText);
@@ -2719,7 +2749,10 @@ WPAC.Init = function () {
         selectorCommentForm: WPAC._scopeSelectorToPostContainer(id, WPAC._Options.selectorCommentForm),
         selectorCommentPagingLinks: WPAC._scopeSelectorToPostContainer(id, WPAC._Options.selectorCommentPagingLinks),
         selectorCommentsContainer: WPAC._scopeSelectorToPostContainer(id, WPAC._Options.selectorCommentsContainer),
-        selectorRespondContainer: WPAC._scopeSelectorToPostContainer(id, WPAC._Options.selectorRespondContainer)
+        selectorRespondContainer: WPAC._scopeSelectorToPostContainer(id, WPAC._Options.selectorRespondContainer),
+        selectorCommentsContainerRaw: WPAC._Options.selectorCommentsContainer,
+        selectorCommentFormRaw: WPAC._Options.selectorCommentForm,
+        selectorRespondContainerRaw: WPAC._Options.selectorRespondContainer
       });
     });
     if (attachedCount === 0) {
@@ -2809,6 +2842,9 @@ WPAC.LoadComments = function (url, options) {
     selectorCommentForm: WPAC._Options.selectorCommentForm,
     selectorCommentsContainer: WPAC._Options.selectorCommentsContainer,
     selectorRespondContainer: WPAC._Options.selectorRespondContainer,
+    selectorCommentsContainerRaw: '',
+    selectorCommentFormRaw: '',
+    selectorRespondContainerRaw: '',
     disableCache: WPAC._Options.disableCache,
     beforeSelectElements: WPACCallbacks.beforeSelectElements,
     beforeUpdateComments: WPACCallbacks.beforeUpdateComments,
@@ -2836,7 +2872,7 @@ WPAC.LoadComments = function (url, options) {
   if (options.disableCache) {
     resolvedLoadUrl = WPAC._AddQueryParamStringToUrl(resolvedLoadUrl, 'WPACRandom', new Date().getTime());
   }
-  var request = jQuery.ajax({
+  jQuery.ajax({
     url: resolvedLoadUrl,
     type: 'GET',
     beforeSend: function beforeSend(xhr) {
@@ -2844,7 +2880,7 @@ WPAC.LoadComments = function (url, options) {
     },
     success: function success(data) {
       try {
-        if (!WPAC._ReplaceComments(data, resolvedLoadUrl, true, formData, formFocus, options.selectorCommentsContainer, options.selectorCommentForm, options.selectorRespondContainer, options.beforeSelectElements, options.beforeUpdateComments, options.afterUpdateComments)) {
+        if (!WPAC._ReplaceComments(data, resolvedLoadUrl, true, formData, formFocus, options.selectorCommentsContainer, options.selectorCommentForm, options.selectorRespondContainer, options.beforeSelectElements, options.beforeUpdateComments, options.afterUpdateComments, options.selectorCommentsContainerRaw, options.selectorCommentFormRaw, options.selectorRespondContainerRaw)) {
           return;
         }
         if (options.updateUrl) {
@@ -2875,7 +2911,7 @@ WPAC.LoadComments = function (url, options) {
       }
     },
     error: function error() {
-      WPAC._LoadFallbackUrl(WPAC._AddQueryParamStringToUrl(window.location.href, 'WPACFallback', '1'));
+      WPAC._LoadFallbackUrl(WPAC._AddQueryParamStringToUrl(window.location.href, 'WPACFallback', '1'), 'WPAC.LoadComments: GET comments failed');
     }
   });
   return true;
@@ -2884,7 +2920,7 @@ jQuery(function () {
   var initSuccesful = WPAC.Init();
   if (true === WPAC._Options.lazyLoadEnabled) {
     if (!initSuccesful) {
-      WPAC._LoadFallbackUrl(WPAC._AddQueryParamStringToUrl(window.location.href, 'WPACFallback', '1'));
+      WPAC._LoadFallbackUrl(WPAC._AddQueryParamStringToUrl(window.location.href, 'WPACFallback', '1'), 'jQuery ready: lazy load enabled but WPAC.Init failed');
       return;
     }
     var triggerType = WPAC._Options.lazyLoadTrigger;
