@@ -17,7 +17,22 @@ WPAC._ExtractTitle = function( html ) {
 		return false;
 	}
 };
-
+/**
+ * Gets the ID of an element, or tries to get a class name with unique numbers in it like `post-22503`
+ * @param {jQuery} element - The element to get the ID or class name from.
+ * @return {string|null} The ID or class name, or null if not found.
+ */
+WPAC._GetIDOrClassFromElement = function( element ) {
+	const id = element.attr( 'id' );
+	if ( id ) {
+		return '#' + id;
+	}
+	const classNames = element.children()?.first()?.attr( 'class' ) ?? null;
+	if ( classNames ) {
+		return '.' + classNames.split( ' ' ).find( ( className ) => className.match( /^\w+-\d+$/ ) ) ?? null;
+	}
+	return null;
+};
 WPAC._ShowMessage = function( message, type, force = false ) {
 	// Determine how to display the loading message.
 	const lazyLoadDisplay = WPAC._Options.lazyLoadDisplay;
@@ -441,6 +456,7 @@ WPAC._ReplaceComments = function(
 		selectorCommentsContainerRaw,
 		selectorCommentsContainer,
 	);
+
 	if ( ! newCommentsContainer.length ) {
 		WPAC._Debug(
 			'error',
@@ -498,9 +514,6 @@ WPAC._ReplaceComments = function(
 		// Decode HTML entities (see http://stackoverflow.com/a/5796744)
 		document.title = jQuery( '<textarea />' ).html( extractedTitle ).text();
 	}
-
-	console.log( oldCommentsContainer );
-	console.log( newCommentsContainer );
 
 	// Empty old container, replace with innards of new container.
 	oldCommentsContainer.empty();
@@ -907,7 +920,7 @@ WPAC.AttachForm = function( options ) {
 		const request = jQuery.ajax( {
 			url: submitUrl,
 			type: 'POST',
-			data: new FormData( this ),
+			data: new FormData( event.target ),
 			processData: false,
 			contentType: false,
 			beforeSend( xhr ) {
@@ -1133,29 +1146,15 @@ WPAC.Init = function() {
 		const $postContainers = jQuery( WPAC._Options.selectorPostContainer );
 		let attachedCount = 0;
 		$postContainers.each( function( i, e ) {
-			let postSelector = jQuery( e ).attr( 'id' );
+			const postSelector = WPAC._GetIDOrClassFromElement( jQuery( e ) );
+			console.log( postSelector );
 			if ( ! postSelector ) {
 				WPAC._Debug(
 					'info',
-					'Skip post container element %o (ID not defined)',
+					'Skip post container element %o (ID or class not defined)',
 					e,
 				);
-			} else {
-				postSelector = '#' + postSelector;
-			}
-			if ( ! postSelector ) {
-				// Grab the element's first class.
-				postSelector = jQuery( e ).children()?.first()?.attr( 'class' ) ?? null;
-				if ( ! postSelector ) {
-					WPAC._Debug(
-						'info',
-						'Skip post container element %o (Class not defined)',
-						e,
-					);
-					return;
-				}
-				// Grab first class.
-				postSelector = '.' + postSelector.split( ' ' )[ 0 ];
+				return;
 			}
 			attachedCount++;
 			WPAC.AttachForm( {
