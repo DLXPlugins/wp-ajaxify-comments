@@ -637,7 +637,7 @@ const Interface = ( props ) => {
 															'has-error': 'pattern' === errors.selectorPostContainer?.type || 'required' === errors.selectorPostContainer?.type,
 															'is-required': true,
 														} ) }
-														help={ __( 'Selector that matches post containers to enable support for multiple comment forms per page; leave empty to disable multiple comment form per page support. Please note: each article container must contain the selector you enter here.', 'wp-ajaxify-comments' ) }
+														help={ __( 'A unique selector that matches post containers to enable support for multiple comment forms per page; leave empty to disable multiple comment form per page support. Please note: each article container must contain the selector you enter here and either have a unique ID or unique class name (e.g., post-22503).', 'wp-ajaxify-comments' ) }
 														aria-required="true"
 														value={ value }
 														onChange={ onChange }

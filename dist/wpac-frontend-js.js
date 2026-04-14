@@ -2044,6 +2044,11 @@ WPAC._ShowMessage = function (message, type) {
     baseZ: WPAC._Options.popupZindex
   });
 };
+
+/**
+ * Checks if the post container selector matches any elements.
+ * @return {boolean} True if the selector matches any elements, false otherwise.
+ */
 WPAC._hasPostContainer = function () {
   var $postContainers = jQuery(WPAC._Options.selectorPostContainer);
   return $postContainers.length > 0;

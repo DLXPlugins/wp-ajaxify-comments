@@ -10331,7 +10331,7 @@ var Interface = function Interface(props) {
           'has-error': 'pattern' === ((_errors$selectorPostC = errors.selectorPostContainer) === null || _errors$selectorPostC === void 0 ? void 0 : _errors$selectorPostC.type) || 'required' === ((_errors$selectorPostC2 = errors.selectorPostContainer) === null || _errors$selectorPostC2 === void 0 ? void 0 : _errors$selectorPostC2.type),
           'is-required': true
         }),
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Selector that matches post containers to enable support for multiple comment forms per page; leave empty to disable multiple comment form per page support. Please note: each article container must contain the selector you enter here.', 'wp-ajaxify-comments'),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('A unique selector that matches post containers to enable support for multiple comment forms per page; leave empty to disable multiple comment form per page support. Please note: each article container must contain the selector you enter here and either have a unique ID or unique class name (e.g., post-22503).', 'wp-ajaxify-comments'),
         "aria-required": "true",
         value: value,
         onChange: onChange
