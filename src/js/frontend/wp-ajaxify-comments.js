@@ -27,7 +27,7 @@ WPAC._GetIDOrClassFromElement = function( element ) {
 	if ( id ) {
 		return '#' + id;
 	}
-	const classNames = element.children()?.first()?.attr( 'class' ) ?? null;
+	const classNames = element.attr( 'class' );
 	if ( classNames ) {
 		return '.' + classNames.split( ' ' ).find( ( className ) => className.match( /^\w+-\d+$/ ) ) ?? null;
 	}

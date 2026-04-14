@@ -1974,12 +1974,11 @@ WPAC._ExtractTitle = function (html) {
  * @return {string|null} The ID or class name, or null if not found.
  */
 WPAC._GetIDOrClassFromElement = function (element) {
-  var _element$children$fir, _element$children;
   var id = element.attr('id');
   if (id) {
     return '#' + id;
   }
-  var classNames = (_element$children$fir = (_element$children = element.children()) === null || _element$children === void 0 || (_element$children = _element$children.first()) === null || _element$children === void 0 ? void 0 : _element$children.attr('class')) !== null && _element$children$fir !== void 0 ? _element$children$fir : null;
+  var classNames = element.attr('class');
   if (classNames) {
     var _ref;
     return (_ref = '.' + classNames.split(' ').find(function (className) {
