@@ -1,2 +1,4 @@
 node_modules
 wp-ajaxify-comments.zip
+languages/*.po
+languages/*.mo
