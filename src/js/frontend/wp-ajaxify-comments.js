@@ -512,13 +512,13 @@ WPAC.AttachForm = function( options ) {
 			WPACCallbacks.beforeSelectElements,
 		);
 		beforeSelect( jQuery( document ) );
-
-		// Set up native event handler.
-		const beforeSelectEvent = new CustomEvent( 'wpacBeforeSelectElements', {
-			detail: { dom: jQuery( document ) },
-		} );
-		document.dispatchEvent( beforeSelectEvent );
 	}
+
+	// Set up native event handler.
+	const beforeSelectEvent = new CustomEvent( 'wpacBeforeSelectElements', {
+		detail: { dom: jQuery( document ) },
+	} );
+	document.dispatchEvent( beforeSelectEvent );
 
 	// Get addHandler method
 	if ( jQuery( document ).on ) {
@@ -617,13 +617,13 @@ WPAC.AttachForm = function( options ) {
 				WPACCallbacks.beforeSubmitComment,
 			);
 			beforeSubmit( jQuery( document ) );
-
-			// Set up native event handler.
-			const beforeSubmitEvent = new CustomEvent( 'wpacBeforeSubmitComment', {
-				detail: { dom: jQuery( document ) },
-			} );
-			document.dispatchEvent( beforeSubmitEvent );
 		}
+
+		// Set up native event handler.
+		const beforeSubmitEvent = new CustomEvent( 'wpacBeforeSubmitComment', {
+			detail: { dom: jQuery( document ) },
+		} );
+		document.dispatchEvent( beforeSubmitEvent );
 
 		const submitUrl = form.attr( 'action' );
 
@@ -742,15 +742,19 @@ WPAC.AttachForm = function( options ) {
 
 				// Try afterPostComment submit comment. Using new function is not ideal here, but safer than exec.
 				if ( WPACCallbacks.afterPostComment !== '' ) {
-					const afterComment = new Function( 'commentUrl', 'unapproved', options.afterPostComment);
-    				afterComment( commentUrl, unapproved == '1');
-
-					// Set up native event handler.
-					const afterCommentEvent = new CustomEvent( 'wpacAfterPostComment', {
-						detail: { commentUrl, unapproved: unapproved == '1' },
-					} );
-					document.dispatchEvent( afterCommentEvent );
+					const afterComment = new Function(
+						'commentUrl',
+						'unapproved',
+						options.afterPostComment,
+					);
+					afterComment( commentUrl, unapproved == '1' );
 				}
+
+				// Set up native event handler.
+				const afterCommentEvent = new CustomEvent( 'wpacAfterPostComment', {
+					detail: { commentUrl, unapproved: unapproved == '1' },
+				} );
+				document.dispatchEvent( afterCommentEvent );
 
 				// Show success message
 				WPAC._ShowMessage(
