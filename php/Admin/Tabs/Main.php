@@ -47,6 +47,7 @@ class Main {
 			$deps['version'],
 			true
 		);
+		wp_set_script_translations( 'wpac-admin-home', 'wp-ajaxify-comments' );
 		wp_localize_script(
 			'wpac-admin-home',
 			'wpacAdminHome',

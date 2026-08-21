@@ -33,7 +33,7 @@ const SelectorsScreen = ( props ) => {
 		<ErrorBoundary
 			fallback={
 				<p>
-					{ __( 'Could not load Selector options.', 'highlight-and-share' ) }
+					{ __( 'Could not load Selector options.', 'wp-ajaxify-comments' ) }
 					<br />
 					<a
 						href="https://dlxplugins.com/support/"

@@ -43,6 +43,7 @@ class Selectors {
 			$deps['version'],
 			true
 		);
+		wp_set_script_translations( 'wpac-admin-selectors', 'wp-ajaxify-comments' );
 		wp_localize_script(
 			'wpac-admin-selectors',
 			'wpacAdminSelectors',

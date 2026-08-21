@@ -41,6 +41,7 @@ class Labels {
 			$deps['version'],
 			true
 		);
+		wp_set_script_translations( 'wpac-admin-labels', 'wp-ajaxify-comments' );
 		wp_localize_script(
 			'wpac-admin-labels',
 			'wpacAdminLabels',

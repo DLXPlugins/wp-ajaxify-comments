@@ -120,6 +120,7 @@ class Lazy_Load {
 			$deps['version'],
 			true
 		);
+		wp_set_script_translations( 'wpac-admin-lazy-load', 'wp-ajaxify-comments' );
 		add_filter( 'ajaxify/comments/theme_color_palette', array( $this, 'theme_color_palette' ), 2, 1 );
 
 		wp_localize_script(

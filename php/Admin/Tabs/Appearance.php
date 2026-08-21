@@ -79,6 +79,7 @@ class Appearance {
 			$deps['version'],
 			true
 		);
+		wp_set_script_translations( 'wpac-admin-appearance', 'wp-ajaxify-comments' );
 		wp_enqueue_script(
 			'wpac-jquery-block-ui',
 			Functions::get_plugin_url( 'dist/wpac-frontend-jquery-blockUI.js' ),

@@ -41,6 +41,7 @@ class Advanced {
 			$deps['version'],
 			true
 		);
+		wp_set_script_translations( 'wpac-admin-advanced', 'wp-ajaxify-comments' );
 		wp_localize_script(
 			'wpac-admin-advanced',
 			'wpacAdminAdvanced',

@@ -33,7 +33,7 @@ const HomeScreen = ( props ) => {
 		<ErrorBoundary
 			fallback={
 				<p>
-					{ __( 'Could not load Home options.', 'highlight-and-share' ) }
+					{ __( 'Could not load Home options.', 'wp-ajaxify-comments' ) }
 					<br />
 					<a
 						href="https://dlxplugins.com/support/"

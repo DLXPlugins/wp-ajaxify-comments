@@ -8,6 +8,7 @@ Author URI: https://dlxplugins.com/plugins/ajaxify-comments/
 Version: 3.2.2
 License: GPLv2
 Text Domain: wp-ajaxify-comments
+Domain Path: /languages
 */
 
 namespace DLXPlugins\WPAC;
