@@ -1,0 +1,368 @@
+# Copyright (C) 2013 WP Ajaxify Comments
+# This file is distributed under the same license as the WP-Ajaxify-Comments package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Ajaxify-Comments 0.14.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-ajaxify-comments\n"
+"POT-Creation-Date: 2013-06-14 18:54:07+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Jan Jonas <mail@janjnas.net>\n"
+"Language-Team: Jan Jonas <mail@janjnas.net>\n"
+
+#: wp-ajaxify-comments.php:41
+msgid "General"
+msgstr "Allgemein"
+
+#: wp-ajaxify-comments.php:46
+msgid "Enable plugin"
+msgstr "Plugin aktiviert"
+
+#: wp-ajaxify-comments.php:51
+msgid "Debug mode"
+msgstr "Debug-Modus"
+
+#: wp-ajaxify-comments.php:56
+msgid "Selectors"
+msgstr "Selektoren"
+
+#: wp-ajaxify-comments.php:61
+msgid "Comment form selector"
+msgstr "Kommentar-Form Selektor"
+
+#: wp-ajaxify-comments.php:66
+msgid "Comments container selector"
+msgstr "Kommentar-Container Selektor"
+
+#: wp-ajaxify-comments.php:71
+msgid "Comment paging links selector"
+msgstr "Kommentar-Seitenwechsel-Link Selektor"
+
+msgid "Comment links selector"
+msgstr "Kommentar-Link Selektor"
+
+#: wp-ajaxify-comments.php:76
+msgid "Respond container selector"
+msgstr "Respond-Container Selektor"
+
+#: wp-ajaxify-comments.php:81
+msgid "Error container selector"
+msgstr "Fehler-Container Selektor"
+
+msgid "Post container selector"
+msgstr "Post-Container Selektor"
+
+msgid "Selector that matches post containers to enable support for multiple comment forms per page; leave empty to disable multiple comment form per page support. Please note: Each post container needs to have the ID attribute defined."
+msgstr "Selektor für den Post-Container um mehrere Kommentar-Formulare pro Seite zu unterstützen; leerlassen um die Unterstützung für mehrere Kommentar-Formulare pro Seite zu deaktivieren. Bitte beachten: Für jeden Post-Container muss ein ID Attribut definiert sein."
+
+msgid "Comment pages URL regex"
+msgstr "Kommentar-Seiten URL-Regex"
+
+msgid "Regular expression that matches URLs of all pages that support comments; leave empty to use WordPress defaults to automatically detect pages where comments are allowed. Please note: The expression is evaluated against the full page URL including schema, hostname, port number (if none default ports are used), (full) path and query string."
+msgstr "Regulärer Ausdruck, der auf alle URLs von Seiten mit Kommentar-Unterstützung zutrifft; leerlassen um WordPress-Standards zu nutzen um Seiten mit Kommentar-Unterstützung zu ermitteln. Bitte beachten: Der Ausdruck wird gegen die vollständige Seiten-URL mit Schema, Hostname, Port-Nummer (wenn kein Standard-Port genutzt wird), (kompletter) Pfad und Query-String ausgewertet."
+
+#: wp-ajaxify-comments.php:86
+msgid "Popup overlay"
+msgstr "Popup Overlay"
+
+#: wp-ajaxify-comments.php:91
+msgid "Corner radius (px)"
+msgstr "Eckenradius (px)"
+
+#: wp-ajaxify-comments.php:97
+msgid "Margin top (px)"
+msgstr "Abstand nach oben (px)"
+
+#: wp-ajaxify-comments.php:103
+msgid "Width (%)"
+msgstr "Breite (%)"
+
+#: wp-ajaxify-comments.php:109
+msgid "Padding (px)"
+msgstr "Innenabstand (px)"
+
+#: wp-ajaxify-comments.php:115
+msgid "Fade in time (ms)"
+msgstr "Einblendzeit (ms)"
+
+#: wp-ajaxify-comments.php:121
+msgid "Fade out time (ms)"
+msgstr "Ausblendzeit (ms)"
+
+#: wp-ajaxify-comments.php:127
+msgid "Timeout (ms)"
+msgstr ""
+
+#: wp-ajaxify-comments.php:133
+msgid "Loading background color"
+msgstr "Hintergrundfarbe (laden)"
+
+#: wp-ajaxify-comments.php:138
+msgid "Loading text color"
+msgstr "Textfarbe (laden)"
+
+#: wp-ajaxify-comments.php:143
+msgid "Success background color"
+msgstr "Hintergrundfarbe (Erfolg)"
+
+#: wp-ajaxify-comments.php:148
+msgid "Success text color"
+msgstr "Textfarbe (Erfolg)"
+
+#: wp-ajaxify-comments.php:153
+msgid "Error background color"
+msgstr "Hintergrundfarbe (Fehler)"
+
+#: wp-ajaxify-comments.php:158
+msgid "Error text color"
+msgstr "Textfarbe (Fehler)"
+
+#: wp-ajaxify-comments.php:163
+msgid "Opacity (%)"
+msgstr "Deckkraft (%)"
+
+#: wp-ajaxify-comments.php:169
+msgid "Text align (left|center|right)"
+msgstr "Textausrichtung (left|center|right)"
+
+#: wp-ajaxify-comments.php:174
+msgid "Default font size"
+msgstr "Standard Schriftgröße"
+
+#: wp-ajaxify-comments.php:175
+msgid "Font size (e.g. \"14px\", \"1.1em\", &hellip;)"
+msgstr "Schriftgröße (z.B. \"14px\", \"1.1em\", &hellip;)"
+
+#: wp-ajaxify-comments.php:180
+msgid "Z-Index"
+msgstr ""
+
+#: wp-ajaxify-comments.php:186
+msgid "Miscellaneous"
+msgstr "Verschiedenes"
+
+#: wp-ajaxify-comments.php:191
+msgid "Scroll speed (ms)"
+msgstr "Scrollzeit (ms)"
+
+msgid "Auto update idle time (ms)"
+msgstr "Inaktivität für automatische Aktualisierung (ms)"
+
+msgid "Leave empty or set to 0 to disable the auto update feature."
+msgstr "Leerlassen oder auf 0 setzen um die Funktion zu deaktivieren."
+
+#: wp-ajaxify-comments.php:197
+msgid "Texts"
+msgstr "Texte"
+
+#: wp-ajaxify-comments.php:201
+msgid "Posting your comment. Please wait&hellip;"
+msgstr "Kommentar wird gespeichert. Bitte warten&hellip;"
+
+#: wp-ajaxify-comments.php:202
+msgid "Post comment"
+msgstr "Kommentar speichern"
+
+#: wp-ajaxify-comments.php:206
+msgid "Loading comments. Please wait&hellip;"
+msgstr "Lade Kommentare, bitte warten&hellip;"
+
+#: wp-ajaxify-comments.php:207
+msgid "Refresh comments"
+msgstr "Kommentare aktualisieren"
+
+#: wp-ajaxify-comments.php:211
+msgid "Something went wrong, your comment has not been posted."
+msgstr "Etwas ist schiefgelaufen, der Kommentar wurde nicht gespeichert."
+
+#: wp-ajaxify-comments.php:212
+msgid "Unknown error occured"
+msgstr "Unbekannter Fehler aufgetreten"
+
+msgid "Error 'Please type a comment'"
+msgstr "Fehler 'Bitte Kommentar eingeben'"
+
+msgid "Error 'Comments closed'"
+msgstr "Fehler 'Kommentarfunktion geschlossen'"
+
+msgid "Error 'Must be logged in'"
+msgstr "Fehler 'Login erforderlich'"
+
+msgid "Error 'Fill in required fields'"
+msgstr "Fehler 'Pflichtfelder ausfüllen'"
+
+msgid "Error 'Invalid email address'"
+msgstr "Fehler 'Ungültige E-Mail-Adresse'"
+
+msgid "Error 'Post too quickly'"
+msgstr "Fehler 'Zu Schnell abgeschickt'"
+
+msgid "Error 'Duplicate comment'"
+msgstr "Fehler 'Doppelter Kommentar'"
+
+#: wp-ajaxify-comments.php:216
+msgid "Your comment has been posted. Thank you!"
+msgstr "Der Kommentar wurde gespeichert. Vielen Dank!"
+
+#: wp-ajaxify-comments.php:217
+msgid "Comment posted"
+msgstr "Kommentar gespeichert"
+
+#: wp-ajaxify-comments.php:221
+msgid "Your comment has been posted and is awaiting moderation. Thank you!"
+msgstr "Der Kommentar wurde gespeichert und wartet auf die Moderation. Vielen Dank!"
+
+#: wp-ajaxify-comments.php:222
+msgid "Comment posted unapproved"
+msgstr "Kommentar ungeprüft gespeichert"
+
+#: wp-ajaxify-comments.php:226
+msgid "Reloading page. Please wait&hellip;"
+msgstr "Seite wird neugeladen. Bitte warten&hellip;"
+
+#: wp-ajaxify-comments.php:227
+msgid "Reloading page"
+msgstr "Seite neuladen"
+
+#: wp-ajaxify-comments.php:232
+msgid "Expert settings"
+msgstr "Experteneinstellungen"
+
+#: wp-ajaxify-comments.php:237 wp-ajaxify-comments.php:244
+#: wp-ajaxify-comments.php:250 wp-ajaxify-comments.php:256
+msgid "'%s' callback"
+msgstr ""
+
+#: wp-ajaxify-comments.php:239
+msgid "Parameter: dom (jQuery DOM element)"
+msgstr "Parameter: dom (jQuery DOM Element)"
+
+msgid "Parameters: newDom (jQuery DOM element), commentUrl (string)"
+msgstr "Parameter: newDom (jQuery DOM element), commentUrl (string)"
+
+#: wp-ajaxify-comments.php:261
+msgid "Load comments async threshold"
+msgstr "Kommentare asynchron laden (Grenzwert)"
+
+msgid "Trigger to load comments async"
+msgstr "Kommentare asynchron laden (Trigger)"
+
+msgid "Trigger to load comments asynchronously ('DomReady': Load comments immediately, 'Viewport': Load comments when comments container is in viewport, 'None': Comment loading is triggered manually)."
+msgstr "Trigger um Kommentare asynchron zu laden ('DomReady': Kommentare sofort laden, 'Viewport': Kommentare laden sobald Kommentar-Container im Sichtfeld ist, 'None': Kommentare laden erfolgt manuell')."
+
+#: wp-ajaxify-comments.php:261
+msgid "Disable URL updating"
+msgstr "URL Aktualisierung unterbinden"
+
+msgid "Disable scroll to anchor"
+msgstr "Zum Anker scrollen unterbinden"
+
+msgid "Use uncompressed scripts"
+msgstr "Unkomprimierte Skripte nutzen"
+
+msgid "By default a compressed (and merged) JavaScript file is used, check to use uncompressed JavaScript files. Please note: If debug mode is enabled, uncompressed JavaScript files are used."
+msgstr "Standardmäßig wird eine komprimierte (und zusammengefasste) JavaScript Datei genutzt, anhaken um unkomprimierte JavaScript Dateien zu nutzen. Bitte beachten: Wenn der Debug-Modus aktiviert ist, werden unkomprimierte JavaScript Dateien genutzt."
+
+msgid "Always include scripts"
+msgstr "Skripte immer einbinden"
+
+msgid "Place scripts in footer"
+msgstr "JavaScript Dateien im Footer einbinden"
+
+msgid "Enable to place JavaScript files before the </body> tag."
+msgstr "Anhaken um JavaScript Dateien vor dem </body> Tag einzubinden."
+
+msgid "By default JavaScript files are only included on pages where comments are enabled, check to include JavaScript files on every page. Please note: If debug mode is enabled, JavaScript files are included on every pages."
+msgstr "Standardmäßig werden JavaScript Dateien nur auf Seiten eingebunden, auf denen die Kommentarfunktion aktiviert ist, anhaken um die JavaScript Dateien auf allen Seiten einzubinden. Bitte beachten: Wenn der Debug-Modus aktiviert ist, werden JavaScript Dateien auf allen Seiten eingebunden."
+
+msgid "Optimize AJAX response"
+msgstr "AJAX-Antworten optimieren"
+
+msgid "Check to remove unnecessary HTML content from AJAX responses to save bandwidth."
+msgstr "Anhaken um unnötigen HTML Inhalt in AJAX-Antworten zu entfernen um Bandbreite zu sparen."
+
+msgid "Base URL"
+msgstr "Basis URL"
+
+msgid "If you are running your Wordpress site behind a reverse proxy, set the this option to be the FQDN that the site will be accessed on (e.g. http://www.your-site.com)."
+msgstr "Wenn die Wordpress Seite hinter einem Reverse Proxy betrieben wird, kann diese Option auf den FQDN gesetzt werden, über welchen die Seite erreichbar ist (z.B. http://www.your-site.com)."
+
+msgid "Disable cache"
+msgstr "Cache deaktivieren"
+
+msgid "Check to disable client-side caching when updating comments."
+msgstr "Anhaken um client-seitiges Caching zu deaktivieren, wenn Kommentare aktualisiert werden."
+
+msgid "Enable by query"
+msgstr "Aktivieren per Query"
+
+msgid "Check to enable the plugin by passing the (secret) query string (WPACEnable=%s)"
+msgstr "Anhaken um das Plugin mit dem (geheimen) query Parameter (WPACEnable=%s) zu aktivieren"
+
+#: wp-ajaxify-comments.php:263
+msgid ""
+"Load comments asynchronously with secondary AJAX request if more than the specified number of comments exist (0 for always load comments asynchronously). Leave empty to disable this feature."
+msgstr "Lade Kommentare mit einem zusätzlichen (asynchronen) AJAX request, wenn die angegebene Anzahl an Kommentaren existiert (0 um Kommentare immer asynchron zu laden). Leerlassen, um diese Funktion zu deaktivieren."
+
+#: wp-ajaxify-comments.php:405
+msgid "%s is not enabled!"
+msgstr "%s is nicht aktiviert!"
+
+#: wp-ajaxify-comments.php:405 wp-ajaxify-comments.php:408
+msgid "Click here to configure the plugin."
+msgstr "Klick hier um das Plugin zu konfigurieren."
+
+#: wp-ajaxify-comments.php:408
+msgid "%s is running in debug mode!"
+msgstr "%s läuft im Debug-Modus!"
+
+#: wp-ajaxify-comments.php:492
+msgid "Settings saved successfully."
+msgstr "Einstellungen erfolgreich gespeichert."
+
+#: wp-ajaxify-comments.php:494
+msgid "Settings not saved! Please correct the red marked input fields."
+msgstr "Einstellungen nicht gespeichert! Bitte korrigiere die rot markierten Eingabefelder."
+
+#: wp-ajaxify-comments.php:500
+msgid "Plugin Settings: %s"
+msgstr "Plugin Einstellungen: %s"
+
+#: wp-ajaxify-comments.php:510
+msgid "Plugin Settings"
+msgstr "Plugin Einstellungen"
+
+#: wp-ajaxify-comments.php:538
+msgid "Leave empty for default value %s"
+msgstr "Leer für Standardwert %s"
+
+#: wp-ajaxify-comments.php:551
+msgid "Save Changes"
+msgstr "Einstellungen speichern"
+
+#: wp-ajaxify-comments.php:571
+msgid "Contact & Support"
+msgstr "Kontakt & Support"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Ajaxify Comments"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/wp-ajaxify-comments/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"WP Ajaxify Comments hooks into your current theme and adds AJAX functionality to the comment form."
+msgstr "WP Ajaxify Comments erweitert das Kommentar-Formular Ihres aktuelles Themes um AJAX-Funktionalität."
+
+#. Author of the plugin/theme
+msgid "Jan Jonas"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://janjonas.net"
+msgstr ""
