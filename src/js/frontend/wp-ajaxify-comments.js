@@ -469,6 +469,25 @@ WPAC._TestFallbackUrl = function( url ) {
 	return fallbackParam && randomParam;
 };
 
+WPAC._ScopeSelector = function( containerSelector, selector ) {
+	if ( typeof selector !== 'string' || ! selector ) {
+		return '';
+	}
+
+	return selector
+		.split( ',' )
+		.map( function( selectorPart ) {
+			return selectorPart.trim();
+		} )
+		.filter( function( selectorPart ) {
+			return selectorPart;
+		} )
+		.map( function( selectorPart ) {
+			return containerSelector + ' ' + selectorPart;
+		} )
+		.join( ',' );
+};
+
 WPAC.AttachForm = function( options ) {
 	// Set default options
 	options = jQuery.extend(
@@ -903,14 +922,28 @@ WPAC.Init = function() {
 				);
 				return;
 			}
+			const containerSelector = '#' + id;
 			WPAC.AttachForm( {
-				selectorCommentForm: '#' + id + ' ' + WPAC._Options.selectorCommentForm,
-				selectorCommentPagingLinks:
-					'#' + id + ' ' + WPAC._Options.selectorCommentPagingLinks,
-				selectorCommentsContainer:
-					'#' + id + ' ' + WPAC._Options.selectorCommentsContainer,
-				selectorRespondContainer:
-					'#' + id + ' ' + WPAC._Options.selectorRespondContainer,
+				selectorCommentForm: WPAC._ScopeSelector(
+					containerSelector,
+					WPAC._Options.selectorCommentForm,
+				),
+				selectorCommentPagingLinks: WPAC._ScopeSelector(
+					containerSelector,
+					WPAC._Options.selectorCommentPagingLinks,
+				),
+				selectorCommentsContainer: WPAC._ScopeSelector(
+					containerSelector,
+					WPAC._Options.selectorCommentsContainer,
+				),
+				selectorRespondContainer: WPAC._ScopeSelector(
+					containerSelector,
+					WPAC._Options.selectorRespondContainer,
+				),
+				selectorCommentLinks: WPAC._ScopeSelector(
+					containerSelector,
+					WPAC._Options.selectorCommentLinks,
+				),
 			} );
 		} );
 	} else {
