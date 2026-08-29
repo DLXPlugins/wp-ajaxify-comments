@@ -68,6 +68,9 @@ function plugins_loaded() {
 		}
 	);
 
+	$comment_hooks = new Comment_Hooks();
+	$comment_hooks->run();
+
 	// Load die handler. This should only affect if `HTTP_X_WPAC_REQUEST` server var is set.
 	add_filter( 'wp_die_handler', 'wpac_wp_die_handler' );
 

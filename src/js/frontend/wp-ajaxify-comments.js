@@ -535,7 +535,6 @@ WPAC._ScopeSelector = function( containerSelector, selector ) {
 };
 
 WPAC.AttachForm = function( options ) {
-	console.log( 'options', options );
 	// Set default options
 	options = jQuery.extend(
 		{
@@ -554,8 +553,6 @@ WPAC.AttachForm = function( options ) {
 		},
 		options || {},
 	);
-
-	console.log( 'options', options );
 
 	if ( WPAC._Options.debug && WPAC._Options.commentsEnabled ) {
 		WPAC._Debug( 'info', 'Attach form...' );
@@ -969,7 +966,13 @@ WPAC.Init = function() {
 			WPAC._Options.selectorPostContainer,
 		);
 		jQuery( WPAC._Options.selectorPostContainer ).each( function( i, e ) {
-			const id = jQuery( e ).attr( 'id' );
+			const maybePageId = jQuery( e ).find( 'input[name="ajax_page_id"]' ).val();
+			const pageSelector = maybePageId ? `comments-${ parseInt( maybePageId ) }` : null;
+			if ( pageSelector ) {
+				jQuery( e ).attr( 'id', pageSelector );
+			}
+
+			const id = pageSelector || jQuery( e ).attr( 'id' );
 			if ( ! id ) {
 				WPAC._Debug(
 					'info',
@@ -978,7 +981,7 @@ WPAC.Init = function() {
 				);
 				return;
 			}
-			const containerSelector = '#' + id;
+			const containerSelector = `#${ id }`;
 			WPAC.AttachForm( {
 				selectorCommentForm: WPAC._ScopeSelector(
 					containerSelector,
@@ -988,10 +991,7 @@ WPAC.Init = function() {
 					containerSelector,
 					WPAC._Options.selectorCommentPagingLinks,
 				),
-				selectorCommentsContainer: WPAC._ScopeSelector(
-					containerSelector,
-					WPAC._Options.selectorCommentsContainer,
-				),
+				selectorCommentsContainer: containerSelector,
 				selectorRespondContainer: WPAC._ScopeSelector(
 					containerSelector,
 					WPAC._Options.selectorRespondContainer,

@@ -347,6 +347,37 @@ WPAC._TestFallbackUrl = function (url) {
   var randomParam = queryParams.get('WPACRandom');
   return fallbackParam && randomParam;
 };
+WPAC._GetIDOrClassFromElement = function (element) {
+  var id = jQuery(element).attr('id');
+  if (id) {
+    var trimmedId = id.replace('#' + id, '').trim();
+    if (trimmedId) {
+      return '#' + trimmedId;
+    }
+  }
+  var classNames = jQuery(element).attr('class');
+  if (classNames) {
+    var _classNames$split$fin, _classNames$split$fin2;
+    var classMatch = null;
+    // Try body class names first
+    var trimmedCommentIdMatch = null;
+    classMatch = (_classNames$split$fin = classNames.split(' ').find(function (className) {
+      return className.match(/^(\w+-)+\d+$/);
+    })) !== null && _classNames$split$fin !== void 0 ? _classNames$split$fin : null;
+    trimmedCommentIdMatch = classMatch.replace('.' + classMatch, '').trim();
+    if (trimmedCommentIdMatch) {
+      return '.' + trimmedCommentIdMatch;
+    }
+    classMatch = (_classNames$split$fin2 = classNames.split(' ').find(function (className) {
+      return className.match(/^(\w+-)+\d+$/);
+    })) !== null && _classNames$split$fin2 !== void 0 ? _classNames$split$fin2 : null;
+    if (classMatch) {
+      return '.' + classMatch;
+    }
+    WPAC._Debug('error', 'No class name with unique numbers found in the element', element);
+  }
+  return null;
+};
 WPAC._ScopeSelector = function (containerSelector, selector) {
   if (typeof selector !== 'string' || !selector) {
     return '';
@@ -360,7 +391,6 @@ WPAC._ScopeSelector = function (containerSelector, selector) {
   }).join(',');
 };
 WPAC.AttachForm = function (options) {
-  console.log('options', options);
   // Set default options
   options = jQuery.extend({
     selectorCommentForm: WPAC._Options.selectorCommentForm,
@@ -376,7 +406,6 @@ WPAC.AttachForm = function (options) {
     updateUrl: !WPAC._Options.disableUrlUpdate,
     selectorCommentLinks: WPAC._Options.selectorCommentLinks
   }, options || {});
-  console.log('options', options);
   if (WPAC._Options.debug && WPAC._Options.commentsEnabled) {
     WPAC._Debug('info', 'Attach form...');
     WPAC._DebugSelector('comment form', options.selectorCommentForm);
@@ -672,16 +701,21 @@ WPAC.Init = function () {
   if (WPAC._Options.selectorPostContainer) {
     WPAC._Debug('info', "Multiple comment form support enabled (selector: '%s')", WPAC._Options.selectorPostContainer);
     jQuery(WPAC._Options.selectorPostContainer).each(function (i, e) {
-      var id = jQuery(e).attr('id');
+      var maybePageId = jQuery(e).find('input[name="ajax_page_id"]').val();
+      var pageSelector = maybePageId ? "comments-".concat(parseInt(maybePageId)) : null;
+      if (pageSelector) {
+        jQuery(e).attr('id', pageSelector);
+      }
+      var id = pageSelector || jQuery(e).attr('id');
       if (!id) {
         WPAC._Debug('info', 'Skip post container element %o (ID not defined)', e);
         return;
       }
-      var containerSelector = '#' + id;
+      var containerSelector = "#".concat(id);
       WPAC.AttachForm({
         selectorCommentForm: WPAC._ScopeSelector(containerSelector, WPAC._Options.selectorCommentForm),
         selectorCommentPagingLinks: WPAC._ScopeSelector(containerSelector, WPAC._Options.selectorCommentPagingLinks),
-        selectorCommentsContainer: WPAC._ScopeSelector(containerSelector, WPAC._Options.selectorCommentsContainer),
+        selectorCommentsContainer: containerSelector,
         selectorRespondContainer: WPAC._ScopeSelector(containerSelector, WPAC._Options.selectorRespondContainer),
         selectorCommentLinks: WPAC._ScopeSelector(containerSelector, WPAC._Options.selectorCommentLinks)
       });
