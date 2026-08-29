@@ -66,12 +66,14 @@ class Options {
 					break;
 			}
 		}
-		$options = wp_parse_args( $options, $current_options );
+		$options        = wp_parse_args( $options, $current_options );
+		$stored_options = self::normalize_default_labels_for_storage( $options );
 		if ( Functions::is_multisite() ) {
-			update_site_option( WPAC_OPTION_KEY, $options );
+			update_site_option( WPAC_OPTION_KEY, $stored_options );
 		} else {
-			update_option( WPAC_OPTION_KEY, $options );
+			update_option( WPAC_OPTION_KEY, $stored_options );
 		}
+		$options       = self::translate_saved_default_labels( $stored_options, self::get_defaults() );
 		self::$options = $options;
 		return $options;
 	}
@@ -101,6 +103,7 @@ class Options {
 		}
 
 		$defaults = self::get_defaults();
+		$options  = self::translate_saved_default_labels( $options, $defaults );
 		$options  = wp_parse_args( $options, $defaults );
 		// Port over lazy loading options.
 		if ( isset( $options['asyncCommentsThreshold'] ) && ! $skip_migrate ) {
@@ -234,9 +237,9 @@ class Options {
 			'popupZindex'                                  => 10000,
 			'textPosted'                                   => __( 'Your comment has been posted. Thank you!', 'wp-ajaxify-comments' ),
 			'textPostedUnapproved'                         => __( 'Your comment has been posted and is awaiting moderation. Thank you!', 'wp-ajaxify-comments' ),
-			'textReloadPage'                               => __( 'Reloading page. Please wait.', 'wp-ajaxify-comments' ),
-			'textPostComment'                              => __( 'Posting your comment. Please wait.', 'wp-ajaxify-comments' ),
-			'textRefreshComments'                          => __( 'Loading comments. Please wait.', 'wp-ajaxify-comments' ),
+			'textReloadPage'                               => __( 'Reloading page. Please wait&hellip;', 'wp-ajaxify-comments' ),
+			'textPostComment'                              => __( 'Posting your comment. Please wait&hellip;', 'wp-ajaxify-comments' ),
+			'textRefreshComments'                          => __( 'Loading comments. Please wait&hellip;', 'wp-ajaxify-comments' ),
 			'textUnknownError'                             => __( 'Something went wrong, your comment has not been posted.', 'wp-ajaxify-comments' ),
 			'textErrorTypeComment'                         => __( 'Please type your comment text.', 'wp-ajaxify-comments' ),
 			'textErrorCommentsClosed'                      => __( 'Sorry, comments are closed for this item.', 'wp-ajaxify-comments' ),
@@ -350,6 +353,83 @@ class Options {
 		*/
 		);
 		return $defaults;
+	}
+
+	/**
+	 * Return current and historical English defaults for translatable labels.
+	 *
+	 * These values identify labels that have not been customized. Keeping their
+	 * stored form in English allows WordPress to translate them for each locale.
+	 *
+	 * @return array<string, array<int, string>> Label defaults keyed by option name.
+	 */
+	private static function get_default_label_values() {
+		return array(
+			'textPosted'                   => array( 'Your comment has been posted. Thank you!' ),
+			'textPostedUnapproved'         => array( 'Your comment has been posted and is awaiting moderation. Thank you!' ),
+			'textReloadPage'               => array( 'Reloading page. Please wait&hellip;', 'Reloading page. Please wait.' ),
+			'textPostComment'              => array( 'Posting your comment. Please wait&hellip;', 'Posting your comment. Please wait.' ),
+			'textRefreshComments'          => array( 'Loading comments. Please wait&hellip;', 'Loading comments. Please wait.' ),
+			'textUnknownError'             => array( 'Something went wrong, your comment has not been posted.' ),
+			'textErrorTypeComment'         => array( 'Please type your comment text.', 'Please type a comment.' ),
+			'textErrorCommentsClosed'      => array( 'Sorry, comments are closed for this item.' ),
+			'textErrorMustBeLoggedIn'      => array( 'Sorry, you must be logged in to post a comment.' ),
+			'textErrorFillRequiredFields'  => array( 'Please fill the required fields (name, email).' ),
+			'textErrorInvalidEmailAddress' => array( 'Please enter a valid email address.' ),
+			'textErrorPostTooQuickly'      => array(
+				'You are posting comments too quickly. Please wait a minute and resubmit your comment.',
+				'You are posting comments too quickly. Slow down.',
+			),
+			'textErrorDuplicateComment'    => array(
+				'Duplicate comment detected. It looks like you have already submitted this comment.',
+				'Duplicate comment detected; it looks as though you&#8217;ve already said that!',
+			),
+		);
+	}
+
+	/**
+	 * Translate saved labels that still match a plugin-provided English default.
+	 *
+	 * @param array $options  Saved options.
+	 * @param array $defaults Translated defaults for the active locale.
+	 * @return array Saved options with untouched defaults translated.
+	 */
+	private static function translate_saved_default_labels( $options, $defaults ) {
+		foreach ( self::get_default_label_values() as $label_key => $default_values ) {
+			if ( ! array_key_exists( $label_key, $options ) ) {
+				continue;
+			}
+
+			if ( in_array( $options[ $label_key ], $default_values, true ) ) {
+				$options[ $label_key ] = $defaults[ $label_key ];
+			}
+		}
+
+		return $options;
+	}
+
+	/**
+	 * Store untranslated defaults while preserving genuinely customized labels.
+	 *
+	 * @param array $options Options being saved.
+	 * @return array Normalized options.
+	 */
+	private static function normalize_default_labels_for_storage( $options ) {
+		$translated_defaults = self::get_defaults();
+
+		foreach ( self::get_default_label_values() as $label_key => $default_values ) {
+			if ( ! array_key_exists( $label_key, $options ) ) {
+				continue;
+			}
+
+			$is_translated_default = $options[ $label_key ] === $translated_defaults[ $label_key ];
+			$is_english_default    = in_array( $options[ $label_key ], $default_values, true );
+			if ( $is_translated_default || $is_english_default ) {
+				$options[ $label_key ] = $default_values[0];
+			}
+		}
+
+		return $options;
 	}
 
 	/**

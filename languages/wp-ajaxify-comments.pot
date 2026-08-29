@@ -1,0 +1,2174 @@
+# Copyright (C) 2026 DLX Plugins
+# This file is distributed under the GPLv2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Ajaxify Comments - Ajax and Lazy Loading Comments 3.2.2\n"
+"Report-Msgid-Bugs-To: https://github.com/DLXPlugins/wp-ajaxify-comments/issues\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-08-21T18:30:43+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: wp-ajaxify-comments\n"
+
+#. Plugin Name of the plugin
+#: wp-ajaxify-comments.php
+msgid "Ajaxify Comments - Ajax and Lazy Loading Comments"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: wp-ajaxify-comments.php
+msgid "https://dlxplugins.com/plugins/ajaxify-comments/"
+msgstr ""
+
+#. Description of the plugin
+#: wp-ajaxify-comments.php
+msgid "Ajaxify Comments hooks into your current theme and adds AJAX functionality to the comment form. It also supports lazy loading of the comments section."
+msgstr ""
+
+#. Author of the plugin
+#: wp-ajaxify-comments.php
+msgid "DLX Plugins"
+msgstr ""
+
+#: php/Admin/Init.php:82
+#: php/Admin/Init.php:122
+#: php/Admin/Init.php:197
+#: php/Admin/Init.php:240
+#: php/Admin/Init.php:305
+msgid "Nonce or permission verification failed."
+msgstr ""
+
+#: php/Admin/Init.php:149
+msgid "Could not find plugin to install."
+msgstr ""
+
+#: php/Admin/Init.php:168
+msgid "Could not install plugin."
+msgstr ""
+
+#: php/Admin/Init.php:179
+msgid "Plugin installed."
+msgstr ""
+
+#: php/Admin/Init.php:208
+msgid "Could not activate plugin."
+msgstr ""
+
+#: php/Admin/Init.php:217
+msgid "Plugin activated."
+msgstr ""
+
+#: php/Admin/Init.php:285
+msgid "Your options have been saved."
+msgstr ""
+
+#: php/Admin/Init.php:340
+msgid "Your options have been reset."
+msgstr ""
+
+#: php/Admin/Init.php:412
+msgid "Ajaxify Comments is in debug mode. Please visit the settings to disable debug mode."
+msgstr ""
+
+#: php/Admin/Init.php:414
+msgid "Ajaxify Comments is disabled. Please visit the settings to enable Ajaxify Comments."
+msgstr ""
+
+#: php/Admin/Init.php:441
+#: php/Admin/Init.php:442
+#: php/Admin/Init.php:450
+#: php/Admin/Init.php:451
+msgid "Ajaxify Comments"
+msgstr ""
+
+#: php/Admin/Init.php:471
+msgid "Settings"
+msgstr ""
+
+#: php/Admin/Init.php:472
+msgid "Docs"
+msgstr ""
+
+#: php/Admin/Init.php:473
+msgid "Visit Site"
+msgstr ""
+
+#: php/Admin/Settings.php:76
+msgid "Documentation"
+msgstr ""
+
+#: php/Admin/Settings.php:77
+#: src/js/react/views/Support/support.js:25
+msgid "Support"
+msgstr ""
+
+#: php/Admin/Tabs/Advanced.php:66
+#: php/Admin/Tabs/Appearance.php:113
+#: php/Admin/Tabs/Callbacks.php:65
+#: php/Admin/Tabs/Labels.php:65
+#: php/Admin/Tabs/Lazy_Load.php:156
+#: php/Admin/Tabs/Main.php:73
+#: php/Admin/Tabs/Pagination.php:104
+#: php/Admin/Tabs/Selectors.php:67
+#: php/Admin/Tabs/Support.php:64
+msgid "Could not verify nonce."
+msgstr ""
+
+#: php/Admin/Tabs/Advanced.php:88
+msgctxt "Tab label as Advanced"
+msgid "Advanced"
+msgstr ""
+
+#: php/Admin/Tabs/Appearance.php:46
+#: php/Admin/Tabs/Lazy_Load.php:47
+#: php/Admin/Tabs/Pagination.php:46
+msgid "Black"
+msgstr ""
+
+#: php/Admin/Tabs/Appearance.php:51
+#: php/Admin/Tabs/Lazy_Load.php:52
+#: php/Admin/Tabs/Pagination.php:51
+msgid "White"
+msgstr ""
+
+#: php/Admin/Tabs/Appearance.php:56
+#: php/Admin/Tabs/Pagination.php:56
+msgid "Success"
+msgstr ""
+
+#: php/Admin/Tabs/Appearance.php:61
+#: php/Admin/Tabs/Pagination.php:61
+#: php/Menu_Helper.php:67
+#: php/Menu_Helper.php:78
+#: php/Menu_Helper.php:105
+#: php/Menu_Helper.php:116
+#: php/Menu_Helper.php:202
+#: php/Menu_Helper.php:267
+#: php/Menu_Helper.php:281
+msgid "Error"
+msgstr ""
+
+#: php/Admin/Tabs/Appearance.php:135
+msgctxt "Tab label as Appearance"
+msgid "Appearance"
+msgstr ""
+
+#: php/Admin/Tabs/Callbacks.php:87
+msgctxt "Tab label as Callbacks"
+msgid "Callbacks"
+msgstr ""
+
+#: php/Admin/Tabs/Integrations.php:76
+msgctxt "Tab label as Integrations"
+msgid "Integrations"
+msgstr ""
+
+#: php/Admin/Tabs/Labels.php:87
+msgctxt "Tab label as Labels"
+msgid "Labels"
+msgstr ""
+
+#: php/Admin/Tabs/Lazy_Load.php:57
+msgid "Dark Blue"
+msgstr ""
+
+#: php/Admin/Tabs/Lazy_Load.php:62
+msgid "Light Blue"
+msgstr ""
+
+#: php/Admin/Tabs/Lazy_Load.php:67
+msgid "Dark Green"
+msgstr ""
+
+#: php/Admin/Tabs/Lazy_Load.php:72
+msgid "Light Green"
+msgstr ""
+
+#: php/Admin/Tabs/Lazy_Load.php:77
+msgid "Dark Red"
+msgstr ""
+
+#: php/Admin/Tabs/Lazy_Load.php:82
+msgid "Light Red"
+msgstr ""
+
+#: php/Admin/Tabs/Lazy_Load.php:87
+msgid "Dark Gray"
+msgstr ""
+
+#: php/Admin/Tabs/Lazy_Load.php:92
+msgid "Light Gray"
+msgstr ""
+
+#: php/Admin/Tabs/Lazy_Load.php:97
+msgid "Gold"
+msgstr ""
+
+#: php/Admin/Tabs/Lazy_Load.php:102
+msgid "Purple"
+msgstr ""
+
+#: php/Admin/Tabs/Lazy_Load.php:178
+msgctxt "Tab label as Lazy Load"
+msgid "Lazy Load"
+msgstr ""
+
+#: php/Admin/Tabs/Main.php:100
+msgctxt "Tab label as Main"
+msgid "Home"
+msgstr ""
+
+#: php/Admin/Tabs/Pagination.php:126
+msgctxt "Tab label as Pagination"
+msgid "Pagination"
+msgstr ""
+
+#: php/Admin/Tabs/Selectors.php:89
+msgctxt "Tab label as Selectors"
+msgid "Selectors"
+msgstr ""
+
+#: php/Admin/Tabs/Support.php:86
+msgctxt "Tab label as Support"
+msgid "Support"
+msgstr ""
+
+#: php/Menu_Helper.php:68
+#: php/Menu_Helper.php:106
+#: php/Menu_Helper.php:203
+#: php/Menu_Helper.php:268
+msgid "Could not verify nonce or permissions."
+msgstr ""
+
+#: php/Menu_Helper.php:79
+msgid "Could not find a post to open comments for."
+msgstr ""
+
+#: php/Menu_Helper.php:88
+#: php/Menu_Helper.php:126
+msgid "Success!"
+msgstr ""
+
+#: php/Menu_Helper.php:89
+msgid "Comments have been opened. Refreshing post..."
+msgstr ""
+
+#: php/Menu_Helper.php:117
+msgid "Could not find a post to close comments for."
+msgstr ""
+
+#: php/Menu_Helper.php:127
+msgid "Comments have been closed. Refreshing post..."
+msgstr ""
+
+#: php/Menu_Helper.php:214
+msgid "Incompatible Plugin Found"
+msgstr ""
+
+#: php/Menu_Helper.php:215
+msgid "Jetpack Comments is enabled. Jetpack loads their comment form in an iframe. This prevents a lot of third-party comment integrations from working, including this plugin."
+msgstr ""
+
+#: php/Menu_Helper.php:226
+msgid "Error: Comments are closed"
+msgstr ""
+
+#: php/Menu_Helper.php:227
+msgid "Comments are not open for this post. Please enable comments for this post and try Selector Helper again."
+msgstr ""
+
+#: php/Menu_Helper.php:242
+msgid "Error: No comments found"
+msgstr ""
+
+#: php/Menu_Helper.php:243
+msgid "No comments were found for this post. Please add a comment and try Selector Helper again."
+msgstr ""
+
+#: php/Menu_Helper.php:250
+msgid "Comment Tests Passed"
+msgstr ""
+
+#: php/Menu_Helper.php:251
+msgid "Your comment section looks good. Let's try to grab the selectors."
+msgstr ""
+
+#: php/Menu_Helper.php:282
+msgid "No selectors were found. Please try again."
+msgstr ""
+
+#: php/Menu_Helper.php:302
+msgid "Selectors Have Been Saved"
+msgstr ""
+
+#: php/Menu_Helper.php:303
+msgid "You should be all set. Make sure Ajaxify Comments is enabled and leave a few test comments to be sure."
+msgstr ""
+
+#: php/Menu_Helper.php:365
+msgid "Ajaxify"
+msgstr ""
+
+#: php/Menu_Helper.php:369
+msgid "WP Ajaxify Comments"
+msgstr ""
+
+#: php/Menu_Helper.php:402
+msgid "Simulate Ajaxify Disabled"
+msgstr ""
+
+#: php/Menu_Helper.php:425
+msgid "Simulate Ajaxify Enabled"
+msgstr ""
+
+#: php/Menu_Helper.php:435
+msgid "Launch Selector Helper"
+msgstr ""
+
+#: php/Menu_Helper.php:486
+msgid "Simulate Lazy Load Disabled"
+msgstr ""
+
+#: php/Menu_Helper.php:520
+msgid "Simulate Lazy Load Enabled"
+msgstr ""
+
+#: php/Menu_Helper.php:544
+#: src/js/frontend/menu-helper.js:648
+msgid "Close Comments"
+msgstr ""
+
+#: php/Menu_Helper.php:562
+#: src/js/frontend/menu-helper.js:529
+msgid "Open Comments"
+msgstr ""
+
+#: php/Menu_Helper.php:573
+msgid "Visit Admin Settings"
+msgstr ""
+
+#: php/Menu_Helper.php:581
+msgid "Visit Selector Settings"
+msgstr ""
+
+#: php/Menu_Helper.php:593
+msgid "View Post Comments"
+msgstr ""
+
+#: php/Menu_Helper.php:602
+msgid "View All Comments"
+msgstr ""
+
+#: php/Menu_Helper.php:631
+msgid "Back to Post"
+msgstr ""
+
+#: php/Menu_Helper.php:678
+#: src/js/react/views/Appearance/appearance.js:287
+msgid "Preview Loading"
+msgstr ""
+
+#: php/Menu_Helper.php:688
+#: src/js/react/views/Appearance/appearance.js:298
+msgid "Preview Success"
+msgstr ""
+
+#: php/Menu_Helper.php:698
+#: src/js/react/views/Appearance/appearance.js:309
+msgid "Preview Error"
+msgstr ""
+
+#: php/Options.php:238
+msgid "Your comment has been posted. Thank you!"
+msgstr ""
+
+#: php/Options.php:239
+msgid "Your comment has been posted and is awaiting moderation. Thank you!"
+msgstr ""
+
+#: php/Options.php:240
+msgid "Reloading page. Please wait&hellip;"
+msgstr ""
+
+#: php/Options.php:241
+msgid "Posting your comment. Please wait&hellip;"
+msgstr ""
+
+#: php/Options.php:242
+msgid "Loading comments. Please wait&hellip;"
+msgstr ""
+
+#: php/Options.php:243
+msgid "Something went wrong, your comment has not been posted."
+msgstr ""
+
+#: php/Options.php:244
+msgid "Please type your comment text."
+msgstr ""
+
+#: php/Options.php:245
+msgid "Sorry, comments are closed for this item."
+msgstr ""
+
+#: php/Options.php:246
+msgid "Sorry, you must be logged in to post a comment."
+msgstr ""
+
+#: php/Options.php:247
+msgid "Please fill the required fields (name, email)."
+msgstr ""
+
+#: php/Options.php:248
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: php/Options.php:249
+msgid "You are posting comments too quickly. Please wait a minute and resubmit your comment."
+msgstr ""
+
+#: php/Options.php:250
+msgid "Duplicate comment detected. It looks like you have already submitted this comment."
+msgstr ""
+
+#: php/Options.php:274
+#: php/Options.php:307
+msgid "Loading comments..."
+msgstr ""
+
+#: php/Options.php:315
+#: php/Options.php:319
+msgid "Load Comments"
+msgstr ""
+
+#: php/Options.php:316
+#: php/Options.php:320
+msgid "Loading Comments..."
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:19
+#: src/js/frontend/menu-helper.js:116
+#: src/js/frontend/menu-helper.js:393
+msgid "Ajaxify Selector Helper"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:20
+msgid "Checking the comment status."
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:55
+msgid "Proceed"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:76
+#: src/js/frontend/menu-helper.js:444
+#: src/js/frontend/menu-helper.js:457
+#: src/js/frontend/menu-helper.js:599
+#: src/js/frontend/menu-helper.js:718
+#: src/js/react/components/SnackPop/index.js:210
+msgid "OK"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:88
+#: src/js/frontend/menu-helper.js:469
+#: src/js/frontend/menu-helper.js:611
+#: src/js/frontend/menu-helper.js:730
+msgid "An unknown error occurred."
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:89
+#: src/js/frontend/menu-helper.js:470
+#: src/js/frontend/menu-helper.js:612
+#: src/js/frontend/menu-helper.js:731
+msgid "Something unexpected happened. Please try again."
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:93
+#: src/js/frontend/menu-helper.js:370
+#: src/js/frontend/menu-helper.js:477
+#: src/js/frontend/menu-helper.js:497
+#: src/js/frontend/menu-helper.js:616
+#: src/js/frontend/menu-helper.js:735
+msgid "Close"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:117
+msgid "Finding your comment selectors…"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:209
+#: src/js/react/views/Selectors/selectors.js:232
+msgid "Comments Container"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:248
+msgid "Comment List"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:276
+#: src/js/react/views/Selectors/selectors.js:326
+msgid "Comment Form"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:299
+msgid "Respond Container"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:324
+msgid "Comment Textarea"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:354
+msgid "Submit Button"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:366
+#: src/js/frontend/menu-helper.js:493
+msgid "Unable to Find All Selectors"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:367
+#: src/js/frontend/menu-helper.js:494
+msgid "We were unable to find all the required selectors. Please contact support and tell them what theme you are using. Make sure Lazy Loading is disabled."
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:371
+#: src/js/frontend/menu-helper.js:498
+msgid "Contact Support"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:386
+msgid "Label"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:386
+msgid "Selector"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:394
+msgid "We found all the selectors. Please confirm the following selectors are correct before saving."
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:396
+msgid "Save Selectors"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:403
+#: src/js/frontend/menu-helper.js:586
+#: src/js/frontend/menu-helper.js:705
+msgid "Cancel"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:409
+msgid "Saving Selectors"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:410
+msgid "Saving the Selectors."
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:526
+msgid "Open Comments for This Post?"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:527
+msgid "Comments are closed. Would you like to open them?"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:542
+msgid "Opening Comments"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:543
+msgid "Opening the comments."
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:587
+#: src/js/frontend/menu-helper.js:706
+msgid "Refresh Post"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:645
+msgid "Close Comments for This Post?"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:646
+msgid "Comments are open. Would you like to close them?"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:661
+msgid "Closing Comments"
+msgstr ""
+
+#: src/js/frontend/menu-helper.js:662
+msgid "Closing the comments."
+msgstr ""
+
+#: src/js/react/components/Alignment/index.js:80
+msgid "Change Alignment"
+msgstr ""
+
+#: src/js/react/components/Alignment/index.js:81
+msgctxt "Align items left"
+msgid "Align Left"
+msgstr ""
+
+#: src/js/react/components/Alignment/index.js:86
+msgctxt "Align items center/middle"
+msgid "Align Center"
+msgstr ""
+
+#: src/js/react/components/Alignment/index.js:91
+msgctxt "Align items right"
+msgid "Align Right"
+msgstr ""
+
+#: src/js/react/components/Notice/index.js:32
+#: src/js/react/components/SnackPop/index.js:144
+msgid "Back to Top"
+msgstr ""
+
+#: src/js/react/components/ResponsiveTabs/index.js:19
+msgid "Desktop"
+msgstr ""
+
+#: src/js/react/components/ResponsiveTabs/index.js:26
+msgid "Tablet"
+msgstr ""
+
+#: src/js/react/components/ResponsiveTabs/index.js:33
+msgid "Mobile"
+msgstr ""
+
+#: src/js/react/components/SaveResetButtons/index.js:82
+msgid "Saving…"
+msgstr ""
+
+#: src/js/react/components/SaveResetButtons/index.js:85
+msgid "Saved"
+msgstr ""
+
+#: src/js/react/components/SaveResetButtons/index.js:87
+msgid "Save Options"
+msgstr ""
+
+#: src/js/react/components/SaveResetButtons/index.js:92
+msgid "Resetting to Defaults…"
+msgstr ""
+
+#: src/js/react/components/SaveResetButtons/index.js:95
+msgid "Options Restored to Defaults"
+msgstr ""
+
+#: src/js/react/components/SaveResetButtons/index.js:97
+msgid "Reset to Defaults"
+msgstr ""
+
+#: src/js/react/components/SaveResetButtons/index.js:146
+msgid "Saving Options…"
+msgstr ""
+
+#: src/js/react/components/SaveResetButtons/index.js:150
+msgid "Resetting to defaults…"
+msgstr ""
+
+#: src/js/react/components/SaveResetButtons/index.js:154
+msgid "There are form validation errors. Please correct them above."
+msgstr ""
+
+#: src/js/react/components/SnackPop/index.js:102
+msgid "An Error Has Occurred"
+msgstr ""
+
+#: src/js/react/components/VerticalAlignment/index.js:80
+msgid "Change Vertical Alignment"
+msgstr ""
+
+#: src/js/react/components/VerticalAlignment/index.js:81
+msgctxt "Justify Top"
+msgid "Vertically Align Top"
+msgstr ""
+
+#: src/js/react/components/VerticalAlignment/index.js:86
+msgctxt "Align items center/middle"
+msgid "Vertically Align Center"
+msgstr ""
+
+#: src/js/react/components/VerticalAlignment/index.js:91
+msgctxt "Align items Bottom"
+msgid "Vertically Align Bottom"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:33
+#: src/js/react/views/Callbacks/callbacks.js:34
+msgid "Could not load callback options."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:48
+#: src/js/react/views/Appearance/appearance.js:141
+#: src/js/react/views/Callbacks/callbacks.js:49
+#: src/js/react/views/Home/home.js:51
+#: src/js/react/views/Labels/labels.js:48
+#: src/js/react/views/LazyLoad/lazy-load.js:57
+#: src/js/react/views/Selectors/selectors.js:51
+msgid "Loading Options"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:115
+msgid "Advanced"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:117
+msgid "These are advanced options for the plugin. These can alter the behavior of the plugin."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:139
+msgid "Comment Pages URL Regex"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:151
+msgid "Regular expression that matches URLs of all pages that support comments; leave empty to use WordPress defaults to automatically detect pages where comments are allowed. Please note: The expression is evaluated against the full page URL including schema, hostname, port number (if none default ports are used), (full) path and query string."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:169
+msgid "Disable URL Updating"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:174
+msgid "URLs update as comments are posted and comments are paginated. Disable this if you want to prevent any URL re-writing."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:188
+msgid "Disable Scroll to Anchor"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:196
+msgid "By default, Ajaxify Comments will perform an easing scroll to the anchor in the URL location bar. Disable this if you want to prevent any scrolling."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:210
+msgid "Use Uncompressed Scripts"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:218
+msgid "By default a compressed (and merged) JavaScript file is used, check to use uncompressed JavaScript files. Please note: If debug mode is enabled, uncompressed JavaScript files are used."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:233
+msgid "Always Include Scripts"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:241
+msgid "By default JavaScript files are only included on pages where comments are enabled, check to include JavaScript files on every page. Please note: If debug mode is enabled, JavaScript files are included on every pages."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:248
+msgid "Debug mode is enabled. Scripts will be loaded automatically when debug mode is on."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:268
+msgid "Place Scripts in Footer"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:276
+msgid "Load JavaScript files in the footer to improve performance. Please note: If debug mode is enabled, JavaScript files are loaded in the footer."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:283
+msgid "Debug mode is enabled. Scripts will be loaded in the footer when debug mode is on."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:303
+msgid "Optimize AJAX Response"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:311
+msgid "Check to remove unnecessary HTML content from AJAX responses to save bandwidth."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:327
+msgid "Base URL"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:334
+msgid "If you are running your Wordpress site behind a reverse proxy, set the this option to be the FQDN that the site will be accessed on (e.g. http://www.your-site.com)."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:352
+msgid "Disable Cache"
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:357
+msgid "Check to disable client-side caching when updating comments."
+msgstr ""
+
+#: src/js/react/views/Advanced/advanced.js:373
+msgid "Enable by Query"
+msgstr ""
+
+#. Translators: %s is the secret query string
+#: src/js/react/views/Advanced/advanced.js:380
+#, js-format
+msgid "Check to enable the plugin by passing the (secret) query string (WPACEnable=%s)"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:46
+#: src/js/react/views/Integrations/Plugin.js:52
+msgid "Loading…"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:51
+msgid "Your comment has been posted!"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:56
+msgid "There was an error posting your comment."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:126
+msgid "Could not load appearance options."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:241
+msgid "Appearance Settings"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:244
+msgid "Adjust the appearance of Ajaxify comments and see a preview of how it will look on the frontend."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:316
+msgid "Overlay Colors"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:320
+msgid "Adjust the colors of the popup and launch a preview below."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:338
+msgid "Overlay Background Color"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:363
+msgid "Loading Background Color"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:384
+msgid "Loading Text Color"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:405
+msgid "Success Loading Background Color"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:426
+msgid "Success Loading Text Color"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:447
+msgid "Error Loading Background Color"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:468
+msgid "Error Loading Text Color"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:480
+msgid "Spacing and Opacity"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:498
+#: src/js/react/views/Appearance/appearance.js:521
+#: src/js/react/views/Appearance/appearance.js:544
+msgid "Overlay Opacity %"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:504
+#: src/js/react/views/Appearance/appearance.js:527
+#: src/js/react/views/Appearance/appearance.js:550
+msgid "Adjust the opacity of the overlay."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:577
+#: src/js/react/views/Appearance/appearance.js:600
+#: src/js/react/views/Appearance/appearance.js:623
+msgid "Popup Corner Radius (px)"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:583
+#: src/js/react/views/Appearance/appearance.js:606
+#: src/js/react/views/Appearance/appearance.js:629
+msgid "Adjust the corner radius of the overlay (in pixels)."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:656
+#: src/js/react/views/Appearance/appearance.js:679
+#: src/js/react/views/Appearance/appearance.js:702
+msgid "Popup Margin Top (px)"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:662
+#: src/js/react/views/Appearance/appearance.js:685
+#: src/js/react/views/Appearance/appearance.js:708
+msgid "Adjust the margin top value of the overlay (in pixels)."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:733
+#: src/js/react/views/Appearance/appearance.js:756
+#: src/js/react/views/Appearance/appearance.js:779
+msgid "Popup Width (%)"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:739
+#: src/js/react/views/Appearance/appearance.js:762
+#: src/js/react/views/Appearance/appearance.js:785
+msgid "Adjust the width value as a percentage."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:810
+#: src/js/react/views/Appearance/appearance.js:833
+#: src/js/react/views/Appearance/appearance.js:856
+msgid "Popup Padding (px)"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:816
+#: src/js/react/views/Appearance/appearance.js:839
+#: src/js/react/views/Appearance/appearance.js:862
+msgid "Adjust the padding value of the popup in pixels."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:876
+msgid "Popover Text Styles"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:893
+#: src/js/react/views/Appearance/appearance.js:929
+#: src/js/react/views/Appearance/appearance.js:965
+#: src/js/react/views/LazyLoad/inline-button.js:478
+msgid "Font Size"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:900
+#: src/js/react/views/Appearance/appearance.js:936
+#: src/js/react/views/Appearance/appearance.js:972
+msgid "Font size (e.g. \"14px\", \"1.1em\")"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:907
+#: src/js/react/views/Appearance/appearance.js:943
+#: src/js/react/views/Appearance/appearance.js:979
+#: src/js/react/views/Appearance/appearance.js:1072
+#: src/js/react/views/Appearance/appearance.js:1120
+#: src/js/react/views/Appearance/appearance.js:1168
+#: src/js/react/views/Appearance/appearance.js:1221
+#: src/js/react/views/Labels/labels.js:162
+#: src/js/react/views/Labels/labels.js:197
+#: src/js/react/views/Labels/labels.js:232
+#: src/js/react/views/Labels/labels.js:267
+#: src/js/react/views/Labels/labels.js:302
+#: src/js/react/views/Labels/labels.js:337
+#: src/js/react/views/Labels/labels.js:374
+#: src/js/react/views/Labels/labels.js:411
+#: src/js/react/views/Labels/labels.js:448
+#: src/js/react/views/Labels/labels.js:484
+#: src/js/react/views/Labels/labels.js:520
+#: src/js/react/views/Labels/labels.js:557
+#: src/js/react/views/Labels/labels.js:593
+#: src/js/react/views/LazyLoad/lazy-load.js:468
+#: src/js/react/views/LazyLoad/lazy-load.js:616
+#: src/js/react/views/Selectors/selectors.js:258
+#: src/js/react/views/Selectors/selectors.js:304
+#: src/js/react/views/Selectors/selectors.js:352
+#: src/js/react/views/Selectors/selectors.js:400
+#: src/js/react/views/Selectors/selectors.js:448
+#: src/js/react/views/Selectors/selectors.js:496
+#: src/js/react/views/Selectors/selectors.js:548
+#: src/js/react/views/Selectors/selectors.js:584
+#: src/js/react/views/Selectors/selectors.js:620
+#: src/js/react/views/Selectors/selectors.js:655
+msgid "This is a required field."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1003
+msgid "Text Alignment"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1004
+#: src/js/react/views/LazyLoad/inline-button.js:228
+#: src/js/react/views/LazyLoad/inline-spinner.js:403
+msgid "Left"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1005
+#: src/js/react/views/LazyLoad/inline-button.js:229
+#: src/js/react/views/LazyLoad/inline-spinner.js:404
+msgid "Center"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1006
+#: src/js/react/views/LazyLoad/inline-button.js:230
+#: src/js/react/views/LazyLoad/inline-spinner.js:405
+msgid "Right"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1024
+msgid "Vertical Alignment"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1036
+msgid "Timing and Transitions"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1046
+msgid "Fade in time (ms)"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1053
+msgid "The fade in time in milliseconds."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1060
+#: src/js/react/views/Appearance/appearance.js:1108
+#: src/js/react/views/Appearance/appearance.js:1156
+#: src/js/react/views/Appearance/appearance.js:1209
+msgid "Please enter only integers."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1094
+msgid "Fade out time (ms)"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1101
+msgid "The fade out time in milliseconds."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1142
+msgid "Popover Timeout (ms)"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1149
+msgid "How long should the popover display in milliseconds."
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1185
+msgid "Popover Z-Index"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1195
+msgid "Overlay Z-Index"
+msgstr ""
+
+#: src/js/react/views/Appearance/appearance.js:1202
+msgid "Set the z-index of the overlay popover."
+msgstr ""
+
+#: src/js/react/views/Callbacks/callbacks.js:114
+msgid "Callbacks"
+msgstr ""
+
+#: src/js/react/views/Callbacks/callbacks.js:117
+msgid "Callbacks allow you to run custom JavaScript code (including calling your own functions) at various points in the comment posting process."
+msgstr ""
+
+#: src/js/react/views/Callbacks/callbacks.js:139
+msgid "OnBeforeSelectElements Callback"
+msgstr ""
+
+#: src/js/react/views/Callbacks/callbacks.js:146
+msgid "Parameter: dom (jQuery DOM element)"
+msgstr ""
+
+#: src/js/react/views/Callbacks/callbacks.js:162
+msgid "OnBeforeSubmitComment Callback"
+msgstr ""
+
+#: src/js/react/views/Callbacks/callbacks.js:169
+msgid "Callback before a commment is submitted."
+msgstr ""
+
+#: src/js/react/views/Callbacks/callbacks.js:185
+msgid "OnAfterPostComment Callback"
+msgstr ""
+
+#: src/js/react/views/Callbacks/callbacks.js:192
+msgid "Parameter: commentUrl (string), unapproved (boolean)"
+msgstr ""
+
+#: src/js/react/views/Callbacks/callbacks.js:208
+msgid "OnBeforeUpdateComments Callback"
+msgstr ""
+
+#: src/js/react/views/Callbacks/callbacks.js:215
+#: src/js/react/views/Callbacks/callbacks.js:238
+msgid "Parameters: newDom (jQuery DOM element), commentUrl (string)"
+msgstr ""
+
+#: src/js/react/views/Callbacks/callbacks.js:231
+msgid "OnAfterUpdateComments Callback"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:36
+msgid "Could not load Home options."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:101
+msgid "Ajaxify Settings Home"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:104
+msgid "Enable or disable Ajaxify comments, or place into debug mode."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:136
+msgid "Welcome to Ajaxify Comments"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:139
+msgid "Let's help you get started."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:145
+msgid "When first activated, Ajaxify Comments is not enabled by default. This is so you can set up any necessary selectors and set the appearance before enabling the Ajax functionality. To get started, please start with setting the selectors."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:158
+#: src/js/react/views/Home/home.js:208
+msgid "Set Selectors"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:167
+#: src/js/react/views/Selectors/selectors.js:154
+msgid "Getting Started Guide"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:186
+msgid "It appears your theme has changed."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:189
+msgid "You may need to run Menu Helper again."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:195
+msgid "With theme changes, the selectors offen change. Please re-test your comments and enable Menu Helper if you need to set your selectors again."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:217
+msgid "Menu Helper Guide"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:237
+msgid "Ajaxify Status"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:244
+msgid "Enable Ajaxify Comments"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:249
+msgid "Configure whether to enable or disable Ajaxify Comments."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:264
+msgid "Enable Debug Mode"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:269
+msgid "Debug mode will show you the Ajaxify Comments debug log in the browser console."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:282
+#: src/js/react/views/Selectors/selectors.js:187
+msgid "Menu Helper"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:289
+#: src/js/react/views/Selectors/selectors.js:195
+msgid "Enable Menu Helper"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:294
+msgid "Turn on some menu shortcuts when viewing a post with comments. You can force Ajaxify comments to load, and check the page for selectors."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:309
+#: src/js/react/views/Selectors/selectors.js:145
+#: src/js/react/views/Selectors/selectors.js:213
+msgid "Menu Helper Overview"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:315
+msgid "Miscellaneous"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:323
+msgid "Scroll speed (ms)"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:329
+msgid "The scroll speed is the time it takes to scroll to the comment after successful submission."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:341
+msgid "The value for the scroll speed is invalid."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:357
+msgid "Auto update idle time (ms)"
+msgstr ""
+
+#: src/js/react/views/Home/home.js:363
+msgid "Leave empty or set to 0 to disable the auto update feature."
+msgstr ""
+
+#: src/js/react/views/Home/home.js:375
+msgid "The value for the idle time is invalid."
+msgstr ""
+
+#: src/js/react/views/Integrations/integrations.js:81
+msgid "Available Plugin Integrations"
+msgstr ""
+
+#: src/js/react/views/Integrations/integrations.js:84
+msgid "The following plugins can be integrated directly with Ajaxify Comments."
+msgstr ""
+
+#: src/js/react/views/Integrations/integrations.js:128
+msgid "Featured Pro Plugins"
+msgstr ""
+
+#: src/js/react/views/Integrations/integrations.js:131
+msgid "Please check out these pro offerings from the makers of this plugin."
+msgstr ""
+
+#: src/js/react/views/Integrations/integrations.js:141
+#: src/js/react/views/Integrations/integrations.js:145
+msgid "Comment Edit Pro"
+msgstr ""
+
+#: src/js/react/views/Integrations/integrations.js:147
+msgid "Comment Edit Pro extends basic comment editing with frontend moderation, webhooks, Slack integration, comment shortcuts, and much, much more."
+msgstr ""
+
+#: src/js/react/views/Integrations/integrations.js:155
+#: src/js/react/views/Integrations/integrations.js:159
+msgid "QuotesDLX"
+msgstr ""
+
+#: src/js/react/views/Integrations/integrations.js:161
+msgid "QuotesDLX provides several beautiful themes you can use to showcase quotes on your site. It works with the block editor and via shortcode."
+msgstr ""
+
+#: src/js/react/views/Integrations/integrations.js:176
+msgid "You might also like…"
+msgstr ""
+
+#: src/js/react/views/Integrations/integrations.js:179
+msgid "These plugins can help you with social sharing and creating impactful alerts."
+msgstr ""
+
+#: src/js/react/views/Integrations/Plugin.js:55
+msgid "Installing…"
+msgstr ""
+
+#: src/js/react/views/Integrations/Plugin.js:58
+msgid "Activating…"
+msgstr ""
+
+#: src/js/react/views/Integrations/Plugin.js:61
+msgid "Install"
+msgstr ""
+
+#: src/js/react/views/Integrations/Plugin.js:64
+msgid "Activate"
+msgstr ""
+
+#: src/js/react/views/Integrations/Plugin.js:66
+msgid "Active"
+msgstr ""
+
+#: src/js/react/views/Integrations/Plugin.js:78
+msgid "Status: Not installed"
+msgstr ""
+
+#: src/js/react/views/Integrations/Plugin.js:81
+msgid "Status: Inactive"
+msgstr ""
+
+#: src/js/react/views/Integrations/Plugin.js:83
+msgid "Status: Installed and Active"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:33
+msgid "Could not load labels options."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:120
+#: src/js/react/views/Labels/labels.js:139
+msgid "Labels"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:123
+msgid "Adjust the labels that are shown to the user."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:149
+msgid "Comment posted"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:155
+msgid "The text shown when a comment has been posted."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:184
+msgid "Comment posted (unapproved)"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:190
+msgid "The text shown when a comment has been posted but is unapproved."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:219
+msgid "Reload page"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:225
+msgid "The text shown when the page needs to be reloaded."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:254
+msgid "Post Comment Notification"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:260
+msgid "The text shown when a comment is successfully posted."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:289
+msgid "Refresh Comments Status Label"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:295
+msgid "The text shown when the comments are refreshing."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:324
+msgid "Unknown Error"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:330
+msgid "The text shown when an unknown error occurs."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:360
+msgid "Error 'Please type a comment':"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:367
+msgid "The text shown when the user has not typed a comment."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:397
+msgid "Error 'Comments closed':"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:404
+msgid "The text shown when comments are closed."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:434
+msgid "Error 'Must be logged in':"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:441
+msgid "The text shown when the user must be logged in to post a comment."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:470
+msgid "Error 'Fill in required fields':"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:477
+msgid "The text shown when the user has not filled in all required fields."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:510
+msgid "Error 'Invalid email address':"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:513
+msgid "The text shown when the user has not entered a valid email address."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:543
+msgid "Error 'Post too quickly':"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:550
+msgid "The text shown when the user is posting comments too quickly."
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:579
+msgid "Error 'Duplicate comment':"
+msgstr ""
+
+#: src/js/react/views/Labels/labels.js:586
+msgid "The text shown when the user has posted a duplicate comment."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:98
+msgid "Button Options"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:111
+msgid "Button Label"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:112
+msgid "The label of the button."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:136
+msgid "Loading Label"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:137
+msgid "The label of the button when loading."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:152
+msgid "Use Theme Styles"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:153
+msgid "Use the theme styles for the button. Switch off to use the button designer."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:180
+msgid "Button Designer"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:190
+msgid "Appearance"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:195
+msgid "Button Style"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:205
+msgid "Solid"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:213
+msgid "Transparent"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:227
+#: src/js/react/views/LazyLoad/inline-spinner.js:402
+msgid "Layout Alignment"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:246
+msgid "Border Width"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:252
+msgid "Set the width of the border."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:268
+msgid "Border Radius"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:274
+msgid "Set the radius of the border."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:289
+msgid "Vertical Padding"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:299
+msgid "Set the padding of the top and bottom of the button."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:315
+msgid "Horizontal Padding"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:325
+msgid "Set the padding of the left and right of the button."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:337
+#: src/js/react/views/LazyLoad/inline-spinner.js:488
+msgid "Colors"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:352
+#: src/js/react/views/LazyLoad/inline-spinner.js:505
+msgid "Background Color"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:373
+msgid "Background Color on Hover"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:394
+msgid "Text Color"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:415
+msgid "Text Color on Hover"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:436
+msgid "Border Color"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:457
+msgid "Border Color on Hover"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:468
+msgid "Typography"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:484
+msgid "Set the font size of the button."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:500
+msgid "Line Height"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:506
+msgid "Set the line height of the button."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-button.js:522
+msgid "Font Weight"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:86
+#: src/js/react/views/LazyLoad/lazy-load.js:511
+#: src/js/react/views/LazyLoad/lazy-load.js:565
+msgid "Loading Skeleton"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:96
+msgid "Show Loading Skeleton Heading"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:97
+msgid "Show a heading above the loading skeleton."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:117
+msgid "Loading Skeleton Heading"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:118
+msgid "The heading above the loading skeleton."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:127
+#: src/js/react/views/LazyLoad/inline-spinner.js:469
+msgid "This field is required."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:150
+msgid "Number of Skeletons to Show"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:156
+msgid "Set how many loading instances that should show."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:177
+msgid "Skeleton Background Color"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:198
+msgid "Skeleton Highlight Color"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:209
+msgid "Preview Loading Skeleton"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-skeleton.js:228
+#: src/js/react/views/LazyLoad/inline-spinner.js:184
+msgid "Preview"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:67
+msgid "Choose a loading icon to display while comments are loading. A preview is shown below."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:87
+msgid "Animation Speed and Duration"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:98
+msgid "Choose the time it takes for the loading animation to take place. For a faster animation, choose a lower value. For a slower animation, choose a higher value."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:107
+msgid "Fastest"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:111
+msgid "0.75s"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:115
+msgid "1"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:119
+msgid "1.25s"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:123
+msgid "1.5s"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:127
+msgid "1.75s"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:131
+msgid "2s"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:135
+msgid "2.5s"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:139
+msgid "Slowest"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:198
+msgid "Stop Animation"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:198
+msgid "Start Animation"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:203
+msgid "Stop"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:203
+msgid "Spin"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:222
+msgid "Loading Icon Size"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:228
+msgid "Set the size of the loading icon."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:245
+msgid "Label Font Size"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:253
+msgid "Set the size of the label."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:270
+msgid "Label Line Height"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:276
+msgid "Set the line height of the label."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:293
+msgid "Label and Icon Gap"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:299
+msgid "Set the gap between the icon and label."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:316
+msgid "Padding"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:322
+msgid "Set the padding of the container."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:340
+msgid "Loading Spinner"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:349
+msgid "Layout"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:362
+msgid "Layout Type"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:363
+msgid "Choose a layout for this loading banner."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:367
+#: src/js/react/views/LazyLoad/inline-spinner.js:375
+msgid "Horizontal"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:378
+#: src/js/react/views/LazyLoad/inline-spinner.js:385
+msgid "Vertical"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:421
+msgid "Flip Layout"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:422
+msgid "Flip the order of the spinner and label."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:437
+msgid "Enable Label for Spinner"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:438
+msgid "Show a loading label next to the spinner."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:458
+msgid "Enter a label for the Spinner"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:459
+msgid "The label goes next to the spinner."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:531
+msgid "Spinner Icon Color"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:553
+msgid "Label Text Color"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:565
+msgid "Typography and Dimensions"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:579
+msgid "Desktop Options"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:591
+msgid "Tablet Options"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/inline-spinner.js:603
+msgid "Mobile Options"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:42
+msgid "Could not load Lazy Load options."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:182
+msgid "Lazy Load Comments Settings"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:185
+msgid "Lazy loading comments can help speed up your page load time, especially if you have a page with a lot of comments."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:202
+msgid "Lazy Loading"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:206
+msgid "Determine if you would like to lazy load your comments."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:218
+msgid "Enable Lazy Loading"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:219
+msgid "Enable lazy loading of comments."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:230
+msgid "Loading Trigger"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:234
+msgid "Choose how to load the comments. You can choose a specific location or even load comments in a custom container."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:246
+msgid "Trigger"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:247
+msgid "Choose what triggers the comments to load."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:251
+msgid "External Trigger"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:252
+msgid "Comments Scrolled Into Viewport (Recommended)"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:253
+msgid "Dom Ready"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:254
+msgid "Dom Element Reached"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:255
+msgid "Page Scroll Length"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:262
+msgid "You can trigger the comments to load externally by using the following JavaScript function: WPAC.RefreshComments();"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:288
+msgid "Please enter a valid CSS selector."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:295
+#: src/js/react/views/LazyLoad/lazy-load.js:445
+msgid "HTML ID, or Class"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:296
+msgid "Enter a CSS selector for the element that will trigger the comments to load."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:306
+msgid "A valid CSS selector must be entered."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:334
+msgid "Please enter a valid number."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:340
+msgid "Scroll Offset"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:341
+msgid "Enter a vertical offset that is relative to the top viewport. Entering 0 will assume an offest of 100%."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:341
+msgid "Enter a vertical offset for that will trigger loading a certain number of pixels above the element. Entering 0 will assume an offest of 100%."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:352
+msgid "A valid number must be entered."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:375
+msgid "Loading Message"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:379
+msgid "While comments are loading, a loading message displays. How would you like to display the loading message?"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:391
+msgid "Display"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:392
+msgid "Choose how you would like to display the loading message. Choose None to not show any loading indicator."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:396
+msgid "Overlay (default)"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:397
+msgid "Inline"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:398
+msgid "None"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:414
+msgid "Inline Display Location"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:415
+msgid "Choose where you would like the loading message to appear on the page. Load in the comments section, or choose a custom element. If element is chosen, the comments will load within the element."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:421
+msgid "Comment Section"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:425
+msgid "Custom HTML Element (Experimental)"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:446
+msgid "Enter a CSS selector for the element that will display the loading message."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:456
+msgid "Please use valid CSS selectors."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:489
+msgid "Inline Loading"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:493
+msgid "If you choose to display the loading message inline, how would you like to display it?"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:505
+msgid "Inline Loading Type"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:506
+msgid "Choose how you would like to display the loading message."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:510
+msgid "Spinner (default)"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:514
+msgid "Loading Button"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:518
+#: src/js/react/views/LazyLoad/lazy-load.js:594
+#: src/js/react/views/LazyLoad/lazy-load.js:605
+msgid "Shortcode"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:534
+msgid "Inline Spinner"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:536
+msgid "Loading Inline Options"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:567
+msgid "Loading Skeleton Options"
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:606
+msgid "Enter a shortcode to display while comments are loading."
+msgstr ""
+
+#: src/js/react/views/LazyLoad/lazy-load.js:644
+msgid "Loading Button Options"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:36
+msgid "Could not load Selector options."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:121
+msgid "Welcome to Ajaxify Comments Selectors"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:124
+msgid "Selectors help Ajaxify Comments know about your comment section structure."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:130
+msgid "In order to post comments via Ajax, Ajaxify Comments needs to know about the structure of your comments section. Finding selectors is hard, so please enable Menu Helper and visit a post with comments. You will find all the settings you need under the Ajaxify menu item in the admin toolbar."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:166
+msgid "JavaScript Selectors"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:169
+msgid "Ajaxify Comments needs some information about your comment section in order to work properly. Please enter the CSS selectors for the following elements."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:200
+msgid "Enable menu helper to enable a helper in the admin menu in order to evaluate a comments page for the selectors needed."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:222
+msgid "Comment Section Selectors"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:239
+msgid "The CSS selector for Comments container."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:246
+#: src/js/react/views/Selectors/selectors.js:292
+#: src/js/react/views/Selectors/selectors.js:340
+#: src/js/react/views/Selectors/selectors.js:388
+#: src/js/react/views/Selectors/selectors.js:436
+#: src/js/react/views/Selectors/selectors.js:484
+msgid "Please use valid comma-separated CSS selectors."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:279
+msgid "Comments List"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:285
+msgid "The CSS selector for the comments list wrapper."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:333
+msgid "The CSS selector for the comment form. Can be comma separated."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:374
+msgid "Respond Textarea Selector"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:381
+msgid "The CSS selector for the Respond textarea."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:422
+msgid "Comment Textarea Selector"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:429
+msgid "The CSS selector for the main comment textarea."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:470
+msgid "Comment Submit Button Selector"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:477
+msgid "The CSS selector for the comment submit button."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:517
+msgid "Selectors Overview"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:524
+msgid "Advanced Selectors"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:534
+msgid "Paging Links Selector"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:541
+msgid "Comment paging links selector for Ajax pagination."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:570
+msgid "Comment Links Selector"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:577
+msgid "Selector for the comment links."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:606
+msgid "Error Container Selector"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:613
+msgid "This is where any error messages will be shown."
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:641
+msgid "Post Container Selector"
+msgstr ""
+
+#: src/js/react/views/Selectors/selectors.js:648
+msgid "Selector that matches post containers to enable support for multiple comment forms per page; leave empty to disable multiple comment form per page support. Please note: Each post container needs to have the ID attribute defined. If this option is set, all other selectors cannot select the elements by ID, but have to select the elements inside the post container for example by element and/or class."
+msgstr ""
+
+#: src/js/react/views/Support/support.js:28
+msgid "Get help for the plugin. Please note that this is a free plugin supported by volunteers. Please be patient and polite when asking for help."
+msgstr ""
+
+#: src/js/react/views/Support/support.js:43
+msgid "Documentation and Overview"
+msgstr ""
+
+#: src/js/react/views/Support/support.js:46
+msgid "The documentation for Highlight and Share is designed to get you up and running fast."
+msgstr ""
+
+#: src/js/react/views/Support/support.js:59
+msgid "Visit the Documentation"
+msgstr ""
+
+#: src/js/react/views/Support/support.js:65
+msgid "Support and Help"
+msgstr ""
+
+#: src/js/react/views/Support/support.js:68
+msgid "Get the help you need, either through the public support forums or privately through a support ticket."
+msgstr ""
+
+#: src/js/react/views/Support/support.js:81
+msgid "Visit the Support Forums"
+msgstr ""
+
+#: src/js/react/views/Support/support.js:90
+msgid "Use the Support Form"
+msgstr ""
+
+#: src/js/react/views/Support/support.js:96
+msgid "Please Leave a Star Rating"
+msgstr ""
+
+#: src/js/react/views/Support/support.js:99
+msgid "Please take a moment to rate Ajaxify Comments on WordPress.org. Your ratings help others decide whether to use this plugin. Ratings also help us to continue to improve and spread awareness of the plugin."
+msgstr ""
+
+#: src/js/react/views/Support/support.js:112
+msgid "Please Rate Ajaxify Comments"
+msgstr ""
+
+#: src/js/react/views/Support/support.js:118
+msgid "More From DLX Plugins"
+msgstr ""
+
+#: src/js/react/views/Support/support.js:121
+msgid "Check out more plugins and plugin tutorials from DLX Plugins."
+msgstr ""
+
+#: src/js/react/views/Support/support.js:134
+msgid "View Deluxe Plugins"
+msgstr ""
+
+#: src/js/react/views/Support/support.js:143
+msgid "DLX Plugin Tutorials"
+msgstr ""

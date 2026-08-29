@@ -30,7 +30,7 @@ const LabelsScreen = ( props ) => {
 		<ErrorBoundary
 			fallback={
 				<p>
-					{ __( 'Could not load labels options.', 'highlight-and-share' ) }
+					{ __( 'Could not load labels options.', 'wp-ajaxify-comments' ) }
 					<br />
 					<a
 						href="https://dlxplugins.com/support/"

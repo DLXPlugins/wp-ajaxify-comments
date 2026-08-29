@@ -40,6 +40,7 @@ class Integrations {
 			$deps['version'],
 			true
 		);
+		wp_set_script_translations( 'wpac-admin-integrations', 'wp-ajaxify-comments' );
 		wp_localize_script(
 			'wpac-admin-integrations',
 			'wpacAdminIntegrations',

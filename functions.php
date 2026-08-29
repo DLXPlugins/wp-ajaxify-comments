@@ -458,7 +458,7 @@ function wpac_init() {
 			header( 'X-WPAC-URL: ' . $wpac_url );
 		}
 	}
-	$dir = dirname( plugin_basename( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR;
+	$dir = dirname( plugin_basename( __FILE__ ) ) . '/languages/';
 	load_plugin_textdomain( 'wp-ajaxify-comments', false, $dir );
 }
 add_action( 'init', 'wpac_init' );

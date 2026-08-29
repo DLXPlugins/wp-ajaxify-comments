@@ -39,7 +39,7 @@ const LazyLoadScreen = ( props ) => {
 		<ErrorBoundary
 			fallback={
 				<p>
-					{ __( 'Could not load Lazy Load options.', 'highlight-and-share' ) }
+					{ __( 'Could not load Lazy Load options.', 'wp-ajaxify-comments' ) }
 					<br />
 					<a
 						href="https://dlxplugins.com/support/"
