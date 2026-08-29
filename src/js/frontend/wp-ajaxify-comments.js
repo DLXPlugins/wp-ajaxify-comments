@@ -478,6 +478,43 @@ WPAC._TestFallbackUrl = function( url ) {
 	return fallbackParam && randomParam;
 };
 
+WPAC._GetIDOrClassFromElement = function( element ) {
+	const id = jQuery( element ).attr( 'id' );
+	if ( id ) {
+		const trimmedId = id.replace( '#' + id, '' ).trim();
+		if ( trimmedId ) {
+			return '#' + trimmedId;
+		}
+	}
+	const classNames = jQuery( element ).attr( 'class' );
+	if ( classNames ) {
+		let classMatch = null;
+		// Try body class names first
+		let trimmedCommentIdMatch = null;
+		classMatch =
+			classNames
+				.split( ' ' )
+				.find( ( className ) => className.match( /^(\w+-)+\d+$/ ) ) ?? null;
+		trimmedCommentIdMatch = classMatch.replace( '.' + classMatch, '' ).trim();
+		if ( trimmedCommentIdMatch ) {
+			return '.' + trimmedCommentIdMatch;
+		}
+		classMatch =
+			classNames
+				.split( ' ' )
+				.find( ( className ) => className.match( /^(\w+-)+\d+$/ ) ) ?? null;
+		if ( classMatch ) {
+			return '.' + classMatch;
+		}
+		WPAC._Debug(
+			'error',
+			'No class name with unique numbers found in the element',
+			element,
+		);
+	}
+	return null;
+};
+
 WPAC._ScopeSelector = function( containerSelector, selector ) {
 	if ( typeof selector !== 'string' || ! selector ) {
 		return '';
