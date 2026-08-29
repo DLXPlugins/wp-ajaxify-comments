@@ -435,6 +435,16 @@ class Functions {
 			'id'    => array(),
 		);
 
+		// Add input tags.
+		$allowed_tags['input'] = array(
+			'type'  => array(),
+			'name'  => array(),
+			'value' => array(),
+			'id'    => array(),
+			'class' => array(),
+			'style' => array(),
+		);
+
 		$allowed_tags['select'] = array(
 			'class'    => array(),
 			'id'       => array(),
