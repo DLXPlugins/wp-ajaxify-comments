@@ -498,6 +498,7 @@ WPAC._ScopeSelector = function( containerSelector, selector ) {
 };
 
 WPAC.AttachForm = function( options ) {
+	console.log( 'options', options );
 	// Set default options
 	options = jQuery.extend(
 		{
@@ -516,6 +517,8 @@ WPAC.AttachForm = function( options ) {
 		},
 		options || {},
 	);
+
+	console.log( 'options', options );
 
 	if ( WPAC._Options.debug && WPAC._Options.commentsEnabled ) {
 		WPAC._Debug( 'info', 'Attach form...' );
