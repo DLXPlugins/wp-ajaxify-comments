@@ -40,17 +40,18 @@ WPAC._ShowMessage = function( message, type, force = false ) {
 		textColor = WPAC._Options.popupTextColorSuccess;
 	}
 
-	let topOffset = WPAC._Options.popupVerticalAlign === 'verticalStart' ? top + 'px' : 'unset';
+	let topOffset =
+		WPAC._Options.popupVerticalAlign === 'verticalStart' ? top + 'px' : 'unset';
 	if ( WPAC._Options.popupVerticalAlign === 'verticalCenter' ) {
 		topOffset = '45%';
 	}
-	
-	jQuery.blockUI({ 
-		blockMsgClass: "wpac-overlay",
-		message: message, 
-		fadeIn: WPAC._Options.popupFadeIn, 
-		fadeOut: WPAC._Options.popupFadeOut, 
-		timeout:(type == "loading") ? 0 : WPAC._Options.popupTimeout, 
+
+	jQuery.blockUI( {
+		blockMsgClass: 'wpac-overlay',
+		message,
+		fadeIn: WPAC._Options.popupFadeIn,
+		fadeOut: WPAC._Options.popupFadeOut,
+		timeout: type == 'loading' ? 0 : WPAC._Options.popupTimeout,
 		centerY: false,
 		centerX: true,
 		showOverlay: true,
@@ -58,7 +59,10 @@ WPAC._ShowMessage = function( message, type, force = false ) {
 			width: 'var(--wpac-popup-width)',
 			left: 'calc(50% - var(--wpac-popup-width) / 2)',
 			top: topOffset,
-			bottom: WPAC._Options.popupVerticalAlign === 'verticalEnd' ? top + 'px' : 'unset',
+			bottom:
+				WPAC._Options.popupVerticalAlign === 'verticalEnd'
+					? top + 'px'
+					: 'unset',
 			border: 'none',
 			padding: WPAC._Options.popupPadding + 'px',
 			backgroundColor,
@@ -187,7 +191,7 @@ WPAC._LoadFallbackUrl = function( fallbackUrl ) {
 };
 
 WPAC._ScrollToAnchor = function( anchor, updateHash, scrollComplete ) {
-	scrollComplete = scrollComplete || function() { };
+	scrollComplete = scrollComplete || function() {};
 	const anchorElement = jQuery( anchor );
 	if ( anchorElement.length ) {
 		WPAC._Debug(
@@ -256,7 +260,10 @@ WPAC._ReplaceComments = function(
 		: commentUrl;
 
 	let oldCommentsContainer = jQuery( selectorCommentsContainer );
-	if ( WPAC._Options.lazyLoadIntoElement && 'comments' !== WPAC._Options.lazyLoadInlineDisplayLocation ) {
+	if (
+		WPAC._Options.lazyLoadIntoElement &&
+		'comments' !== WPAC._Options.lazyLoadInlineDisplayLocation
+	) {
 		oldCommentsContainer = jQuery( WPAC._Options.lazyLoadInlineDisplayElement );
 	}
 	if ( ! oldCommentsContainer.length ) {
@@ -326,7 +333,9 @@ WPAC._ReplaceComments = function(
 		} );
 
 		// Find respond selector and remove.
-		const respondContainer = newCommentsContainer.find( selectorRespondContainer );
+		const respondContainer = newCommentsContainer.find(
+			selectorRespondContainer,
+		);
 		if ( respondContainer.length ) {
 			respondContainer.remove();
 		}
@@ -572,7 +581,6 @@ WPAC.AttachForm = function( options ) {
 		if ( ! href ) {
 			href = event.target.href;
 		}
-		console.log( 'href', href );
 		if ( href ) {
 			event.preventDefault();
 			WPAC.LoadComments( href, {
@@ -585,7 +593,9 @@ WPAC.AttachForm = function( options ) {
 			} );
 		}
 	};
-	let maybeSelectorCommentPagingEl = jQuery( options.selectorCommentPagingLinks );
+	const maybeSelectorCommentPagingEl = jQuery(
+		options.selectorCommentPagingLinks,
+	);
 	if ( maybeSelectorCommentPagingEl.length > 0 ) {
 		addHandler( 'click', options.selectorCommentPagingLinks, pagingClickHandler );
 	} else {
@@ -594,10 +604,12 @@ WPAC.AttachForm = function( options ) {
 		const navEl = jQuery( navSelector );
 		if ( navEl.length > 0 ) {
 			addHandler( 'click', navSelector, pagingClickHandler );
-		} else {
-			if ( WPAC._Options.debug ) {
-				WPAC._Debug( 'error', 'Selector for paging links not found: %s', options.selectorCommentPagingLinks );
-			}
+		} else if ( WPAC._Options.debug ) {
+			WPAC._Debug(
+				'error',
+				'Selector for paging links not found: %s',
+				options.selectorCommentPagingLinks,
+			);
 		}
 	}
 
@@ -610,7 +622,7 @@ WPAC.AttachForm = function( options ) {
 		const href = element.attr( 'href' );
 		// To use new URL.
 		const anchor = new URL( href ).hash;
-		
+
 		if ( jQuery( anchor ).length > 0 ) {
 			if ( options.updateUrl ) {
 				WPAC._UpdateUrl( href );
@@ -719,12 +731,12 @@ WPAC.AttachForm = function( options ) {
 			WPAC._ShowMessage( WPAC._Options.textUnknownError, 'error', true );
 		};
 
-		var request = jQuery.ajax( {
+		const request = jQuery.ajax( {
 			url: submitUrl,
 			type: 'POST',
 			data: new FormData( this ),
 			processData: false,
-            contentType: false,
+			contentType: false,
 			beforeSend( xhr ) {
 				xhr.setRequestHeader( 'X-WPAC-REQUEST', '1' );
 			},
@@ -746,7 +758,7 @@ WPAC.AttachForm = function( options ) {
 				WPAC._Debug( 'info', 'Comment has been posted' );
 
 				// Get info from response header
-				var commentUrl = request.getResponseHeader( 'X-WPAC-URL' );
+				const commentUrl = request.getResponseHeader( 'X-WPAC-URL' );
 				WPAC._Debug(
 					'info',
 					"Found comment URL '%s' in X-WPAC-URL header.",
@@ -781,7 +793,7 @@ WPAC.AttachForm = function( options ) {
 						? WPAC._Options.textPostedUnapproved
 						: WPAC._Options.textPosted,
 					'success',
-					true
+					true,
 				);
 
 				/**
@@ -959,7 +971,11 @@ WPAC.Init = function() {
 		'click',
 		function( e ) {
 			e.preventDefault();
-			WPAC._ShowMessage( 'This is the loading preview...', 'loadingPreview', true );
+			WPAC._ShowMessage(
+				'This is the loading preview...',
+				'loadingPreview',
+				true,
+			);
 		},
 	);
 
@@ -1021,7 +1037,6 @@ WPAC._InitIdleTimer = function() {
  * @return comments.
  */
 WPAC.RefreshComments = function( options ) {
-
 	if ( WPAC._TestFallbackUrl( location.href ) ) {
 		WPAC._Debug(
 			'error',
@@ -1057,7 +1072,7 @@ WPAC.LoadComments = function( url, options ) {
 			scrollToAnchor: ! WPAC._Options.disableScrollToAnchor,
 			showLoadingInfo: true,
 			updateUrl: ! WPAC._Options.disableUrlUpdate,
-			success() { },
+			success() {},
 			selectorCommentForm: WPAC._Options.selectorCommentForm,
 			selectorCommentsContainer: WPAC._Options.selectorCommentsContainer,
 			selectorRespondContainer: WPAC._Options.selectorRespondContainer,
@@ -1075,7 +1090,7 @@ WPAC.LoadComments = function( url, options ) {
 		? jQuery(
 			"[name='" + document.activeElement.name + "']",
 			options.selectorCommentForm,
-		).attr( 'name' )
+		  ).attr( 'name' )
 		: '';
 
 	// Get query strings form URL (ajaxifyLazyLoadEnable, nonce, post_id).
@@ -1112,7 +1127,6 @@ WPAC.LoadComments = function( url, options ) {
 		},
 		success( data ) {
 			try {
-
 				if (
 					! WPAC._ReplaceComments(
 						data,
@@ -1209,12 +1223,14 @@ jQuery( function() {
 
 		// Determine where to load the lazy loading message (if not overlay).
 		const isLazyLoadInline = 'inline' === WPAC._Options.lazyLoadDisplay;
-		const lazyloadInlineDisplayLocation = WPAC._Options.lazyLoadInlineDisplayLocation; /* can be comments, element */
-		
+		const lazyloadInlineDisplayLocation =
+			WPAC._Options
+				.lazyLoadInlineDisplayLocation; /* can be comments, element */
 
 		// If inline, let's move the loader.
 		if ( isLazyLoadInline && WPAC._Options.lazyLoadIntoElement ) {
-			let lazyloadInlineDisplayElement = WPAC._Options.lazyLoadInlineDisplayElement;
+			let lazyloadInlineDisplayElement =
+				WPAC._Options.lazyLoadInlineDisplayElement;
 			if ( 'comments' === lazyloadInlineDisplayLocation ) {
 				lazyloadInlineDisplayElement = WPAC._Options.selectorCommentsContainer;
 			}
@@ -1224,7 +1240,6 @@ jQuery( function() {
 				// Clone it without ref.
 				const lazyLoadContentClone = jQuery.clone( lazyLoadContent );
 				lazyLoadContentClone.id = 'wpac-lazy-load-content-clone';
-
 
 				// Determine trigger if button.
 				if ( 'button' === lazyLoadInlineType ) {
@@ -1240,9 +1255,10 @@ jQuery( function() {
 				if ( 'comments' === lazyloadInlineDisplayLocation ) {
 					const commentsContainer = jQuery( lazyloadInlineDisplayElement );
 					if ( commentsContainer ) {
-
 						// Test for block theme comment container title.
-						const maybeBlockCommentstitle = commentsContainer.find( '.wp-block-comments-title, .comments-title' );
+						const maybeBlockCommentstitle = commentsContainer.find(
+							'.wp-block-comments-title, .comments-title',
+						);
 						if ( maybeBlockCommentstitle.length > 0 ) {
 							// Insert after title.
 							jQuery( maybeBlockCommentstitle ).after( lazyLoadContentClone );
@@ -1263,7 +1279,6 @@ jQuery( function() {
 
 						// Remove style attribute.
 						jQuery( domElement ).removeAttr( 'style' );
-						
 					} else {
 						WPAC._Debug(
 							'error',
@@ -1273,11 +1288,14 @@ jQuery( function() {
 				}
 
 				// Init lazy loading button (if any).
-				const lazyLoadButton = document.querySelector( '.ajaxify-comments-loading-button-wrapper button' );
+				const lazyLoadButton = document.querySelector(
+					'.ajaxify-comments-loading-button-wrapper button',
+				);
 				if ( null !== lazyLoadButton ) {
 					lazyLoadButton.addEventListener( 'click', function( e ) {
 						e.preventDefault();
-						lazyLoadButton.innerHTML = WPAC._Options.lazyLoadInlineButtonLabelLoading;
+						lazyLoadButton.innerHTML =
+							WPAC._Options.lazyLoadInlineButtonLabelLoading;
 						WPAC.RefreshComments();
 					} );
 				}
@@ -1349,7 +1367,6 @@ jQuery( function() {
 								WPAC._ShowMessage( WPAC._Options.textRefreshComments, 'loading' );
 								WPAC.RefreshComments();
 							}
-							
 						},
 						{ offset: lazyLoadScrollOffset ? lazyLoadScrollOffset : '100%' },
 					);
@@ -1362,7 +1379,10 @@ jQuery( function() {
 				break;
 			case 'domready':
 				// Only refresh comments if not inline button.
-				if ( 'button' !== lazyLoadInlineType && isLazyLoadInline || ! isLazyLoadInline ) {
+				if (
+					( 'button' !== lazyLoadInlineType && isLazyLoadInline ) ||
+					! isLazyLoadInline
+				) {
 					WPAC._Debug(
 						'info',
 						'Lazy loading: Waiting on Dom to be ready for lazy loading.',
@@ -1385,11 +1405,13 @@ jQuery( function() {
 				jQuery( body ).waypoint(
 					function( direction ) {
 						this.destroy();
-						if ( 'button' !== lazyLoadInlineType && 'inline' === lazyLoadInlineType ) {
+						if (
+							'button' !== lazyLoadInlineType &&
+							'inline' === lazyLoadInlineType
+						) {
 							WPAC._ShowMessage( WPAC._Options.textRefreshComments, 'loading' );
 							WPAC.RefreshComments();
 						}
-						
 					},
 					{ offset: lazyLoadScrollOffset * -1 },
 				);

@@ -14,6 +14,9 @@ module.exports = {
 		wpacMenuHelper: 'readonly',
 		wpacAdminLazyLoad: 'readonly',
 		wpacAdminIntegrations: 'readonly',
+		WPAC: 'readonly',
+		jQuery: 'readonly',
+		WPACCallbacks: 'readonly',
 	},
 	extends: [
 		'eslint:recommended',
