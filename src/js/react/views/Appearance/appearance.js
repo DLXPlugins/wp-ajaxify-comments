@@ -123,7 +123,7 @@ const AppearanceScreen = ( props ) => {
 		<ErrorBoundary
 			fallback={
 				<p>
-					{ __( 'Could not load appearance options.', 'highlight-and-share' ) }
+					{ __( 'Could not load appearance options.', 'wp-ajaxify-comments' ) }
 					<br />
 					<a
 						href="https://dlxplugins.com/support/"

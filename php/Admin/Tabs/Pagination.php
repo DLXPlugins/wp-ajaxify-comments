@@ -77,6 +77,7 @@ class Pagination {
 			Functions::get_plugin_version(),
 			true
 		);
+		wp_set_script_translations( 'wpac-admin-pagination', 'wp-ajaxify-comments' );
 		add_filter( 'ajaxify/comments/theme_color_palette', array( $this, 'theme_color_palette' ), 1, 1 );
 		wp_localize_script(
 			'wpac-admin-pagination',

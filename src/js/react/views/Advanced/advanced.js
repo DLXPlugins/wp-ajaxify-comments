@@ -30,7 +30,7 @@ const AdvancedScreen = ( props ) => {
 		<ErrorBoundary
 			fallback={
 				<p>
-					{ __( 'Could not load callback options.', 'highlight-and-share' ) }
+					{ __( 'Could not load callback options.', 'wp-ajaxify-comments' ) }
 					<br />
 					<a
 						href="https://dlxplugins.com/support/"

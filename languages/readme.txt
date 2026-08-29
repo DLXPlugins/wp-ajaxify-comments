@@ -1,4 +1,8 @@
 == For Translators ==
 
-If you have added your own translation, or have updated an existing one, please send it to me (TBA) and I will bundle it into the next release. Thank you!
-See http://codex.wordpress.org/I18n_for_WordPress_Developers for further information about i18n.
+Translate Ajaxify Comments through the WordPress.org translation project:
+https://translate.wordpress.org/projects/wp-plugins/wp-ajaxify-comments
+
+The bundled PO/MO files temporarily preserve existing community translations
+while they are imported and approved on WordPress.org. Remove each locale after
+WordPress.org starts distributing its replacement language pack.
