@@ -359,8 +359,7 @@ WPAC._ReplaceComments = function(
 
 	// Update title
 	const extractedTitle = WPAC._ExtractTitle( data );
-	const hasMultipleCommentContainers = jQuery( WPAC._Options.selectorCommentsContainer ).length > 1;
-	if ( extractedBody !== false && ! hasMultipleCommentContainers ) {
+	if ( extractedBody !== false && ! WPAC._Options.hasMultipleCommentContainers ) {
 		// Decode HTML entities (see http://stackoverflow.com/a/5796744)
 		document.title = jQuery( '<textarea />' ).html( extractedTitle ).text();
 	}
@@ -866,8 +865,7 @@ WPAC.AttachForm = function( options ) {
 
 				// Smooth scroll to comment url and update browser url
 				if ( commentUrl ) {
-					const hasMultipleCommentContainers = jQuery( WPAC._Options.selectorCommentsContainer ).length > 1;
-					if ( options.updateUrl && ! hasMultipleCommentContainers ) {
+					if ( options.updateUrl && ! WPAC._Options.hasMultipleCommentContainers ) {
 						WPAC._UpdateUrl( commentUrl );
 					}
 
@@ -962,6 +960,7 @@ WPAC.Init = function() {
 	}
 
 	if ( WPAC._Options.selectorPostContainer ) {
+		WPAC._Options.hasMultipleCommentContainers = jQuery( WPAC._Options.selectorCommentsContainer ).length > 1;
 		WPAC._Debug(
 			'info',
 			"Multiple comment form support enabled (selector: '%s')",
