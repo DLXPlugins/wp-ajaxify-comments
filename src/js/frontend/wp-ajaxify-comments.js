@@ -620,14 +620,36 @@ WPAC.AttachForm = function( options ) {
 		}
 		if ( href ) {
 			event.preventDefault();
-			WPAC.LoadComments( href, {
-				selectorCommentForm: options.selectorCommentForm,
-				selectorCommentsContainer: options.selectorCommentsContainer,
-				selectorRespondContainer: options.selectorRespondContainer,
-				beforeSelectElements: options.beforeSelectElements,
-				beforeUpdateComments: options.beforeUpdateComments,
-				afterUpdateComments: options.afterUpdateComments,
-			} );
+			let pageId = 0;
+			let paginationTargetSelector = null;
+			const paginationTarget = event.target;
+			const paginationTargetContainer = paginationTarget.closest( options.selectorCommentsContainer );
+			if ( paginationTargetContainer ) {
+				paginationTargetSelector = paginationTargetContainer.getAttribute( 'id' );
+				if ( paginationTargetSelector ) {
+					paginationTargetSelector = '#' + paginationTargetSelector;
+					pageId = paginationTargetSelector.replace( 'comments-', '' );
+				}
+			}
+			if ( ! WPAC._Options.hasMultipleCommentContainers ) {
+				WPAC.LoadComments( href, {
+					selectorCommentForm: options.selectorCommentForm,
+					selectorCommentsContainer: options.selectorCommentsContainer,
+					selectorRespondContainer: options.selectorRespondContainer,
+					beforeSelectElements: options.beforeSelectElements,
+					beforeUpdateComments: options.beforeUpdateComments,
+					afterUpdateComments: options.afterUpdateComments,
+				} );
+			} else if ( WPAC._Options.hasMultipleCommentContainers && paginationTargetSelector && pageId ) {
+				WPAC.LoadComments( href, {
+					selectorCommentForm: options.selectorCommentForm,
+					selectorCommentsContainer: paginationTargetSelector,
+					selectorRespondContainer: options.selectorRespondContainer,
+					beforeSelectElements: options.beforeSelectElements,
+					beforeUpdateComments: options.beforeUpdateComments,
+					afterUpdateComments: options.afterUpdateComments,
+				} );
+			}
 		}
 	};
 	const maybeSelectorCommentPagingEl = jQuery(
@@ -1178,23 +1200,26 @@ WPAC.LoadComments = function( url, options ) {
 						options.selectorCommentsContainer,
 						options.selectorCommentForm,
 						options.selectorRespondContainer,
-						options.beforeSelectElements,
-						options.beforeUpdateComments,
-						options.afterUpdateComments,
+						WPAC._Options.beforeSelectElements,
+						WPAC._Options.beforeUpdateComments,
+						WPAC._Options.afterUpdateComments,
 					)
 				) {
 					return;
 				}
 
-				if ( options.updateUrl ) {
+				if ( options.updateUrl && ! WPAC._Options.hasMultipleCommentContainers ) {
 					WPAC._UpdateUrl( url );
 				}
 
 				// Scroll to anchor
 				var waitForScrollToAnchor = false;
 				if ( options.scrollToAnchor ) {
-					const anchor =
+					let anchor =
 						url.indexOf( '#' ) >= 0 ? url.substr( url.indexOf( '#' ) ) : null;
+					if ( WPAC._Options.hasMultipleCommentContainers ) {
+						anchor = options.selectorCommentsContainer;
+					}
 					if ( anchor ) {
 						WPAC._Debug( 'info', "Anchor '%s' extracted from url", anchor );
 						if (

@@ -464,14 +464,36 @@ WPAC.AttachForm = function (options) {
     }
     if (href) {
       event.preventDefault();
-      WPAC.LoadComments(href, {
-        selectorCommentForm: options.selectorCommentForm,
-        selectorCommentsContainer: options.selectorCommentsContainer,
-        selectorRespondContainer: options.selectorRespondContainer,
-        beforeSelectElements: options.beforeSelectElements,
-        beforeUpdateComments: options.beforeUpdateComments,
-        afterUpdateComments: options.afterUpdateComments
-      });
+      var pageId = 0;
+      var paginationTargetSelector = null;
+      var paginationTarget = event.target;
+      var paginationTargetContainer = paginationTarget.closest(options.selectorCommentsContainer);
+      if (paginationTargetContainer) {
+        paginationTargetSelector = paginationTargetContainer.getAttribute('id');
+        if (paginationTargetSelector) {
+          paginationTargetSelector = '#' + paginationTargetSelector;
+          pageId = paginationTargetSelector.replace('comments-', '');
+        }
+      }
+      if (!WPAC._Options.hasMultipleCommentContainers) {
+        WPAC.LoadComments(href, {
+          selectorCommentForm: options.selectorCommentForm,
+          selectorCommentsContainer: options.selectorCommentsContainer,
+          selectorRespondContainer: options.selectorRespondContainer,
+          beforeSelectElements: options.beforeSelectElements,
+          beforeUpdateComments: options.beforeUpdateComments,
+          afterUpdateComments: options.afterUpdateComments
+        });
+      } else if (WPAC._Options.hasMultipleCommentContainers && paginationTargetSelector && pageId) {
+        WPAC.LoadComments(href, {
+          selectorCommentForm: options.selectorCommentForm,
+          selectorCommentsContainer: paginationTargetSelector,
+          selectorRespondContainer: options.selectorRespondContainer,
+          beforeSelectElements: options.beforeSelectElements,
+          beforeUpdateComments: options.beforeUpdateComments,
+          afterUpdateComments: options.afterUpdateComments
+        });
+      }
     }
   };
   var maybeSelectorCommentPagingEl = jQuery(options.selectorCommentPagingLinks);
@@ -838,10 +860,10 @@ WPAC.LoadComments = function (url, options) {
     },
     success: function success(data) {
       try {
-        if (!WPAC._ReplaceComments(data, url, true, formData, formFocus, options.selectorCommentsContainer, options.selectorCommentForm, options.selectorRespondContainer, options.beforeSelectElements, options.beforeUpdateComments, options.afterUpdateComments)) {
+        if (!WPAC._ReplaceComments(data, url, true, formData, formFocus, options.selectorCommentsContainer, options.selectorCommentForm, options.selectorRespondContainer, WPAC._Options.beforeSelectElements, WPAC._Options.beforeUpdateComments, WPAC._Options.afterUpdateComments)) {
           return;
         }
-        if (options.updateUrl) {
+        if (options.updateUrl && !WPAC._Options.hasMultipleCommentContainers) {
           WPAC._UpdateUrl(url);
         }
 
@@ -849,6 +871,9 @@ WPAC.LoadComments = function (url, options) {
         var waitForScrollToAnchor = false;
         if (options.scrollToAnchor) {
           var _anchor2 = url.indexOf('#') >= 0 ? url.substr(url.indexOf('#')) : null;
+          if (WPAC._Options.hasMultipleCommentContainers) {
+            _anchor2 = options.selectorCommentsContainer;
+          }
           if (_anchor2) {
             WPAC._Debug('info', "Anchor '%s' extracted from url", _anchor2);
             if (WPAC._ScrollToAnchor(_anchor2, options.updateUrl, function () {
