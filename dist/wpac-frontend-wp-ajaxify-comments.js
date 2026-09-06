@@ -698,8 +698,8 @@ WPAC.Init = function () {
     }
     WPAC._Debug('info', 'Found jQuery Idle Timer plugin');
   }
-  if (WPAC._Options.selectorPostContainer) {
-    WPAC._Options.hasMultipleCommentContainers = jQuery(WPAC._Options.selectorCommentsContainer).length > 1;
+  WPAC._Options.hasMultipleCommentContainers = jQuery(WPAC._Options.selectorCommentsContainer).length > 1;
+  if (WPAC._Options.selectorPostContainer && WPAC._Options.hasMultipleCommentContainers) {
     WPAC._Debug('info', "Multiple comment form support enabled (selector: '%s')", WPAC._Options.selectorPostContainer);
     jQuery(WPAC._Options.selectorPostContainer).each(function (i, e) {
       var maybePageId = jQuery(e).find('input[name="ajax_page_id"]').val();
