@@ -310,7 +310,7 @@ WPAC._ReplaceComments = function(
 	} );
 	document.dispatchEvent( beforeSelectEvent );
 
-	let newCommentsContainer = extractedBody.find( selectorCommentsContainer );
+	let newCommentsContainer = extractedBody.find( WPAC._Options.selectorCommentsContainer );
 	if ( ! newCommentsContainer.length ) {
 		WPAC._Debug(
 			'error',
@@ -359,7 +359,8 @@ WPAC._ReplaceComments = function(
 
 	// Update title
 	const extractedTitle = WPAC._ExtractTitle( data );
-	if ( extractedBody !== false ) {
+	const hasMultipleCommentContainers = jQuery( WPAC._Options.selectorCommentsContainer ).length > 1;
+	if ( extractedBody !== false && ! hasMultipleCommentContainers ) {
 		// Decode HTML entities (see http://stackoverflow.com/a/5796744)
 		document.title = jQuery( '<textarea />' ).html( extractedTitle ).text();
 	}
@@ -865,7 +866,8 @@ WPAC.AttachForm = function( options ) {
 
 				// Smooth scroll to comment url and update browser url
 				if ( commentUrl ) {
-					if ( options.updateUrl ) {
+					const hasMultipleCommentContainers = jQuery( WPAC._Options.selectorCommentsContainer ).length > 1;
+					if ( options.updateUrl && ! hasMultipleCommentContainers ) {
 						WPAC._UpdateUrl( commentUrl );
 					}
 

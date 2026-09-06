@@ -2164,7 +2164,7 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
     }
   });
   document.dispatchEvent(beforeSelectEvent);
-  var newCommentsContainer = extractedBody.find(selectorCommentsContainer);
+  var newCommentsContainer = extractedBody.find(WPAC._Options.selectorCommentsContainer);
   if (!newCommentsContainer.length) {
     WPAC._Debug('error', "Comment container on requested page not found (selector: '%s')", selectorCommentsContainer);
     WPAC._LoadFallbackUrl(fallbackUrl);
@@ -2202,7 +2202,8 @@ WPAC._ReplaceComments = function (data, commentUrl, useFallbackUrl, formData, fo
 
   // Update title
   var extractedTitle = WPAC._ExtractTitle(data);
-  if (extractedBody !== false) {
+  var hasMultipleCommentContainers = jQuery(WPAC._Options.selectorCommentsContainer).length > 1;
+  if (extractedBody !== false && !hasMultipleCommentContainers) {
     // Decode HTML entities (see http://stackoverflow.com/a/5796744)
     document.title = jQuery('<textarea />').html(extractedTitle).text();
   }
@@ -2585,7 +2586,8 @@ WPAC.AttachForm = function (options) {
 
         // Smooth scroll to comment url and update browser url
         if (commentUrl) {
-          if (options.updateUrl) {
+          var hasMultipleCommentContainers = jQuery(WPAC._Options.selectorCommentsContainer).length > 1;
+          if (options.updateUrl && !hasMultipleCommentContainers) {
             WPAC._UpdateUrl(commentUrl);
           }
           if (options.scrollToAnchor) {
