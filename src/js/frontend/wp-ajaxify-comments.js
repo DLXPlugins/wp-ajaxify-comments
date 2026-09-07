@@ -239,6 +239,359 @@ WPAC._UpdateUrl = function( url ) {
 	}
 };
 
+/**
+ * Parse a scoped comments selector of the form #comments-{postId}.
+ *
+ * @param {string} selector Selector that may contain a client-generated post ID.
+ * @return {number} Post ID, or 0 if the selector is not scoped.
+ */
+WPAC._GetScopedPostId = function( selector ) {
+	if ( typeof selector !== 'string' || ! selector ) {
+		return 0;
+	}
+
+	const match = selector.match( /^#comments-(\d+)$/ );
+	return match ? parseInt( match[ 1 ], 10 ) : 0;
+};
+
+/**
+ * Find the comment_post_ID form marker for a post inside a jQuery root.
+ *
+ * @param {jQuery} $root  Root to search (document or extracted body).
+ * @param {number} postId Post ID to match.
+ * @return {jQuery} Matching input, or empty jQuery object.
+ */
+WPAC._FindFormMarkerByPostId = function( $root, postId ) {
+	const parsedPostId = parseInt( postId, 10 );
+	if ( ! $root || ! $root.length || ! parsedPostId ) {
+		return jQuery();
+	}
+
+	return $root.find( 'input[name="comment_post_ID"]' ).filter( function() {
+		return parseInt( jQuery( this ).val(), 10 ) === parsedPostId;
+	} ).first();
+};
+
+/**
+ * Find the configured comments container for a post ID.
+ *
+ * @param {jQuery} $root  Root to search (document or extracted body).
+ * @param {number} postId Post ID to match.
+ * @return {jQuery} Matching comments container, or empty jQuery object.
+ */
+WPAC._FindCommentsContainerByPostId = function( $root, postId ) {
+	const parsedPostId = parseInt( postId, 10 );
+	const commentsSelector = WPAC._Options.selectorCommentsContainer;
+	const $marker = WPAC._FindFormMarkerByPostId( $root, parsedPostId );
+
+	if ( $marker.length ) {
+		const $closest = $marker.closest( commentsSelector );
+		if ( $closest.length ) {
+			return $closest.first();
+		}
+
+		// Form sits outside the comments container; look within the post wrapper.
+		const postContainerSelector = WPAC._Options.selectorPostContainer;
+		if ( postContainerSelector ) {
+			const $post = $marker.closest( postContainerSelector );
+			if ( $post.length ) {
+				const $fromPost = $post.find( commentsSelector );
+				if ( $fromPost.length ) {
+					return $fromPost.first();
+				}
+			}
+		}
+	}
+
+	// Live pages stamp #comments-{postId} on the post wrapper; fetched HTML does not.
+	if ( parsedPostId ) {
+		const $scopedPost = $root.find( '#comments-' + parsedPostId );
+		if ( $scopedPost.length ) {
+			const $fromScoped = $scopedPost.find( commentsSelector );
+			if ( $fromScoped.length ) {
+				return $fromScoped.first();
+			}
+			if ( $scopedPost.is( commentsSelector ) ) {
+				return $scopedPost.first();
+			}
+		}
+	}
+
+	return jQuery();
+};
+
+/**
+ * Find the configured comment form for a post ID.
+ *
+ * @param {jQuery} $root  Root to search (document or extracted body).
+ * @param {number} postId Post ID to match.
+ * @return {jQuery} Matching comment form, or empty jQuery object.
+ */
+WPAC._FindCommentFormByPostId = function( $root, postId ) {
+	const $marker = WPAC._FindFormMarkerByPostId( $root, postId );
+	if ( ! $marker.length ) {
+		return jQuery();
+	}
+
+	const formSelector = WPAC._Options.selectorCommentForm;
+	if ( formSelector ) {
+		const $form = $marker.closest( formSelector );
+		if ( $form.length ) {
+			return $form.first();
+		}
+	}
+
+	return $marker.closest( 'form' );
+};
+
+/**
+ * Collect unique comment_post_ID values from a jQuery root.
+ *
+ * @param {jQuery} $root Root to search.
+ * @return {number[]} Unique post IDs.
+ */
+WPAC._CollectPostIds = function( $root ) {
+	const postIds = [];
+	if ( ! $root || ! $root.length ) {
+		return postIds;
+	}
+
+	$root.find( 'input[name="comment_post_ID"]' ).each( function() {
+		const postId = parseInt( jQuery( this ).val(), 10 );
+		if ( postId && postIds.indexOf( postId ) === -1 ) {
+			postIds.push( postId );
+		}
+	} );
+
+	return postIds;
+};
+
+/**
+ * Get serialized form fields saved before a comments refresh.
+ *
+ * @param {Array|Object} formData Flat serializeArray data or per-post-id map.
+ * @param {number}       postId   Post ID when using a per-post-id map.
+ * @return {Array|null} Saved fields, or null.
+ */
+WPAC._GetSavedFormFields = function( formData, postId ) {
+	if ( ! formData ) {
+		return null;
+	}
+	if ( formData.byPostId ) {
+		return postId ? formData.byPostId[ postId ] : null;
+	}
+	if ( Array.isArray( formData ) ) {
+		return formData;
+	}
+	return null;
+};
+
+/**
+ * Restore saved field values into a comment form without overwriting user input.
+ *
+ * @param {jQuery} $form  Comment form.
+ * @param {Array}  fields serializeArray() fields.
+ */
+WPAC._RestoreFormData = function( $form, fields ) {
+	if ( ! $form || ! $form.length || ! fields || ! fields.length ) {
+		return;
+	}
+
+	jQuery.each( fields, function( key, value ) {
+		const formElement = $form.find( "[name='" + value.name + "']" );
+		if ( formElement.length !== 1 || formElement.val() ) {
+			return;
+		}
+		formElement.val( value.value );
+	} );
+};
+
+/**
+ * Replace comments for one or more posts by matching comment_post_ID markers.
+ *
+ * @param {jQuery}       extractedBody             Parsed body from the fetched document.
+ * @param {string}       commentUrl                Request URL.
+ * @param {string}       fallbackUrl               Fallback URL if mapping fails.
+ * @param {Array|Object} formData                  Saved form fields.
+ * @param {string}       formFocus                 Focused field name.
+ * @param {string}       selectorCommentsContainer Live comments selector (may be #comments-{postId}).
+ * @param {string}       selectorCommentForm       Live comment form selector.
+ * @param {string}       selectorRespondContainer  Respond container selector.
+ * @param {string}       beforeUpdateComments      Optional before-update callback source.
+ * @param {string}       afterUpdateComments       Optional after-update callback source.
+ * @return {boolean} True on success.
+ */
+WPAC._ReplaceMultipleComments = function(
+	extractedBody,
+	commentUrl,
+	fallbackUrl,
+	formData,
+	formFocus,
+	selectorCommentsContainer,
+	selectorCommentForm,
+	selectorRespondContainer,
+	beforeUpdateComments,
+	afterUpdateComments,
+) {
+	const liveRoot = jQuery( document );
+	const scopedPostId = WPAC._GetScopedPostId( selectorCommentsContainer );
+	const postIds = scopedPostId ? [ scopedPostId ] : WPAC._CollectPostIds( liveRoot );
+
+	if ( ! postIds.length ) {
+		WPAC._Debug(
+			'error',
+			'No comment_post_ID markers found for multiple comment containers',
+		);
+		WPAC._LoadFallbackUrl( fallbackUrl );
+		return false;
+	}
+
+	if ( '' !== beforeUpdateComments ) {
+		const beforeComments = new Function(
+			'extractedBody',
+			'commentUrl',
+			beforeUpdateComments,
+		);
+		beforeComments( extractedBody, commentUrl );
+	}
+
+	const beforeCommentsEvent = new CustomEvent( 'wpacBeforeUpdateComments', {
+		detail: { newDom: extractedBody, commentUrl },
+	} );
+	document.dispatchEvent( beforeCommentsEvent );
+
+	const replacedPostIds = [];
+	jQuery.each( postIds, function( i, postId ) {
+		const $old = WPAC._FindCommentsContainerByPostId( liveRoot, postId );
+		const $new = WPAC._FindCommentsContainerByPostId( extractedBody, postId );
+
+		if ( ! $old.length || ! $new.length ) {
+			WPAC._Debug(
+				'error',
+				'Unable to map comments container for post ID %s (live: %s, fetched: %s)',
+				postId,
+				$old.length,
+				$new.length,
+			);
+			return;
+		}
+
+		$old.empty();
+		$old.append( $new.children() );
+		replacedPostIds.push( postId );
+		WPAC._Debug( 'info', 'Replaced comments container for post ID %s', postId );
+	} );
+
+	if ( scopedPostId && replacedPostIds.length !== 1 ) {
+		WPAC._LoadFallbackUrl( fallbackUrl );
+		return false;
+	}
+
+	if ( ! scopedPostId && ! replacedPostIds.length ) {
+		WPAC._LoadFallbackUrl( fallbackUrl );
+		return false;
+	}
+
+	if ( WPAC._Options.commentsEnabled ) {
+		let formReplaceFailed = false;
+
+		jQuery.each( replacedPostIds, function( i, postId ) {
+			const $oldContainer = WPAC._FindCommentsContainerByPostId( liveRoot, postId );
+			const $oldForm = WPAC._FindCommentFormByPostId( liveRoot, postId );
+			const formIsNested = $oldForm.length && $oldContainer.length && (
+				jQuery.contains( $oldContainer[ 0 ], $oldForm[ 0 ] ) ||
+				$oldContainer[ 0 ] === $oldForm[ 0 ]
+			);
+
+			if ( $oldForm.length ) {
+				if ( ! formIsNested ) {
+					WPAC._Debug( 'info', 'Replace comment form for post ID %s...', postId );
+					const $newForm = WPAC._FindCommentFormByPostId( extractedBody, postId );
+					if ( ! $newForm.length ) {
+						WPAC._Debug(
+							'error',
+							'Comment form for post ID %s not found in fetched document',
+							postId,
+						);
+						if ( scopedPostId ) {
+							formReplaceFailed = true;
+							return false;
+						}
+						return;
+					}
+					$oldForm.replaceWith( $newForm );
+				}
+			} else if ( scopedPostId ) {
+				WPAC._Debug( 'info', 'Try to re-inject comment form...' );
+
+				const wpTempFormDiv = jQuery( '#wp-temp-form-div' );
+				if ( ! wpTempFormDiv.length ) {
+					WPAC._Debug(
+						'error',
+						"WordPress' #wp-temp-form-div container not found",
+						selectorRespondContainer,
+					);
+					formReplaceFailed = true;
+					return false;
+				}
+
+				const $newForm = WPAC._FindCommentFormByPostId( extractedBody, postId );
+				const $newRespond = $newForm.length
+					? $newForm.closest( selectorRespondContainer )
+					: extractedBody.find( selectorRespondContainer ).first();
+				if ( ! $newRespond.length ) {
+					WPAC._Debug(
+						'error',
+						"Respond container on requested page not found (selector: '%s')",
+						selectorRespondContainer,
+					);
+					formReplaceFailed = true;
+					return false;
+				}
+				wpTempFormDiv.replaceWith( $newRespond );
+			}
+
+			const $restoredForm = WPAC._FindCommentFormByPostId( liveRoot, postId );
+			WPAC._RestoreFormData(
+				$restoredForm,
+				WPAC._GetSavedFormFields( formData, postId ),
+			);
+		} );
+
+		if ( formReplaceFailed ) {
+			WPAC._LoadFallbackUrl( fallbackUrl );
+			return false;
+		}
+
+		if ( formFocus ) {
+			const focusPostId = ( formData && formData.focusPostId ) ? formData.focusPostId : scopedPostId;
+			const $focusForm = focusPostId
+				? WPAC._FindCommentFormByPostId( liveRoot, focusPostId )
+				: jQuery( selectorCommentForm );
+			const $focusElement = $focusForm.find( "[name='" + formFocus + "']" );
+			if ( $focusElement.length ) {
+				$focusElement.focus();
+			}
+		}
+	}
+
+	if ( '' !== afterUpdateComments ) {
+		const updateComments = new Function(
+			'extractedBody',
+			'commentUrl',
+			afterUpdateComments,
+		);
+		updateComments( extractedBody, commentUrl );
+	}
+
+	const updateCommentsEvent = new CustomEvent( 'wpacAfterUpdateComments', {
+		detail: { newDom: extractedBody, commentUrl },
+	} );
+	document.dispatchEvent( updateCommentsEvent );
+
+	return true;
+};
+
 WPAC._ReplaceComments = function(
 	data,
 	commentUrl,
@@ -258,6 +611,44 @@ WPAC._ReplaceComments = function(
 	const fallbackUrl = useFallbackUrl
 		? WPAC._AddQueryParamStringToUrl( commentUrl, 'WPACFallback', '1' )
 		: commentUrl;
+
+	const extractedBody = WPAC._ExtractBody( data );
+	if ( extractedBody === false ) {
+		WPAC._Debug(
+			'error',
+			"Unsupported server response, unable to extract body (data: '%s')",
+			data,
+		);
+		WPAC._LoadFallbackUrl( fallbackUrl );
+		return false;
+	}
+
+	// Call before select elements.
+	if ( beforeSelectElements !== '' ) {
+		const beforeSelect = new Function( 'extractedBody', beforeSelectElements );
+		beforeSelect( extractedBody );
+	}
+
+	// Set up custom event.
+	const beforeSelectEvent = new CustomEvent( 'wpacBeforeSelectElements', {
+		detail: { extractedBody },
+	} );
+	document.dispatchEvent( beforeSelectEvent );
+
+	if ( WPAC._Options.hasMultipleCommentContainers ) {
+		return WPAC._ReplaceMultipleComments(
+			extractedBody,
+			commentUrl,
+			fallbackUrl,
+			formData,
+			formFocus,
+			selectorCommentsContainer,
+			selectorCommentForm,
+			selectorRespondContainer,
+			beforeUpdateComments,
+			afterUpdateComments,
+		);
+	}
 
 	let oldCommentsContainer = jQuery( selectorCommentsContainer );
 	if (
@@ -286,29 +677,6 @@ WPAC._ReplaceComments = function(
 			return jQuery( this ).children().length > 0 && ! jQuery( this ).is( ':header' );
 		} );
 	}
-
-	const extractedBody = WPAC._ExtractBody( data );
-	if ( extractedBody === false ) {
-		WPAC._Debug(
-			'error',
-			"Unsupported server response, unable to extract body (data: '%s')",
-			data,
-		);
-		WPAC._LoadFallbackUrl( fallbackUrl );
-		return false;
-	}
-
-	// Call before select elements.
-	if ( beforeSelectElements !== '' ) {
-		const beforeSelect = new Function( 'extractedBody', beforeSelectElements );
-		beforeSelect( extractedBody );
-	}
-
-	// Set up custom event.
-	const beforeSelectEvent = new CustomEvent( 'wpacBeforeSelectElements', {
-		detail: { extractedBody },
-	} );
-	document.dispatchEvent( beforeSelectEvent );
 
 	let newCommentsContainer = extractedBody.find( WPAC._Options.selectorCommentsContainer );
 	if ( ! newCommentsContainer.length ) {
@@ -357,10 +725,10 @@ WPAC._ReplaceComments = function(
 	} );
 	document.dispatchEvent( beforeCommentsEvent );
 
-	// Update title
+	// Update title.
 	const extractedTitle = WPAC._ExtractTitle( data );
-	if ( extractedBody !== false && ! WPAC._Options.hasMultipleCommentContainers ) {
-		// Decode HTML entities (see http://stackoverflow.com/a/5796744)
+	if ( extractedBody !== false ) {
+		// Decode HTML entities (see http://stackoverflow.com/a/5796744).
 		document.title = jQuery( '<textarea />' ).html( extractedTitle ).text();
 	}
 
@@ -371,12 +739,12 @@ WPAC._ReplaceComments = function(
 	if ( WPAC._Options.commentsEnabled ) {
 		const form = jQuery( selectorCommentForm );
 		if ( form.length ) {
-			// Replace comment form (for spam protection plugin compatibility) if comment form is not nested in comments container
-			// If comment form is nested in comments container comment form has already been replaced
+			// Replace comment form (for spam protection plugin compatibility) if comment form is not nested in comments container.
+			// If comment form is nested in comments container comment form has already been replaced.
 			if ( ! form.parents( selectorCommentsContainer ).length ) {
 				WPAC._Debug( 'info', 'Replace comment form...' );
 				const newCommentForm = extractedBody.find( selectorCommentForm );
-				if ( newCommentForm.length == 0 ) {
+				if ( newCommentForm.length === 0 ) {
 					WPAC._Debug(
 						'error',
 						"Comment form on requested page not found (selector: '%s')",
@@ -391,8 +759,8 @@ WPAC._ReplaceComments = function(
 			WPAC._Debug( 'info', 'Try to re-inject comment form...' );
 
 			// "Re-inject" comment form, if comment form was removed by updating the comments container; could happen
-			// if theme support threaded/nested comments and form tag is not nested in comments container
-			// -> Replace WordPress placeholder <div> (#wp-temp-form-div) with respond <div>
+			// if theme support threaded/nested comments and form tag is not nested in comments container.
+			// -> Replace WordPress placeholder <div> (#wp-temp-form-div) with respond <div>.
 			const wpTempFormDiv = jQuery( '#wp-temp-form-div' );
 			if ( ! wpTempFormDiv.length ) {
 				WPAC._Debug(
@@ -416,26 +784,17 @@ WPAC._ReplaceComments = function(
 			wpTempFormDiv.replaceWith( newRespondContainer );
 		}
 
-		if ( formData ) {
-			// Re-inject saved form data
-			jQuery.each( formData, function( key, value ) {
-				const formElement = jQuery(
-					"[name='" + value.name + "']",
-					selectorCommentForm,
-				);
-				if ( formElement.length != 1 || formElement.val() ) {
-					return;
-				}
-				formElement.val( value.value );
-			} );
-		}
+		WPAC._RestoreFormData(
+			jQuery( selectorCommentForm ),
+			WPAC._GetSavedFormFields( formData ),
+		);
 		if ( formFocus ) {
-			// Reset focus
+			// Reset focus.
 			const formElement = jQuery(
 				"[name='" + formFocus + "']",
 				selectorCommentForm,
 			);
-			if ( formElement ) {
+			if ( formElement.length ) {
 				formElement.focus();
 			}
 		}
@@ -476,43 +835,6 @@ WPAC._TestFallbackUrl = function( url ) {
 	const randomParam = queryParams.get( 'WPACRandom' );
 
 	return fallbackParam && randomParam;
-};
-
-WPAC._GetIDOrClassFromElement = function( element ) {
-	const id = jQuery( element ).attr( 'id' );
-	if ( id ) {
-		const trimmedId = id.replace( '#' + id, '' ).trim();
-		if ( trimmedId ) {
-			return '#' + trimmedId;
-		}
-	}
-	const classNames = jQuery( element ).attr( 'class' );
-	if ( classNames ) {
-		let classMatch = null;
-		// Try body class names first
-		let trimmedCommentIdMatch = null;
-		classMatch =
-			classNames
-				.split( ' ' )
-				.find( ( className ) => className.match( /^(\w+-)+\d+$/ ) ) ?? null;
-		trimmedCommentIdMatch = classMatch.replace( '.' + classMatch, '' ).trim();
-		if ( trimmedCommentIdMatch ) {
-			return '.' + trimmedCommentIdMatch;
-		}
-		classMatch =
-			classNames
-				.split( ' ' )
-				.find( ( className ) => className.match( /^(\w+-)+\d+$/ ) ) ?? null;
-		if ( classMatch ) {
-			return '.' + classMatch;
-		}
-		WPAC._Debug(
-			'error',
-			'No class name with unique numbers found in the element',
-			element,
-		);
-	}
-	return null;
 };
 
 WPAC._ScopeSelector = function( containerSelector, selector ) {
@@ -1147,14 +1469,39 @@ WPAC.LoadComments = function( url, options ) {
 		options || {},
 	);
 
-	// Save form data and focus
-	const formData = jQuery( options.selectorCommentForm ).serializeArray();
-	const formFocus = document.activeElement
-		? jQuery(
-			"[name='" + document.activeElement.name + "']",
-			options.selectorCommentForm,
-		  ).attr( 'name' )
-		: '';
+	// Save form data and focus.
+	let formData;
+	let formFocus = '';
+	if ( WPAC._Options.hasMultipleCommentContainers ) {
+		formData = { byPostId: {}, focusPostId: 0 };
+		const liveRoot = jQuery( document );
+		const scopedPostId = WPAC._GetScopedPostId( options.selectorCommentsContainer );
+		const postIds = scopedPostId ? [ scopedPostId ] : WPAC._CollectPostIds( liveRoot );
+
+		jQuery.each( postIds, function( i, postId ) {
+			const $form = WPAC._FindCommentFormByPostId( liveRoot, postId );
+			if ( $form.length ) {
+				formData.byPostId[ postId ] = $form.serializeArray();
+			}
+		} );
+
+		if ( document.activeElement && document.activeElement.name ) {
+			const $activeForm = jQuery( document.activeElement ).closest( 'form' );
+			const focusPostId = parseInt( $activeForm.find( 'input[name="comment_post_ID"]' ).val(), 10 );
+			if ( focusPostId ) {
+				formData.focusPostId = focusPostId;
+				formFocus = document.activeElement.name;
+			}
+		}
+	} else {
+		formData = jQuery( options.selectorCommentForm ).serializeArray();
+		formFocus = document.activeElement
+			? jQuery(
+				"[name='" + document.activeElement.name + "']",
+				options.selectorCommentForm,
+			).attr( 'name' )
+			: '';
+	}
 
 	// Get query strings form URL (ajaxifyLazyLoadEnable, nonce, post_id).
 	const urlObject = new URL( url );
