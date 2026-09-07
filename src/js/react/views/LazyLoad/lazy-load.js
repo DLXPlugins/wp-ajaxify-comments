@@ -11,16 +11,16 @@ import {
 	ToggleControl,
 	SelectControl,
 } from '@wordpress/components';
-import { AlertCircle, Code} from 'lucide-react';
+import { AlertCircle, Code } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import SaveResetButtons from '../../components/SaveResetButtons';
 // Lazy import the spinner.
 
-const InlineSpinner = React.lazy( () => import( /* webpackChunkName: "inline-spinner-0.0.2" */ './inline-spinner' ) );
-const InlineSkeleton = React.lazy( () => import( /* webpackChunkName: "inline-skeleton-0.0.3" */ './inline-skeleton' ) );
-const InlineButton = React.lazy( () => import( /* webpackChunkName: "inline-button-0.0.2" */ './inline-button' ) );
+const InlineSpinner = React.lazy( () => import( /* webpackChunkName: "inline-spinner-0.0.4" */ './inline-spinner' ) );
+const InlineSkeleton = React.lazy( () => import( /* webpackChunkName: "inline-skeleton-0.0.4" */ './inline-skeleton' ) );
+const InlineButton = React.lazy( () => import( /* webpackChunkName: "inline-button-0.0.4" */ './inline-button' ) );
 
 const retrieveLazyLoadOptions = () => {
 	return SendCommand( 'wpac_get_lazy_load_options', {
@@ -423,7 +423,7 @@ const Interface = ( props ) => {
 																	{
 																		value: 'element',
 																		label: __( 'Custom HTML Element (Experimental)', 'wp-ajaxify-comments' ),
-																	}
+																	},
 																] }
 															/>
 														</>

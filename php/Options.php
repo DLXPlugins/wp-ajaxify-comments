@@ -194,7 +194,7 @@ class Options {
 			'selectorCommentForm'                          => '#commentform,.ast-commentform,.comment-form',
 			'selectorCommentsContainer'                    => '#comments,.comments-wrapper,.comments-area,.wp-block-comments',
 			'selectorCommentList'                          => '.comment-list,.ast-comment-list,.wp-block-comment-template',
-			'selectorCommentPagingLinks'                   => '#comments [class^=\'nav-\'] a',
+			'selectorCommentPagingLinks'                   => '#comments [class^=\'nav-\'] a,.wp-block-comments-pagination a',
 			'selectorCommentLinks'                         => '#comments a[href*="/comment-page-"]',
 			'selectorRespondContainer'                     => '#respond',
 			'selectorErrorContainer'                       => 'p:parent',
