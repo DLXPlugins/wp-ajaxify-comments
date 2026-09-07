@@ -625,10 +625,10 @@ WPAC.AttachForm = function( options ) {
 			const paginationTarget = event.target;
 			const paginationTargetContainer = paginationTarget.closest( options.selectorCommentsContainer );
 			if ( paginationTargetContainer ) {
-				paginationTargetSelector = paginationTargetContainer.getAttribute( 'id' );
+				paginationTargetSelector = paginationTargetContainer.querySelector( 'input[name="comment_post_ID"]' );
 				if ( paginationTargetSelector ) {
-					paginationTargetSelector = '#' + paginationTargetSelector;
-					pageId = paginationTargetSelector.replace( 'comments-', '' );
+					pageId = paginationTargetSelector.value;
+					paginationTargetSelector = '#comments-' + pageId;
 				}
 			}
 			if ( ! WPAC._Options.hasMultipleCommentContainers ) {
