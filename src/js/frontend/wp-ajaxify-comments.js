@@ -989,7 +989,7 @@ WPAC.Init = function() {
 			WPAC._Options.selectorPostContainer,
 		);
 		jQuery( WPAC._Options.selectorPostContainer ).each( function( i, e ) {
-			const maybePageId = jQuery( e ).find( 'input[name="ajax_page_id"]' ).val();
+			const maybePageId = jQuery( e ).find( 'input[name="comment_post_ID"]' ).val();
 			const pageSelector = maybePageId ? `comments-${ parseInt( maybePageId ) }` : null;
 			if ( pageSelector ) {
 				jQuery( e ).attr( 'id', pageSelector );
@@ -1200,9 +1200,9 @@ WPAC.LoadComments = function( url, options ) {
 						options.selectorCommentsContainer,
 						options.selectorCommentForm,
 						options.selectorRespondContainer,
-						WPAC._Options.beforeSelectElements,
-						WPAC._Options.beforeUpdateComments,
-						WPAC._Options.afterUpdateComments,
+						options.beforeSelectElements,
+						options.beforeUpdateComments,
+						options.afterUpdateComments,
 					)
 				) {
 					return;
